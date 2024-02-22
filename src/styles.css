@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+ @import './assets/css/custom.css';
+@import './assets/css/icofont.min.css';
+@import '~ngx-toastr/toastr';
+@import '~@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '~font-awesome/css/font-awesome.css';
+/* @import './assets/scripts/main.js'; */
+.basic:before {
+    content: '';
+    display: block;
+    height: 50px;
+    width: 50px;
+    -webkit-animation: spin .5s infinite linear;
+            animation: spin .5s infinite linear;
+    border: 6px var(--primary) solid;
+    border-left-color: var(--secondary);
+    border-radius: 100%; }
+  

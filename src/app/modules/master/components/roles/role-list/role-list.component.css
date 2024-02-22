@@ -1,0 +1,21 @@
+.custom_design{
+    margin-bottom: 150px !important;
+    margin-left: 40px !important;
+    margin-top: 40px !important;
+    margin-right: 130px !important;
+}
+
+.active-link {
+    color: green;
+  }
+  
+  .inactive-link {
+    color: red;
+  }
+
+  .custom_button{
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-right: 10px;
+  }
+

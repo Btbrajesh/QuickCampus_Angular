@@ -1,0 +1,58 @@
+
+<div class="main-card mb-3 card custom_design">
+    <div class="card-body">
+        <h5 class="card-title">Add New Role</h5>
+        <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">User ID</label>
+                    <select class="form-select form-control" aria-label="Default select example" formControlName="userId">
+                        <option selected>--User-Select--</option>
+                        <option value="1">User1</option>
+                        <option value="2">User2</option>
+                        <option value="3">User3</option>
+                    </select>
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Client ID</label>
+                    <select class="form-select form-control" aria-label="Default select example" formControlName="clientId">
+                        <option selected>--Client-Select--</option>
+                        <option value="1">Client1</option>
+                        <option value="2">Client2</option>
+                        <option value="3">Client3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Role Name</label>
+                    <input placeholder="Role Name" type="text" class="form-control" formControlName="roleName">
+                  <span *ngIf="roleForm.get('roleName')?.hasError('required') && (roleForm.get('roleName')?.dirty || roleForm.get('roleName')?.touched)" class="error-message">
+                    Role Name is required.
+                  </span>
+                  <span *ngIf="roleForm.get('roleName')?.hasError('onlyCharacters')" class="error-message">
+                    Only characters are allowed.
+                  </span>
+                  <span *ngIf="roleForm.get('roleName')?.hasError('maxlength')" class="error-message">
+                    Maximum length exceeded (20 characters maximum).
+                  </span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="d-flex btn_form mt-3">
+                    <button type="submit" class="btn btn-primary mr-3">Save</button>
+                    <button type="button" class="btn btn-secondary" routerLink="/roleList">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-scale-circle">
+    <p class="basic"></p>
+</ngx-spinner>

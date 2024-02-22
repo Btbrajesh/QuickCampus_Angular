@@ -1,0 +1,42 @@
+<div class="main-card mb-3 card custom_design">
+    <div class="table-responsive">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-success custom_button"  routerLink="/addRole" *ngIf="addpermission">Add Role</button>
+        </div>
+        <table class="mb-1 table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-sm-2"> <input type="checkbox" [(ngModel)]="selectAll"
+                            (change)="toggleSelectAll($event)"></th>
+                    <th class="col-sm-6">Role Name</th>
+                    <th class="col-sm-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of roleList | paginate: { itemsPerPage: 10, currentPage: p };let i=index">
+                    <td><input type="checkbox" [(ngModel)]="role.checked"></td>
+                    <td>{{role.name}}</td>
+                    <td> <a class="action-link" *ngIf="updatepermission"><i class="fa fa-edit"></i></a>&nbsp;
+                        <a *ngIf="activeInActivePermission" [ngClass]="{ 'active-link': role.isActive, 'inactive-link': !role.isActive }">{{
+                            role.isActive ? 'Active' : 'Inactive' }}</a>
+                    </td>
+                </tr>
+
+                <tr *ngIf="isLength">
+                    <td colspan="4" width="100%">
+                        <div class="alert alert-danger">
+                            No record found...!
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-4" *ngIf="!isLength">
+            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-scale-circle">
+    <p class="basic"></p>
+</ngx-spinner>

@@ -1,0 +1,47 @@
+<div class="main-card mb-3 card custom_design">
+    <div class="table-responsive">
+        <h2>Manage Applicant</h2>
+        <table class="mb-1 table table-striped">
+            <thead>
+                <tr>
+                        <th class="col-sm-2">Aplicant Name</th>
+                        <th class="col-sm-2">College Name </th>
+                        <th class="col-sm-2">Email Address</th>
+                        <th class="col-sm-2">Highest Qualification</th>
+                        <th class="col-sm-2">Phone number</th>
+                        <th class="col-sm-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let applicant of applicantList | paginate: { itemsPerPage: 10, currentPage: p };let i=index">
+                    <td>{{ applicant.fullName }}</td>
+                        <td>{{ applicant.collegeName }}</td>
+                        <td>{{ applicant.emailAddress }}</td>
+                        <td>{{ applicant.higestQualification }}</td>
+                        <td>{{ applicant.phoneNumber }}</td>
+                        <td>
+                            <a (click)="editUser(applicant)" class="action-link"><i class="fa fa-edit"></i></a>&nbsp;
+                            <a (click)="toggleActive(applicant)"
+                                [ngClass]="{ 'active-link': applicant.isActive, 'inactive-link': !applicant.isActive }">{{
+                                    applicant.isActive ? 'Active' : 'Inactive' }}</a>
+                        </td>
+                </tr>
+
+                <tr *ngIf="isLength">
+                    <td colspan="4" width="100%">
+                        <div class="alert alert-danger">
+                            No record found...!
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-4" *ngIf="!isLength">
+            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-scale-circle">
+    <p class="basic"></p>
+</ngx-spinner>
