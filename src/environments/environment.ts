@@ -5,6 +5,6 @@ export const environment = {
     clientId: 'webApp',
     serviceBase: "/",
     mockBackend: false,
-    apiUrl: 'http://quickcampus.btprojects.in/api',
+    apiUrl: 'https://quickcampus.btprojects.in/api',
     //apiUrl: 'https://localhost:7027/api',
   };

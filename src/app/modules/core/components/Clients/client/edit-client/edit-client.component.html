@@ -1,0 +1,60 @@
+<div class="app-main__inner">
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading d-flex justify-content-between">
+                <div> Client
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-card mb-3 card">
+    <div class="card-header card-title">
+        <h4 class="mb-0">Edit Clients</h4>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row">
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="required">Email</label>
+                            <input placeholder="Email address" type="text" class="form-control" name="email"/>
+                            <span class="requireds"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="required">Phone</label>
+                            <input placeholder="Phone" type="text" class="form-control" name="phone"/>
+                            <span class="requireds"> </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="required">Address</label>
+                            <input placeholder="Address" type="text" class="form-control" name="address"/>
+                            <span class="requireds"></span>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Subscription Plan</label>
+                            <select class="form-select form-control" aria-label="Default select example" name="subscriptionPlan" onChange={handleChange}>
+                                <option selected value="">--Choose Plan--</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="d-flex btn_form mt-3">
+                            <button type="submit" class="btn btn-primary mr-3">Update</button>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div> 

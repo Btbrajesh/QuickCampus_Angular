@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ApplicantlistComponent } from './modules/core/components/applicantlist/applicantlist.component';
+import { ApplicantlistComponent } from './modules/core/components/Applicant/applicantlist/applicantlist.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { fakeBackendProvider } from './_helpers/fack-backend';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';

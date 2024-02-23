@@ -1,0 +1,88 @@
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading d-flex justify-content-between">
+                    <div>Add Client
+                        <div class="page-title-subheading">This is an example dashboard created using
+                            build-in elements and components.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- main content -->
+        <div class="main-card mb-3 card">
+            <div class="card-header card-title">
+                <h4 class="mb-0">Add New Clients</h4>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addClientForm" (ngSubmit)="submit()">
+               <div class="row">
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Name</label>
+                            <input placeholder="Enter name" type="text" class="form-control" formControlName="name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Email</label>
+                            <input placeholder="Email address" type="text" class="form-control" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Phone</label>
+                            <input placeholder="Phone" type="text" class="form-control" formControlName="phone">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Address</label>
+                            <input placeholder="Address" type="text" class="form-control" formControlName="address">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Subscription Plan</label>
+                            <select class="form-select form-control" aria-label="Default select example" formControlName="subscriptionPlan">
+                                <option selected>--Choose Plan--</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">UserName</label>
+                            <input placeholder="UserName" type="text" class="form-control" formControlName="username">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Password</label>
+                            <input placeholder="Password" type="password" class="form-control" formControlName="password">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Confirm Password</label>
+                            <input placeholder="Confirm Password" type="password" class="form-control" formControlName="confirmPassword">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="d-flex btn_form mt-3">
+                            <button type="submit" class="btn btn-primary mr-3">Save</button>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div></form>
+            </div>
+        </div>
+        <!-- main content -->
+    </div>
+
+</div>

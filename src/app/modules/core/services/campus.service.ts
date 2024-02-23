@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Campus } from '../../master/models/campus';
+import { ResponseObj } from '../../master/models/college';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +18,9 @@ export class CampusService {
 
   getCampusById(campusId:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Campus/getCampusByCampusId?campusId'+campusId);
+  }
+
+  addCampus(data:Campus):Observable<ResponseObj>{
+    return this.http.post<any>(environment.apiUrl+'/Campus/AddCampus',data)
   }
 }

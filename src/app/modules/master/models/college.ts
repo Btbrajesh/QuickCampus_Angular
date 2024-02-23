@@ -9,7 +9,6 @@ export interface College{
     ContectEmail:string,
     ContectPhone:number,
     Address1:string,
-    
     isActive:boolean,
 }
 

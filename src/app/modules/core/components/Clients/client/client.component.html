@@ -1,0 +1,239 @@
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading d-flex justify-content-between">
+                    <div>Clients
+                        <div class="page-title-subheading">This is an example dashboard created using
+                            build-in elements and components.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Clients</h5>
+                    <a routerLink="/admin/add-client" class="btn btn-primary btn_blue">Add New Clients</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="mb-0 table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Subscription Plan</th>
+                                <th>Isactive</th>
+                                <th>Created Date</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clientList">
+                                <td>{{client.name}}</td>
+                                <td>{{client.email}}</td>
+                                <td>{{client.phone}}</td>
+                                <td>Year <strong>{{client.subscriptionPlan}}</strong></td>
+                                <td>
+                                    <a (click)="editUser(client)" class="action-link"><i class="fa fa-edit"></i></a>&nbsp;
+                                    <a (click)="toggleActive(client)"
+                                        [ngClass]="{ 'active-link': client.isActive, 'inactive-link': !client.isActive }">{{
+                                            client.isActive ? 'Active' : 'Inactive' }}</a>
+                                </td>
+                                <td>{{client.createdDate | date}}</td>
+                                 <td class="action_button text-right">
+                                    <a routerLink="/admin/edit-client" class="edit" (click)="edit(client.id)"><i class="icofont-ui-edit"></i></a>
+                                    <a (click)="delete(client.id)" class="delete"><i class="icofont-ui-delete"></i></a>
+                                    <a href="#" class="inactive" data-target="#view_client" data-toggle="modal"><i class="icofont-eye"></i></a>
+                                </td>
+                            </tr>
+                       </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+    </div>
+</div>
+
+<!-- User Client -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog_550">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Edit Client</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="edit_clients">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Name</label>
+                    <input placeholder="Enter name" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Email</label>
+                    <input placeholder="Email address" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Phone</label>
+                    <input placeholder="Phone" type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Address</label>
+                    <input placeholder="Address" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">GeoLocation</label>
+                    <input placeholder="GeoLocation" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Subscription Plan</label>
+                    <select class="form-select form-control" aria-label="Default select example">
+                        <option selected>--Choose Plan--</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Isactive</label>
+                    <select class="form-select form-control" aria-label="Default select example">
+                        <option selected>--Choose--</option>
+                        <option value="1">Active</option>
+                        <option value="2">Hold</option>
+                        <option value="3">Remove</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Created By</label>
+                    <input placeholder="Created by" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Modified By</label>
+                    <input placeholder="Modified by" type="email" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Created Date</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="position-relative form-group">
+                    <label for="exampleEmail11" class="">Modified date</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="d-flex btn_form mt-3">
+                    <button type="button" class="btn btn-primary mr-3">Update</button>
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- User Client -->
+<div class="modal fade delete-popup" id="delete_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  <div class="modal-body">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 justify-content-center text-center">
+            <i class="icofont-close-line-circled close-icon"></i>
+            <h3 class="mt-3">Are you sure?</h3>
+            <p>Do you really want to delete these records? This process cannot be undone.</p>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <div class="d-flex justify-content-center btn_form mt-3">
+                <button type="button" class="btn btn-primary mr-3">Delete</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>						
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- User Details -->
+<div class="modal fade" id="view_client" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog_550">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Client Details</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body user_details">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Name:</strong> Leanne Graham</li>
+        <li class="list-group-item"><strong>Email:</strong> leanne@gmail.com</li>
+        <li class="list-group-item"><strong>Phone:</strong> +6489346345</li>
+        <li class="list-group-item"><strong>Address:</strong> G-84, Sector-63, Noida-201301</li>
+        <li class="list-group-item"><strong>GeoLocation:</strong> 123456</li>
+        <li class="list-group-item"><strong>Subscription Plan:</strong> <span>$299 <strong>Year</strong></span></li>
+        <li class="list-group-item"><strong>Isactive:</strong> <span class="badge badge-success">Active</span></li>
+        <li class="list-group-item"><strong>Created By:</strong> Ravi Sharma</li>
+        <li class="list-group-item"><strong>Modified By:</strong> Mr. Anurag</li>
+        <li class="list-group-item"><strong>Created Date:</strong> 13-07-2023</li>
+        <li class="list-group-item"><strong>Modified date:</strong> 13-07-2023</li>
+    </ul>
+  </div>
+</div>
+</div>
+</div>
