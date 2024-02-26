@@ -24,7 +24,6 @@ export class CollegeComponent implements OnInit{
       if(res.isSuccess){
         this.spinnerService.hide();
         this.collegeList = res.data;
-        console.log(this.collegeList)
       }
     },err =>{
       this.spinnerService.hide();

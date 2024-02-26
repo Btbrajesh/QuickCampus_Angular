@@ -37,43 +37,43 @@
                 <ul class="vertical-nav-menu">
                     <li class="app-sidebar__heading">Dashboard</li>
                     <li>
-                        <a routerLink="/dashboard" class="mm-active">
+                        <a routerLink="/dashboard" [class.mm-active]="isSelected('/dashboard')">
                             <i class="metismenu-icon icofont-dashboard"></i>Home
                         </a>
                     </li>
                     <li class="app-sidebar__heading">Menu</li>
                     <li>
-                        <a routerLink="/admin/client">
-                            <i class="metismenu-icon icofont-user-alt-3 font-18"></i>Client
+                        <a routerLink="/admin/client" [class.mm-active]="isSelected('/admin/client')">
+                            <i class="metismenu-icon icofont-cop-badge font-18"></i>Client
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/admin/role">
-                            <i class="metismenu-icon icofont-user-alt-3 font-18"></i>Role
+                        <a routerLink="/admin/role" [class.mm-active]="isSelected('/admin/role')">
+                            <i class="metismenu-icon icofont-cop-badge font-18"></i>Role
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/admin/user">
-                            <i class="metismenu-icon icofont-user-alt-3 font-18"></i>User
+                        <a routerLink="/admin/user" [class.mm-active]="isSelected('/admin/user')">
+                            <i class="metismenu-icon icofont-cop-badge font-18"></i>User
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/admin/applicant">
+                        <a routerLink="/admin/applicant" [class.mm-active]="isSelected('/admin/applicant')">
                             <i class="metismenu-icon icofont-user-alt-3 font-18"></i>Applicant
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/admin/college">
+                        <a routerLink="/admin/college" [class.mm-active]="isSelected('/admin/college')">
                             <i class="metismenu-icon icofont-building font-22"></i>Colleges
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/admin/campus">
+                        <a routerLink="/admin/campus" [class.mm-active]="isSelected('/admin/campus')">
                             <i class="metismenu-icon icofont-building-alt font-22"></i>Campus Walk-In
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/admin/question">
+                        <a routerLink="/admin/question" [class.mm-active]="isSelected('/admin/question')">
                             <i class="metismenu-icon icofont-question font-22"></i>Questions
                         </a>
                     </li>

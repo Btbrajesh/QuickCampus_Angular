@@ -15,5 +15,9 @@ export class UserService {
     return this.http.get<any>(environment.apiUrl+'/User/UserList')
   }
 
+  addUser(data:any):Observable<any>{
+    return this.http.post<any>(environment.apiUrl+'/User/AddUser',data)
+  }
+
   
 }

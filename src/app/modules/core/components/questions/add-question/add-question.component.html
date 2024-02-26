@@ -1,0 +1,96 @@
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading d-flex justify-content-between">
+                    <div>Add New Question
+                        <div class="page-title-subheading">This is an example dashboard created using
+                            build-in elements and components.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- main content -->
+        <div class="main-card mb-3 card">
+            <div class="card-header card-title">
+                <h4 class="mb-0">Add New Question</h4>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addQuestionForm" (ngSubmit)="submit()">
+               <div class="row">
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Question Type <sup>*</sup></label>
+                            <select class="form-select form-control" aria-label="Default select example" formControlName="questionType">
+                                <option selected>--Choose--</option>
+                                <option value="1">Objective</option>
+                                <option value="2">Objective - Multiple Answer</option>
+                                <option value="3">Subjective</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Section <sup>*</sup></label>
+                            <select class="form-select form-control" aria-label="Default select example" formControlName="section">
+                                <option selected>--Choose--</option>
+                                <option value="1">Logical</option>
+                                <option value="2">Technical</option>
+                                <option value="3">HR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Group <sup>*</sup></label>
+                            <select class="form-select form-control" aria-label="Default select example" formControlName="group">
+                                <option selected>--Choose--</option>
+                                <option value="1">Group 1</option>
+                                <option value="2">Group 2</option>
+                                <option value="3">Group 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Marks</label>
+                            <input
+                  placeholder="Marks"
+                  type="text"
+                  class="form-control"
+                  formControlName="marks"
+                />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Question <sup>*</sup></label>
+                            <textarea class="form-control" placeholder="Job Description" rows="4" formControlName="question"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Options <sup>*</sup></label>
+                            <input placeholder="option" type="text" class="form-control" formControlName="option">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" class="">Choose File <sup>*</sup></label>
+                            <input type="file" class="form-control" formControlName="file" (change)="onFileSelected($event)">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="d-flex btn_form mt-3">
+                            <button type="submit" class="btn btn-primary mr-3">Save</button>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div></form>
+            </div>
+        </div>
+        <!-- main content -->
+    </div>
+</div>

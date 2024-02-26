@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthDataResponse } from 'src/app/_models/authData';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { environment } from 'src/environments/environment';
@@ -29,7 +30,7 @@ export class SidebarComponent implements OnInit {
     submenu:''
   }
 
-  constructor(private authenticationService :AuthenticationService){
+  constructor(private authenticationService :AuthenticationService,private router: Router){
     this.authenticationService.user.subscribe(user => {
       if (user && user.roleMasters) {
         this.userRole = user.roleMasters;
@@ -44,6 +45,10 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
    
   }
+
+  isSelected(routePath: string): boolean {
+    return this.router.url === routePath;
+}
 
 
   sidebarList(items:any){

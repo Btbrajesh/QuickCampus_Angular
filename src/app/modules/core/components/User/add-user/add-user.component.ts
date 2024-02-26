@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from '../../../services/role.service';
 import { ClientService } from '../../../services/client.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../../services/user.service';
+import { passwordMatchValidator } from '../../confirm-password.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-user',
@@ -13,15 +15,27 @@ export class AddUserComponent implements OnInit{
 
   roleList:any
   clientList:any
-  addRoleForm!: FormGroup
+  addUserForm!: FormGroup
+  hidePassword: boolean = true;
+  hideConfirmPassword:boolean = true;
+  eyeIconSrc: string = '../../../../../../assets/images/hide.png';
+  eyeIconSrc2: string = '../../../../../../assets/images/hide.png';
 
-  constructor(public roleService:RoleService,public clientService:ClientService,public fb:FormBuilder){}
+  constructor(public roleService:RoleService,private toastr: ToastrService,public clientService:ClientService,public fb:FormBuilder,public userService:UserService){}
 
   ngOnInit(): void {
     this.getRole()
     this.getClient()
-    this.addRoleForm = this.fb.group({
-      
+    this.addUserForm = this.fb.group({
+      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2)]],
+      email:['',[Validators.required,Validators.email]],
+      mobile:['',[Validators.required,Validators.maxLength(10)]],
+      role:['',[Validators.required]],
+      client:['',[Validators.required]],
+      password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
+      confirmPassword:['',[Validators.required]]
+    },{
+      validator:passwordMatchValidator()
     })
 
   }
@@ -38,6 +52,42 @@ export class AddUserComponent implements OnInit{
         this.clientList = res.data
       }
     })
+  }
+
+  submit(){
+    if (this.addUserForm.valid){
+      const data = this.addUserForm.value
+      this.userService.addUser(data).subscribe((res)=>{
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+          this.addUserForm.reset()
+        }else {
+          this.toastr.error(res.message)
+        }
+      },err=>{
+        this.toastr.error(err)
+      })
+    }else{
+      this.toastr.error('Please fill the form with valid values')
+    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+    if (this.hidePassword) {
+        this.eyeIconSrc = '../../../../../../assets/images/hide.png'; // Path to the icon for hidden password
+    } else {
+        this.eyeIconSrc = '../../../../../../assets/images/visible.png'; // Path to the icon for visible password
+    }
+  }
+
+  togglePasswordVisibility2(){
+    this.hideConfirmPassword = !this.hideConfirmPassword;
+    if (this.hideConfirmPassword) {
+        this.eyeIconSrc2 = '../../../../../../assets/images/hide.png'; // Path to the icon for hidden password
+    } else {
+        this.eyeIconSrc2 = '../../../../../../assets/images/visible.png'; // Path to the icon for visible password
+    }
   }
 
 }

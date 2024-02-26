@@ -18,7 +18,6 @@ export class RoleComponent implements OnInit{
 
   getAllRole(){
     this.roleService.getAllRole().subscribe((res)=>{
-      console.log(res,'role')
       this.data = res
     })
   }

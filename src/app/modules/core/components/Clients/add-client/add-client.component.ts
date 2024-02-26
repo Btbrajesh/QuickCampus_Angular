@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../../../services/client.service';
 import { Client } from 'src/app/modules/master/models/client';
+import { passwordMatchValidator } from '../../confirm-password.validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-client',
@@ -10,21 +12,25 @@ import { Client } from 'src/app/modules/master/models/client';
 })
 export class AddClientComponent implements OnInit{
 
-  constructor(public fb:FormBuilder, public clientService:ClientService){}
+  constructor(public fb:FormBuilder, public clientService:ClientService,public router:Router){}
 
   addClientForm!: FormGroup
   data!:Client
+  hidePassword: boolean = true;
+  hideConfirmPassword:boolean = true;
   
   ngOnInit(): void {
     this.addClientForm = this.fb.group({
-      name:[''],
-      email:[''],
-      phone:[''],
-      address:[''],
-      subscriptionPlan:[''],
-      username:[''],
-      password:[''],
-      confirmPassword:['']
+      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2)]],
+      email:['',[Validators.required,Validators.email]],
+      phone:['',[Validators.required,Validators.maxLength(10)]],
+      address:['',[Validators.required,Validators.maxLength(50)]],
+      subscriptionPlan:['',[Validators.required]],
+      username:['',[Validators.required,Validators.maxLength(15)]],
+      password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
+      confirmPassword:['',[Validators.required]]
+    },{
+      validator:passwordMatchValidator()
     })
   }
 
@@ -35,7 +41,18 @@ export class AddClientComponent implements OnInit{
         console.log(res,'res')
       })
     }
-    console.log(this.addClientForm.value)
+  }
+
+  close(){
+    this.router.navigateByUrl('/admin/client')
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  togglePasswordVisibility2(){
+    this.hideConfirmPassword = !this.hideConfirmPassword;
   }
 
 }

@@ -58,7 +58,6 @@ export class AddCampusComponent implements OnInit{
   }
 
   submit(){
-    console.log(this.addCampusForm.value)
     if (this.addCampusForm.valid){
       this.data = this.addCampusForm.value
       this.campusService.addCampus(this.data).subscribe((res)=>{
@@ -69,7 +68,6 @@ export class AddCampusComponent implements OnInit{
 
   addCollege() {
     const selectedCollegeId = this.addCampusForm.value.selectedCollegeId;
-    console.log(selectedCollegeId)
     const selectedCollege = this.collegeList.find(college => college.collegeId == selectedCollegeId);
     if (selectedCollege && !this.selectedColleges.some(college => college.collegeId === selectedCollege.collegeId)) {
       this.selectedColleges.push(selectedCollege);

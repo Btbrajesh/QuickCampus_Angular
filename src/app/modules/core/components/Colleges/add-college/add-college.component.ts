@@ -31,14 +31,14 @@ export class AddCollegeComponent implements OnInit{
    ngOnInit(): void {
     this.fetchCountry();
      this.addCollegeForm = this.fb.group({
-      ImagePath:[''],
-      collegeName:['',[Validators.required,Validators.maxLength(20)]],
+      ImagePath:['',[Validators.required]],
+      collegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3)]],
       collegeCode:['',[Validators.required]],
       Address1:['',[Validators.required]],
-      CityId:['',[Validators.required,Validators.maxLength(20)]],
-      StateId:['',[Validators.required,Validators.maxLength(20)]],
-      CountryId:['',[Validators.required,Validators.maxLength(20)]],
-      ContectPerson:['',[Validators.required,Validators.maxLength(20)]],
+      CityId:['',[Validators.required]],
+      StateId:['',[Validators.required]],
+      CountryId:['',[Validators.required]],
+      ContectPerson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
       ContectEmail:['',[Validators.required,Validators.email]],
       ContectPhone:['',[Validators.required,Validators.maxLength(10)]],
 
@@ -46,10 +46,8 @@ export class AddCollegeComponent implements OnInit{
    }
 
    submit(){
-    console.log(this.addCollegeForm)
 
     if (this.addCollegeForm.valid){
-      
       this.data = this.addCollegeForm.value
       this.data.ImagePath = this.selectedFileName
       this.data.isActive = true
@@ -83,7 +81,6 @@ export class AddCollegeComponent implements OnInit{
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     this.selectedFileName = event.target.files[0].name;
-    console.log(this.selectedFileName)
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e) => {

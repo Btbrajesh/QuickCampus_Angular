@@ -15,6 +15,7 @@ import { EditClientComponent } from "./components/Clients/client/edit-client/edi
 import { RoleComponent } from "./components/Role/role/role.component";
 import { UserComponent } from "./components/User/user/user.component";
 import { AddUserComponent } from "./components/User/add-user/add-user.component";
+import { AddQuestionComponent } from "./components/questions/add-question/add-question.component";
 
 const routes: Routes = [
     {
@@ -33,6 +34,7 @@ const routes: Routes = [
         {path: 'role',component:RoleComponent,canActivate: [AuthGuard]},
         {path: 'user',component:UserComponent,canActivate: [AuthGuard]},
         {path: 'add-user',component:AddUserComponent,canActivate: [AuthGuard]},
+        {path: 'add-question',component:AddQuestionComponent,canActivate: [AuthGuard]},
       ]
     },
   ];

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CampusService } from '../../../services/campus.service';
 import { QuestionService } from '../../../services/question.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-question',
@@ -13,7 +14,7 @@ export class QuestionComponent {
 
   questionList:any[]=[];
 
-  constructor(public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
+  constructor(private sanitizer: DomSanitizer,public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
 
 
   ngOnInit(): void {
@@ -42,5 +43,11 @@ export class QuestionComponent {
     const url = `/updateApplicant/${user.applicantID}`;
     this.router.navigateByUrl(url);
   }
+
+  sanitizeHtml(html: string): string {
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = html;
+    return tempElement.textContent || tempElement.innerText || '';
+}
 
 }

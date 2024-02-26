@@ -13,4 +13,8 @@ export class QuestionService {
   getQuestionList():Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage');
   }
+
+  addQuestion(data:any):Observable<any>{
+    return this.http.post<any>(environment.apiUrl + 'Question/addorupdatequestion',data)
+  }
 }

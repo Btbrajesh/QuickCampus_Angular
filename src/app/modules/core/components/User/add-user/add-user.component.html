@@ -1,79 +1,274 @@
-<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-   
-    <div class="app-main__inner">
-        <div class="app-page-title">
-            <div class="page-title-wrapper">
-                <div class="page-title-heading d-flex justify-content-between">
-                    <div>Add User
-                        
-                    </div>
-                </div>
-            </div>
+<div
+  class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
+>
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading d-flex justify-content-between">
+          <div>Add User</div>
         </div>
-         <!-- main content -->
-        <div class="main-card mb-3 card">
-            <div class="card-header card-title">
-                <h4 class="mb-0">Add New User</h4>
-            </div>
-            <div class="card-body">
-               <div class="row">
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Name</label>
-                            <input placeholder="Enter name" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Email</label>
-                            <input placeholder="Email address" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Phone</label>
-                            <input placeholder="Phone" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Role</label>
-                            <select class="form-select form-control mr-4" placeholder="Select Role">
-                                <option value="">Select Role</option>
-                                <option *ngFor="let role of roleList" [value]="">{{role.name}}</option>
-                            </select> 
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Client</label>
-                            <select class="form-select form-control mr-4" placeholder="Select Client">
-                                <option value="">Select Client</option>
-                                <option *ngFor="let client of clientList" [value]="">{{client.name}}</option>
-                            </select> 
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Password</label>
-                            <input placeholder="Add password" type="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Confirm Password</label>
-                            <input placeholder="Add password" type="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="d-flex btn_form mt-3">
-                            <button type="button" class="btn btn-primary mr-3">Save</button>
-                            <button type="button" class="btn btn-secondary">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- main content -->
+      </div>
     </div>
+    <!-- main content -->
+    <div class="main-card mb-3 card">
+      <div class="card-header card-title">
+        <h4 class="mb-0">Add New User</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="addUserForm" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Name</label>
+                <input
+                  placeholder="Enter name"
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('name')?.invalid &&
+                  (addUserForm.get('name')?.dirty ||
+                    addUserForm.get('name')?.touched) &&
+                  addUserForm.get('name')?.hasError('required')
+                "
+              >
+                <span class="error">Name is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('name')?.hasError('minlength')"
+              >
+                <span class="error">Minimum length is 2</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('name')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 25</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Email</label>
+                <input
+                  placeholder="Email address"
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('email')?.invalid &&
+                  (addUserForm.get('email')?.dirty ||
+                    addUserForm.get('email')?.touched) &&
+                  addUserForm.get('email')?.hasError('required')
+                "
+              >
+                <span class="error">Email is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('email')?.hasError('email')"
+              >
+                <span class="error">Provide a correct email</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Phone</label>
+                <input
+                  placeholder="Phone"
+                  type="text"
+                  class="form-control"
+                  formControlName="mobile"
+                />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('mobile')?.invalid &&
+                  (addUserForm.get('mobile')?.dirty ||
+                    addUserForm.get('mobile')?.touched) &&
+                  addUserForm.get('mobile')?.hasError('required')
+                "
+              >
+                <span class="error">Mobile Number is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('mobile')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum allowed length is 10</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Role</label>
+                <select
+                  class="form-select form-control mr-4"
+                  placeholder="Select Role"
+                  formControlName="role"
+                >
+                  <option value="">Select Role</option>
+                  <option *ngFor="let role of roleList" [value]="">
+                    {{ role.name }}
+                  </option>
+                </select>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('role')?.invalid &&
+                  (addUserForm.get('role')?.dirty ||
+                    addUserForm.get('role')?.touched) &&
+                  addUserForm.get('role')?.hasError('required')
+                "
+              >
+                <span class="error">Role is required</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Client</label>
+                <select
+                  class="form-select form-control mr-4"
+                  placeholder="Select Client"
+                  formControlName="client"
+                >
+                  <option value="">Select Client</option>
+                  <option *ngFor="let client of clientList" [value]="">
+                    {{ client.name }}
+                  </option>
+                </select>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('client')?.invalid &&
+                  (addUserForm.get('client')?.dirty ||
+                    addUserForm.get('client')?.touched) &&
+                  addUserForm.get('client')?.hasError('required')
+                "
+              >
+                <span class="error">Client is required</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Password</label>
+                <div class="input-group">
+                  <input
+                    placeholder="Password"
+                    type="{{ hidePassword ? 'password' : 'text' }}"
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="eye-button"
+                      tabindex="-1"
+                      (click)="togglePasswordVisibility()"
+                    >
+                      <img
+                        [src]="eyeIconSrc"
+                        height="17px"
+                        alt="Toggle password visibility"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('password')?.invalid &&
+                  (addUserForm.get('password')?.dirty ||
+                    addUserForm.get('password')?.touched) &&
+                  addUserForm.get('password')?.hasError('required')
+                "
+              >
+                <span class="error">Password is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('password')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum allowed length is 15</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('password')?.hasError('minlength')"
+              >
+                <span class="error">Minimum required length is 6</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Confirm Password</label>
+                <div class="input-group">
+                  <input
+                    placeholder="Confirm Password"
+                    type="{{ hideConfirmPassword ? 'password' : 'text' }}"
+                    type="password"
+                    class="form-control"
+                    formControlName="confirmPassword"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="eye-button"
+                      tabindex="-1"
+                      (click)="togglePasswordVisibility2()"
+                    >
+                      <img
+                        [src]="eyeIconSrc2"
+                        height="17px"
+                        alt="Toggle password visibility"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addUserForm.get('confirmPassword')?.invalid &&
+                  (addUserForm.get('confirmPassword')?.dirty ||
+                    addUserForm.get('confirmPassword')?.touched) &&
+                  addUserForm.get('confirmPassword')?.hasError('required')
+                "
+              >
+                <span class="error">Confirm Password is required</span>
+              </div>
+              <div class="text-danger">
+                <div
+                  *ngIf="
+                    addUserForm.hasError('passwordMismatch') &&
+                    (addUserForm.get('password')?.dirty ||
+                      addUserForm.get('confirmPassword')?.dirty) &&
+                    addUserForm.get('confirmPassword')?.touched
+                  "
+                >
+                  <span class="error">Passwords do not match</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="d-flex btn_form mt-3">
+                <button type="submit" class="btn btn-primary mr-3">Save</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- main content -->
+  </div>
 </div>
