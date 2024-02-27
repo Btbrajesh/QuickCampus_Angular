@@ -19,6 +19,43 @@
                 <a routerLink="/admin/add-user" class="btn btn-primary btn_blue">Add New User</a>
             </div>
             <div class="table-responsive">
+              <div
+            class="top_filter d-flex align-items-center justify-content-between py-0 mb-4"
+          >
+            <div class="rounded-pill form_custom_inner d-flex">
+              <div class="input-group size position-relative">
+                <input
+                  type="text"
+                  placeholder="Search here ..."
+                  class="form-control border-2"
+                  name="search"
+                  value=""
+                />
+              </div>
+              <button type="button" class="btn btn-success ml-2">Search</button>
+            </div>
+            <div class="rounded-pill form_custom_inner d-flex">
+              <div
+                class="input-group size position-relative"
+                style="margin-right: 15px"
+              >
+                <select class="form-select form-control">
+                  <option>All</option>
+                  <option>Active</option>
+                  <option>Inactive</option>
+                </select>
+              </div>
+              <div class="input-group size position-relative">
+                <select
+                  class="form-select form-control"
+                  aria-label="Default select example"
+                >
+                  <option>All</option>
+                  <option *ngFor="let user of userData" [value]="user.id">{{user.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
                 <table class="mb-0 table table-striped">
                     <thead>
                         <tr>
@@ -36,12 +73,12 @@
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.mobile}}</td>
-                            <td>
-                                <a (click)="editUser(user)" class="action-link"><i class="fa fa-edit"></i></a>&nbsp;
+                            <td class="badge">
                                 <a (click)="toggleActive(user)"
                                     [ngClass]="{ 'active-link': user.isActive, 'inactive-link': !user.isActive }">{{
                                         user.isActive ? 'Active' : 'Inactive' }}</a>
-                            </td>                                   <td class="action_button text-right">
+                            </td>                                   
+                            <td class="action_button text-right">
                                 <a href="add_client.html" class="edit"><i class="icofont-ui-edit"></i></a>
                                 <a href="#" class="delete" data-target="#delete_popup" data-toggle="modal"><i class="icofont-ui-delete"></i></a>
                                 <a href="#" class="inactive" data-target="#view_client" data-toggle="modal"><i class="icofont-eye"></i></a>

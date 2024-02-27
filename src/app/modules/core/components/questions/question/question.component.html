@@ -141,6 +141,34 @@
                         <a routerLink="/admin/add-question" class="btn btn-primary btn_blue">Add New Question</a>
                     </div>
                     <div class="table-responsive">
+                        <div
+                        class="top_filter d-flex align-items-center justify-content-between py-0 mb-4"
+                      >
+                        <div class="rounded-pill form_custom_inner d-flex">
+                          <div class="input-group size position-relative">
+                            <input
+                              type="text"
+                              placeholder="Search here ..."
+                              class="form-control border-2"
+                              name="search"
+                              value=""
+                            />
+                          </div>
+                          <button type="button" class="btn btn-success ml-2">Search</button>
+                        </div>
+                        <div class="rounded-pill form_custom_inner d-flex">
+                          <div
+                            class="input-group size position-relative"
+                            style="margin-right: 15px"
+                          >
+                            <select class="form-select form-control">
+                              <option>All</option>
+                              <option>Active</option>
+                              <option>Inactive</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                         <table class="mb-0 table table-striped">
                             <thead>
                                 <tr>
@@ -162,8 +190,7 @@
                                     <td>{{question.questionTypeName}}</td>
                                     <td>{{question.questionSection}}</td>
                                     <td>{{question.questionGroup}}</td>
-                                    <td>
-                                        <a (click)="editUser(question)" class="action-link"><i class="fa fa-edit"></i></a>&nbsp;
+                                    <td class="badge">
                                         <a (click)="toggleActive(question)"
                                             [ngClass]="{ 'active-link': question.isActive, 'inactive-link': !question.isActive }">{{
                                                 question.isActive ? 'Active' : 'Inactive' }}</a>

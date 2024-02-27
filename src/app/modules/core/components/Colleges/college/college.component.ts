@@ -36,9 +36,6 @@ export class CollegeComponent implements OnInit{
     // Call your service method to update the user's active status
   }
   
-  editUser(user: any): void {
-    const url = `/updateApplicant/${user.applicantID}`;
-    this.router.navigateByUrl(url);
-  }
+ 
 
 }

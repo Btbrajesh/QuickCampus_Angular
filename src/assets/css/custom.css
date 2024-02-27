@@ -101,3 +101,26 @@ textarea.form-control{height: auto;}
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+
+.active-link {
+    background-color: #3ac47d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .inactive-link {
+    background-color: #d92550;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .badge {
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    min-width: 19px;
+}

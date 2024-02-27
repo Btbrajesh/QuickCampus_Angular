@@ -1,265 +1,381 @@
-    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-        <div class="app-header header-shadow">
-            <div class="app-header__logo">
-                <div class="logo-src"></div>
-                <div class="header__pane ml-auto">
-                    <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
-                            data-class="closed-sidebar">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="app-header__mobile-menu">
-                <div>
-                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="app-header__menu">
-                <span>
-                    <button type="button"
-                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                        <span class="btn-icon-wrapper">
-                            <i class="fa fa-ellipsis-v fa-w-6"></i>
-                        </span>
-                    </button>
-                </span>
-            </div>
-            <div class="app-header__content">
-                <div class="app-header-right">
-                    <div class="header-btn-lg pr-0">
-                        <div class="widget-content p-0">
-                            <div class="widget-content-wrapper">
-                                <div class="widget-content-left">
-                                    <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg"
-                                                alt="">
-                                            <i class="icofont-rounded-down ml-2 opacity-8"></i>
-                                        </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true"
-                                            class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
-                                            <div class="dropdown-menu-header">
-                                                <div class="dropdown-menu-header-inner bg-info">
-                                                    <div class="menu-header-image opacity-2"
-                                                        style="background-image: url('assets/images/dropdown-header/city3.jpg');">
-                                                    </div>
-                                                    <div class="menu-header-content text-left">
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-3">
-                                                                    <img width="42" class="rounded-circle"
-                                                                        src="assets/images/avatars/1.jpg" alt="">
-                                                                </div>
-                                                                <div class="widget-content-left">
-                                                                    <div class="widget-heading">Alina Mcloughlin
-                                                                    </div>
-                                                                    <div class="widget-subheading opacity-8">A short
-                                                                        profile description
-                                                                    </div>
-                                                                </div>
-                                                                <div class="widget-content-right mr-2">
-                                                                    <button
-                                                                        class="btn-pill btn-shadow btn-shine btn btn-focus">Logout
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="scroll-area-xs" style="height: 150px;">
-                                                <div class="scrollbar-container ps">
-                                                    <ul class="nav flex-column">
-                                                        <li class="nav-item-header nav-item">Activity
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Chat
-                                                                <div class="ml-auto badge badge-pill badge-info">8
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Recover
-                                                                Password
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item-header nav-item">My Account
-                                                        </li>
-
-                                                        <li class="nav-item">
-                                                            <a href="javascript:void(0);" class="nav-link">Logs
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
-                                        Alina Mclourd
-                                    </div>
-                                    <div class="widget-subheading">
-                                        VP People Manager
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div
+  class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
+>
+  <div class="app-header header-shadow">
+    <div class="app-header__logo">
+      <div class="logo-src"></div>
+      <div class="header__pane ml-auto">
+        <div>
+          <button
+            type="button"
+            class="hamburger close-sidebar-btn hamburger--elastic"
+            data-class="closed-sidebar"
+          >
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
         </div>
-        <div class="app-main__inner">
-            <div class="app-page-title">
-                <div class="page-title-wrapper">
-                    <div class="page-title-heading d-flex justify-content-between">
-                        <div>Colleges
-                            <div class="page-title-subheading">This is an example dashboard created using
-                                build-in elements and components.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- main content -->
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="card-title mb-0">Colleges</h5>
-                        <a routerLink="/admin/add-college" class="btn btn-primary btn_blue">Add New College</a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="mb-0 table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>College</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Contact Person</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Isactive</th>
-                                    <th class="text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let college of collegeList">
-                                    <td>{{college.collegeName}}</td>
-                                    <td>{{college.cityName}}</td>
-                                    <td>{{college.stateName}}</td>
-                                    <td>{{college.contectPerson}}</td>
-                                    <td>{{college.contectEmail}}</td>
-                                    <td>{{college.contectPhone}}</td>
-                                    <td>
-                                        <a (click)="editUser(college)" class="action-link"><i class="fa fa-edit"></i></a>&nbsp;
-                                        <a (click)="toggleActive(college)"
-                                            [ngClass]="{ 'active-link': college.isActive, 'inactive-link': !college.isActive }">{{
-                                                college.isActive ? 'Active' : 'Inactive' }}</a>
-                                    </td>                                    <td class="action_button text-right">
-                                        <a href="add_college.html" class="edit"><i class="icofont-ui-edit"></i></a>
-                                        <a href="#" class="delete" data-target="#delete_popup" data-toggle="modal"><i class="icofont-ui-delete"></i></a>
-                                        <a href="#" class="inactive" data-target="#view_client" data-toggle="modal"><i class="icofont-eye"></i></a>
-                                    </td>
-                                </tr>
-                               
-                                
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="mt-4">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                              <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                                </a>
-                              </li>
-                              <li class="page-item"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </nav>
-                    </div>
-                </div>
-            </div>
-            <!-- main content -->
-        </div>
-       
-        
+      </div>
     </div>
-	
+    <div class="app-header__mobile-menu">
+      <div>
+        <button
+          type="button"
+          class="hamburger hamburger--elastic mobile-toggle-nav"
+        >
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="app-header__menu">
+      <span>
+        <button
+          type="button"
+          class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav"
+        >
+          <span class="btn-icon-wrapper">
+            <i class="fa fa-ellipsis-v fa-w-6"></i>
+          </span>
+        </button>
+      </span>
+    </div>
+    <div class="app-header__content">
+      <div class="app-header-right">
+        <div class="header-btn-lg pr-0">
+          <div class="widget-content p-0">
+            <div class="widget-content-wrapper">
+              <div class="widget-content-left">
+                <div class="btn-group">
+                  <a
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    class="p-0 btn"
+                  >
+                    <img
+                      width="42"
+                      class="rounded-circle"
+                      src="assets/images/avatars/1.jpg"
+                      alt=""
+                    />
+                    <i class="icofont-rounded-down ml-2 opacity-8"></i>
+                  </a>
+                  <div
+                    tabindex="-1"
+                    role="menu"
+                    aria-hidden="true"
+                    class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right"
+                  >
+                    <div class="dropdown-menu-header">
+                      <div class="dropdown-menu-header-inner bg-info">
+                        <div
+                          class="menu-header-image opacity-2"
+                          style="
+                            background-image: url('assets/images/dropdown-header/city3.jpg');
+                          "
+                        ></div>
+                        <div class="menu-header-content text-left">
+                          <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                              <div class="widget-content-left mr-3">
+                                <img
+                                  width="42"
+                                  class="rounded-circle"
+                                  src="assets/images/avatars/1.jpg"
+                                  alt=""
+                                />
+                              </div>
+                              <div class="widget-content-left">
+                                <div class="widget-heading">
+                                  Alina Mcloughlin
+                                </div>
+                                <div class="widget-subheading opacity-8">
+                                  A short profile description
+                                </div>
+                              </div>
+                              <div class="widget-content-right mr-2">
+                                <button
+                                  class="btn-pill btn-shadow btn-shine btn btn-focus"
+                                >
+                                  Logout
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="scroll-area-xs" style="height: 150px">
+                      <div class="scrollbar-container ps">
+                        <ul class="nav flex-column">
+                          <li class="nav-item-header nav-item">Activity</li>
+                          <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link"
+                              >Chat
+                              <div class="ml-auto badge badge-pill badge-info">
+                                8
+                              </div>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link"
+                              >Recover Password
+                            </a>
+                          </li>
+                          <li class="nav-item-header nav-item">My Account</li>
+
+                          <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link"
+                              >Logs
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="widget-content-left ml-3 header-user-info">
+                <div class="widget-heading">Alina Mclourd</div>
+                <div class="widget-subheading">VP People Manager</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading d-flex justify-content-between">
+          <div>
+            Colleges
+            <div class="page-title-subheading">
+              This is an example dashboard created using build-in elements and
+              components.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- main content -->
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h5 class="card-title mb-0">Colleges</h5>
+          <a routerLink="/admin/add-college" class="btn btn-primary btn_blue"
+            >Add New College</a
+          >
+        </div>
+        <div class="table-responsive">
+          <div
+            class="top_filter d-flex align-items-center justify-content-between py-0 mb-4"
+          >
+            <div class="rounded-pill form_custom_inner d-flex">
+              <div class="input-group size position-relative">
+                <input
+                  type="text"
+                  placeholder="Search here ..."
+                  class="form-control border-2"
+                  name="search"
+                  value=""
+                />
+              </div>
+              <button type="button" class="btn btn-success ml-2">Search</button>
+            </div>
+            <div class="rounded-pill form_custom_inner d-flex">
+              <div
+                class="input-group size position-relative"
+                style="margin-right: 15px"
+              >
+                <select class="form-select form-control">
+                  <option>All</option>
+                  <option>Active</option>
+                  <option>Inactive</option>
+                </select>
+              </div>
+            
+            </div>
+          </div>
+          <table class="mb-0 table table-striped">
+            <thead>
+              <tr>
+                <th>College</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Contact Person</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Isactive</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let college of collegeList">
+                <td>{{ college.collegeName }}</td>
+                <td>{{ college.cityName }}</td>
+                <td>{{ college.stateName }}</td>
+                <td>{{ college.contectPerson }}</td>
+                <td>{{ college.contectEmail }}</td>
+                <td>{{ college.contectPhone }}</td>
+                <td class="badge">
+                 
+                  <a
+                    (click)="toggleActive(college)"
+                    [ngClass]="{
+                      'active-link': college.isActive,
+                      'inactive-link': !college.isActive
+                    }"
+                    >{{ college.isActive ? "Active" : "Inactive" }}</a
+                  >
+                </td>
+                <td class="action_button text-right">
+                  <a href="add_college.html" class="edit"
+                    ><i class="icofont-ui-edit"></i
+                  ></a>
+                  <a
+                    href="#"
+                    class="delete"
+                    data-target="#delete_popup"
+                    data-toggle="modal"
+                    ><i class="icofont-ui-delete"></i
+                  ></a>
+                  <a
+                    href="#"
+                    class="inactive"
+                    data-target="#view_client"
+                    data-toggle="modal"
+                    ><i class="icofont-eye"></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-4">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- main content -->
+  </div>
+</div>
 
 <!-- User Client -->
-<div class="modal fade delete-popup" id="delete_popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade delete-popup"
+  id="delete_popup"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
-	    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div class="modal-body">
         <div class="row">
-			<div class="col-lg-12 col-md-12 justify-content-center text-center">
-				<i class="icofont-close-line-circled close-icon"></i>
-				<h3 class="mt-3">Are you sure?</h3>
-				<p>Do you really want to delete these records? This process cannot be undone.</p>
-			</div>
-			<div class="col-lg-12 col-md-12">
-				<div class="d-flex justify-content-center btn_form mt-3">
-					<button type="button" class="btn btn-primary mr-3">Delete</button>
-					<button type="button" class="btn btn-secondary">Cancel</button>
-				</div>						
-			</div>
-		</div>
+          <div class="col-lg-12 col-md-12 justify-content-center text-center">
+            <i class="icofont-close-line-circled close-icon"></i>
+            <h3 class="mt-3">Are you sure?</h3>
+            <p>
+              Do you really want to delete these records? This process cannot be
+              undone.
+            </p>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="d-flex justify-content-center btn_form mt-3">
+              <button type="button" class="btn btn-primary mr-3">Delete</button>
+              <button type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- User Details -->
-<div class="modal fade" id="view_client" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="view_client"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog_550">
     <div class="modal-content">
-	  <div class="modal-header">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">College Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body user_details">
-		<div class="college-logo">
-			<img src="assets/images/college-logo.png" class="img-fluid"/>
-		</div>
+        <div class="college-logo">
+          <img src="assets/images/college-logo.png" class="img-fluid" />
+        </div>
         <ul class="list-group list-group-flush">
-			<li class="list-group-item"><strong>College</strong> ABIT Group of Institutions</li>
-			<li class="list-group-item"><strong>City:</strong> Ghaziabad</li>
-			<li class="list-group-item"><strong>State:</strong> Uttar Pradesh</li>
-			<li class="list-group-item"><strong>Country:</strong> India</li>
-			<li class="list-group-item"><strong>Contact Person:</strong> Mr. Anurag</li>
-			<li class="list-group-item"><strong>Email:</strong> leanne@gmail.com</li>
-			<li class="list-group-item"><strong>Phone:</strong> +6489346345</li>
-			<li class="list-group-item"><strong>Isactive:</strong> <span class="badge badge-success">Active</span></li>
-		</ul>
+          <li class="list-group-item">
+            <strong>College</strong> ABIT Group of Institutions
+          </li>
+          <li class="list-group-item"><strong>City:</strong> Ghaziabad</li>
+          <li class="list-group-item"><strong>State:</strong> Uttar Pradesh</li>
+          <li class="list-group-item"><strong>Country:</strong> India</li>
+          <li class="list-group-item">
+            <strong>Contact Person:</strong> Mr. Anurag
+          </li>
+          <li class="list-group-item">
+            <strong>Email:</strong> leanne@gmail.com
+          </li>
+          <li class="list-group-item"><strong>Phone:</strong> +6489346345</li>
+          <li class="list-group-item">
+            <strong>Isactive:</strong>
+            <span class="badge badge-success">Active</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
-<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-scale-circle">
-    <p class="basic"></p>
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-scale-circle"
+>
+  <p class="basic"></p>
 </ngx-spinner>
