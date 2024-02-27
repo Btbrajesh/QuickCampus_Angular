@@ -79,7 +79,7 @@
                                         user.isActive ? 'Active' : 'Inactive' }}</a>
                             </td>                                   
                             <td class="action_button text-right">
-                                <a href="add_client.html" class="edit"><i class="icofont-ui-edit"></i></a>
+                                <a routerLink="/admin/edit-user/{{user.id}}" class="edit"><i class="icofont-ui-edit"></i></a>
                                 <a href="#" class="delete" data-target="#delete_popup" data-toggle="modal"><i class="icofont-ui-delete"></i></a>
                                 <a href="#" class="inactive" data-target="#view_client" data-toggle="modal"><i class="icofont-eye"></i></a>
                             </td>

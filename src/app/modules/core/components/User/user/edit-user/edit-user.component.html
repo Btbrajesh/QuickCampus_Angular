@@ -1,0 +1,76 @@
+<div
+  class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
+>
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading d-flex justify-content-between">
+          <div>Edit User</div>
+        </div>
+      </div>
+    </div>
+    <!-- main content -->
+    <div class="main-card mb-3 card">
+      <div class="card-header card-title">
+        <h4 class="mb-0">Edit User</h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Email</label>
+                <input
+                  placeholder="Email address"
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
+              
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Phone</label>
+                <input
+                  placeholder="Phone"
+                  type="text"
+                  class="form-control"
+                  formControlName="mobile"
+                />
+              </div>
+             
+              
+            </div>
+      
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Client</label>
+                <select
+                  class="form-select form-control mr-4"
+                  placeholder="Select Client"
+                  formControlName="client"
+                >
+                  <option value="">Select Client</option>
+                  <option *ngFor="let client of clientList" [value]="">
+                    {{ client.name }}
+                  </option>
+                </select>
+              </div>
+            
+            </div>
+            
+           
+            <div class="col-md-12">
+              <div class="d-flex btn_form mt-3">
+                <button type="submit" class="btn btn-primary mr-3">Update</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- main content -->
+  </div>
+</div>
