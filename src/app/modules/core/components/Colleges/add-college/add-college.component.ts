@@ -4,8 +4,8 @@ import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { State, StateInfo } from 'src/app/modules/master/models/state';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
-import { AddCollegeService } from '../../../services/add-college.service';
 import { College } from 'src/app/modules/master/models/college';
+import { CollegeService } from '../../../services/college.service';
 
 @Component({
   selector: 'app-add-college',
@@ -26,7 +26,7 @@ export class AddCollegeComponent implements OnInit{
     selectedFileName!: string;
     imagePreviewUrl: string | ArrayBuffer | null = null;
 
-   constructor(public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public addCollegeService:AddCollegeService){}
+   constructor(public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
 
    ngOnInit(): void {
     this.fetchCountry();
@@ -51,7 +51,7 @@ export class AddCollegeComponent implements OnInit{
       this.data = this.addCollegeForm.value
       this.data.ImagePath = this.selectedFileName
       this.data.isActive = true
-      this.addCollegeService.addCollege(this.data).subscribe((res)=>{
+      this.collegeService.addCollege(this.data).subscribe((res)=>{
         console.log(res,'res')
       })
     }

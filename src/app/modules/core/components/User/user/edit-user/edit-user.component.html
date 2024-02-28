@@ -15,7 +15,7 @@
         <h4 class="mb-0">Edit User</h4>
       </div>
       <div class="card-body">
-        <form>
+        <form [formGroup]="editForm" (ngSubmit)="submit()">
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -39,28 +39,7 @@
                   formControlName="mobile"
                 />
               </div>
-             
-              
             </div>
-      
-            <div class="col-md-4">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Client</label>
-                <select
-                  class="form-select form-control mr-4"
-                  placeholder="Select Client"
-                  formControlName="client"
-                >
-                  <option value="">Select Client</option>
-                  <option *ngFor="let client of clientList" [value]="">
-                    {{ client.name }}
-                  </option>
-                </select>
-              </div>
-            
-            </div>
-            
-           
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">
                 <button type="submit" class="btn btn-primary mr-3">Update</button>

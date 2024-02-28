@@ -88,9 +88,8 @@
                 <td>{{ client.createdDate | date }}</td>
                 <td class="action_button text-right">
                   <a
-                    routerLink="/admin/edit-client"
+                    routerLink="/admin/edit-client/{{client.id}}"
                     class="edit"
-                    (click)="edit(client.id)"
                     ><i class="icofont-ui-edit"></i
                   ></a>
                   <a (click)="delete(client.id)" class="delete"

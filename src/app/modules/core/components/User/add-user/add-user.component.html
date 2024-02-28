@@ -142,7 +142,7 @@
                   formControlName="client"
                 >
                   <option value="">Select Client</option>
-                  <option *ngFor="let client of clientList" [value]="">
+                  <option *ngFor="let client of clientList" [value]="client.id">
                     {{ client.name }}
                   </option>
                 </select>

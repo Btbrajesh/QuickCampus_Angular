@@ -13,26 +13,26 @@
         <h4 class="mb-0">Edit Clients</h4>
     </div>
     <div class="card-body">
-        <form>
+        <form [formGroup]="editClientForm" (ngSubmit)="submit()">
             <div class="row">
                     <div class="col-md-4">
                         <div class="position-relative form-group">
                             <label for="exampleEmail11" class="required">Email</label>
-                            <input placeholder="Email address" type="text" class="form-control" name="email"/>
+                            <input placeholder="Email address" type="text" class="form-control" name="email" formControlName="email"/>
                             <span class="requireds"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="position-relative form-group">
                             <label for="exampleEmail11" class="required">Phone</label>
-                            <input placeholder="Phone" type="text" class="form-control" name="phone"/>
+                            <input placeholder="Phone" type="text" class="form-control" name="phone" formControlName="phone"/>
                             <span class="requireds"> </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="position-relative form-group">
                             <label for="exampleEmail11" class="required">Address</label>
-                            <input placeholder="Address" type="text" class="form-control" name="address"/>
+                            <input placeholder="Address" type="text" class="form-control" name="address" formControlName="address"/>
                             <span class="requireds"></span>
                         </div>
                     </div>
@@ -40,11 +40,10 @@
                     <div class="col-md-4">
                         <div class="position-relative form-group">
                             <label for="exampleEmail11" class="">Subscription Plan</label>
-                            <select class="form-select form-control" aria-label="Default select example" name="subscriptionPlan" onChange={handleChange}>
+                            <select class="form-select form-control" aria-label="Default select example" name="subscriptionPlan" formControlName="subscriptionPlan">
                                 <option selected value="">--Choose Plan--</option>
                                 <option value="100">100</option>
                                 <option value="200">200</option>
-
                             </select>
                         </div>
                     </div>

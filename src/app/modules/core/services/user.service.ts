@@ -19,5 +19,17 @@ export class UserService {
     return this.http.post<any>(environment.apiUrl+'/User/AddUser',data)
   }
 
+  getCurrentData(id:any){
+    return this.http.get<any>(environment.apiUrl+'/User/GetUserDetailsById?Id='+id)
+  }
+
+  updateUser(data:any){
+    return this.http.post<any>(environment.apiUrl+'/User/EditUser',data)
+  }
+
+  // editUser(data:any):Observable<any>{
+  //   return this.http.post<any>(environment.apiUrl+'/EditUser?clientid=')
+  // }
+
   
 }

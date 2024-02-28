@@ -22,4 +22,12 @@ export class ClientService {
   deleteClient(id:number){
     return this.http.delete<any>(environment.apiUrl+'/Client/DeleteClient?Id='+id)
   }
+
+  getDetailById(id:number){
+    return this.http.get<any>(environment.apiUrl+'/Client/DetailsClient?Id='+id)
+  }
+
+  updateDetails(data:any){
+    return this.http.post<any>(environment.apiUrl+'/Client/EditClient',data)
+  }
 }

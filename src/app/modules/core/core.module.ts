@@ -19,9 +19,10 @@ import { UserComponent } from './components/User/user/user.component';
 import { AddUserComponent } from './components/User/add-user/add-user.component';
 import { AddQuestionComponent } from './components/questions/add-question/add-question.component';
 import { EditUserComponent } from './components/User/user/edit-user/edit-user.component';
+import { EditCollegeComponent } from './components/Colleges/college/edit-college/edit-college.component';
 
 @NgModule({
-  declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent],
+  declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent, EditCollegeComponent],
   imports: [CommonModule,CoreRoutingModule,DataTablesModule,NgxPaginationModule,NgxSpinnerModule,ReactiveFormsModule,FormsModule],
 })
 export class CoreModule {}

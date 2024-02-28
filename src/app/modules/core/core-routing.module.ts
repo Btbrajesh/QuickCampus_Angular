@@ -17,6 +17,7 @@ import { UserComponent } from "./components/User/user/user.component";
 import { AddUserComponent } from "./components/User/add-user/add-user.component";
 import { AddQuestionComponent } from "./components/questions/add-question/add-question.component";
 import { EditUserComponent } from "./components/User/user/edit-user/edit-user.component";
+import { EditCollegeComponent } from "./components/Colleges/college/edit-college/edit-college.component";
 
 const routes: Routes = [
     {
@@ -31,12 +32,13 @@ const routes: Routes = [
         {path: 'add-college',component:AddCollegeComponent,canActivate: [AuthGuard]},
         {path: 'add-campus',component:AddCampusComponent,canActivate: [AuthGuard]},
         {path: 'add-client',component:AddClientComponent,canActivate: [AuthGuard]},
-        {path: 'edit-client',component:EditClientComponent,canActivate: [AuthGuard]},
+        {path: 'edit-client/:id',component:EditClientComponent,canActivate: [AuthGuard]},
         {path: 'role',component:RoleComponent,canActivate: [AuthGuard]},
         {path: 'user',component:UserComponent,canActivate: [AuthGuard]},
         {path: 'add-user',component:AddUserComponent,canActivate: [AuthGuard]},
         {path: 'add-question',component:AddQuestionComponent,canActivate: [AuthGuard]},
         {path: 'edit-user/:id',component:EditUserComponent,canActivate: [AuthGuard]},
+        {path: 'edit-college/:id',component:EditCollegeComponent,canActivate: [AuthGuard]},
       ]
     },
   ];

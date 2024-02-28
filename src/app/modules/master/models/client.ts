@@ -8,3 +8,11 @@ export interface Client{
     password:string
     confirmPassword:string
 }
+
+export interface UpdateClient{
+    id:number,
+    address:string,
+    email:string,
+    phone:string,
+    subscriptionPlan:string
+}

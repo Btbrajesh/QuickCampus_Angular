@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
-import { AddCollegeService } from '../../../services/add-college.service';
 import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { State, StateInfo } from 'src/app/modules/master/models/state';
