@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ClientService } from 'src/app/modules/core/services/client.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { User } from 'src/app/modules/master/models/user';
 
@@ -19,7 +19,7 @@ export class EditUserComponent implements OnInit{
     mobile:new FormControl(''),
   })
 
-  constructor(public clientService:ClientService,private router:ActivatedRoute, public userService:UserService){}
+  constructor(public route:Router, public clientService:ClientService,private router:ActivatedRoute, public userService:UserService){}
 
   ngOnInit(): void {
     this.getClient()
@@ -39,6 +39,10 @@ export class EditUserComponent implements OnInit{
         this.clientList = res.data
       }
     })
+  }
+
+  cancel(){
+    this.route.navigateByUrl('/admin/user')
   }
 
   submit(){

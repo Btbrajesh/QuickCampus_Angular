@@ -6,6 +6,7 @@ import { State, StateInfo } from 'src/app/modules/master/models/state';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
 import { College } from 'src/app/modules/master/models/college';
 import { CollegeService } from '../../../services/college.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-college',
@@ -26,7 +27,7 @@ export class AddCollegeComponent implements OnInit{
     selectedFileName!: string;
     imagePreviewUrl: string | ArrayBuffer | null = null;
 
-   constructor(public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
+   constructor(public router:Router,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
 
    ngOnInit(): void {
     this.fetchCountry();
@@ -56,6 +57,10 @@ export class AddCollegeComponent implements OnInit{
       })
     }
    }
+
+   cancel(){
+    this.router.navigateByUrl('/admin/college')
+  }
 
    private fetchCountry(){
     this.countrystatecityService.getCountry().subscribe(data=>{

@@ -31,4 +31,8 @@ export class ClientService {
   updateDetails(data:any){
     return this.http.post<ResponseObj>(environment.apiUrl+'/Client/EditClient',data)
   }
+
+  activeInactive(id:any){
+    return this.http.get<any>(environment.apiUrl+'/Client/activeAndInactive?id='+id)
+  }
 }

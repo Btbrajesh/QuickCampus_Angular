@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { passwordMatchValidator } from '../../confirm-password.validator';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -21,7 +22,7 @@ export class AddUserComponent implements OnInit{
   eyeIconSrc: string = '../../../../../../assets/images/hide.png';
   eyeIconSrc2: string = '../../../../../../assets/images/hide.png';
 
-  constructor(public roleService:RoleService,private toastr: ToastrService,public clientService:ClientService,public fb:FormBuilder,public userService:UserService){}
+  constructor(public router:Router, public roleService:RoleService,private toastr: ToastrService,public clientService:ClientService,public fb:FormBuilder,public userService:UserService){}
 
   ngOnInit(): void {
     this.getRole()
@@ -70,6 +71,10 @@ export class AddUserComponent implements OnInit{
     }else{
       this.toastr.error('Please fill the form with valid values')
     }
+  }
+
+  cancel(){
+    this.router.navigateByUrl('/admin/user')
   }
 
   togglePasswordVisibility(): void {

@@ -28,10 +28,15 @@ export class ClientComponent implements OnInit{
     })
   }
 
-  toggleActive(user: any): void {
-    user.isActive = !user.isActive;
+  toggleActive(id: any): void {
+    this.clientService.activeInactive(id).subscribe((res)=>{
+      console.log(res,'acitve')
+    })
+    // user.isActive = !user.isActive;
     // Call your service method to update the user's active status
   }
+
+  
   
 
   edit(id:number){

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ClientService } from '../../../services/client.service';
 import { Client } from 'src/app/modules/master/models/client';
-import { passwordMatchValidator } from '../../confirm-password.validator';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ClientService } from 'src/app/modules/core/services/client.service';
+import { passwordMatchValidator } from '../../../confirm-password.validator';
 
 @Component({
   selector: 'app-add-client',
