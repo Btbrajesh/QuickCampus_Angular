@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Client } from '../../master/models/client';
+import { ResponseObj } from '../../master/models/college';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ClientService {
   }
 
   addClient(data:Client){
-    return this.http.post<any>(environment.apiUrl+'/Client/AddClient',data)
+    return this.http.post<ResponseObj>(environment.apiUrl+'/Client/AddClient',data)
   }
 
   deleteClient(id:number){
@@ -28,6 +29,6 @@ export class ClientService {
   }
 
   updateDetails(data:any){
-    return this.http.post<any>(environment.apiUrl+'/Client/EditClient',data)
+    return this.http.post<ResponseObj>(environment.apiUrl+'/Client/EditClient',data)
   }
 }

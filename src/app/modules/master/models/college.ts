@@ -16,6 +16,7 @@ export interface ResponseObj{
     data :College;
     message : string;
     status: number;
+    isSuccess:string;
 }
 
 export interface UpdateCollege{

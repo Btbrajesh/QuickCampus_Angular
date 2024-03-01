@@ -4,6 +4,7 @@ import { ClientService } from '../../../services/client.service';
 import { Client } from 'src/app/modules/master/models/client';
 import { passwordMatchValidator } from '../../confirm-password.validator';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-client',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AddClientComponent implements OnInit{
 
-  constructor(public fb:FormBuilder, public clientService:ClientService,public router:Router){}
+  constructor(public fb:FormBuilder, public clientService:ClientService,public router:Router,public toastr:ToastrService){}
 
   addClientForm!: FormGroup
   data!:Client
@@ -26,7 +27,7 @@ export class AddClientComponent implements OnInit{
       phone:['',[Validators.required,Validators.maxLength(10)]],
       address:['',[Validators.required,Validators.maxLength(50)]],
       subscriptionPlan:['',[Validators.required]],
-      username:['',[Validators.required,Validators.maxLength(15)]],
+      username:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
       confirmPassword:['',[Validators.required]]
     },{
@@ -38,8 +39,15 @@ export class AddClientComponent implements OnInit{
     if (this.addClientForm.valid){
       this.data = this.addClientForm.value
       this.clientService.addClient(this.data).subscribe((res)=>{
-        console.log(res,'res')
+        console.log(res)
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+        }else{
+          this.toastr.error(res.message)
+        }
       })
+    }else{
+      this.toastr.error('Please fill all the details properly')
     }
   }
 
