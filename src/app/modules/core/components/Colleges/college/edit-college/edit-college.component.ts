@@ -8,6 +8,7 @@ import { College, UpdateCollege } from 'src/app/modules/master/models/college';
 import { CollegeService } from 'src/app/modules/core/services/college.service';
 import { ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/modules/core/services/client.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-college',
@@ -43,7 +44,7 @@ export class EditCollegeComponent implements OnInit{
       isActive:new FormControl()
     })
 
-    constructor(public clientService:ClientService,private router:ActivatedRoute,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
+    constructor(public toastr:ToastrService,public clientService:ClientService,private router:ActivatedRoute,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
 
 
   ngOnInit(): void {
@@ -58,15 +59,17 @@ export class EditCollegeComponent implements OnInit{
         collegeCode:new FormControl(res.data.collegeCode),
         Address1:new FormControl(res.data.address1),
         Address2:new FormControl(res.data.address2),
-        CityId:new FormControl(''),
-        StateId:new FormControl(''),
-        CountryId:new FormControl(''),
+        CityId:new FormControl(),
+        StateId:new FormControl(),
+        CountryId:new FormControl(),
         ContectPerson:new FormControl(res.data.contectPerson),
         ContectEmail:new FormControl(res.data.contectEmail),
         ContectPhone:new FormControl(res.data.contectPhone),
         client:new FormControl(''),
         isActive:new FormControl(),
       })
+    },err=>{
+      this.toastr.error(err)
     })
    }
 
@@ -74,6 +77,8 @@ export class EditCollegeComponent implements OnInit{
     this.countrystatecityService.getCountry().subscribe(data=>{
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
+    },err=>{
+      this.toastr.error(err)
     })
   }
   
@@ -81,6 +86,8 @@ export class EditCollegeComponent implements OnInit{
     this.countrystatecityService.getStateOfSelectedCountry(countryId).subscribe(data=>{
       this.listState = data
       this.stateInfoList = this.listState.data
+    },err=>{
+      this.toastr.error(err)
     })
   }
   
@@ -88,6 +95,8 @@ export class EditCollegeComponent implements OnInit{
     this.countrystatecityService.getCitiesOfSelectedState(stateId).subscribe(data=>{
     this.listCity = data
     this.cityInfoList = this.listCity.data
+  },err=>{
+    this.toastr.error(err)
   })
   }
 
@@ -96,6 +105,8 @@ export class EditCollegeComponent implements OnInit{
       if(res.isSuccess){
         this.clientList = res.data
       }
+    },err=>{
+      this.toastr.error(err)
     })
   }
 
@@ -122,6 +133,8 @@ export class EditCollegeComponent implements OnInit{
       this.collegeService.updateCollege(data).subscribe((res)=>{
         console.log(res,'update college')
       })
+    }else{
+      this.toastr.error("Please Fill All the Details")
     }
   }
 

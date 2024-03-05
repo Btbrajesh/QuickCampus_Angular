@@ -14,7 +14,7 @@ export class QuestionComponent {
 
   questionList:any[]=[];
 
-  constructor(private sanitizer: DomSanitizer,public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
+  constructor(public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
 
 
   ngOnInit(): void {

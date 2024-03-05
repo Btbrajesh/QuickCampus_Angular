@@ -42,9 +42,13 @@ export class AddClientComponent implements OnInit{
         console.log(res)
         if (res.isSuccess){
           this.toastr.success(res.message)
+          this.addClientForm.reset()
+          this.router.navigateByUrl('/admin/client')
         }else{
           this.toastr.error(res.message)
         }
+      },err=>{
+        this.toastr.error(err)
       })
     }else{
       this.toastr.error('Please fill all the details properly')

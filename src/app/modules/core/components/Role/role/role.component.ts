@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from '../../../services/role.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-role',
@@ -10,7 +11,7 @@ export class RoleComponent implements OnInit{
 
   data!:any
 
-  constructor(public roleService:RoleService){}
+  constructor(public roleService:RoleService, public toastr:ToastrService){}
 
   ngOnInit(): void {
     this.getAllRole()
@@ -19,6 +20,8 @@ export class RoleComponent implements OnInit{
   getAllRole(){
     this.roleService.getAllRole().subscribe((res)=>{
       this.data = res
+    },err =>{
+      this.toastr.error("Error in applicant list",err)
     })
   }
   

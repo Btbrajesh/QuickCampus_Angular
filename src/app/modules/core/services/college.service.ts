@@ -40,7 +40,7 @@ export class CollegeService {
   }
 
   updateCollege(data:any){
-    return this.http.post<any>(environment.apiUrl+'College/EditCollege',data)
+    return this.http.post<any>(environment.apiUrl+'/College/EditCollege',data)
   }
 
  

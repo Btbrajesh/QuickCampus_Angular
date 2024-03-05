@@ -4,6 +4,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { ApplicantService } from '../../../services/applicant.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-applicantlist',
@@ -25,7 +26,7 @@ export class ApplicantlistComponent implements OnInit {
   applicantList :any[]=[];
   p: number = 1;
  
-  constructor(private applicantService: ApplicantService,private router: Router,private spinnerService: NgxSpinnerService){
+  constructor(public toastr:ToastrService,private applicantService: ApplicantService,private router: Router,private spinnerService: NgxSpinnerService){
    
   }
 
@@ -44,9 +45,9 @@ getApplicantList(){
         applicant.fullName = `${applicant.firstName} ${applicant.lastName}`;
       });
     }
-  },err =>{
+  },err=>{
     this.spinnerService.hide();
-    console.log("Error in applicant list",err);
+    this.toastr.error(err)
   })
 }
 
@@ -62,5 +63,11 @@ ngOnDestroy(): void {
   editUser(user: any): void {
     const url = `/updateApplicant/${user.applicantID}`;
     this.router.navigateByUrl(url);
+  }
+
+  delete(id:number){
+    this.applicantService.deleteApplicant(id).subscribe((res)=>{
+      console.log(res)
+    })
   }
 }

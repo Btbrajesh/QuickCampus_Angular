@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +12,7 @@ export class UserComponent implements OnInit{
 
   userData:any
 
-  constructor(public userService:UserService,public router:Router){}
+  constructor(public toastr:ToastrService,public userService:UserService,public router:Router){}
 
   ngOnInit(): void {
     this.getAll()
@@ -22,6 +23,8 @@ export class UserComponent implements OnInit{
       if (res.isSuccess){
         this.userData = res.data
       }
+    },err=>{
+      this.toastr.error(err)
     })
   }
 

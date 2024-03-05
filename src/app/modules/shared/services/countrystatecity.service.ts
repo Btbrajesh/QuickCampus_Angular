@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Country } from '../../master/models/country';
 import { environment } from 'src/environments/environment';
 import { State } from '../../master/models/state';
+import { Response } from '../../master/models/response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +24,9 @@ export class CountrystatecityService {
 
   getCitiesOfSelectedState(stateId:number): Observable<any>{
     return this.httpclient.get(environment.apiUrl+'/City/GetAllCity?stateId='+stateId)
+  }
+
+  getCityById(cityId:number){
+    return this.httpclient.get<Response>(environment.apiUrl+'/City/GetCityById?id='+cityId)
   }
 }

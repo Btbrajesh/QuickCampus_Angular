@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../../services/client.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-client',
@@ -12,7 +13,7 @@ export class ClientComponent implements OnInit{
 
   clientList: any[]= []
 
-  constructor(public clientService:ClientService,public router:Router,public spinnerService:NgxSpinnerService){}
+  constructor(public toastr:ToastrService,public clientService:ClientService,public router:Router,public spinnerService:NgxSpinnerService){}
 
   ngOnInit(): void {
     this.getClientList()
@@ -25,6 +26,8 @@ export class ClientComponent implements OnInit{
         this.clientList = res.data
         this.spinnerService.hide()
       }
+    },err=>{
+      this.toastr.error(err)
     })
   }
 

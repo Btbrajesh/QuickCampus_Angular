@@ -34,8 +34,9 @@ export class EditClientComponent implements OnInit{
         phone:new FormControl(res.data['phone']),
         subscriptionPlan:new FormControl(res.data['subscriptionPlan']),
       })
+    },err=>{
+      this.toastr.error(err)
     })
-    this.router.snapshot.params['id']
   }
 
   submit(){
@@ -43,7 +44,15 @@ export class EditClientComponent implements OnInit{
       const formData = this.editClientForm.value as UpdateClient;
       formData.id = this.router.snapshot.params['id']
       this.clientService.updateDetails(formData).subscribe((res)=>{
-        this.toastr.success(res.message)
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+          this.editClientForm.reset()
+          this.route.navigateByUrl('/admin/client')
+        }else{
+          this.toastr.error(res.message)
+        }
+      },err=>{
+        this.toastr.error(err)
       })
     }else{
       this.toastr.error("Please fill all the details properly")

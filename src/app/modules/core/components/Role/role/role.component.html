@@ -20,7 +20,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h5 class="card-title mb-0">Role</h5>
-          <a href="add_role.html" class="btn btn-primary btn_blue"
+          <a routerLink="/admin/add-role" class="btn btn-primary btn_blue"
             >Add New Role</a
           >
         </div>
@@ -65,7 +65,7 @@
           <table class="mb-0 table table-striped">
             <thead>
               <tr>
-                <th>#Id</th>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Created By</th>
                 <th>Created Date</th>
@@ -83,7 +83,7 @@
                 <td>{{ role.modifiedBy }}</td>
                 <td>{{ role.modofiedDate | date }}</td>
                 <td class="action_button text-right">
-                  <a href="add_role.html" class="edit"
+                  <a routerLink="/admin/edit-role/{{role.id}}" class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>
                   <a

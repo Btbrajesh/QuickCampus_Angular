@@ -8,6 +8,7 @@ import { Campus } from 'src/app/modules/master/models/campus';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CollegeService } from '../../../services/college.service';
 import { CampusService } from '../../../services/campus.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-campus',
@@ -30,7 +31,7 @@ export class AddCampusComponent implements OnInit{
     isTableVisible: boolean = false;
     isDisabled: boolean = true;
 
-  constructor(private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
+  constructor(public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
   ngOnInit(): void {
     this.fetchCountry()
@@ -99,6 +100,8 @@ export class AddCampusComponent implements OnInit{
     this.countrystatecityService.getCountry().subscribe(data=>{
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
+    },err=>{
+      this.toastr.error(err)
     })
   }
   
@@ -106,6 +109,8 @@ export class AddCampusComponent implements OnInit{
     this.countrystatecityService.getStateOfSelectedCountry(countryId).subscribe(data=>{
       this.listState = data
       this.stateInfoList = this.listState.data
+    },err=>{
+      this.toastr.error(err)
     })
   }
   
@@ -113,6 +118,8 @@ export class AddCampusComponent implements OnInit{
     this.countrystatecityService.getCitiesOfSelectedState(stateId).subscribe(data=>{
     this.listCity = data
     this.cityInfoList = this.listCity.data
-  })
+  },err=>{
+      this.toastr.error(err)
+    })
 }
 }

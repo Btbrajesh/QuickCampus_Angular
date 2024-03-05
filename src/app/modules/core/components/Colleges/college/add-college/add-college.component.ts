@@ -5,8 +5,9 @@ import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { State, StateInfo } from 'src/app/modules/master/models/state';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
 import { College } from 'src/app/modules/master/models/college';
-import { CollegeService } from '../../../services/college.service';
+import { CollegeService } from '../../../../services/college.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-college',
@@ -27,7 +28,7 @@ export class AddCollegeComponent implements OnInit{
     selectedFileName!: string;
     imagePreviewUrl: string | ArrayBuffer | null = null;
 
-   constructor(public router:Router,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
+   constructor(public toastr:ToastrService,public router:Router,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
 
    ngOnInit(): void {
     this.fetchCountry();
@@ -53,8 +54,18 @@ export class AddCollegeComponent implements OnInit{
       this.data.ImagePath = this.selectedFileName
       this.data.isActive = true
       this.collegeService.addCollege(this.data).subscribe((res)=>{
-        console.log(res,'res')
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+          this.addCollegeForm.reset()
+          this.router.navigateByUrl('/admin/college')
+        }else{
+          this.toastr.error(res.message)
+        }
+      },err=>{
+        this.toastr.error(err)
       })
+    }else{
+      this.toastr.error('Please Fill All the Details')
     }
    }
 
@@ -66,6 +77,8 @@ export class AddCollegeComponent implements OnInit{
     this.countrystatecityService.getCountry().subscribe(data=>{
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
+    },err=>{
+      this.toastr.error(err)
     })
   }
   
@@ -73,6 +86,8 @@ export class AddCollegeComponent implements OnInit{
     this.countrystatecityService.getStateOfSelectedCountry(countryId).subscribe(data=>{
       this.listState = data
       this.stateInfoList = this.listState.data
+    },err=>{
+      this.toastr.error(err)
     })
   }
   
@@ -80,6 +95,8 @@ export class AddCollegeComponent implements OnInit{
     this.countrystatecityService.getCitiesOfSelectedState(stateId).subscribe(data=>{
     this.listCity = data
     this.cityInfoList = this.listCity.data
+  },err=>{
+    this.toastr.error(err)
   })
   }
 

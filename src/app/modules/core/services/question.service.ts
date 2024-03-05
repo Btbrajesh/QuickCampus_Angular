@@ -15,6 +15,6 @@ export class QuestionService {
   }
 
   addQuestion(data:any):Observable<any>{
-    return this.http.post<any>(environment.apiUrl + 'Question/addorupdatequestion',data)
+    return this.http.post<any>(environment.apiUrl + '/Question/addorupdatequestion',data)
   }
 }

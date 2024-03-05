@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { QuestionService } from '../../../services/question.service';
+import { QuestionService } from '../../../../services/question.service';
 import { Question } from 'src/app/modules/master/models/question';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-question',
@@ -15,7 +16,7 @@ export class AddQuestionComponent implements OnInit{
   selectedFileName!: string;
   data!:Question
 
-  constructor(public fb:FormBuilder,public questionService:QuestionService){}
+  constructor(public toastr:ToastrService,public fb:FormBuilder,public questionService:QuestionService){}
 
   ngOnInit(): void {
     this.addQuestionForm = this.fb.group({
@@ -36,6 +37,8 @@ export class AddQuestionComponent implements OnInit{
       this.data.file = this.selectedFileName
       this.questionService.addQuestion(this.data).subscribe((res)=>{
         console.log(res,'question')
+      },err=>{
+        this.toastr.error(err)
       })
     }
   }

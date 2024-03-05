@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from '../../../services/role.service';
-import { ClientService } from '../../../services/client.service';
+import { RoleService } from '../../../../services/role.service';
+import { ClientService } from '../../../../services/client.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
-import { passwordMatchValidator } from '../../confirm-password.validator';
+import { UserService } from '../../../../services/user.service';
+import { passwordMatchValidator } from '../../../confirm-password.validator';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -52,6 +52,8 @@ export class AddUserComponent implements OnInit{
       if(res.isSuccess){
         this.clientList = res.data
       }
+    },err=>{
+      this.toastr.error(err)
     })
   }
 
@@ -62,6 +64,7 @@ export class AddUserComponent implements OnInit{
         if (res.isSuccess){
           this.toastr.success(res.message)
           this.addUserForm.reset()
+          this.router.navigateByUrl('/admin/user')
         }else {
           this.toastr.error(res.message)
         }

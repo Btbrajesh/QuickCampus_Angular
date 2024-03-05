@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Applicant } from '../../master/models/applicant';
+import { ResponseObj } from '../../master/models/college';
 
 
 @Injectable({
@@ -16,11 +18,19 @@ export class ApplicantService {
   }
 
   getApplicantById(applicantId:number): Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/Applicant/GetApplicantById?Id='+applicantId);
+    return this.http.get<any>(environment.apiUrl +'/Applicant/GetApplicantById?applicantId='+applicantId);
   }
 
-  updateApplicant(applicantId:number,applicant:any): Observable<any>{
-    return this.http.post<any>(environment.apiUrl +'/Applicant/EditApplicant?ApplicantId='+applicantId,applicant);
+  updateApplicant(data:Applicant): Observable<any>{
+    return this.http.post<ResponseObj>(environment.apiUrl +'/Applicant/EditApplicant',data);
   }
 
+  deleteApplicant(id:number){
+    return this.http.delete<any>(environment.apiUrl+'/Applicant/DeleteApplicant?applicantId='+id)
+  }
+
+  addApplicant(data:any){
+    return this.http.post<ResponseObj>(environment.apiUrl+'/Applicant/AddApplicant',data)
+  }
+  
 }
