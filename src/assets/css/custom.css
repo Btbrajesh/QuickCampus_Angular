@@ -124,3 +124,7 @@ textarea.form-control{height: auto;}
     padding: 5px 10px;
     min-width: 19px;
 }
+
+.modal-backdrop{
+    z-index: 1040 !important;
+}

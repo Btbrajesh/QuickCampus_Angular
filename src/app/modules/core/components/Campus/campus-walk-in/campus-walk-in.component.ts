@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CampusService } from '../../../services/campus.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CollegedetailModalComponent } from '../../../popups/collegedetail-modal/collegedetail-modal.component';
+import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
+import { ToastrService } from 'ngx-toastr';
+import { CampusdetailModalComponent } from '../../../popups/campusdetail-modal/campusdetail-modal.component';
 
 @Component({
   selector: 'app-campus-walk-in',
@@ -12,7 +17,7 @@ export class CampusWalkInComponent implements OnInit{
 
   campusList:any[]=[];
 
-  constructor(public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
+  constructor(private modalService: NgbModal,public toastr:ToastrService,public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
 
   ngOnInit(): void {
     this.getCampusList()
@@ -21,6 +26,7 @@ export class CampusWalkInComponent implements OnInit{
   getCampusList(){
     this.spinnerService.show();
     this.campusService.getCampusList().subscribe(res =>{
+      console.log(res,'camp')
       if(res.isSuccess){
         this.spinnerService.hide();
         this.campusList = res.data;
@@ -36,6 +42,25 @@ export class CampusWalkInComponent implements OnInit{
     // Call your service method to update the user's active status
   }
   
- 
+  deleteItem(itemId: number): void {
+    const modalRef = this.modalService.open(DeleteModalComponent);
+    modalRef.componentInstance.itemId = itemId;
+    modalRef.result.then((result) => {
+      if (result === 'delete') {
+        console.log(itemId)
+        this.campusService.deleteById(itemId).subscribe((res)=>{
+          this.toastr.success(res.message)
+          this.getCampusList()
+        },err=>{
+          this.toastr.error(err)
+        })
+      }
+    })
+  }
+  
+  viewDetails(itemId: number): void {
+    const modalRef = this.modalService.open(CampusdetailModalComponent, { size: 'lg' });
+    modalRef.componentInstance.itemId = itemId;
+  }
 
 }

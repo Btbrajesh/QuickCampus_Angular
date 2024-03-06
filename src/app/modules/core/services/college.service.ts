@@ -35,13 +35,16 @@ export class CollegeService {
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)
   }
 
-  getDetailById(id:number){
+  getDetailById(id:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl+'/College/GetCollegeDetailsById?Id='+id)
   }
 
-  updateCollege(data:any){
+  updateCollege(data:any): Observable<any>{
     return this.http.post<any>(environment.apiUrl+'/College/EditCollege',data)
   }
 
+  deleteByID(id:any): Observable<any>{
+    return this.http.delete<any>(environment.apiUrl+'/College/DeleteCollege?id='+id)
+  }
  
 }

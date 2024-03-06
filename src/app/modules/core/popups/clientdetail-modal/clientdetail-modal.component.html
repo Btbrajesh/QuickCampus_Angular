@@ -1,0 +1,35 @@
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Client Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="cancel()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body user_details">
+        <ul class="list-group list-group-flush" *ngFor="let client of clientDetail">
+          <li class="list-group-item"><strong>Name:</strong> {{client.name}}</li>
+          <li class="list-group-item">
+            <strong>Email:</strong> {{client.email}}
+          </li>
+          <li class="list-group-item"><strong>Phone:</strong> {{client.phone}}</li>
+          <li class="list-group-item">
+            <strong>Address:</strong> {{client.address}}
+          </li>
+          <li class="list-group-item"><strong>GeoLocation:</strong> {{client.latitude}} {{client.longitude}}</li>
+          <li class="list-group-item">
+            <strong>Subscription Plan:</strong>
+            <span>{{client.subscriptionPlan}} <strong>Year</strong></span>
+          </li>
+          <li class="list-group-item">
+            <strong>Isactive:</strong>
+            <span class="badge badge-success">{{client.isActive}}</span>
+          </li>
+        </ul>
+      </div>
+  

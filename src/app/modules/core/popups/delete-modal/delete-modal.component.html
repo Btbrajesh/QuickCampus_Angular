@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">Delete Confirmation</h4>
+    <button type="button" class="close" (click)="cancelDelete()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this item?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+  </div>

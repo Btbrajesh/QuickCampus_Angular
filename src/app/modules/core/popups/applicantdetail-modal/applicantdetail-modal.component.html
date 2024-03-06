@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="cancel()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body user_details">
+    <ul class="list-group list-group-flush" *ngFor="let applicant of applicantDetail">
+        <li class="list-group-item"><strong>Name:</strong> {{applicant.firstName}} +{{applicant.lastName}} </li>
+        <li class="list-group-item"><strong>Email:</strong> {{applicant.emailAddress}}</li>
+        <li class="list-group-item"><strong>Phone:</strong> {{applicant.phoneNumber}}</li>
+        <li class="list-group-item"><strong>College Name:</strong> {{applicant.collegeName}}</li>
+        <li class="list-group-item"><strong>Highest Qualification:</strong> {{applicant.higestQualification}}</li>
+        <li class="list-group-item"><strong>Highest Qualification Percentage:</strong> {{applicant.higestQualificationPercentage}}</li>
+        <li class="list-group-item"><strong>Intermediate Percentage</strong> {{applicant.intermediatePercentage}}</li>
+        <li class="list-group-item"><strong>Metric Percentage:</strong> {{applicant.matricPercentage}}</li>
+        <li class="list-group-item"><strong>Skills:</strong> {{applicant.skills}}</li>
+
+    </ul>
+  </div>
+

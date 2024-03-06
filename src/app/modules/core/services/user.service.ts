@@ -31,5 +31,13 @@ export class UserService {
   //   return this.http.post<any>(environment.apiUrl+'/EditUser?clientid=')
   // }
 
+  deleteUser(id:any){
+    return this.http.delete<any>(environment.apiUrl+'/User/DeleteUser?id='+id)
+  }
+
+  getUserById(id:any){
+    return this.http.get<any>(environment.apiUrl+'/User/GetUserDetailsById?Id='+id)
+  }
+
   
 }

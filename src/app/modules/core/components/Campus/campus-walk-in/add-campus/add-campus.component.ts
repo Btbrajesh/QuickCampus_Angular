@@ -6,9 +6,10 @@ import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { State, StateInfo } from 'src/app/modules/master/models/state';
 import { Campus } from 'src/app/modules/master/models/campus';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CollegeService } from '../../../services/college.service';
-import { CampusService } from '../../../services/campus.service';
+import { CollegeService } from '../../../../services/college.service';
+import { CampusService } from '../../../../services/campus.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-campus',
@@ -31,7 +32,7 @@ export class AddCampusComponent implements OnInit{
     isTableVisible: boolean = false;
     isDisabled: boolean = true;
 
-  constructor(public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
+  constructor(public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
   ngOnInit(): void {
     this.fetchCountry()
@@ -122,4 +123,8 @@ export class AddCampusComponent implements OnInit{
       this.toastr.error(err)
     })
 }
+
+ cancel(){
+  this.router.navigateByUrl('/admin/campus')
+ }
 }

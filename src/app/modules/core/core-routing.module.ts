@@ -8,7 +8,7 @@ import { CollegeComponent } from "./components/Colleges/college/college.componen
 import { CampusWalkInComponent } from "./components/Campus/campus-walk-in/campus-walk-in.component";
 import { QuestionComponent } from "./components/questions/question/question.component";
 import { AddCollegeComponent } from "./components/Colleges/college/add-college/add-college.component";
-import { AddCampusComponent } from "./components/Campus/add-campus/add-campus.component";
+import { AddCampusComponent } from "./components/Campus/campus-walk-in/add-campus/add-campus.component";
 import { ClientComponent } from "./components/Clients/client/client.component";
 import { EditClientComponent } from "./components/Clients/client/edit-client/edit-client.component";
 import { RoleComponent } from "./components/Role/role/role.component";

@@ -30,4 +30,8 @@ export class RoleService {
   updateRole(data:any){
     return this.http.post<any>(environment.apiUrl+'/Role/EditRole',data)
   }
+
+  deleteRole(id:any){
+    return this.http.delete<ResponseObj>(environment.apiUrl+'/Role/DeleteRole?id='+id)
+  }
 }

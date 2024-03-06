@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
+import { UserdetailModalComponent } from '../../../popups/userdetail-modal/userdetail-modal.component';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +15,7 @@ export class UserComponent implements OnInit{
 
   userData:any
 
-  constructor(public toastr:ToastrService,public userService:UserService,public router:Router){}
+  constructor(private modalService: NgbModal,public toastr:ToastrService,public userService:UserService,public router:Router){}
 
   ngOnInit(): void {
     this.getAll()
@@ -25,6 +28,25 @@ export class UserComponent implements OnInit{
       }
     },err=>{
       this.toastr.error(err)
+    })
+  }
+
+  viewDetails(itemId: number): void {
+    const modalRef = this.modalService.open(UserdetailModalComponent, { size: 'lg' });
+    modalRef.componentInstance.itemId = itemId;
+  }
+
+  deleteItem(itemId: number): void {
+    const modalRef = this.modalService.open(DeleteModalComponent);
+    modalRef.componentInstance.itemId = itemId;
+    modalRef.result.then((result) => {
+      if (result === 'delete') {
+        this.userService.deleteUser(itemId).subscribe((res)=>{
+          this.toastr.success(res.message)
+          this.getAll()
+        }
+        )
+      }
     })
   }
 

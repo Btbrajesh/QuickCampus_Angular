@@ -14,7 +14,7 @@ import { Applicant } from 'src/app/modules/master/models/applicant';
 export class EditApplicantComponent implements OnInit{
 
   editApplicantForm= new FormGroup({
-    id: new FormControl(),
+    applicantID: new FormControl(),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     emailAddress: new FormControl('',Validators.compose([Validators.required,Validators.email]) ),
@@ -37,7 +37,7 @@ ngOnInit(): void {
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
     console.log(res)
     this.editApplicantForm = new FormGroup({
-      id: new FormControl(),
+      applicantID: new FormControl(),
       firstName: new FormControl(res.data['firstName']),
       lastName: new FormControl(res.data['lastName']),
       emailAddress: new FormControl(res.data['emailAddress']),
@@ -60,10 +60,19 @@ ngOnInit(): void {
 submit(){
   if (this.editApplicantForm.valid){
     const formData = this.editApplicantForm.value as Applicant;
-    formData.id = this.router.snapshot.params['id']
+    formData.applicantID = this.router.snapshot.params['id']
     this.applicantService.updateApplicant(formData).subscribe((res)=>{
-      console.log(res,'updateapplicant')
+      if (res.isSuccess){
+        this.toastr.success(res.message)
+        this.route.navigateByUrl('/admin/applicant')
+      }else{
+        this.toastr.error(res.message)
+      }
+    },err=>{
+      this.toastr.error(err)
     })
+  }else{
+    this.toastr.error("Please fill the form properly")
   }
 }
 
