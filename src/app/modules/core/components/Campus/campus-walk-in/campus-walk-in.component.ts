@@ -47,10 +47,13 @@ export class CampusWalkInComponent implements OnInit{
     modalRef.componentInstance.itemId = itemId;
     modalRef.result.then((result) => {
       if (result === 'delete') {
-        console.log(itemId)
         this.campusService.deleteById(itemId).subscribe((res)=>{
-          this.toastr.success(res.message)
-          this.getCampusList()
+          if (res.isSuccess){
+            this.toastr.success(res.message)
+            this.getCampusList()
+          }else{
+            this.toastr.error(res.message)
+          }
         },err=>{
           this.toastr.error(err)
         })

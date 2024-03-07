@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionService } from '../../../../services/question.service';
 import { Question } from 'src/app/modules/master/models/question';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-question',
@@ -16,17 +17,17 @@ export class AddQuestionComponent implements OnInit{
   selectedFileName!: string;
   data!:Question
 
-  constructor(public toastr:ToastrService,public fb:FormBuilder,public questionService:QuestionService){}
+  constructor(public router:Router,public toastr:ToastrService,public fb:FormBuilder,public questionService:QuestionService){}
 
   ngOnInit(): void {
     this.addQuestionForm = this.fb.group({
-      questionType:['',[Validators.required]],
+      questionTypeName:['',[Validators.required]],
       questionSection:['',[Validators.required]],
       questionGroup:['',[Validators.required]],
       marks:['',[Validators.required]],
       question:['',[Validators.required]],
       options:['',[Validators.required]],
-      file:['',[Validators.required]]
+      file:['']
     })
   }
 
@@ -46,6 +47,10 @@ export class AddQuestionComponent implements OnInit{
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     this.selectedFileName = event.target.files[0].name;  
+  }
+
+  cancel(){
+    this.router.navigateByUrl('/admin/question')
   }
 
 

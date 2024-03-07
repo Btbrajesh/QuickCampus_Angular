@@ -26,6 +26,6 @@ export class CampusService {
   }
 
   deleteById(id:number): Observable<any>{
-    return this.http.delete<Response>(environment.apiUrl+'/Campus/DeleteCampus?campusId='+id)
+    return this.http.delete<any>(environment.apiUrl+'/Campus/DeleteCampus?campusId='+id)
   }
 }
