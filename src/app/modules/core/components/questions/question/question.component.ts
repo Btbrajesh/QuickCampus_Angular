@@ -4,6 +4,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CampusService } from '../../../services/campus.service';
 import { QuestionService } from '../../../services/question.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-question',
@@ -14,7 +17,7 @@ export class QuestionComponent {
 
   questionList:any[]=[];
 
-  constructor(public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
+  constructor(public toastr:ToastrService,private modalService: NgbModal,public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
 
 
   ngOnInit(): void {
@@ -48,6 +51,25 @@ export class QuestionComponent {
     const tempElement = document.createElement('div');
     tempElement.innerHTML = html;
     return tempElement.textContent || tempElement.innerText || '';
+}
+
+deleteItem(itemId: number): void {
+  const modalRef = this.modalService.open(DeleteModalComponent);
+  modalRef.componentInstance.itemId = itemId;
+  modalRef.result.then((result) => {
+    if (result === 'delete') {
+      this.questionService.deleteQuestion(itemId).subscribe((res)=>{
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+          this.getCampusList()
+        }else{
+          this.toastr.error(res.message)
+        }
+      },err=>{
+        this.toastr.error(err)
+      })
+    }
+  })
 }
 
 }

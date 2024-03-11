@@ -244,6 +244,26 @@
                             <span class="error">Comment is required</span>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" className="">Status</label>
+                            <select class="form-select form-control mr-4" placeholder="Select Select" formControlName="statusId">
+                                <option value="">Select Status</option>
+                                <option *ngFor="let status of statusList" [value]="status.statusId">{{status.statusName}}</option>
+                            </select> 
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="position-relative form-group">
+                            <label for="exampleEmail11" className="">Company</label>
+                            <select class="form-select form-control mr-4" placeholder="Select Company" formControlName="assignedToCompany">
+                                <option value="">Select Company</option>
+                                <option *ngFor="let company of companyList" [value]="company.companyId">{{company.companyName}}</option>
+                            </select> 
+                        </div>
+                    </div>
                     
 
                     <div class="col-md-12">

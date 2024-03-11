@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Applicant } from '../../master/models/applicant';
 import { ResponseObj } from '../../master/models/college';
+import { Response } from '../../master/models/response';
 
 
 @Injectable({
@@ -31,6 +32,14 @@ export class ApplicantService {
 
   addApplicant(data:any){
     return this.http.post<ResponseObj>(environment.apiUrl+'/Applicant/AddApplicant',data)
+  }
+
+  getStatusList(){
+    return this.http.get<Response>(environment.apiUrl+'/Status/GetAllStatus')
+  }
+
+  getCompanyList(){
+    return this.http.get<Response>(environment.apiUrl+'/Company/GetAllCompany')
   }
   
 }

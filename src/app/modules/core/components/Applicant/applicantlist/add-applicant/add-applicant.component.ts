@@ -17,6 +17,8 @@ import { CountrystatecityService } from 'src/app/modules/shared/services/country
 export class AddApplicantComponent implements OnInit{
   
   addApplicantForm!:FormGroup;
+  statusList :any;
+  companyList :any;
 
   constructor(public toastr:ToastrService,public router:Router,private applicantService:ApplicantService,public fb:FormBuilder,public campusService:CampusService){}
 
@@ -33,16 +35,16 @@ export class AddApplicantComponent implements OnInit{
       intermediatePercentage:['',[Validators.required]],
       skills:['',[Validators.required]],
       comment:['',[Validators.required]],
-      statusId:[''],
-      assignedToCompany:['']
+      statusId:['',[Validators.required]],
+      assignedToCompany:['',[Validators.required]]
     })
+    this.getStatus()
+    this.getCompany()
   }
 
   submit(){
     if (this.addApplicantForm.valid){
       const data = this.addApplicantForm.value as Applicant
-      data.statusId = 0
-      data.assignedToCompany = 0
       this.applicantService.addApplicant(data).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)
@@ -61,6 +63,23 @@ export class AddApplicantComponent implements OnInit{
 
   cancel(){
     this.router.navigateByUrl('/admin/applicant')
+  }
+
+  getStatus(){
+    this.applicantService.getStatusList().subscribe((res)=>{
+      if (res.isSuccess){
+        this.statusList = res.data
+      }
+     
+    })
+  }
+
+  getCompany(){
+    this.applicantService.getCompanyList().subscribe((res)=>{
+      if (res.isSuccess){
+        this.companyList = res.data
+      }
+    })
   }
 
 }

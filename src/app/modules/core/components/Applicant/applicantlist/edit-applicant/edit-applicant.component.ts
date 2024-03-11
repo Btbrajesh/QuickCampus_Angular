@@ -35,7 +35,7 @@ export class EditApplicantComponent implements OnInit{
 
 ngOnInit(): void {
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
-    console.log(res)
+    console.log(res,'edit')
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
       firstName: new FormControl(res.data['firstName']),

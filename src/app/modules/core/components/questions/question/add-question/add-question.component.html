@@ -21,11 +21,8 @@
         <h4 class="mb-0">Add New Question</h4>
       </div>
       <div class="card-body">
-        
         <form [formGroup]="addQuestionForm" (ngSubmit)="submit()">
-        
           <div class="row">
-           
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
@@ -34,7 +31,7 @@
                 <select
                   class="form-select form-control"
                   aria-label="Default select example"
-                  formControlName="questionTypeName"
+                  formControlName="questionTypeId"
                 >
                   <option selected>--Choose--</option>
                   <option value="1">Objective</option>
@@ -45,10 +42,10 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('questionTypeName')?.invalid &&
-                  (addQuestionForm.get('questionTypeName')?.dirty ||
-                    addQuestionForm.get('questionTypeName')?.touched) &&
-                  addQuestionForm.get('questionTypeName')?.hasError('required')
+                  addQuestionForm.get('questionTypeId')?.invalid &&
+                  (addQuestionForm.get('questionTypeId')?.dirty ||
+                    addQuestionForm.get('questionTypeId')?.touched) &&
+                  addQuestionForm.get('questionTypeId')?.hasError('required')
                 "
               >
                 <span class="error">Question type is required</span>
@@ -62,21 +59,24 @@
                 <select
                   class="form-select form-control"
                   aria-label="Default select example"
-                  formControlName="questionSection"
+                  formControlName="sectionId"
                 >
                   <option selected>--Choose--</option>
-                  <option value="1">Logical</option>
-                  <option value="2">Technical</option>
-                  <option value="3">HR</option>
+                  <option
+                    *ngFor="let section of sectionList"
+                    [value]="section.sectionId"
+                  >
+                    {{ section.section1 }}
+                  </option>
                 </select>
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('questionSection')?.invalid &&
-                  (addQuestionForm.get('questionSection')?.dirty ||
-                    addQuestionForm.get('questionSection')?.touched) &&
-                  addQuestionForm.get('questionSection')?.hasError('required')
+                  addQuestionForm.get('sectionId')?.invalid &&
+                  (addQuestionForm.get('sectionId')?.dirty ||
+                    addQuestionForm.get('sectionId')?.touched) &&
+                  addQuestionForm.get('sectionId')?.hasError('required')
                 "
               >
                 <span class="error">Section is required</span>
@@ -88,7 +88,7 @@
                 <select
                   class="form-select form-control"
                   aria-label="Default select example"
-                  formControlName="questionGroup"
+                  formControlName="groupId"
                 >
                   <option selected>--Choose--</option>
                   <option value="1">Group 1</option>
@@ -99,10 +99,10 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('questionGroup')?.invalid &&
-                  (addQuestionForm.get('questionGroup')?.dirty ||
-                    addQuestionForm.get('questionGroup')?.touched) &&
-                  addQuestionForm.get('questionGroup')?.hasError('required')
+                  addQuestionForm.get('groupId')?.invalid &&
+                  (addQuestionForm.get('groupId')?.dirty ||
+                    addQuestionForm.get('groupId')?.touched) &&
+                  addQuestionForm.get('groupId')?.hasError('required')
                 "
               >
                 <span class="error">Group is required</span>
@@ -139,101 +139,62 @@
                   class="form-control"
                   placeholder="Job Description"
                   rows="4"
-                  formControlName="question"
+                  formControlName="Text"
                 ></textarea>
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('question')?.invalid &&
-                  (addQuestionForm.get('question')?.dirty ||
-                    addQuestionForm.get('question')?.touched) &&
-                  addQuestionForm.get('question')?.hasError('required')
+                  addQuestionForm.get('Text')?.invalid &&
+                  (addQuestionForm.get('Text')?.dirty ||
+                    addQuestionForm.get('Text')?.touched) &&
+                  addQuestionForm.get('Text')?.hasError('required')
                 "
               >
                 <span class="error">Question is required</span>
               </div>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-12">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class=""
-                  >Options <sup>*</sup></label
-                >
-                <input
-                  placeholder="option"
-                  type="text"
-                  class="form-control"
-                  formControlName="options"
-                />
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  addQuestionForm.get('options')?.invalid &&
-                  (addQuestionForm.get('options')?.dirty ||
-                    addQuestionForm.get('options')?.touched) &&
-                  addQuestionForm.get('options')?.hasError('required')
-                "
-              >
-                <span class="error">Option is required</span>
+                <div formArrayName="QuestionssoptionVm">
+                  <div
+                    *ngFor="
+                      let option of questionsOptionsArray.controls;
+                      let i = index
+                    "
+                  >
+                    <!-- Option fields -->
+                    <div class="d-flex" [formGroupName]="i">
+                      <input
+                        type="text"
+                        formControlName="optionText"
+                        placeholder="Option Text"
+                        class="form-control mt-2 col-md-4"
+                      />
+                      <input
+                        type="file"
+                        formControlName="imagepath"
+                        placeholder="Image Path"
+                        class="form-control mt-2 ml-2 col-md-4"
+                      />
+                      <input type="checkbox" formControlName="isCorrect" class="m-2"/>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class=""
-                  >Choose File <sup>*</sup></label
-                >
-                <input
-                  type="file"
-                  class="form-control"
-                  formControlName="file"
-                  (change)="onFileSelected($event)"
-                />
-              </div>
-              
-            </div>
-            <div class="col-md-6">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class=""
-                  >Options <sup>*</sup></label
-                >
-                <input
-                  placeholder="option"
-                  type="text"
-                  class="form-control"
-                  formControlName="options"
-                />
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  addQuestionForm.get('options')?.invalid &&
-                  (addQuestionForm.get('options')?.dirty ||
-                    addQuestionForm.get('options')?.touched) &&
-                  addQuestionForm.get('options')?.hasError('required')
-                "
-              >
-                <span class="error">Option is required</span>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class=""
-                  >Choose File <sup>*</sup></label
-                >
-                <input
-                  type="file"
-                  class="form-control"
-                  formControlName="file"
-                  (change)="onFileSelected($event)"
-                />
-              </div>
-              
-            </div>
+
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">
                 <button type="submit" class="btn btn-primary mr-3">Save</button>
-                <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+                <button
+                  type="button"
+                  (click)="cancel()"
+                  class="btn btn-secondary"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>

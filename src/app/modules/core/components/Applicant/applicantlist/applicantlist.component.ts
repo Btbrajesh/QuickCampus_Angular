@@ -40,7 +40,6 @@ ngOnInit(): void {
 getApplicantList(){
   this.spinnerService.show();
   this.applicantService.getApplicantList().subscribe(resp =>{
-    console.log(resp,'applican')
     if(resp.isSuccess){
       this.spinnerService.hide();
       this.applicantList = resp.data;
@@ -88,9 +87,4 @@ ngOnDestroy(): void {
     this.router.navigateByUrl(url);
   }
 
-  delete(id:number){
-    this.applicantService.deleteApplicant(id).subscribe((res)=>{
-      console.log(res)
-    })
-  }
 }
