@@ -67,10 +67,6 @@
               <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Created By</th>
-                <th>Created Date</th>
-                <th>Modified by</th>
-                <th>Modified Date</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -78,10 +74,6 @@
               <tr *ngFor="let role of data">
                 <td>{{ role.id }}</td>
                 <td>{{ role.name }}</td>
-                <td>{{ role.createdBy }}</td>
-                <td>{{ role.createdDate | date }}</td>
-                <td>{{ role.modifiedBy }}</td>
-                <td>{{ role.modofiedDate | date }}</td>
                 <td class="action_button text-right">
                   <a routerLink="/admin/edit-role/{{role.id}}" class="edit"
                     ><i class="icofont-ui-edit"></i
@@ -130,7 +122,13 @@
   </div>
 </div>
 
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="default"
+  type="ball-scale-circle"
+>
+  <p class="basic"></p>
+</ngx-spinner>
 
 
-<!-- User Details -->
 

@@ -43,7 +43,6 @@ export class AddQuestionComponent implements OnInit{
 
   getSection(){
     return this.questionService.getSection().subscribe((res)=>{
-      console.log(res,'sectio')
       this.sectionList = res.data
     })
   }
@@ -61,7 +60,6 @@ export class AddQuestionComponent implements OnInit{
   
 
   submit(){
-    console.log(this.addQuestionForm.value)
     if(this.addQuestionForm.valid){
       const formData = new FormData();
       const formValue = this.addQuestionForm.value;
@@ -87,7 +85,6 @@ export class AddQuestionComponent implements OnInit{
       }
   
       this.questionService.addQuestion(formData).subscribe((res)=>{
-        console.log(res,' question')
         if (res.result.isSuccess){
           this.toastr.success(res.result.message)
           this.addQuestionForm.reset()

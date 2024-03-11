@@ -39,7 +39,6 @@ export class AddClientComponent implements OnInit{
     if (this.addClientForm.valid){
       this.data = this.addClientForm.value
       this.clientService.addClient(this.data).subscribe((res)=>{
-        console.log(res)
         if (res.isSuccess){
           this.toastr.success(res.message)
           this.addClientForm.reset()

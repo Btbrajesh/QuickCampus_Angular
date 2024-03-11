@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ResponseObj } from '../../master/models/college';
+import { Response } from '../../master/models/response';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class RoleService {
   constructor(public http:HttpClient) { }
 
   getAllRole():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+'/Role/RoleList')
+    return this.http.get<Response>(environment.apiUrl+'/Role/RoleList')
   }
 
   getAllPermission():Observable<any>{

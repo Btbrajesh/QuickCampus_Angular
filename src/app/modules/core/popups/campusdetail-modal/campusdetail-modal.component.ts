@@ -26,7 +26,6 @@ export class CampusdetailModalComponent {
   getDetailById(Id:number){
     this.campusService.getCampusById(Id).subscribe((res)=>{
         this.data = res
-        console.log(this.data,'data')
       })
     }
   

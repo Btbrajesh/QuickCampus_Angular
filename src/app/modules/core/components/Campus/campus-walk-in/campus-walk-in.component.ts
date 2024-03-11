@@ -26,14 +26,13 @@ export class CampusWalkInComponent implements OnInit{
   getCampusList(){
     this.spinnerService.show();
     this.campusService.getCampusList().subscribe(res =>{
-      console.log(res,'camp')
       if(res.isSuccess){
         this.spinnerService.hide();
         this.campusList = res.data;
       }
     },err =>{
       this.spinnerService.hide();
-      console.log("Error in applicant list",err);
+      this.toastr.error(err)
     })
   }
 

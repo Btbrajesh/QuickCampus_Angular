@@ -51,7 +51,6 @@ export class EditCollegeComponent implements OnInit{
     this.fetchCountry();
     this.getClient()
     this.collegeService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res,'college')
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),
@@ -131,7 +130,13 @@ export class EditCollegeComponent implements OnInit{
       data.isActive = true
       data.id = this.router.snapshot.params['id']
       this.collegeService.updateCollege(data).subscribe((res)=>{
-        console.log(res,'update college')
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+        }else{
+          this.toastr.error(res.message)
+        }
+      },err=>{
+        this.toastr.error(err)
       })
     }else{
       this.toastr.error("Please Fill All the Details")

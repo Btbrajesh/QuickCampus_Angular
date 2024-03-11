@@ -33,7 +33,7 @@ export class QuestionComponent {
       }
     },err =>{
       this.spinnerService.hide();
-      console.log("Error in applicant list",err);
+      this.toastr.error(err)
     })
   }
 

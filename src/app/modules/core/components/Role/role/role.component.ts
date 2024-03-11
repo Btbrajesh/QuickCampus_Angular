@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RoledetailModalComponent } from '../../../popups/roledetail-modal/roledetail-modal.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-role',
@@ -14,16 +15,24 @@ export class RoleComponent implements OnInit{
 
   data!:any
 
-  constructor(private modalService: NgbModal,public roleService:RoleService, public toastr:ToastrService){}
+  constructor(private modalService: NgbModal,private spinnerService: NgxSpinnerService,public roleService:RoleService, public toastr:ToastrService){}
 
   ngOnInit(): void {
     this.getAllRole()
   }
 
   getAllRole(){
+    this.spinnerService.show()
     this.roleService.getAllRole().subscribe((res)=>{
-      this.data = res
+      if (res.isSuccess){
+        this.spinnerService.hide()
+        this.data = res.data
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
     },err =>{
+      this.spinnerService.hide()
       this.toastr.error(err)
     })
   }

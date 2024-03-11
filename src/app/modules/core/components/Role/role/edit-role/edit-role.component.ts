@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { RoleService } from 'src/app/modules/core/services/role.service';
@@ -22,13 +23,12 @@ export class EditRoleComponent implements OnInit{
     permission: new FormArray([],[Validators.required])
   })
 
-  constructor(public fb:FormBuilder,private router:ActivatedRoute,public route:Router,public roleService:RoleService, public clientService:ClientService, public toastr:ToastrService){}
+  constructor(public spinnerService:NgxSpinnerService,public fb:FormBuilder,private router:ActivatedRoute,public route:Router,public roleService:RoleService, public clientService:ClientService, public toastr:ToastrService){}
 
   ngOnInit(): void {
     this.getPermissionList()
     this.getClientList()
     this.roleService.getRoleById(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res,'role')
       this.editRoleForm = new FormGroup({
         id:new FormControl(),
         roleName:new FormControl(res.data['roleName']),
@@ -60,7 +60,6 @@ export class EditRoleComponent implements OnInit{
     this.clientService.getClientList().subscribe((res)=>{
       if (res.isSuccess){
         this.clientList = res.data
-        console.log(this.clientList)
       }
     },err=>{
       this.toastr.error(err)
@@ -69,7 +68,6 @@ export class EditRoleComponent implements OnInit{
 
   getPermissionList(){
     this.roleService.getAllPermission().subscribe((res)=>{
-      console.log(res)
       if (res.isSuccess){
         this.permissionList = res.data
       }

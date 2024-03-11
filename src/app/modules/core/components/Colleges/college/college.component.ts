@@ -23,15 +23,12 @@ export class CollegeComponent implements OnInit{
   }
 
   getAllCollegeList(){
-    this.spinnerService.show();
     this.collegeService.getCollegeList().subscribe(res =>{
       if(res.isSuccess){
-        this.spinnerService.hide();
         this.collegeList = res.data;
       }
     },err =>{
-      this.spinnerService.hide();
-      console.log("Error in applicant list",err);
+      this.toastr.error(err)
     })
   }
 

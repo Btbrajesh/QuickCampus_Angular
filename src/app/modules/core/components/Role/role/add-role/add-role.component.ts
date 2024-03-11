@@ -54,7 +54,6 @@ export class AddRoleComponent implements OnInit{
     this.clientService.getClientList().subscribe((res)=>{
       if (res.isSuccess){
         this.clientList = res.data
-        console.log(this.clientList)
         this.spinnerService.hide()
       }
     },err =>{
@@ -64,9 +63,10 @@ export class AddRoleComponent implements OnInit{
 
   getPermissionList(){
     this.roleService.getAllPermission().subscribe((res)=>{
-      console.log(res)
       if (res.isSuccess){
         this.permissionList = res.data
+      }else{
+        this.toastr.error(res.message)
       }
     },err =>{
       this.toastr.error("Error in applicant list",err)

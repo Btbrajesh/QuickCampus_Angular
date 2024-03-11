@@ -23,11 +23,10 @@ export class ClientComponent implements OnInit{
   }
 
   getClientList(){
-    this.spinnerService.show()
     this.clientService.getClientList().subscribe((res)=>{
       if (res.isSuccess){
         this.clientList = res.data
-        this.spinnerService.hide()
+        
       }
     },err=>{
       this.toastr.error(err)
@@ -36,10 +35,8 @@ export class ClientComponent implements OnInit{
 
   toggleActive(id: any): void {
     this.clientService.activeInactive(id).subscribe((res)=>{
-      console.log(res,'acitve')
     })
-    // user.isActive = !user.isActive;
-    // Call your service method to update the user's active status
+  
   }
 
   deleteItem(itemId: number): void {
@@ -60,12 +57,5 @@ export class ClientComponent implements OnInit{
     const modalRef = this.modalService.open(ClientdetailModalComponent, { size: 'lg' });
     modalRef.componentInstance.itemId = itemId;
   }
-  
-
-  edit(id:number){
-    console.log(id)
-  }
-
-  
 
 }

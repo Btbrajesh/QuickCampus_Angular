@@ -62,7 +62,6 @@ export class AddCampusComponent implements OnInit{
     if (this.addCampusForm.valid){
       this.data = this.addCampusForm.value
       this.campusService.addCampus(this.data).subscribe((res)=>{
-        console.log(res,'campus')
       })
     }
   }
@@ -92,7 +91,7 @@ export class AddCampusComponent implements OnInit{
       }
     },err =>{
       this.spinnerService.hide();
-      console.log("Error in applicant list",err);
+      this.toastr.error(err)
     })
   }
 

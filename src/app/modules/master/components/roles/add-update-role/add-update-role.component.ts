@@ -37,8 +37,6 @@ roleForm! :FormGroup;
     }
     this.spinnerService.show();
     if (!this.roleForm.invalid) {
-      console.log(this.roleForm.value);
-
       this.roleInFlight =this.roleService.roleAddUpdate(this.roleForm.value).subscribe(resp => {
         if(resp.isSuccess){
           this.spinnerService.hide();
