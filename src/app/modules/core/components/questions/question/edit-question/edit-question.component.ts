@@ -65,13 +65,6 @@ export class EditQuestionComponent implements OnInit{
   }
 
   // Helper method to add a new option FormGroup to the FormArray
-  addOption() {
-    this.optionArray.push(this.fb.group({
-      optionText: [''],
-      isCorrect: [false],
-      imagepath: ['']
-    }));
-  }
 
   getSection(){
     return this.questionService.getSection().subscribe((res)=>{

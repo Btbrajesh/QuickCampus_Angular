@@ -16,7 +16,7 @@ export class CollegeService {
   }
 
   getCollegeById(collegeId:number): Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/College/GetCollegeDetailsById?Id='+collegeId);
+    return this.http.get<any>(environment.apiUrl +'/College/GetCollegeDetailsById?collegeid='+collegeId);
   }
 
   addCollege(data:College):Observable<ResponseObj>{
@@ -33,10 +33,6 @@ export class CollegeService {
     formData.append('Address1',data.Address1)
     formData.append('IsActive',String(true))
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)
-  }
-
-  getDetailById(id:number): Observable<any>{
-    return this.http.get<any>(environment.apiUrl+'/College/GetCollegeDetailsById?Id='+id)
   }
 
   updateCollege(data:any): Observable<any>{

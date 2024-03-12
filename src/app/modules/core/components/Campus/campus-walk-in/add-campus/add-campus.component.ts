@@ -10,6 +10,7 @@ import { CollegeService } from '../../../../services/college.service';
 import { CampusService } from '../../../../services/campus.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ClientService } from 'src/app/modules/core/services/client.service';
 
 @Component({
   selector: 'app-add-campus',
@@ -18,8 +19,8 @@ import { Router } from '@angular/router';
 })
 export class AddCampusComponent implements OnInit{
 
-  collegeList :any[]=[];
-
+    collegeList :any[]=[];
+    clientList:any
     data!:Campus
     addCampusForm!:FormGroup
     listcountry!: Country
@@ -32,11 +33,12 @@ export class AddCampusComponent implements OnInit{
     isTableVisible: boolean = false;
     isDisabled: boolean = true;
 
-  constructor(public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
+  constructor(public clientService:ClientService,public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
   ngOnInit(): void {
     this.fetchCountry()
     this.getAllCollegeList()
+    this.getClientList()
     this.addCampusForm= this.fb.group({
       campusDate:[''],
       title:[''],
@@ -82,6 +84,16 @@ export class AddCampusComponent implements OnInit{
     }
   }
 
+  getClientList(){
+    this.clientService.getClientList().subscribe((res)=>{
+      if(res.isSuccess){
+        this.clientList = res.data
+      }
+    },err=>{
+      this.toastr.error(err)
+    })
+  }
+
   getAllCollegeList(){
     this.spinnerService.show();
     this.collegeService.getCollegeList().subscribe(res =>{
@@ -96,7 +108,7 @@ export class AddCampusComponent implements OnInit{
   }
 
 
-  private fetchCountry(){
+  fetchCountry(){
     this.countrystatecityService.getCountry().subscribe(data=>{
       this.listcountry = data
       this.countryInfoList = this.listcountry.data

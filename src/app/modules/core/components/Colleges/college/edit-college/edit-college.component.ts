@@ -50,7 +50,7 @@ export class EditCollegeComponent implements OnInit{
   ngOnInit(): void {
     this.fetchCountry();
     this.getClient()
-    this.collegeService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
+    this.collegeService.getCollegeById(this.router.snapshot.params['id']).subscribe((res)=>{
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),

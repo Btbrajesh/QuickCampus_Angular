@@ -22,7 +22,7 @@ export class CollegedetailModalComponent {
   }
 
   getDetailById(Id:number){
-    this.collegeService.getDetailById(Id).subscribe((res)=>{
+    this.collegeService.getCollegeById(Id).subscribe((res)=>{
       if (res.isSuccess){
         const data = res.data
         this.collegeDetail.push(data)

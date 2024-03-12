@@ -142,28 +142,30 @@
                         <div class="row">
                              <div class="col-md-4">
                                  <div class="position-relative form-group">
-                                     <label for="exampleEmail11" class="">Campus Date</label>
+                                     <label for="exampleEmail11" class="">Walk In Date</label>
                                      <input placeholder="Enter date" type="date" class="form-control" formControlName="campusDate">
                                  </div>
                              </div>
                              <div class="col-md-4">
-                                 <div class="position-relative form-group">
-                                     <label for="exampleEmail11" class="">Title</label>
-                                     <input placeholder="Title" type="text" class="form-control" formControlName="title">
-                                 </div>
-                             </div>
-                             <div class="col-md-4">
-                                 <div class="position-relative form-group">
-                                     <label for="exampleEmail11" class="">Address 1</label>
-                                     <input placeholder="Enter address" type="text" class="form-control" formControlName="address1">
-                                 </div>
-                             </div>
-                             <div class="col-md-4">
-                                 <div class="position-relative form-group">
-                                     <label for="exampleEmail11" class="">Address 2</label>
-                                     <input placeholder="Enter address" type="text" class="form-control" formControlName="address2">
-                                 </div>
-                             </div>
+                                <div class="position-relative form-group">
+                                    <label for="exampleEmail11" class="">Address 1</label>
+                                    <input placeholder="Enter address" type="text" class="form-control" formControlName="address1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="position-relative form-group">
+                                    <label for="exampleEmail11" class="">Address 2</label>
+                                    <input placeholder="Enter address" type="text" class="form-control" formControlName="address2">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="position-relative form-group">
+                                    <label for="exampleEmail11" class="">Job Description</label>
+                                    <textarea class="form-control" placeholder="Job Description" rows="1" formControlName="jobDescription"></textarea>
+                                </div>
+                            </div>
+                             
+                             
                              <div class="col-md-4">
                                  <div class="position-relative form-group">
                                      <label for="exampleEmail11" class="">Country</label>
@@ -191,7 +193,12 @@
                                         </select>                                
                                  </div>
                              </div> 
-                             
+                             <div class="col-md-4">
+                                <div class="position-relative form-group">
+                                    <label for="exampleEmail11" class="">Title</label>
+                                    <input placeholder="Title" type="text" class="form-control" formControlName="title">
+                                </div>
+                            </div>
                              <div class="col-md-4">
                                 <div class="position-relative form-group">
                                     <label for="exampleEmail11" className="">Add College</label>
@@ -231,13 +238,22 @@
                                     </tr>
                                 </tbody>
                             </table>
-          
-                             <div class="col-md-12">
-                                 <div class="position-relative form-group">
-                                     <label for="exampleEmail11" class="">Job Description</label>
-                                     <textarea class="form-control" placeholder="Job Description" rows="4" formControlName="jobDescription"></textarea>
-                                 </div>
-                             </div>
+                            <div class="col-md-4">
+                                <div class="position-relative form-group">
+                                  <label for="exampleEmail11" class="">Client</label>
+                                  <select
+                                    class="form-select form-control mr-4"
+                                    placeholder="Select Client"
+                                    formControlName="client"
+                                  >
+                                    <option value="">Select Client</option>
+                                    <option *ngFor="let client of clientList" [value]="client.id">
+                                      {{ client.name }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                             
                              <div class="col-md-12">
                                  <div class="d-flex btn_form mt-3">
                                      <button type="submit" class="btn btn-primary mr-3">Save</button>
