@@ -51,7 +51,6 @@ export class EditCollegeComponent implements OnInit{
     this.fetchCountry();
     this.getClient()
     this.collegeService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res,'college')
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),

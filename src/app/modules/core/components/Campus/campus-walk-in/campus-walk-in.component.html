@@ -56,7 +56,6 @@
                                     <th>Campus Date</th>
                                     <th>Title</th>
                                     <th>Place</th>
-                                    <th>Applicant Colleges</th>
                                     <th>Isactive</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
@@ -66,7 +65,6 @@
                                     <td>{{campus.walkInDate}}</td>
                                     <td>{{campus.title}}</td>
                                     <td>{{campus.address1}}</td>
-                                    <td><strong>1</strong></td>
                                     <td class="badge">
                                         <a (click)="toggleActive(campus)"
                                             [ngClass]="{ 'active-link': campus.isActive, 'inactive-link': !campus.isActive }">{{

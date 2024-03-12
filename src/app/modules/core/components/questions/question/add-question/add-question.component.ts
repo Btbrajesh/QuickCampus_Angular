@@ -51,7 +51,6 @@ export class AddQuestionComponent implements OnInit{
 
   getGroup(){
     return this.questionService.getGroup().subscribe((res)=>{
-      console.log(res,'gor')
       this.groupList = res.data
     })
   }

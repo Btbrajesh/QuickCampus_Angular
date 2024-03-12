@@ -27,7 +27,6 @@ export class QuestionComponent {
   getQuestionList(){
     this.spinnerService.show();
     this.questionService.getQuestionList().subscribe(res =>{
-      console.log(res,'que')
       if(res.isSuccess){
         this.spinnerService.hide();
         this.questionList = res.data;

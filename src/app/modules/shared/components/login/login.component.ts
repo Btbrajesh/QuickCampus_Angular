@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit  {
         this.loginInFlight = null;
         this.toastr.error(resp.message);
       }
-      console.log(resp ,"login data");
     },err =>{
       this.toastr.error(err);
       this.loginInFlight = null;

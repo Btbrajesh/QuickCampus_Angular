@@ -26,6 +26,7 @@ export class CampusWalkInComponent implements OnInit{
   getCampusList(){
     this.spinnerService.show();
     this.campusService.getCampusList().subscribe(res =>{
+      console.log(res)
       if(res.isSuccess){
         this.spinnerService.hide();
         this.campusList = res.data;

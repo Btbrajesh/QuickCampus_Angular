@@ -93,7 +93,6 @@ export class EditQuestionComponent implements OnInit{
 
 
   submit(){
-    console.log(this.editQuestionForm.value)
     if(this.editQuestionForm.valid){
       const formData = new FormData();
       const formValue = this.editQuestionForm.value;
