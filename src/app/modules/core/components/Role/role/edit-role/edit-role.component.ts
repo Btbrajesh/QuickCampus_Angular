@@ -29,6 +29,7 @@ export class EditRoleComponent implements OnInit{
     this.getPermissionList()
     this.getClientList()
     this.roleService.getRoleById(this.router.snapshot.params['id']).subscribe((res)=>{
+      console.log(res)
       this.editRoleForm = new FormGroup({
         id:new FormControl(),
         roleName:new FormControl(res.data['roleName']),

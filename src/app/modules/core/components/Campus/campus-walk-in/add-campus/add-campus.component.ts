@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
 import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
@@ -39,49 +39,78 @@ export class AddCampusComponent implements OnInit{
     this.fetchCountry()
     this.getAllCollegeList()
     this.getClientList()
+    this.initForm()
+  }
+
+  initForm(){
     this.addCampusForm= this.fb.group({
-      campusDate:[''],
+      walkInDate:[''],
       title:[''],
       address1:[''],
       address2:[''],
-      country:[''],
-      state:[''],
+      countryId:[],
+      stateId:[],
       city:[''],
       isActive:[''],
       jobDescription:[''],
       selectedCollegeId: [''],
-      collegeForm :this.fb.group({
-        collegeName:[''],
-        collegeCode:[''],
-        examStartTime:[''],
-        examEndTime:[''],
-        startDate:['']
-      })
+      collegeForm :this.fb.array([])
     })
+  }
+
+  get collegeArray(): FormArray {
+    return this.addCampusForm.get('collegeForm') as FormArray;
+  }
+
+  addCollegeData(){
+    const selectedCollegeId = this.addCampusForm.value.selectedCollegeId;
+    this.collegeService.getCollegeById(selectedCollegeId).subscribe((res)=>{
+      console.log(res)
+      this.patchCollegeArray(res.data);
+    })
+  }
+
+  patchCollegeArray(college:any){
+    const collegeFormArray = this.addCampusForm.get('collegeForm') as FormArray;
+    collegeFormArray.push(this.createCollegeFormGroup(college));
+    this.isTableVisible = true
   }
 
   submit(){
     if (this.addCampusForm.valid){
       this.data = this.addCampusForm.value
+      this.data.countryId = parseInt(this.addCampusForm.value.countryId, 10);
+      this.data.stateId = parseInt(this.addCampusForm.value.stateId, 10);
       this.campusService.addCampus(this.data).subscribe((res)=>{
+        console.log(res)
       })
     }
   }
 
-  addCollege() {
-    const selectedCollegeId = this.addCampusForm.value.selectedCollegeId;
-    const selectedCollege = this.collegeList.find(college => college.collegeId == selectedCollegeId);
-    if (selectedCollege && !this.selectedColleges.some(college => college.collegeId === selectedCollege.collegeId)) {
-      this.selectedColleges.push(selectedCollege);
-      this.isTableVisible = true;
+  
+
+  addCollegeFormGroup(college: any) {
+    const collegeFormArray = this.addCampusForm.get('collegeForm') as FormArray;
+    collegeFormArray.push(this.createCollegeFormGroup(college));
+    this.isTableVisible = true
   }
+
+  createCollegeFormGroup(college: any): FormGroup {
+    return this.fb.group({
+      stateId:[college.stateId],
+      collegeId:[college.collegeId],
+      collegeName: [college.collegeName],
+      collegeCode: [college.collegeCode],
+      examStartTime: [''],
+      examEndTime: [''],
+      startDate: ['']
+    });
   }
 
   removeCollege(index: number) {
+    const collegeFormArray = this.addCampusForm.get('collegeForm') as FormArray;
+    collegeFormArray.removeAt(index);
     this.selectedColleges.splice(index, 1);
-    if (this.selectedColleges.length<=0){
-      this.isTableVisible = false;
-    }
   }
 
   getClientList(){
@@ -110,6 +139,7 @@ export class AddCampusComponent implements OnInit{
 
   fetchCountry(){
     this.countrystatecityService.getCountry().subscribe(data=>{
+      console.log(data,'count')
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
     },err=>{
@@ -128,6 +158,7 @@ export class AddCampusComponent implements OnInit{
   
   onStateSelected(stateId:number){
     this.countrystatecityService.getCitiesOfSelectedState(stateId).subscribe(data=>{
+      console.log(data,'state')
     this.listCity = data
     this.cityInfoList = this.listCity.data
   },err=>{

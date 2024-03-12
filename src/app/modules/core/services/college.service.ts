@@ -19,19 +19,19 @@ export class CollegeService {
     return this.http.get<any>(environment.apiUrl +'/College/GetCollegeDetailsById?collegeid='+collegeId);
   }
 
-  addCollege(data:College):Observable<ResponseObj>{
+  addCollege(data:College):Observable<any>{
     var formData = new FormData;
     formData.append('ImagePath',data.ImagePath)
     formData.append('CollegeName',data.collegeName)
     formData.append('CollegeCode',data.collegeCode)
     formData.append('CityId',data.CityId)
-    formData.append('ContectPhone',String(data.ContectPhone))
+    formData.append('ContectPhone',data.ContectPhone)
     formData.append('StateId',data.StateId)
     formData.append('CountryId',data.CountryId)
     formData.append('ContectEmail',data.ContectEmail)
     formData.append('ContectPerson',data.ContectPerson)
     formData.append('Address1',data.Address1)
-    formData.append('IsActive',String(true))
+    formData.append('Address2',data.Address2)
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)
   }
 

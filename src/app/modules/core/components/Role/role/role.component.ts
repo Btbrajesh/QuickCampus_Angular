@@ -24,6 +24,7 @@ export class RoleComponent implements OnInit{
   getAllRole(){
     this.spinnerService.show()
     this.roleService.getAllRole().subscribe((res)=>{
+      console.log(res,'roel')
       if (res.isSuccess){
         this.spinnerService.hide()
         this.data = res.data

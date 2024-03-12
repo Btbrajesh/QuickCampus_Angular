@@ -37,6 +37,7 @@ export class AddCollegeComponent implements OnInit{
       collegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3)]],
       collegeCode:['',[Validators.required]],
       Address1:['',[Validators.required]],
+      Address2:['',[Validators.required]],
       CityId:['',[Validators.required]],
       StateId:['',[Validators.required]],
       CountryId:['',[Validators.required]],
@@ -48,11 +49,10 @@ export class AddCollegeComponent implements OnInit{
    }
 
    submit(){
-
+    console.log(this.addCollegeForm.value)
     if (this.addCollegeForm.valid){
       this.data = this.addCollegeForm.value
       this.data.ImagePath = this.selectedFileName
-      this.data.isActive = true
       this.collegeService.addCollege(this.data).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)

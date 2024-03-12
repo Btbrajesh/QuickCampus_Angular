@@ -7,9 +7,9 @@ export interface College{
     CountryId :string,
     ContectPerson:string,
     ContectEmail:string,
-    ContectPhone:number,
+    ContectPhone:string,
     Address1:string,
-    isActive:boolean,
+    Address2:string,
 }
 
 export interface ResponseObj{

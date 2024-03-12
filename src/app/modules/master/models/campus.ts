@@ -6,8 +6,8 @@ export interface Campus{
     title:string;
     campusDate: Date;
     city:number;
-    state:number;
-    country:number;
+    stateId:number;
+    countryId:number;
     isActive:number;
     jobDescription:string;
     colleges:Array<AddCollege>;

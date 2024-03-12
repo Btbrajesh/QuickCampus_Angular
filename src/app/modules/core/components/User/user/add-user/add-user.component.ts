@@ -43,7 +43,7 @@ export class AddUserComponent implements OnInit{
 
   getRole(){
     this.roleService.getAllRole().subscribe((res)=>{
-        this.roleList = res
+        this.roleList = res.data
     })
   }
 

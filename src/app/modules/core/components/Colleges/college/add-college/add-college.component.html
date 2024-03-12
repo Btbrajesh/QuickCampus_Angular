@@ -317,6 +317,28 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Address 2</label>
+                <input
+                  placeholder="College address"
+                  type="text"
+                  class="form-control"
+                  formControlName="Address2"
+                />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  addCollegeForm.get('Address2')?.invalid &&
+                  (addCollegeForm.get('Address2')?.dirty ||
+                    addCollegeForm.get('Address2')?.touched) &&
+                  addCollegeForm.get('Address2')?.hasError('required')
+                "
+              >
+                <span class="error">College Address is required</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Country</label>
                 <select
                   class="form-control"
@@ -406,9 +428,9 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Contact Person</label>
+                <label for="exampleEmail11" class="">Contact Person Email</label>
                 <input
-                  placeholder="Contact Person"
+                  placeholder="Contact Person Email"
                   type="text"
                   class="form-control"
                   formControlName="ContectPerson"
@@ -470,7 +492,7 @@
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Phone</label>
                 <input
-                  placeholder="Created by"
+                  placeholder="Your Phone Number"
                   type="text"
                   class="form-control"
                   formControlName="ContectPhone"

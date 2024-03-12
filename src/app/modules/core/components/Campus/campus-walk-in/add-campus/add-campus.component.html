@@ -143,7 +143,7 @@
                              <div class="col-md-4">
                                  <div class="position-relative form-group">
                                      <label for="exampleEmail11" class="">Walk In Date</label>
-                                     <input placeholder="Enter date" type="date" class="form-control" formControlName="campusDate">
+                                     <input placeholder="Enter date" type="date" class="form-control" formControlName="walkInDate">
                                  </div>
                              </div>
                              <div class="col-md-4">
@@ -169,7 +169,7 @@
                              <div class="col-md-4">
                                  <div class="position-relative form-group">
                                      <label for="exampleEmail11" class="">Country</label>
-                                     <select class="form-control" placeholder="Select Country" formControlName="country" (ngModelChange)="onCountrySelected($event)">
+                                     <select class="form-control" placeholder="Select Country" formControlName="countryId" (ngModelChange)="onCountrySelected($event)">
                                          <option value="">Select Country</option>
                                          <option *ngFor="let country of countryInfoList" [value]="country.countryId">{{country.countryName}}</option>
                                      </select>                                
@@ -178,7 +178,7 @@
                              <div class="col-md-4">
                                  <div class="position-relative form-group">
                                      <label for="exampleEmail11" class="">State</label>
-                                     <select class="form-control" placeholder="Select State" formControlName="state" (ngModelChange)="onStateSelected($event)">
+                                     <select class="form-control" placeholder="Select State" formControlName="stateId" (ngModelChange)="onStateSelected($event)">
                                          <option value="">Select State</option>
                                          <option *ngFor="let state of stateInfoList" [value]="state.stateId">{{state.stateName}}</option>
                                      </select>                                
@@ -189,7 +189,7 @@
                                      <label for="exampleEmail11" class="">City</label>
                                      <select class="form-control" placeholder="Select City" formControlName="city">
                                          <option value="">Select City</option>
-                                         <option *ngFor="let city of cityInfoList" [value]="city.cityId">{{city.cityName}}</option>
+                                         <option *ngFor="let city of cityInfoList" [value]="city.cityName">{{city.cityName}}</option>
                                         </select>                                
                                  </div>
                              </div> 
@@ -211,7 +211,7 @@
                             <div class="col-md-2">
                                 <div class="position-relative form-group">
                                     <label for="exampleEmail11" className=""></label>
-                                    <button type='button' class="btn btn-primary mt-4" (click)="addCollege()">Add</button>
+                                    <button type='button' class="btn btn-primary mt-4" (click)="addCollegeData()">Add</button>
                                 </div>
                             </div>
                             <table class="table" *ngIf="isTableVisible">
@@ -226,19 +226,21 @@
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr *ngFor="let college of selectedColleges; let i = index">
+                                <tbody formArrayName="collegeForm" *ngIf="collegeArray">
+                                    <ng-container *ngFor="let college of collegeArray.controls; let i=index" [formGroupName]="i">
+                                    <tr>
                                         <th scope="row">{{ i + 1 }}</th>
-                                        <td><input type="text" [value]="[college.collegeName]" formControlName="collegeName"></td>
-                                        <td><input type="text" [value]="[college.collegeCode]" formControlName="collegeCode"></td>
+                                        <td><input type="text" formControlName="collegeName"></td>
+                                        <td><input type="text" formControlName="collegeCode"></td>
                                         <td><input type="time" formControlName="examStartTime"></td>
                                         <td><input type="time" formControlName="examEndTime"></td>
                                         <td><input type="date" formControlName="startDate"></td>
                                         <td><button type="button" class="btn btn-danger" (click)="removeCollege(i)">Remove</button></td>
                                     </tr>
+                                </ng-container>
                                 </tbody>
                             </table>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="position-relative form-group">
                                   <label for="exampleEmail11" class="">Client</label>
                                   <select
@@ -246,14 +248,14 @@
                                     placeholder="Select Client"
                                     formControlName="client"
                                   >
-                                    <option value="">Select Client</option>
+                                    <option value=" ">Select Client</option>
                                     <option *ngFor="let client of clientList" [value]="client.id">
                                       {{ client.name }}
                                     </option>
                                   </select>
                                 </div>
                               </div>
-                             
+                              -->
                              <div class="col-md-12">
                                  <div class="d-flex btn_form mt-3">
                                      <button type="submit" class="btn btn-primary mr-3">Save</button>
