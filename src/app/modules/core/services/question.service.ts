@@ -15,13 +15,6 @@ export class QuestionService {
   }
 
   addQuestion(data:any):Observable<any>{
-    // var formData = new FormData;
-    // formData.append('questionTypeName',data.questionTypeName)
-    // formData.append('questionSection',data.questionSection)
-    // formData.append('questionGroup',data.questionGroup)
-    // formData.append('marks',data.marks)
-    // formData.append('question',data.question)
-    // formData.append('QuestionssoptionVm',data.QuestionssoptionVm)
     return this.http.post<any>(environment.apiUrl + '/Question/addorupdatequestion',data)
   }
 
@@ -31,5 +24,17 @@ export class QuestionService {
 
   getSection():Observable<any>{
     return this.http.get<any>(environment.apiUrl+'/Section/GetAllSection')
+  }
+
+  getQuestionById(id:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Question/getquestionbyid?questionId='+id)
+  }
+
+  getGroup(){
+    return this.http.get<any>(environment.apiUrl+'/Group/GetAllGroup')
+  }
+
+  getQuestionType(){
+    return this.http.get<any>(environment.apiUrl+'/Question/GetAllQuestionTypes')
   }
 }

@@ -55,6 +55,7 @@
                                     <th>ID</th>
                                     <th>Question</th>
                                     <th>Question Type</th>
+                                    <th>Marks</th>
                                     <th>Section</th>
                                     <th>Group</th>
                                     <th>Isactive</th>
@@ -65,18 +66,20 @@
                                 <tr *ngFor="let question of questionList">
                                     <td>{{question.questionId}}</td>
                                     <td>
-                                        <div [innerHTML]="sanitizeHtml(question.question)"></div>
+                                        <div [innerHTML]="sanitizeHtml(question.text)"></div>
                                     </td>
                                     <td>{{question.questionTypeName}}</td>
+                                    <td>{{question.marks}}</td>
                                     <td>{{question.questionSection}}</td>
                                     <td>{{question.questionGroup}}</td>
                                     <td class="badge">
                                         <a (click)="toggleActive(question)"
                                             [ngClass]="{ 'active-link': question.isActive, 'inactive-link': !question.isActive }">{{
                                                 question.isActive ? 'Active' : 'Inactive' }}</a>
-                                    </td>                                     <td class="action_button text-right">
-                                        <a  class="edit"><i class="icofont-ui-edit"></i></a>
-                                        <a (click)="deleteItem(question.questionId)" class="delete" data-target="#delete_popup" data-toggle="modal"><i class="icofont-ui-delete"></i></a>
+                                    </td >                                     
+                                    <td class="action_button text-right">
+                                        <a routerLink="/admin/edit-question/{{question.questionId}}" class="edit"><i class="icofont-ui-edit"></i></a>
+                                        <a (click)="deleteItem(question.questionId)" class="delete"><i class="icofont-ui-delete"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

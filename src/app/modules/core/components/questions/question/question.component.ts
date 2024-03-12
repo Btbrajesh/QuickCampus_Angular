@@ -21,12 +21,13 @@ export class QuestionComponent {
 
 
   ngOnInit(): void {
-    this.getCampusList()
+    this.getQuestionList()
   }
 
-  getCampusList(){
+  getQuestionList(){
     this.spinnerService.show();
     this.questionService.getQuestionList().subscribe(res =>{
+      console.log(res,'que')
       if(res.isSuccess){
         this.spinnerService.hide();
         this.questionList = res.data;
@@ -61,7 +62,7 @@ deleteItem(itemId: number): void {
       this.questionService.deleteQuestion(itemId).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)
-          this.getCampusList()
+          this.getQuestionList()
         }else{
           this.toastr.error(res.message)
         }

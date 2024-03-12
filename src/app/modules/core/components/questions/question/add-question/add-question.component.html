@@ -91,9 +91,8 @@
                   formControlName="groupId"
                 >
                   <option selected>--Choose--</option>
-                  <option value="1">Group 1</option>
-                  <option value="2">Group 2</option>
-                  <option value="3">Group 3</option>
+                  <option *ngFor="let group of groupList" [value]="group.groupId">{{group.groupName}}</option>
+                  
                 </select>
               </div>
               <div

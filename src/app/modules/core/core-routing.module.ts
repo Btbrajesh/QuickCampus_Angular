@@ -22,6 +22,7 @@ import { AddRoleComponent } from "./components/Role/role/add-role/add-role.compo
 import { EditApplicantComponent } from "./components/Applicant/applicantlist/edit-applicant/edit-applicant.component";
 import { EditRoleComponent } from "./components/Role/role/edit-role/edit-role.component";
 import { AddApplicantComponent } from "./components/Applicant/applicantlist/add-applicant/add-applicant.component";
+import { EditQuestionComponent } from "./components/questions/question/edit-question/edit-question.component";
 
 const routes: Routes = [
     {
@@ -47,6 +48,7 @@ const routes: Routes = [
         {path: 'add-applicant',component:AddApplicantComponent,canActivate: [AuthGuard]},
         {path: 'edit-applicant/:id',component:EditApplicantComponent,canActivate: [AuthGuard]},
         {path: 'edit-role/:id',component:EditRoleComponent,canActivate: [AuthGuard]},
+        {path: 'edit-question/:id',component:EditQuestionComponent,canActivate:[AuthGuard]}
       ]
     },
   ];

@@ -17,11 +17,13 @@ export class AddQuestionComponent implements OnInit{
   selectedFileName!: string;
   data!:Question
   sectionList:any
+  groupList:any
 
   constructor(public router:Router,public toastr:ToastrService,public fb:FormBuilder,public questionService:QuestionService){}
 
   ngOnInit(): void {
     this.getSection()
+    this.getGroup()
     this.addQuestionForm = this.fb.group({
       questionTypeId:['',[Validators.required]],
       sectionId:['',[Validators.required]],
@@ -44,6 +46,13 @@ export class AddQuestionComponent implements OnInit{
   getSection(){
     return this.questionService.getSection().subscribe((res)=>{
       this.sectionList = res.data
+    })
+  }
+
+  getGroup(){
+    return this.questionService.getGroup().subscribe((res)=>{
+      console.log(res,'gor')
+      this.groupList = res.data
     })
   }
 

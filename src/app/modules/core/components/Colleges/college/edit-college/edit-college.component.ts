@@ -6,7 +6,7 @@ import { State, StateInfo } from 'src/app/modules/master/models/state';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
 import { College, UpdateCollege } from 'src/app/modules/master/models/college';
 import { CollegeService } from 'src/app/modules/core/services/college.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -44,13 +44,14 @@ export class EditCollegeComponent implements OnInit{
       isActive:new FormControl()
     })
 
-    constructor(public toastr:ToastrService,public clientService:ClientService,private router:ActivatedRoute,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
+    constructor(public route:Router,public toastr:ToastrService,public clientService:ClientService,private router:ActivatedRoute,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
 
 
   ngOnInit(): void {
     this.fetchCountry();
     this.getClient()
     this.collegeService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
+      console.log(res,'college')
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),
@@ -58,9 +59,9 @@ export class EditCollegeComponent implements OnInit{
         collegeCode:new FormControl(res.data.collegeCode),
         Address1:new FormControl(res.data.address1),
         Address2:new FormControl(res.data.address2),
-        CityId:new FormControl(),
-        StateId:new FormControl(),
-        CountryId:new FormControl(),
+        CityId:new FormControl(res.data.cityId),
+        StateId:new FormControl(res.data.stateId),
+        CountryId:new FormControl(res.data.countryId),
         ContectPerson:new FormControl(res.data.contectPerson),
         ContectEmail:new FormControl(res.data.contectEmail),
         ContectPhone:new FormControl(res.data.contectPhone),
@@ -107,6 +108,10 @@ export class EditCollegeComponent implements OnInit{
     },err=>{
       this.toastr.error(err)
     })
+  }
+
+  cancel(){
+    this.route.navigateByUrl('/admin/college')
   }
 
   onFileSelected(event: any) {

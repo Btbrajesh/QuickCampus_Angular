@@ -1,1 +1,152 @@
-<p>edit-question works!</p>
+<div
+  class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
+>
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading d-flex justify-content-between">
+          <div>
+            Edit Question
+            <div class="page-title-subheading">
+              This is an example dashboard created using build-in elements and
+              components.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- main content -->
+    <div class="main-card mb-3 card">
+      <div class="card-header card-title">
+        <h4 class="mb-0">Edit Question</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editQuestionForm" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class=""
+                  >Question Type <sup>*</sup></label
+                >
+                <select
+                  class="form-select form-control"
+                  aria-label="Default select example"
+                  formControlName="questionTypeId"
+                >
+                  <option selected>--Choose--</option>
+                  <option *ngFor="let question of questionList" [value]="question.questionTypeId">{{question.questiontype}}</option>
+                  
+                </select>
+              </div>
+             
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class=""
+                  >Section <sup>*</sup></label
+                >
+                <select
+                  class="form-select form-control"
+                  aria-label="Default select example"
+                  formControlName="sectionId"
+                >
+                  <option selected>--Choose--</option>
+                  <option
+                    *ngFor="let section of sectionList"
+                    [value]="section.sectionId"
+                  >
+                    {{ section.section1 }}
+                  </option>
+                </select>
+              </div>
+              
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Group <sup>*</sup></label>
+                <select
+                  class="form-select form-control"
+                  aria-label="Default select example"
+                  formControlName="groupId"
+                >
+                  <option selected>--Choose--</option>
+                  <option *ngFor="let group of groupList" [value]="group.groupId">{{group.groupName}}</option>
+                  
+                </select>
+              </div>
+             
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Marks</label>
+                <input
+                  placeholder="Marks"
+                  type="text"
+                  class="form-control"
+                  formControlName="marks"
+                />
+              </div>
+              
+            </div>
+            <div class="col-md-12">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class=""
+                  >Question <sup>*</sup></label
+                >
+                <textarea
+                  class="form-control"
+                  placeholder="Job Description"
+                  rows="4"
+                  formControlName="text"
+                ></textarea>
+              </div>
+             
+            </div>
+
+            <div class="col-md-12">
+              <div class="position-relative form-group">
+                <div formArrayName="QuestionssoptionVm" *ngIf="optionArray">
+                  <div *ngFor="let option of optionArray.controls; let i=index" [formGroupName]="i">
+                    <div >
+                    <!-- Option fields -->
+                    <div class="d-flex">
+                      <input
+                        type="text"
+                        formControlName="optionText"
+                        placeholder="Option Text"
+                        class="form-control mt-2 col-md-4"
+                      />
+                      <input
+                        type="file"
+                        formControlName="imagepath"
+                        placeholder="Image Path"
+                        class="form-control mt-2 ml-2 col-md-4"
+                      />
+                      <input type="checkbox" formControlName="isCorrect" class="m-2"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="d-flex btn_form mt-3">
+                <button type="submit" class="btn btn-primary mr-3">Save</button>
+                <button
+                  type="button"
+                  (click)="cancel()"
+                  class="btn btn-secondary"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+         
+        </form>
+      </div>
+    </div>
+    <!-- main content -->
+  </div>
+</div>
