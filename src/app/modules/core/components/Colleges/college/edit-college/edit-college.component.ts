@@ -26,6 +26,8 @@ export class EditCollegeComponent implements OnInit{
     selectedFile: File | null = null;
     selectedFileName!: string;
     clientList:any
+    countryId!:number
+    stateId!:number
     imagePreviewUrl: string | ArrayBuffer | null = null;
     editCollegeForm= new FormGroup({
       id: new FormControl(),
@@ -41,7 +43,6 @@ export class EditCollegeComponent implements OnInit{
       ContectEmail:new FormControl(''),
       ContectPhone:new FormControl(''),
       client:new FormControl(''),
-      isActive:new FormControl()
     })
 
     constructor(public route:Router,public toastr:ToastrService,public clientService:ClientService,private router:ActivatedRoute,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
@@ -51,6 +52,8 @@ export class EditCollegeComponent implements OnInit{
     this.fetchCountry();
     this.getClient()
     this.collegeService.getCollegeById(this.router.snapshot.params['id']).subscribe((res)=>{
+      this.onCountrySelected(res.data.countryId) 
+      this.onStateSelected(res.data.stateId)
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),
@@ -65,14 +68,14 @@ export class EditCollegeComponent implements OnInit{
         ContectEmail:new FormControl(res.data.contectEmail),
         ContectPhone:new FormControl(res.data.contectPhone),
         client:new FormControl(''),
-        isActive:new FormControl(),
       })
     },err=>{
       this.toastr.error(err)
     })
+    
    }
 
-  private fetchCountry(){
+  fetchCountry(){
     this.countrystatecityService.getCountry().subscribe(data=>{
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
@@ -80,8 +83,9 @@ export class EditCollegeComponent implements OnInit{
       this.toastr.error(err)
     })
   }
+
   
-  onCountrySelected(countryId: any){
+  onCountrySelected(countryId: number){
     this.countrystatecityService.getStateOfSelectedCountry(countryId).subscribe(data=>{
       this.listState = data
       this.stateInfoList = this.listState.data
@@ -115,7 +119,7 @@ export class EditCollegeComponent implements OnInit{
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.selectedFileName = event.target.files[0].name;
+    this.selectedFileName = event.target.files[0];
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -131,7 +135,6 @@ export class EditCollegeComponent implements OnInit{
     if (this.editCollegeForm.valid){
       const data = this.editCollegeForm.value as UpdateCollege;
       data.ImagePath = this.selectedFileName
-      data.isActive = true
       data.id = this.router.snapshot.params['id']
       this.collegeService.updateCollege(data).subscribe((res)=>{
         if (res.isSuccess){

@@ -226,7 +226,7 @@
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody formArrayName="collegeForm" *ngIf="collegeArray">
+                                <tbody formArrayName="colleges" *ngIf="collegeArray">
                                     <ng-container *ngFor="let college of collegeArray.controls; let i=index" [formGroupName]="i">
                                     <tr>
                                         <th scope="row">{{ i + 1 }}</th>
@@ -240,22 +240,6 @@
                                 </ng-container>
                                 </tbody>
                             </table>
-                            <!-- <div class="col-md-4">
-                                <div class="position-relative form-group">
-                                  <label for="exampleEmail11" class="">Client</label>
-                                  <select
-                                    class="form-select form-control mr-4"
-                                    placeholder="Select Client"
-                                    formControlName="client"
-                                  >
-                                    <option value=" ">Select Client</option>
-                                    <option *ngFor="let client of clientList" [value]="client.id">
-                                      {{ client.name }}
-                                    </option>
-                                  </select>
-                                </div>
-                              </div>
-                              -->
                              <div class="col-md-12">
                                  <div class="d-flex btn_form mt-3">
                                      <button type="submit" class="btn btn-primary mr-3">Save</button>

@@ -28,4 +28,8 @@ export class CampusService {
   deleteById(id:number): Observable<any>{
     return this.http.delete<any>(environment.apiUrl+'/Campus/DeleteCampus?campusId='+id)
   }
+
+  updateCampus(data:any){
+    return this.http.post<any>(environment.apiUrl +'/Campus/UpdateCampus',data)
+  }
 }

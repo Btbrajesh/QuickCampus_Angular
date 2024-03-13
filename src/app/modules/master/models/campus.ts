@@ -21,6 +21,20 @@ export interface AddCollege{
     collegeCode:string;
     examStartTime:Time;
     examEndTime:Time;
-    startDateTime:Date;
+    startDate:Date;
     isIncludeInWalkIn:boolean
+}
+
+export interface UpdateCampus{
+    walkInId:number;
+    address1:string;
+    address2:string;
+    title:string;
+    campusDate: Date;
+    city:number;
+    stateId:number;
+    countryId:number;
+    isActive:number;
+    jobDescription:string;
+    colleges:Array<AddCollege>;
 }

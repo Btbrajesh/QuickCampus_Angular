@@ -34,15 +34,15 @@ export class AddCollegeComponent implements OnInit{
     this.fetchCountry();
      this.addCollegeForm = this.fb.group({
       ImagePath:['',[Validators.required]],
-      collegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3)]],
-      collegeCode:['',[Validators.required]],
+      CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3)]],
+      CollegeCode:['',[Validators.required]],
       Address1:['',[Validators.required]],
       Address2:['',[Validators.required]],
       CityId:['',[Validators.required]],
       StateId:['',[Validators.required]],
       CountryId:['',[Validators.required]],
-      ContectPerson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
-      ContectEmail:['',[Validators.required,Validators.email]],
+      contectperson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
+      contectemail:['',[Validators.required,Validators.email]],
       ContectPhone:['',[Validators.required,Validators.maxLength(10)]],
 
      })
@@ -102,7 +102,7 @@ export class AddCollegeComponent implements OnInit{
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.selectedFileName = event.target.files[0].name;
+    this.selectedFileName = event.target.files[0];
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e) => {

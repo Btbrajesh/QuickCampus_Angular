@@ -32,9 +32,10 @@ import { UserdetailModalComponent } from './popups/userdetail-modal/userdetail-m
 import { ApplicantdetailModalComponent } from './popups/applicantdetail-modal/applicantdetail-modal.component';
 import { CollegedetailModalComponent } from './popups/collegedetail-modal/collegedetail-modal.component';
 import { CampusdetailModalComponent } from './popups/campusdetail-modal/campusdetail-modal.component';
+import { EditCampusComponent } from './components/Campus/campus-walk-in/edit-campus/edit-campus.component';
 
 @NgModule({
-  declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent, EditCollegeComponent, AddRoleComponent, EditApplicantComponent, EditRoleComponent, AddApplicantComponent, EditQuestionComponent,DeleteModalComponent, ClientdetailModalComponent, RoledetailModalComponent, UserdetailModalComponent, ApplicantdetailModalComponent, CollegedetailModalComponent, CampusdetailModalComponent],
+  declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent, EditCollegeComponent, AddRoleComponent, EditApplicantComponent, EditRoleComponent, AddApplicantComponent, EditQuestionComponent,DeleteModalComponent, ClientdetailModalComponent, RoledetailModalComponent, UserdetailModalComponent, ApplicantdetailModalComponent, CollegedetailModalComponent, CampusdetailModalComponent, EditCampusComponent],
   imports: [CommonModule,CoreRoutingModule,DataTablesModule,NgxPaginationModule,NgxSpinnerModule,ReactiveFormsModule,FormsModule],
 })
 export class CoreModule {}

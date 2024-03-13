@@ -29,4 +29,9 @@ export class CountrystatecityService {
   getCityById(cityId:number){
     return this.httpclient.get<Response>(environment.apiUrl+'/City/GetCityById?id='+cityId)
   }
+
+  getStateById(stateId:number){
+    return this.httpclient.get<Response>(environment.apiUrl+'/State/GetStateById?stateid='+stateId)
+  }
+
 }

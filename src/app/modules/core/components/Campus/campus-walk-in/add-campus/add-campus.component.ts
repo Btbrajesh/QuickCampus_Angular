@@ -51,27 +51,25 @@ export class AddCampusComponent implements OnInit{
       countryId:[],
       stateId:[],
       city:[''],
-      isActive:[''],
       jobDescription:[''],
       selectedCollegeId: [''],
-      collegeForm :this.fb.array([])
+      colleges :this.fb.array([])
     })
   }
 
   get collegeArray(): FormArray {
-    return this.addCampusForm.get('collegeForm') as FormArray;
+    return this.addCampusForm.get('colleges') as FormArray;
   }
 
   addCollegeData(){
     const selectedCollegeId = this.addCampusForm.value.selectedCollegeId;
     this.collegeService.getCollegeById(selectedCollegeId).subscribe((res)=>{
-      console.log(res)
       this.patchCollegeArray(res.data);
     })
   }
 
   patchCollegeArray(college:any){
-    const collegeFormArray = this.addCampusForm.get('collegeForm') as FormArray;
+    const collegeFormArray = this.addCampusForm.get('colleges') as FormArray;
     collegeFormArray.push(this.createCollegeFormGroup(college));
     this.isTableVisible = true
   }
@@ -82,7 +80,14 @@ export class AddCampusComponent implements OnInit{
       this.data.countryId = parseInt(this.addCampusForm.value.countryId, 10);
       this.data.stateId = parseInt(this.addCampusForm.value.stateId, 10);
       this.campusService.addCampus(this.data).subscribe((res)=>{
-        console.log(res)
+        console.log(res,'campus')
+        if (res.isSuccess){
+          this.toastr.success(res.message)
+          this.addCampusForm.reset()
+          this.router.navigateByUrl('/admin/campus')
+        }else{
+          this.toastr.error(res.message)
+        }
       })
     }
   }
@@ -90,7 +95,7 @@ export class AddCampusComponent implements OnInit{
   
 
   addCollegeFormGroup(college: any) {
-    const collegeFormArray = this.addCampusForm.get('collegeForm') as FormArray;
+    const collegeFormArray = this.addCampusForm.get('colleges') as FormArray;
     collegeFormArray.push(this.createCollegeFormGroup(college));
     this.isTableVisible = true
   }
@@ -108,7 +113,7 @@ export class AddCampusComponent implements OnInit{
   }
 
   removeCollege(index: number) {
-    const collegeFormArray = this.addCampusForm.get('collegeForm') as FormArray;
+    const collegeFormArray = this.addCampusForm.get('colleges') as FormArray;
     collegeFormArray.removeAt(index);
     this.selectedColleges.splice(index, 1);
   }

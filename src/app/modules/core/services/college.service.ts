@@ -22,16 +22,17 @@ export class CollegeService {
   addCollege(data:College):Observable<any>{
     var formData = new FormData;
     formData.append('ImagePath',data.ImagePath)
-    formData.append('CollegeName',data.collegeName)
-    formData.append('CollegeCode',data.collegeCode)
-    formData.append('CityId',data.CityId)
-    formData.append('ContectPhone',data.ContectPhone)
-    formData.append('StateId',data.StateId)
-    formData.append('CountryId',data.CountryId)
-    formData.append('ContectEmail',data.ContectEmail)
-    formData.append('ContectPerson',data.ContectPerson)
+    formData.append('CollegeCode',data.CollegeCode)
+    formData.append('CollegeName',data.CollegeName)
     formData.append('Address1',data.Address1)
     formData.append('Address2',data.Address2)
+    formData.append('StateId',data.StateId)
+    formData.append('CountryId',data.CountryId)
+    formData.append('CityId',data.CityId)
+    formData.append('contectperson',data.contectperson)
+    formData.append('ContectPhone',data.ContectPhone)
+    formData.append('contectemail',data.contectemail)
+   
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)
   }
 

@@ -62,7 +62,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let campus of campusList">
-                                    <td>{{campus.walkInDate}}</td>
+                                    <td>{{campus.walkInDate | date}}</td>
                                     <td>{{campus.title}}</td>
                                     <td>{{campus.address1}}</td>
                                     <td class="badge">
@@ -70,7 +70,7 @@
                                             [ngClass]="{ 'active-link': campus.isActive, 'inactive-link': !campus.isActive }">{{
                                                 campus.isActive ? 'Active' : 'Inactive' }}</a>
                                     </td>                                      <td class="action_button text-right">
-                                        <a href="add_campus.html" class="edit"><i class="icofont-ui-edit"></i></a>
+                                        <a routerLink="/admin/edit-campus/{{campus.walkInID}}" class="edit"><i class="icofont-ui-edit"></i></a>
                                         <a (click)="deleteItem(campus.walkInID)" class="delete"><i class="icofont-ui-delete"></i></a>
                                         <a (click)="viewDetails(campus.walkInID)" class="inactive" ><i class="icofont-eye"></i></a>
                                     </td>
