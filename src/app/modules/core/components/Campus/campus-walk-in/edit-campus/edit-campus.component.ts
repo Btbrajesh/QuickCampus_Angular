@@ -163,7 +163,6 @@ export class EditCampusComponent implements OnInit{
   
   onStateSelected(stateId:number){
     this.countrystatecityService.getCitiesOfSelectedState(stateId).subscribe(data=>{
-      console.log(data,'state')
     this.listCity = data
     this.cityInfoList = this.listCity.data
   },err=>{

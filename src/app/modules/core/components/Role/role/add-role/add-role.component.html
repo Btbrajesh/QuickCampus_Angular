@@ -2,19 +2,7 @@
   class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
 >
   <div class="app-main__inner">
-    <div class="app-page-title">
-      <div class="page-title-wrapper">
-        <div class="page-title-heading d-flex justify-content-between">
-          <div>
-            Add Role
-            <div class="page-title-subheading">
-              This is an example dashboard created using build-in elements and
-              components.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+   
     <!-- main content -->
     <div class="main-card mb-3 card">
       <div class="card-header card-title">
@@ -45,54 +33,12 @@
                 <span class="error">Role Name is required</span>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Client</label>
-                <select
-                  class="form-select form-control"
-                  aria-label="Default select example"
-                  formControlName="client"
-                >
-                  <option selected>--Choose Client--</option>
-                  <option
-                    *ngFor="let client of clientList"
-                    value="{{ client.id }}"
-                  >
-                    {{ client.name }}
-                  </option>
-                </select>
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  addRoleForm.get('client')?.invalid &&
-                  (addRoleForm.get('client')?.dirty ||
-                    addRoleForm.get('client')?.touched) &&
-                  addRoleForm.get('client')?.hasError('required')
-                "
-              >
-                <span class="error">Client is required</span>
-              </div>
-            </div>
+         
 
             <div class="col-md-12"><label>Permission</label></div>
-            <!-- <div class="col-md-3" *ngFor="let permissions of permissionList" >
-              <div class="position-relative form-group"  >
-                <label>
-                    <input type="checkbox" formArrayName="permission" value="{{permissions.id}}">
-                    {{permissions.permissionName}}
-                </label>
-              </div>
-            </div> -->
-               
                 <div class="col-md-12" formArrayName="permission">
-                  
-                  
-                   
                       <div class="col-md-3" *ngFor="let item of permissionList; let i = index">
                       <div class="position-relative form-group">
-
-                      
                     <input type="checkbox" [id]="'checkbox-' + item.id" [value]="item.id" (change)="onCheckboxChange($event, item.id)">
                     <label class='ml-2' [for]="'checkbox-' + item.id">{{ item.permissionName }}</label>
                   </div>

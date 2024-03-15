@@ -14,7 +14,6 @@ import { Role } from 'src/app/modules/master/models/role';
 })
 export class EditRoleComponent implements OnInit{
 
-  clientList: any[]= []
   permissionList: any[]= []
   editRoleForm = new FormGroup({
     id:new FormControl(),
@@ -27,7 +26,6 @@ export class EditRoleComponent implements OnInit{
 
   ngOnInit(): void {
     this.getPermissionList()
-    this.getClientList()
     this.roleService.getRoleById(this.router.snapshot.params['id']).subscribe((res)=>{
       console.log(res)
       this.editRoleForm = new FormGroup({
@@ -54,17 +52,6 @@ export class EditRoleComponent implements OnInit{
       const index = selectedIdsFormArray.controls.findIndex(x => x.value === id);
       selectedIdsFormArray.removeAt(index);
     }
-  }
-  
-
-  getClientList(){
-    this.clientService.getClientList().subscribe((res)=>{
-      if (res.isSuccess){
-        this.clientList = res.data
-      }
-    },err=>{
-      this.toastr.error(err)
-    })
   }
 
   getPermissionList(){

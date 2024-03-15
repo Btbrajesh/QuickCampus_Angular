@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddRoleComponent implements OnInit{
 
-  clientList: any[]= []
+
   permissionList: any[]= []
   addRoleForm!:FormGroup
 
@@ -22,7 +22,6 @@ export class AddRoleComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.getClientList()
     this.getPermissionList()
     this.addRoleForm = this.fb.group({
       roleName:['',[Validators.required]],
@@ -48,19 +47,6 @@ export class AddRoleComponent implements OnInit{
     }
   }
   
-
-  getClientList(){
-    this.spinnerService.show()
-    this.clientService.getClientList().subscribe((res)=>{
-      if (res.isSuccess){
-        this.clientList = res.data
-        this.spinnerService.hide()
-      }
-    },err =>{
-      this.toastr.error("Error in applicant list",err)
-    })
-  }
-
   getPermissionList(){
     this.roleService.getAllPermission().subscribe((res)=>{
       if (res.isSuccess){

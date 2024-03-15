@@ -1,110 +1,102 @@
 <div class="app-main__inner">
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading d-flex justify-content-between">
-                <div> Client
-                </div>
-            </div>
+    <div class="main-card mb-3 card">
+        <div class="card-header card-title">
+            <h4 class="mb-0">Edit Applicant</h4>
         </div>
-    </div>
+        <div class="card-body">
+            <form [formGroup]="editApplicantForm" (ngSubmit)="submit()">
+                <div class="row">
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">First Name</label>
+                                <input placeholder="First Name" type="text" class="form-control" name="firstName" formControlName="firstName"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Last Name</label>
+                                <input placeholder="Last Name" type="text" class="form-control" name="lastName" formControlName="lastName"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Email</label>
+                                <input placeholder="Email address" type="text" class="form-control" name="email" formControlName="emailAddress"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Phone Number</label>
+                                <input placeholder="Phone" type="text" class="form-control" name="phone" formControlName="phoneNumber"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">College Name</label>
+                                <input placeholder="College Name" type="text" class="form-control" name="collegeName" formControlName="collegeName"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Highest Qualification</label>
+                                <input placeholder="Highest Qualification" type="text" class="form-control" name="higestQualification" formControlName="higestQualification"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Highest Qualification Percentage</label>
+                                <input placeholder="Highest Qualification Percentage" type="text" class="form-control" name="higestQualificationPercentage" formControlName="higestQualificationPercentage"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Metric Percentage</label>
+                                <input placeholder="Metric Percentage" type="text" class="form-control" name="matricPercentage" formControlName="matricPercentage"/>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Intermediate Percentage</label>
+                                <input placeholder="Intermediate Percentage" type="text" class="form-control" name="intermediatePercentage" formControlName="intermediatePercentage"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" class="required">Skills</label>
+                                <input placeholder="Skills" type="text" class="form-control" name="skills" formControlName="skills"/>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" className="">Status</label>
+                                <select class="form-select form-control mr-4" placeholder="Select Select" formControlName="statusId">
+                                    <option value="">Select Status</option>
+                                    <option *ngFor="let status of statusList" [value]="status.statusId">{{status.statusName}}</option>
+                                </select> 
+                            </div>
+                        </div>
+    
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label for="exampleEmail11" className="">Company</label>
+                                <select class="form-select form-control mr-4" placeholder="Select Company" formControlName="assignedToCompany">
+                                    <option value="">Select Company</option>
+                                    <option *ngFor="let company of companyList" [value]="company.companyId">{{company.companyName}}</option>
+                                </select> 
+                            </div>
+                        </div>
+                        
+    
+                        <div class="col-md-12">
+                            <div class="d-flex btn_form mt-3">
+                                <button type="submit" class="btn btn-primary mr-3">Update</button>
+                                <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                            </div>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div> 
 </div>
-<div class="main-card mb-3 card">
-    <div class="card-header card-title">
-        <h4 class="mb-0">Edit Applicant</h4>
-    </div>
-    <div class="card-body">
-        <form [formGroup]="editApplicantForm" (ngSubmit)="submit()">
-            <div class="row">
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">First Name</label>
-                            <input placeholder="First Name" type="text" class="form-control" name="firstName" formControlName="firstName"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Last Name</label>
-                            <input placeholder="Last Name" type="text" class="form-control" name="lastName" formControlName="lastName"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Email</label>
-                            <input placeholder="Email address" type="text" class="form-control" name="email" formControlName="emailAddress"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Phone Number</label>
-                            <input placeholder="Phone" type="text" class="form-control" name="phone" formControlName="phoneNumber"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">College Name</label>
-                            <input placeholder="College Name" type="text" class="form-control" name="collegeName" formControlName="collegeName"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Highest Qualification</label>
-                            <input placeholder="Highest Qualification" type="text" class="form-control" name="higestQualification" formControlName="higestQualification"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Highest Qualification Percentage</label>
-                            <input placeholder="Highest Qualification Percentage" type="text" class="form-control" name="higestQualificationPercentage" formControlName="higestQualificationPercentage"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Metric Percentage</label>
-                            <input placeholder="Metric Percentage" type="text" class="form-control" name="matricPercentage" formControlName="matricPercentage"/>
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Intermediate Percentage</label>
-                            <input placeholder="Intermediate Percentage" type="text" class="form-control" name="intermediatePercentage" formControlName="intermediatePercentage"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Skills</label>
-                            <input placeholder="Skills" type="text" class="form-control" name="skills" formControlName="skills"/>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" className="">Status</label>
-                            <select class="form-select form-control mr-4" placeholder="Select Select" formControlName="statusId">
-                                <option value="">Select Status</option>
-                                <option></option>
-                            </select> 
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" className="">Company</label>
-                            <select class="form-select form-control mr-4" placeholder="Select Company" formControlName="assignedToCompany">
-                                <option value="">Select Company</option>
-                                <option ></option>
-                            </select> 
-                        </div>
-                    </div>
-                    
-
-                    <div class="col-md-12">
-                        <div class="d-flex btn_form mt-3">
-                            <button type="submit" class="btn btn-primary mr-3">Update</button>
-                            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-                        </div>
-                    </div>
-            </div>
-        </form>
-    </div>
-</div> 

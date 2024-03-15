@@ -13,6 +13,8 @@ import { Applicant } from 'src/app/modules/master/models/applicant';
 })
 export class EditApplicantComponent implements OnInit{
 
+  statusList :any;
+  companyList :any;
   editApplicantForm= new FormGroup({
     applicantID: new FormControl(),
     firstName: new FormControl(''),
@@ -34,6 +36,8 @@ export class EditApplicantComponent implements OnInit{
 
 
 ngOnInit(): void {
+  this.getCompany()
+  this.getStatus()
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
@@ -77,6 +81,23 @@ submit(){
 
 cancel(){
   this.route.navigateByUrl('/admin/applicant')
+}
+
+getStatus(){
+  this.applicantService.getStatusList().subscribe((res)=>{
+    if (res.isSuccess){
+      this.statusList = res.data
+    }
+   
+  })
+}
+
+getCompany(){
+  this.applicantService.getCompanyList().subscribe((res)=>{
+    if (res.isSuccess){
+      this.companyList = res.data
+    }
+  })
 }
 
 }

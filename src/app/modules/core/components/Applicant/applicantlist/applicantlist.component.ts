@@ -15,19 +15,8 @@ import { ApplicantdetailModalComponent } from '../../../popups/applicantdetail-m
   styleUrls: ['./applicantlist.component.css']
 })
 export class ApplicantlistComponent implements OnInit {
-  posts: any;
-  @ViewChild(DataTableDirective, { static: false })
-  datatableElement: any = DataTableDirective;
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
-  dtColumns: DataTables.ColumnSettings[] = [];
-  pageLength:number = 10;
-  lastPage = 0;
-  dtInstance: any;
-  isLength!: boolean;
-  allUsers: any = [];
+  
   applicantList :any[]=[];
-  p: number = 1;
   page = 1;
 	pageSize = 8;
   collectionSize!:number
@@ -77,9 +66,6 @@ viewDetails(itemId: number): void {
   modalRef.componentInstance.itemId = itemId;
 }
 
-ngOnDestroy(): void {
-  this.dtTrigger.unsubscribe();
-}
 
   toggleActive(user: any): void {
     user.isActive = !user.isActive;
