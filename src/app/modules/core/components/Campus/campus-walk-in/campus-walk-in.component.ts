@@ -16,6 +16,9 @@ import { CampusdetailModalComponent } from '../../../popups/campusdetail-modal/c
 export class CampusWalkInComponent implements OnInit{
 
   campusList:any[]=[];
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
 
@@ -27,8 +30,12 @@ export class CampusWalkInComponent implements OnInit{
     this.spinnerService.show();
     this.campusService.getCampusList().subscribe(res =>{
       if(res.isSuccess){
-        this.spinnerService.hide();
-        this.campusList = res.data;
+        this.collectionSize = res.data.length
+        this.campusList = res.data.map((campus:any,i:number)=>({id:i+1, ...campus})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
+        this.spinnerService.hide()
       }
     },err =>{
       this.spinnerService.hide();

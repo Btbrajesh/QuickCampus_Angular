@@ -16,6 +16,9 @@ import { ToastrService } from 'ngx-toastr';
 export class QuestionComponent {
 
   questionList:any[]=[];
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
 
   constructor(public toastr:ToastrService,private modalService: NgbModal,public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
 
@@ -28,8 +31,12 @@ export class QuestionComponent {
     this.spinnerService.show();
     this.questionService.getQuestionList().subscribe(res =>{
       if(res.isSuccess){
-        this.spinnerService.hide();
-        this.questionList = res.data;
+        this.collectionSize = res.data.length
+        this.questionList = res.data.map((question:any,i:number)=>({id:i+1, ...question})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
+        this.spinnerService.hide()
       }
     },err =>{
       this.spinnerService.hide();

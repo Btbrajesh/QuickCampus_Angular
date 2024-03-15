@@ -13,7 +13,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class RoleComponent implements OnInit{
 
-  data!:any
+  roleList!:any
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
 
   constructor(private modalService: NgbModal,private spinnerService: NgxSpinnerService,public roleService:RoleService, public toastr:ToastrService){}
 
@@ -24,10 +27,13 @@ export class RoleComponent implements OnInit{
   getAllRole(){
     this.spinnerService.show()
     this.roleService.getAllRole().subscribe((res)=>{
-      console.log(res,'roel')
       if (res.isSuccess){
+        this.collectionSize = res.data.length
+        this.roleList = res.data.map((role:any,i:number)=>({id:i+1, ...role})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
         this.spinnerService.hide()
-        this.data = res.data
       }else{
         this.spinnerService.hide()
         this.toastr.error(res.message)

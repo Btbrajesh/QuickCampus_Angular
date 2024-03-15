@@ -28,6 +28,9 @@ export class ApplicantlistComponent implements OnInit {
   allUsers: any = [];
   applicantList :any[]=[];
   p: number = 1;
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
  
   constructor(private modalService: NgbModal,public toastr:ToastrService,private applicantService: ApplicantService,private router: Router,private spinnerService: NgxSpinnerService){
    
@@ -39,13 +42,14 @@ ngOnInit(): void {
 
 getApplicantList(){
   this.spinnerService.show();
-  this.applicantService.getApplicantList().subscribe(resp =>{
-    if(resp.isSuccess){
-      this.spinnerService.hide();
-      this.applicantList = resp.data;
-      this.applicantList.map((applicant) => {
-        applicant.fullName = `${applicant.firstName} ${applicant.lastName}`;
-      });
+  this.applicantService.getApplicantList().subscribe(res =>{
+    if(res.isSuccess){
+      this.collectionSize = res.data.length
+        this.applicantList = res.data.map((applicant:any,i:number)=>({id:i+1, ...applicant})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
+        this.spinnerService.hide()
     }
   },err=>{
     this.spinnerService.hide();

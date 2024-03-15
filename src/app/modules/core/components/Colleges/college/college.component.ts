@@ -15,6 +15,9 @@ import { CollegedetailModalComponent } from '../../../popups/collegedetail-modal
 export class CollegeComponent implements OnInit{
 
   collegeList :any[]=[];
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,private router:Router){}
 
@@ -25,7 +28,12 @@ export class CollegeComponent implements OnInit{
   getAllCollegeList(){
     this.collegeService.getCollegeList().subscribe(res =>{
       if(res.isSuccess){
-        this.collegeList = res.data;
+        this.collectionSize = res.data.length
+        this.collegeList = res.data.map((college:any,i:number)=>({id:i+1, ...college})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
+        this.spinnerService.hide()
       }
     },err =>{
       this.toastr.error(err)

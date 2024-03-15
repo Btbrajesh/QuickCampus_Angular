@@ -2,17 +2,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
        
         <div class="app-main__inner">
-            <div class="app-page-title">
-                <div class="page-title-wrapper">
-                    <div class="page-title-heading d-flex justify-content-between">
-                        <div>Campus
-                            <div class="page-title-subheading">This is an example dashboard created using
-                                build-in elements and components.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <!-- main content -->
             <div class="main-card mb-3 card">
                 <div class="card-body">
@@ -77,27 +67,24 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-between p-2">
+                          <ngb-pagination
+                            [collectionSize]="collectionSize"
+                            [(page)]="page"
+                            [pageSize]="pageSize"
+                            (pageChange)="getCampusList()"
+                          >
+                          </ngb-pagination>
+                        
+                          <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCampusList()">
+                            <option [ngValue]="8">8 items per page</option>
+                            <option [ngValue]="20">20 items per page</option>
+                            <option [ngValue]="25">25 items per page</option>
+                          </select>
+                        </div>
                     </div>
 
-                    <div class="mt-4">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                              <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                                </a>
-                              </li>
-                              <li class="page-item"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </nav>
-                    </div>
+                    
                 </div>
             </div>
             <!-- main content -->

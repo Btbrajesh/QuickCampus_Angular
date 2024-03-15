@@ -14,20 +14,27 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class UserComponent implements OnInit{
 
-  userData:any
+  userList:any
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
 
   constructor(private modalService: NgbModal,public spinnerService:NgxSpinnerService,public toastr:ToastrService,public userService:UserService,public router:Router){}
 
   ngOnInit(): void {
-    this.getAll()
+    this.getAllUser()
   }
 
-  getAll(){
+  getAllUser(){
     this.spinnerService.show()
     this.userService.getAllUser().subscribe((res)=>{
       if (res.isSuccess){
+        this.collectionSize = res.data.length
+        this.userList = res.data.map((user:any,i:number)=>({id:i+1, ...user})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
         this.spinnerService.hide()
-        this.userData = res.data
       }
     },err=>{
       this.spinnerService.hide()
@@ -47,7 +54,7 @@ export class UserComponent implements OnInit{
       if (result === 'delete') {
         this.userService.deleteUser(itemId).subscribe((res)=>{
           this.toastr.success(res.message)
-          this.getAll()
+          this.getAllUser()
         }
         )
       }

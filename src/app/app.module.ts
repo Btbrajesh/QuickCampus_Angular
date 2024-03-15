@@ -17,6 +17,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CoreRoutingModule } from './modules/core/core-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbPaginationModule, NgbTypeaheadModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxPaginationModule,
     NgxSpinnerModule,
     FormsModule,
+    NgbPaginationModule, NgbTypeaheadModule, NgbModule,
     ToastrModule.forRoot({positionClass: 'toast-top-right'}),
   ],
   providers: [

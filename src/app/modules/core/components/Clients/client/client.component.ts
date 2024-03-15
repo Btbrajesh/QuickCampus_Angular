@@ -15,6 +15,9 @@ import { ClientdetailModalComponent } from '../../../popups/clientdetail-modal/c
 export class ClientComponent implements OnInit{
 
   clientList: any[]= []
+  page = 1;
+	pageSize = 8;
+  collectionSize!:number
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,public clientService:ClientService,public router:Router,public spinnerService:NgxSpinnerService){}
 
@@ -23,12 +26,21 @@ export class ClientComponent implements OnInit{
   }
 
   getClientList(){
+    this.spinnerService.show()
     this.clientService.getClientList().subscribe((res)=>{
       if (res.isSuccess){
-        this.clientList = res.data
-        
+        this.collectionSize = res.data.length
+        this.clientList = res.data.map((client:any,i:number)=>({id:i+1, ...client})).slice(
+          (this.page - 1) * this.pageSize,
+			    (this.page - 1) * this.pageSize + this.pageSize,
+        )
+        this.spinnerService.hide()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
       }
     },err=>{
+      this.spinnerService.hide()
       this.toastr.error(err)
     })
   }
