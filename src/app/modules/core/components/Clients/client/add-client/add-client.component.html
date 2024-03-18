@@ -107,6 +107,12 @@
               >
                 <span class="error">Maximum allowed length is 10</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="addClientForm.get('phone')?.hasError('minlength')"
+              >
+                <span class="error">Minimum allowed length is 10</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">

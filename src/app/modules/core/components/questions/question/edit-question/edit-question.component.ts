@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { QuestionService } from 'src/app/modules/core/services/question.service';
@@ -34,11 +34,11 @@ export class EditQuestionComponent implements OnInit{
   initForm() {
     this.editQuestionForm = this.fb.group({
       questionId: [''],
-      questionTypeId: [''],
-      sectionId: [''],
-      groupId: [''],
-      marks: [''],
-      text: [''],
+      questionTypeId: ['',[Validators.required]],
+      sectionId: ['',[Validators.required]],
+      groupId: ['',[Validators.required]],
+      marks: ['',[Validators.required]],
+      text: ['',[Validators.required]],
       QuestionssoptionVm: this.fb.array([])
     });
   }

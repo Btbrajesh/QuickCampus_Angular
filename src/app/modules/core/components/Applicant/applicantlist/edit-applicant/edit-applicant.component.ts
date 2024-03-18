@@ -41,19 +41,19 @@ ngOnInit(): void {
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
-      firstName: new FormControl(res.data['firstName']),
-      lastName: new FormControl(res.data['lastName']),
-      emailAddress: new FormControl(res.data['emailAddress']),
-      phoneNumber:new FormControl(res.data['phoneNumber']),
-      collegeName:new FormControl(res.data['collegeName']),
-      higestQualification:new FormControl(res.data['higestQualification']),
-      higestQualificationPercentage:new FormControl(res.data['higestQualificationPercentage']),
-      matricPercentage:new FormControl(res.data['matricPercentage']),
-      intermediatePercentage:new FormControl(res.data['intermediatePercentage']),
-      skills:new FormControl(res.data['skills']),
-      statusId: new FormControl(res.data['statusId']),
-      comment: new FormControl(res.data['comment']),
-      assignedToCompany: new FormControl(res.data['assignedToCompany']),
+      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15)]),
+      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15)]),
+      emailAddress: new FormControl(res.data['emailAddress'],[Validators.required,Validators.email]),
+      phoneNumber:new FormControl(res.data['phoneNumber'],[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
+      collegeName:new FormControl(res.data['collegeName'],[Validators.required,Validators.minLength(2),Validators.maxLength(30)]),
+      higestQualification:new FormControl(res.data['higestQualification'],[Validators.required]),
+      higestQualificationPercentage:new FormControl(res.data['higestQualificationPercentage'],[Validators.required]),
+      matricPercentage:new FormControl(res.data['matricPercentage'],[Validators.required]),
+      intermediatePercentage:new FormControl(res.data['intermediatePercentage'],[Validators.required]),
+      skills:new FormControl(res.data['skills'],[Validators.required]),
+      statusId: new FormControl(res.data['statusId'],[Validators.required]),
+      comment: new FormControl(res.data['comment'],[Validators.required]),
+      assignedToCompany: new FormControl(res.data['assignedToCompany'],[Validators.required]),
     })
   },err=>{
     this.toastr.error(err)

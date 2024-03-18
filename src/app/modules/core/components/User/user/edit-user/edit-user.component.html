@@ -9,7 +9,7 @@
         <h4 class="mb-0">Edit User</h4>
       </div>
       <div class="card-body">
-        <form [formGroup]="editForm" (ngSubmit)="submit()">
+        <form [formGroup]="editForm" (ngSubmit)="submit()" #myform="ngForm">
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -21,7 +21,24 @@
                   formControlName="email"
                 />
               </div>
-              
+              <div
+            class="text-danger"
+            *ngIf="
+              (editForm.get('email')?.invalid &&
+                (editForm.get('email')?.dirty ||
+                  editForm.get('email')?.touched)) ||
+              (editForm.get('email')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Email is required</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editForm.get('email')?.hasError('email')"
+          >
+            <span class="error">Provide a correct email</span>
+          </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -33,6 +50,30 @@
                   formControlName="mobile"
                 />
               </div>
+              <div
+            class="text-danger"
+            *ngIf="
+              (editForm.get('mobile')?.invalid &&
+                (editForm.get('mobile')?.dirty ||
+                  editForm.get('mobile')?.touched)) ||
+              (editForm.get('mobile')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Phone is required</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editForm.get('mobile')?.hasError('maxlength')"
+          >
+            <span class="error">Maximum allowed length is 10</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editForm.get('mobile')?.hasError('minlength')"
+          >
+            <span class="error">Minimum allowed length is 10</span>
+          </div>
             </div>
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">

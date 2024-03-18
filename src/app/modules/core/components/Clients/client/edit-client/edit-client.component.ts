@@ -17,9 +17,9 @@ export class EditClientComponent implements OnInit{
   editClientForm= new FormGroup({
     id: new FormControl(),
     address: new FormControl(''),
-    email: new FormControl('',Validators.compose([Validators.required,Validators.email]) ),
-    phone:new FormControl('',Validators.compose([Validators.required,Validators.minLength(10)])),
-    subscriptionPlan:new FormControl('',Validators.required),
+    email: new FormControl('' ),
+    phone:new FormControl(''),
+    subscriptionPlan:new FormControl(''),
   })
 
   constructor(private router:ActivatedRoute,public route:Router, public clientService:ClientService, public toastr:ToastrService){}
@@ -28,10 +28,10 @@ export class EditClientComponent implements OnInit{
     this.clientService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
       this.editClientForm= new FormGroup({
         id: new FormControl(),
-        address: new FormControl(res.data['address']),
-        email: new FormControl(res.data['email']),
-        phone:new FormControl(res.data['phone']),
-        subscriptionPlan:new FormControl(res.data['subscriptionPlan']),
+        address: new FormControl(res.data['address'], Validators.compose([Validators.required,Validators.maxLength(50)])),
+        email: new FormControl(res.data['email'],Validators.compose([Validators.required,Validators.email])),
+        phone:new FormControl(res.data['phone'],Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10)])),
+        subscriptionPlan:new FormControl(res.data['subscriptionPlan'],Validators.required),
       })
     },err=>{
       this.toastr.error(err)

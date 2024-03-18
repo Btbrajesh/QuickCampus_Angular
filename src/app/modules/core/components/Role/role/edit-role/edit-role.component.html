@@ -9,7 +9,7 @@
         <h4 class="mb-0">Edit Role</h4>
       </div>
       <div class="card-body">
-        <form [formGroup]="editRoleForm" (ngSubmit)="submit()">
+        <form [formGroup]="editRoleForm" (ngSubmit)="submit()" #myform="ngForm">
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -21,7 +21,18 @@
                   formControlName="roleName"
                 />
               </div>
-              
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editRoleForm.get('roleName')?.invalid &&
+                    (editRoleForm.get('roleName')?.dirty ||
+                    editRoleForm.get('roleName')?.touched)) ||
+                  (editRoleForm.get('roleName')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Role Name is required</span>
+              </div>
             </div>
            
 
@@ -33,7 +44,18 @@
                     <label class='ml-2' [for]="'checkbox-' + item.id">{{ item.permissionName }}</label>
                   </div>
                 </div>
-                
+                <div
+                class="text-danger"
+                *ngIf="
+                  (editRoleForm.get('permission')?.invalid &&
+                    (editRoleForm.get('permission')?.dirty ||
+                    editRoleForm.get('permission')?.touched)) ||
+                  (editRoleForm.get('permission')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Permission is required</span>
+              </div>
               </div>
                
                 

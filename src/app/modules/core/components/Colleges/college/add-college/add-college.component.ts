@@ -43,13 +43,12 @@ export class AddCollegeComponent implements OnInit{
       CountryId:['',[Validators.required]],
       contectperson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
       contectemail:['',[Validators.required,Validators.email]],
-      ContectPhone:['',[Validators.required,Validators.maxLength(10)]],
+      ContectPhone:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
 
      })
    }
 
    submit(){
-    console.log(this.addCollegeForm.value)
     if (this.addCollegeForm.valid){
       this.data = this.addCollegeForm.value
       this.data.ImagePath = this.selectedFileName

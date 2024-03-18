@@ -52,24 +52,22 @@ export class EditCollegeComponent implements OnInit{
     this.fetchCountry();
     this.getClient()
     this.collegeService.getCollegeById(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res,'cikkeg')
       this.onCountrySelected(res.data.countryId) 
       this.onStateSelected(res.data.stateId)
-     
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),
-        collegeName:new FormControl(res.data.collegeName),
-        collegeCode:new FormControl(res.data.collegeCode),
-        Address1:new FormControl(res.data.address1),
-        Address2:new FormControl(res.data.address2),
-        CityId:new FormControl(res.data.cityId),
-        StateId:new FormControl(res.data.stateId),
-        CountryId:new FormControl(res.data.countryId),
-        ContectPerson:new FormControl(res.data.contectPerson),
-        ContectEmail:new FormControl(res.data.contectEmail),
-        ContectPhone:new FormControl(res.data.contectPhone),
-        client:new FormControl(''),
+        collegeName:new FormControl(res.data.collegeName,[Validators.required,Validators.maxLength(50),Validators.minLength(3)]),
+        collegeCode:new FormControl(res.data.collegeCode,[Validators.required]),
+        Address1:new FormControl(res.data.address1,[Validators.required,Validators.maxLength(40)]),
+        Address2:new FormControl(res.data.address2,[Validators.required,Validators.maxLength(40)]),
+        CityId:new FormControl(res.data.cityId,[Validators.required]),
+        StateId:new FormControl(res.data.stateId,[Validators.required]),
+        CountryId:new FormControl(res.data.countryId,[Validators.required]),
+        ContectPerson:new FormControl(res.data.contectPerson,[Validators.required,Validators.minLength(2)]),
+        ContectEmail:new FormControl(res.data.contectEmail,[Validators.required,Validators.email]),
+        ContectPhone:new FormControl(res.data.contectPhone,[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
+        client:new FormControl('',[Validators.required]),
       })
     },err=>{
       this.toastr.error(err)
@@ -88,7 +86,6 @@ export class EditCollegeComponent implements OnInit{
   
   onCountrySelected(countryId: number){
     this.countrystatecityService.getStateOfSelectedCountry(countryId).subscribe(data=>{
-      console.log(data)
       this.listState = data
       this.stateInfoList = this.listState.data
     },err=>{

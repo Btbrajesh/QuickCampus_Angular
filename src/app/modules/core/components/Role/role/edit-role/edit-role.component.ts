@@ -27,12 +27,11 @@ export class EditRoleComponent implements OnInit{
   ngOnInit(): void {
     this.getPermissionList()
     this.roleService.getRoleById(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res)
       this.editRoleForm = new FormGroup({
         id:new FormControl(),
-        roleName:new FormControl(res.data['roleName']),
+        roleName:new FormControl(res.data['roleName'],Validators.required),
         client:new FormControl(''),
-        permission: new FormArray([])
+        permission: new FormArray([],Validators.required)
       })
     },err=>{
       this.toastr.error(err)

@@ -81,7 +81,6 @@ export class AddCampusComponent implements OnInit{
       this.data.countryId = parseInt(this.addCampusForm.value.countryId, 10);
       this.data.stateId = parseInt(this.addCampusForm.value.stateId, 10);
       this.campusService.addCampus(this.data).subscribe((res)=>{
-        console.log(res,'campus')
         if (res.isSuccess){
           this.toastr.success(res.message)
           this.addCampusForm.reset()
@@ -145,7 +144,6 @@ export class AddCampusComponent implements OnInit{
 
   fetchCountry(){
     this.countrystatecityService.getCountry().subscribe(data=>{
-      console.log(data,'count')
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
     },err=>{
@@ -164,7 +162,6 @@ export class AddCampusComponent implements OnInit{
   
   onStateSelected(stateId:number){
     this.countrystatecityService.getCitiesOfSelectedState(stateId).subscribe(data=>{
-      console.log(data,'state')
     this.listCity = data
     this.cityInfoList = this.listCity.data
   },err=>{

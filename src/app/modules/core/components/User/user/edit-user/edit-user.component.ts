@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { User } from 'src/app/modules/master/models/user';
 import { ToastrService } from 'ngx-toastr';
+import { valHooks } from 'jquery';
 
 @Component({
   selector: 'app-edit-user',
@@ -27,8 +28,8 @@ export class EditUserComponent implements OnInit{
     this.userService.getCurrentData(this.router.snapshot.params['id']).subscribe((res)=>{
       this.editForm = new FormGroup({
         id: new FormControl(),
-        email: new FormControl(res.data['email']),
-        mobile:new FormControl(res.data['mobile'])
+        email: new FormControl(res.data['email'],[Validators.required,Validators.email]),
+        mobile:new FormControl(res.data['mobile'],[Validators.required,Validators.maxLength(10),Validators.minLength(10)])
       })
     })
     

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { passwordMatchValidator } from '../../../confirm-password.validator';
+import { valHooks } from 'jquery';
 
 @Component({
   selector: 'app-add-client',
@@ -24,7 +25,7 @@ export class AddClientComponent implements OnInit{
     this.addClientForm = this.fb.group({
       name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2)]],
       email:['',[Validators.required,Validators.email]],
-      phone:['',[Validators.required,Validators.maxLength(10)]],
+      phone:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
       address:['',[Validators.required,Validators.maxLength(50)]],
       subscriptionPlan:['',[Validators.required]],
       username:['',[Validators.required,Validators.email]],

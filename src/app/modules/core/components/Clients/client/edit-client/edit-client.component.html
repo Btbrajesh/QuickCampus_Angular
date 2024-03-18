@@ -1,51 +1,145 @@
-
 <div class="main-card mb-3 card">
-    <div class="card-header card-title">
-        <h4 class="mb-0">Edit Clients</h4>
-    </div>
-    <div class="card-body">
-        <form [formGroup]="editClientForm" (ngSubmit)="submit()">
-            <div class="row">
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Email</label>
-                            <input placeholder="Email address" type="text" class="form-control" name="email" formControlName="email"/>
-                            <span class="requireds"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Phone</label>
-                            <input placeholder="Phone" type="text" class="form-control" name="phone" formControlName="phone"/>
-                            <span class="requireds"> </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="required">Address</label>
-                            <input placeholder="Address" type="text" class="form-control" name="address" formControlName="address"/>
-                            <span class="requireds"></span>
-                        </div>
-                    </div>
-                
-                    <div class="col-md-4">
-                        <div class="position-relative form-group">
-                            <label for="exampleEmail11" class="">Subscription Plan</label>
-                            <select class="form-select form-control" aria-label="Default select example" name="subscriptionPlan" formControlName="subscriptionPlan">
-                                <option selected value="">--Choose Plan--</option>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                            </select>
-                        </div>
-                    </div>
+  <div class="card-header card-title">
+    <h4 class="mb-0">Edit Clients</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="editClientForm" (ngSubmit)="submit()" #myform="ngForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="position-relative form-group">
+            <label for="exampleEmail11" class="required">Email</label>
+            <input
+              placeholder="Email address"
+              type="text"
+              class="form-control"
+              name="email"
+              formControlName="email"
+            />
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              (editClientForm.get('email')?.invalid &&
+                (editClientForm.get('email')?.dirty ||
+                  editClientForm.get('email')?.touched)) ||
+              (editClientForm.get('email')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Email is required</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editClientForm.get('email')?.hasError('email')"
+          >
+            <span class="error">Provide a correct email</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group">
+            <label for="exampleEmail11" class="required">Phone</label>
+            <input
+              placeholder="Phone"
+              type="text"
+              class="form-control"
+              name="phone"
+              formControlName="phone"
+            />
+            <span class="requireds"> </span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              (editClientForm.get('phone')?.invalid &&
+                (editClientForm.get('phone')?.dirty ||
+                  editClientForm.get('phone')?.touched)) ||
+              (editClientForm.get('phone')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Phone is required</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editClientForm.get('phone')?.hasError('maxlength')"
+          >
+            <span class="error">Maximum allowed length is 10</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editClientForm.get('phone')?.hasError('minlength')"
+          >
+            <span class="error">Minimum allowed length is 10</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group">
+            <label for="exampleEmail11" class="required">Address</label>
+            <input
+              placeholder="Address"
+              type="text"
+              class="form-control"
+              name="address"
+              formControlName="address"
+            />
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              (editClientForm.get('address')?.invalid &&
+                (editClientForm.get('address')?.dirty ||
+                  editClientForm.get('address')?.touched)) ||
+              (editClientForm.get('address')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Address is required</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editClientForm.get('address')?.hasError('maxlength')"
+          >
+            <span class="error">Maximum allowed length is 50</span>
+          </div>
+        </div>
 
-                    <div class="col-md-12">
-                        <div class="d-flex btn_form mt-3">
-                            <button type="submit" class="btn btn-primary mr-3">Update</button>
-                            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-                        </div>
-                    </div>
-            </div>
-        </form>
-    </div>
-</div> 
+        <div class="col-md-4">
+          <div class="position-relative form-group">
+            <label for="exampleEmail11" class="">Subscription Plan</label>
+            <select
+              class="form-select form-control"
+              aria-label="Default select example"
+              name="subscriptionPlan"
+              formControlName="subscriptionPlan"
+            >
+              <option selected value="">--Choose Plan--</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+            </select>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              (editClientForm.get('subscriptionPlan')?.invalid &&
+                (editClientForm.get('subscriptionPlan')?.dirty ||
+                  editClientForm.get('subscriptionPlan')?.touched)) ||
+              (editClientForm.get('subscriptionPlan')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Subscription Plan is required</span>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="d-flex btn_form mt-3">
+            <button type="submit" class="btn btn-primary mr-3">Update</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

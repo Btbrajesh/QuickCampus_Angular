@@ -1,102 +1,406 @@
 <div class="app-main__inner">
-    <div class="main-card mb-3 card">
-        <div class="card-header card-title">
-            <h4 class="mb-0">Edit Applicant</h4>
+  <div class="main-card mb-3 card">
+    <div class="card-header card-title">
+      <h4 class="mb-0">Edit Applicant</h4>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="editApplicantForm"
+        (ngSubmit)="submit()"
+        #myform="ngForm"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">First Name</label>
+              <input
+                placeholder="First Name"
+                type="text"
+                class="form-control"
+                name="firstName"
+                formControlName="firstName"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('firstName')?.invalid &&
+                  (editApplicantForm.get('firstName')?.dirty ||
+                    editApplicantForm.get('firstName')?.touched)) ||
+                (editApplicantForm.get('firstName')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">First Name is required</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('firstName')?.hasError('maxlength')"
+            >
+              <span class="error">Maximum allowed length is 15</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('firstName')?.hasError('minlength')"
+            >
+              <span class="error">Minimum required words are 2</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">Last Name</label>
+              <input
+                placeholder="Last Name"
+                type="text"
+                class="form-control"
+                name="lastName"
+                formControlName="lastName"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('lastName')?.invalid &&
+                  (editApplicantForm.get('lastName')?.dirty ||
+                    editApplicantForm.get('lastName')?.touched)) ||
+                (editApplicantForm.get('lastName')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Last Name is required</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('lastName')?.hasError('maxlength')"
+            >
+              <span class="error">Maximum allowed length is 15</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('lastName')?.hasError('minlength')"
+            >
+              <span class="error">Minimum required words are 2</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">Email</label>
+              <input
+                placeholder="Email address"
+                type="text"
+                class="form-control"
+                name="email"
+                formControlName="emailAddress"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('emailAddress')?.invalid &&
+                  (editApplicantForm.get('emailAddress')?.dirty ||
+                    editApplicantForm.get('emailAddress')?.touched)) ||
+                (editApplicantForm.get('emailAddress')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Email is required</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('emailAddress')?.hasError('email')"
+            >
+              <span class="error">Provide a correct email</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">Phone Number</label>
+              <input
+                placeholder="Phone"
+                type="text"
+                class="form-control"
+                name="phone"
+                formControlName="phoneNumber"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('phoneNumber')?.invalid &&
+                  (editApplicantForm.get('phoneNumber')?.dirty ||
+                    editApplicantForm.get('phoneNumber')?.touched)) ||
+                (editApplicantForm.get('phoneNumber')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Phone Number is required</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                editApplicantForm.get('phoneNumber')?.hasError('maxlength')
+              "
+            >
+              <span class="error">Maximum allowed length is 10</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                editApplicantForm.get('phoneNumber')?.hasError('minlength')
+              "
+            >
+              <span class="error">Minimum 10 number required</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">College Name</label>
+              <input
+                placeholder="College Name"
+                type="text"
+                class="form-control"
+                name="collegeName"
+                formControlName="collegeName"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('collegeName')?.invalid &&
+                  (editApplicantForm.get('collegeName')?.dirty ||
+                    editApplicantForm.get('collegeName')?.touched)) ||
+                (editApplicantForm.get('collegeName')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">College Name is required</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                editApplicantForm.get('collegeName')?.hasError('maxlength')
+              "
+            >
+              <span class="error">Maximum allowed length is 30</span>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                editApplicantForm.get('collegeName')?.hasError('minlength')
+              "
+            >
+              <span class="error">Minimum required length is 2</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required"
+                >Highest Qualification</label
+              >
+              <input
+                placeholder="Highest Qualification"
+                type="text"
+                class="form-control"
+                name="higestQualification"
+                formControlName="higestQualification"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('higestQualification')?.invalid &&
+                  (editApplicantForm.get('higestQualification')?.dirty ||
+                    editApplicantForm.get('higestQualification')?.touched)) ||
+                (editApplicantForm
+                  .get('higestQualification')
+                  ?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Highest Qualification is required</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required"
+                >Highest Qualification Percentage</label
+              >
+              <input
+                placeholder="Highest Qualification Percentage"
+                type="text"
+                class="form-control"
+                name="higestQualificationPercentage"
+                formControlName="higestQualificationPercentage"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('higestQualificationPercentage')?.invalid &&
+                  (editApplicantForm.get('higestQualificationPercentage')?.dirty ||
+                    editApplicantForm.get('higestQualificationPercentage')?.touched)) ||
+                (editApplicantForm.get('higestQualificationPercentage')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error"
+                >Highest Qualification Percentage is required</span
+              >
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required"
+                >Metric Percentage</label
+              >
+              <input
+                placeholder="Metric Percentage"
+                type="text"
+                class="form-control"
+                name="matricPercentage"
+                formControlName="matricPercentage"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('matricPercentage')?.invalid &&
+                  (editApplicantForm.get('matricPercentage')?.dirty ||
+                    editApplicantForm.get('matricPercentage')?.touched)) ||
+                (editApplicantForm.get('matricPercentage')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Metric Percentage is required</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required"
+                >Intermediate Percentage</label
+              >
+              <input
+                placeholder="Intermediate Percentage"
+                type="text"
+                class="form-control"
+                name="intermediatePercentage"
+                formControlName="intermediatePercentage"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('intermediatePercentage')?.invalid &&
+                  (editApplicantForm.get('intermediatePercentage')?.dirty ||
+                    editApplicantForm.get('intermediatePercentage')?.touched)) ||
+                (editApplicantForm.get('intermediatePercentage')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Intermediate Percentage is required</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">Skills</label>
+              <input
+                placeholder="Skills"
+                type="text"
+                class="form-control"
+                name="skills"
+                formControlName="skills"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('skills')?.invalid &&
+                  (editApplicantForm.get('skills')?.dirty ||
+                    editApplicantForm.get('skills')?.touched)) ||
+                (editApplicantForm.get('skills')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Skills is required</span>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" className="">Status</label>
+              <select
+                class="form-select form-control mr-4"
+                placeholder="Select Select"
+                formControlName="statusId"
+              >
+                <option value="">Select Status</option>
+                <option
+                  *ngFor="let status of statusList"
+                  [value]="status.statusId"
+                >
+                  {{ status.statusName }}
+                </option>
+              </select>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('statusId')?.invalid &&
+                  (editApplicantForm.get('statusId')?.dirty ||
+                    editApplicantForm.get('statusId')?.touched)) ||
+                (editApplicantForm.get('statusId')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Status is required</span>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" className="">Company</label>
+              <select
+                class="form-select form-control mr-4"
+                placeholder="Select Company"
+                formControlName="assignedToCompany"
+              >
+                <option value="">Select Company</option>
+                <option
+                  *ngFor="let company of companyList"
+                  [value]="company.companyId"
+                >
+                  {{ company.companyName }}
+                </option>
+              </select>
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('assignedToCompany')?.invalid &&
+                  (editApplicantForm.get('assignedToCompany')?.dirty ||
+                    editApplicantForm.get('assignedToCompany')?.touched)) ||
+                (editApplicantForm.get('assignedToCompany')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Company is required</span>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="d-flex btn_form mt-3">
+              <button type="submit" class="btn btn-primary mr-3">Update</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-            <form [formGroup]="editApplicantForm" (ngSubmit)="submit()">
-                <div class="row">
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">First Name</label>
-                                <input placeholder="First Name" type="text" class="form-control" name="firstName" formControlName="firstName"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Last Name</label>
-                                <input placeholder="Last Name" type="text" class="form-control" name="lastName" formControlName="lastName"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Email</label>
-                                <input placeholder="Email address" type="text" class="form-control" name="email" formControlName="emailAddress"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Phone Number</label>
-                                <input placeholder="Phone" type="text" class="form-control" name="phone" formControlName="phoneNumber"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">College Name</label>
-                                <input placeholder="College Name" type="text" class="form-control" name="collegeName" formControlName="collegeName"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Highest Qualification</label>
-                                <input placeholder="Highest Qualification" type="text" class="form-control" name="higestQualification" formControlName="higestQualification"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Highest Qualification Percentage</label>
-                                <input placeholder="Highest Qualification Percentage" type="text" class="form-control" name="higestQualificationPercentage" formControlName="higestQualificationPercentage"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Metric Percentage</label>
-                                <input placeholder="Metric Percentage" type="text" class="form-control" name="matricPercentage" formControlName="matricPercentage"/>
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Intermediate Percentage</label>
-                                <input placeholder="Intermediate Percentage" type="text" class="form-control" name="intermediatePercentage" formControlName="intermediatePercentage"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" class="required">Skills</label>
-                                <input placeholder="Skills" type="text" class="form-control" name="skills" formControlName="skills"/>
-                            </div>
-                        </div>
-    
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" className="">Status</label>
-                                <select class="form-select form-control mr-4" placeholder="Select Select" formControlName="statusId">
-                                    <option value="">Select Status</option>
-                                    <option *ngFor="let status of statusList" [value]="status.statusId">{{status.statusName}}</option>
-                                </select> 
-                            </div>
-                        </div>
-    
-                        <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label for="exampleEmail11" className="">Company</label>
-                                <select class="form-select form-control mr-4" placeholder="Select Company" formControlName="assignedToCompany">
-                                    <option value="">Select Company</option>
-                                    <option *ngFor="let company of companyList" [value]="company.companyId">{{company.companyName}}</option>
-                                </select> 
-                            </div>
-                        </div>
-                        
-    
-                        <div class="col-md-12">
-                            <div class="d-flex btn_form mt-3">
-                                <button type="submit" class="btn btn-primary mr-3">Update</button>
-                                <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-                            </div>
-                        </div>
-                </div>
-            </form>
-        </div>
-    </div> 
+      </form>
+    </div>
+  </div>
 </div>

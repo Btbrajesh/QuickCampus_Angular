@@ -2,13 +2,16 @@
   class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
 >
   <div class="app-main__inner">
-   
     <!-- main content -->
     <div class="main-card mb-3 card">
       <div class="card-header card-title">
         <h4 class="mb-0">Edit College</h4>
       </div>
-      <form [formGroup]="editCollegeForm" (ngSubmit)="submit()">
+      <form
+        [formGroup]="editCollegeForm"
+        (ngSubmit)="submit()"
+        #myform="ngForm"
+      >
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
@@ -40,7 +43,6 @@
                   />
                 </div>
               </a>
-              
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -52,9 +54,36 @@
                   formControlName="collegeName"
                 />
               </div>
-              
-             
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('collegeName')?.invalid &&
+                    (editCollegeForm.get('collegeName')?.dirty ||
+                      editCollegeForm.get('collegeName')?.touched)) ||
+                  (editCollegeForm.get('collegeName')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">College Name is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('collegeName')?.hasError('minlength')
+                "
+              >
+                <span class="error">Minimum 3 letters required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('collegeName')?.hasError('maxlength')
+                "
+              >
+                <span class="error">Maximum length is 50</span>
+              </div>
             </div>
+
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">College Code</label>
@@ -65,7 +94,18 @@
                   formControlName="collegeCode"
                 />
               </div>
-              
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('collegeCode')?.invalid &&
+                    (editCollegeForm.get('collegeCode')?.dirty ||
+                      editCollegeForm.get('collegeCode')?.touched)) ||
+                  (editCollegeForm.get('collegeCode')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">College Code is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -77,20 +117,58 @@
                   formControlName="Address1"
                 />
               </div>
-              
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('Address1')?.invalid &&
+                    (editCollegeForm.get('Address1')?.dirty ||
+                      editCollegeForm.get('Address1')?.touched)) ||
+                  (editCollegeForm.get('Address1')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">College Address is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('Address1')?.hasError('maxlength')
+                "
+              >
+                <span class="error">Maximum length is 40</span>
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="position-relative form-group">
-                  <label for="exampleEmail11" class="">Address 2</label>
-                  <input
-                    placeholder="College address"
-                    type="text"
-                    class="form-control"
-                    formControlName="Address2"
-                  />
-                </div>
-                
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Address 2</label>
+                <input
+                  placeholder="College address"
+                  type="text"
+                  class="form-control"
+                  formControlName="Address2"
+                />
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('Address2')?.invalid &&
+                    (editCollegeForm.get('Address2')?.dirty ||
+                      editCollegeForm.get('Address2')?.touched)) ||
+                  (editCollegeForm.get('Address2')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">College Address is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('Address2')?.hasError('maxlength')
+                "
+              >
+                <span class="error">Maximum length is 40</span>
+              </div>
+            </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Country</label>
@@ -109,7 +187,18 @@
                   </option>
                 </select>
               </div>
-              
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('CountryId')?.invalid &&
+                    (editCollegeForm.get('CountryId')?.dirty ||
+                      editCollegeForm.get('CountryId')?.touched)) ||
+                  (editCollegeForm.get('CountryId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Country is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -129,7 +218,18 @@
                   </option>
                 </select>
               </div>
-             
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('StateId')?.invalid &&
+                    (editCollegeForm.get('StateId')?.dirty ||
+                      editCollegeForm.get('StateId')?.touched)) ||
+                  (editCollegeForm.get('StateId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">State is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -148,8 +248,20 @@
                   </option>
                 </select>
               </div>
-              
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('CityId')?.invalid &&
+                    (editCollegeForm.get('CityId')?.dirty ||
+                      editCollegeForm.get('CityId')?.touched)) ||
+                  (editCollegeForm.get('CityId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">City is required</span>
+              </div>
             </div>
+
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Contact Person</label>
@@ -160,8 +272,29 @@
                   formControlName="ContectPerson"
                 />
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('ContectPerson')?.invalid &&
+                    (editCollegeForm.get('ContectPerson')?.dirty ||
+                      editCollegeForm.get('ContectPerson')?.touched)) ||
+                  (editCollegeForm.get('ContectPerson')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Contact Person is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('ContectPerson')?.hasError('minlength')
+                "
+              >
+                <span class="error">Minimum 3 letters required</span>
+              </div>
               
             </div>
+
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Contact Email</label>
@@ -172,7 +305,24 @@
                   formControlName="ContectEmail"
                 />
               </div>
-             
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('ContectEmail')?.invalid &&
+                    (editCollegeForm.get('ContectEmail')?.dirty ||
+                      editCollegeForm.get('ContectEmail')?.touched)) ||
+                  (editCollegeForm.get('ContectEmail')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Contact Email is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="editCollegeForm.get('ContectEmail')?.hasError('email')"
+              >
+                <span class="error">Provide a correct email</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -184,28 +334,76 @@
                   formControlName="ContectPhone"
                 />
               </div>
-              
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('ContectPhone')?.invalid &&
+                    (editCollegeForm.get('ContectPhone')?.dirty ||
+                      editCollegeForm.get('ContectPhone')?.touched)) ||
+                  (editCollegeForm.get('ContectPhone')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Contact Phone is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('ContectPhone')?.hasError('maxlength')
+                "
+              >
+                <span class="error">Maximum allowed length is 10</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('ContectPhone')?.hasError('minlength')
+                "
+              >
+                <span class="error">Minimum required length is 10</span>
+              </div>
             </div>
             <div class="col-md-4">
-                <div class="position-relative form-group">
-                  <label for="exampleEmail11" class="">Client</label>
-                  <select
-                    class="form-select form-control mr-4"
-                    placeholder="Select Client"
-                    formControlName="client"
-                  >
-                    <option value="">Select Client</option>
-                    <option *ngFor="let client of clientList" [value]="client.id">
-                      {{ client.name }}
-                    </option>
-                  </select>
-                </div>
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Client</label>
+                <select
+                  class="form-select form-control mr-4"
+                  placeholder="Select Client"
+                  formControlName="client"
+                >
+                  <option value="">Select Client</option>
+                  <option *ngFor="let client of clientList" [value]="client.id">
+                    {{ client.name }}
+                  </option>
+                </select>
+                
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('client')?.invalid &&
+                    (editCollegeForm.get('client')?.dirty ||
+                      editCollegeForm.get('client')?.touched)) ||
+                  (editCollegeForm.get('client')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Client is required</span>
+              </div>
+            </div>
 
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">
-                <button type="submit" class="btn btn-primary mr-3">Update</button>
-                <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-primary mr-3">
+                  Update
+                </button>
+                <button
+                  type="button"
+                  (click)="cancel()"
+                  class="btn btn-secondary"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>

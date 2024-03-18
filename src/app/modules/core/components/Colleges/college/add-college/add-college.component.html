@@ -307,7 +307,7 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('email')?.hasError('email')"
+                *ngIf="addCollegeForm.get('contectemail')?.hasError('email')"
               >
                 <span class="error">Provide a correct email</span>
               </div>
@@ -339,6 +339,12 @@
                 *ngIf="addCollegeForm.get('ContectPhone')?.hasError('maxlength')"
               >
                 <span class="error">Maximum allowed length is 10</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addCollegeForm.get('ContectPhone')?.hasError('minlength')"
+              >
+                <span class="error">Minimum required length is 10</span>
               </div>
             </div>
             <div class="col-md-12">
