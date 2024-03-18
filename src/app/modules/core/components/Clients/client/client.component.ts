@@ -16,8 +16,11 @@ export class ClientComponent implements OnInit{
 
   clientList: any[]= []
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
+  
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,public clientService:ClientService,public router:Router,public spinnerService:NgxSpinnerService){}
 
@@ -45,10 +48,11 @@ export class ClientComponent implements OnInit{
     })
   }
 
-  toggleActive(id: any): void {
-    this.clientService.activeInactive(id).subscribe((res)=>{
-    })
-  
+  onSearch() {
+    this.clientService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+      this.clientList = res.data;
+      this.collectionSize = this.clientList.length;
+    });
   }
 
   deleteItem(itemId: number): void {
@@ -62,6 +66,11 @@ export class ClientComponent implements OnInit{
         }
         )
       }
+    })
+  }
+
+  toggleActive(id: any): void {
+    this.clientService.activeInactive(id).subscribe((res)=>{
     })
   }
 

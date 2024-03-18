@@ -14,14 +14,14 @@ export class AddCollegeService {
   addCollege(data:College):Observable<ResponseObj>{
     var formData = new FormData;
     formData.append('ImagePath',data.ImagePath)
-    formData.append('CollegeName',data.collegeName)
-    formData.append('CollegeCode',data.collegeCode)
+    formData.append('CollegeName',data.CollegeName)
+    formData.append('CollegeCode',data.CollegeCode)
     formData.append('CityId',data.CityId)
     formData.append('ContectPhone',String(data.ContectPhone))
     formData.append('StateId',data.StateId)
     formData.append('CountryId',data.CountryId)
-    formData.append('ContectEmail',data.ContectEmail)
-    formData.append('ContectPerson',data.ContectPerson)
+    formData.append('ContectEmail',data.contectemail)
+    formData.append('ContectPerson',data.contectperson)
     formData.append('Address1',data.Address1)
     formData.append('IsActive',String(true))
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)

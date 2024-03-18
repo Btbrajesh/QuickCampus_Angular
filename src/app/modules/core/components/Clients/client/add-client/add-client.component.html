@@ -9,7 +9,7 @@
         <h4 class="mb-0">Add New Clients</h4>
       </div>
       <div class="card-body">
-        <form [formGroup]="addClientForm" (ngSubmit)="submit()">
+        <form [formGroup]="addClientForm" (ngSubmit)="submit()" #myform="ngForm">
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -24,14 +24,12 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('name')?.invalid &&
-                  (addClientForm.get('name')?.dirty ||
-                    addClientForm.get('name')?.touched) &&
-                  addClientForm.get('name')?.hasError('required')
+                  addClientForm.get('name')?.invalid && (addClientForm.get('name')?.dirty || addClientForm.get('name')?.touched) || addClientForm.get('name')?.hasError('required') && myform.submitted
                 "
               >
                 <span class="error">Name is required</span>
               </div>
+              
               <div
                 class="text-danger"
                 *ngIf="addClientForm.get('name')?.hasError('minlength')"
@@ -58,10 +56,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('email')?.invalid &&
-                  (addClientForm.get('email')?.dirty ||
-                    addClientForm.get('email')?.touched) &&
-                  addClientForm.get('email')?.hasError('required')
+                  addClientForm.get('email')?.invalid && (addClientForm.get('email')?.dirty || addClientForm.get('email')?.touched) || addClientForm.get('email')?.hasError('required') && myform.submitted
                 "
               >
                 <span class="error">Email is required</span>
@@ -86,10 +81,8 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('phone')?.invalid &&
-                  (addClientForm.get('phone')?.dirty ||
-                    addClientForm.get('phone')?.touched) &&
-                  addClientForm.get('phone')?.hasError('required')
+                  addClientForm.get('phone')?.invalid && (addClientForm.get('phone')?.dirty || addClientForm.get('phone')?.touched) || addClientForm.get('phone')?.hasError('required') && myform.submitted
+
                 "
               >
                 <span class="error">Phone is required</span>
@@ -114,10 +107,8 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('address')?.invalid &&
-                  (addClientForm.get('address')?.dirty ||
-                    addClientForm.get('address')?.touched) &&
-                  addClientForm.get('address')?.hasError('required')
+                  addClientForm.get('address')?.invalid && (addClientForm.get('address')?.dirty || addClientForm.get('address')?.touched) || addClientForm.get('address')?.hasError('required') && myform.submitted
+
                 "
               >
                 <span class="error">Address is required</span>
@@ -146,10 +137,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('subscriptionPlan')?.invalid &&
-                  (addClientForm.get('subscriptionPlan')?.dirty ||
-                    addClientForm.get('subscriptionPlan')?.touched) &&
-                  addClientForm.get('subscriptionPlan')?.hasError('required')
+                  addClientForm.get('subscriptionPlan')?.invalid && (addClientForm.get('subscriptionPlan')?.dirty || addClientForm.get('subscriptionPlan')?.touched) || addClientForm.get('subscriptionPlan')?.hasError('required') && myform.submitted
                 "
               >
                 <span class="error">Subscription Plan is required</span>
@@ -168,10 +156,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('username')?.invalid &&
-                  (addClientForm.get('username')?.dirty ||
-                    addClientForm.get('username')?.touched) &&
-                  addClientForm.get('username')?.hasError('required')
+                  addClientForm.get('username')?.invalid && (addClientForm.get('username')?.dirty || addClientForm.get('username')?.touched) || addClientForm.get('username')?.hasError('required') && myform.submitted
                 "
               >
                 <span class="error">Username is required</span>
@@ -212,10 +197,8 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('password')?.invalid &&
-                  (addClientForm.get('password')?.dirty ||
-                    addClientForm.get('password')?.touched) &&
-                  addClientForm.get('password')?.hasError('required')
+                  addClientForm.get('password')?.invalid && (addClientForm.get('password')?.dirty || addClientForm.get('password')?.touched) || addClientForm.get('password')?.hasError('required') && myform.submitted
+
                 "
               >
                 <span class="error">Password is required</span>
@@ -262,10 +245,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addClientForm.get('confirmPassword')?.invalid &&
-                  (addClientForm.get('confirmPassword')?.dirty ||
-                    addClientForm.get('confirmPassword')?.touched) &&
-                  addClientForm.get('confirmPassword')?.hasError('required')
+                  addClientForm.get('confirmPassword')?.invalid && (addClientForm.get('confirmPassword')?.dirty || addClientForm.get('confirmPassword')?.touched) || addClientForm.get('confirmPassword')?.hasError('required') && myform.submitted
                 "
               >
                 <span class="error">Confirm Password is required</span>

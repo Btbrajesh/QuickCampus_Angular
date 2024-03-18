@@ -16,6 +16,11 @@ export class ClientService {
     return this.http.get<any>(environment.apiUrl+'/Client/GetAllClient')
   }
 
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]> {
+    // Make API request with search term as query parameter
+    return this.http.get<any>(environment.apiUrl+'/Client/GetAllClient?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
   addClient(data:Client){
     return this.http.post<ResponseObj>(environment.apiUrl+'/Client/AddClient',data)
   }

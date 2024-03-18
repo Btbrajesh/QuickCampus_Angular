@@ -23,23 +23,21 @@
                 type="text"
                 placeholder="Search here ..."
                 class="form-control border-2"
-                name="search"
-                value=""
+                [(ngModel)]="searchTerm" (ngModelChange)="onSearch()"
               />
             </div>
-            <button type="button" class="btn btn-success ml-2">Search</button>
           </div>
           <div class="rounded-pill form_custom_inner d-flex">
-            <div
+            <!-- <div
               class="input-group size position-relative"
               style="margin-right: 15px"
             >
-              <select class="form-select form-control">
-                <option>All</option>
-                <option>Active</option>
-                <option>Inactive</option>
+              <select class="form-select form-control" >
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
               </select>
-            </div>
+            </div> -->
           </div>
         </div>
           <table class="mb-0 table table-striped">
@@ -104,7 +102,7 @@
             </ngb-pagination>
           
             <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getClientList()">
-              <option [ngValue]="8">8 items per page</option>
+              <option [ngValue]="10">10 items per page</option>
               <option [ngValue]="20">20 items per page</option>
               <option [ngValue]="25">25 items per page</option>
             </select>

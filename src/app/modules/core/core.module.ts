@@ -34,9 +34,10 @@ import { CollegedetailModalComponent } from './popups/collegedetail-modal/colleg
 import { CampusdetailModalComponent } from './popups/campusdetail-modal/campusdetail-modal.component';
 import { EditCampusComponent } from './components/Campus/campus-walk-in/edit-campus/edit-campus.component';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchPipe } from './services/search.pipe';
 
 @NgModule({
-  declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent, EditCollegeComponent, AddRoleComponent, EditApplicantComponent, EditRoleComponent, AddApplicantComponent, EditQuestionComponent,DeleteModalComponent, ClientdetailModalComponent, RoledetailModalComponent, UserdetailModalComponent, ApplicantdetailModalComponent, CollegedetailModalComponent, CampusdetailModalComponent, EditCampusComponent],
-  imports: [NgbPaginationModule, NgbTypeaheadModule,CommonModule,CoreRoutingModule,DataTablesModule,NgxPaginationModule,NgxSpinnerModule,ReactiveFormsModule,FormsModule],
+  declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent, EditCollegeComponent, AddRoleComponent, EditApplicantComponent, EditRoleComponent, AddApplicantComponent, EditQuestionComponent,DeleteModalComponent, ClientdetailModalComponent, RoledetailModalComponent, UserdetailModalComponent, ApplicantdetailModalComponent, CollegedetailModalComponent, CampusdetailModalComponent, EditCampusComponent, SearchPipe],
+  imports: [FormsModule,NgbPaginationModule, NgbTypeaheadModule,CommonModule,CoreRoutingModule,DataTablesModule,NgxPaginationModule,NgxSpinnerModule,ReactiveFormsModule,FormsModule],
 })
 export class CoreModule {}
