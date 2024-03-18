@@ -18,8 +18,10 @@ export class ApplicantlistComponent implements OnInit {
   
   applicantList :any[]=[];
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
  
   constructor(private modalService: NgbModal,public toastr:ToastrService,private applicantService: ApplicantService,private router: Router,private spinnerService: NgxSpinnerService){
    
@@ -44,6 +46,13 @@ getApplicantList(){
     this.spinnerService.hide();
     this.toastr.error(err)
   })
+}
+
+onSearch() {
+  this.applicantService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+    this.applicantList = res.data;
+    this.collectionSize = this.applicantList.length;
+  });
 }
 
 deleteItem(itemId: number): void {

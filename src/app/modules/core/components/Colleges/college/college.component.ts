@@ -16,8 +16,10 @@ export class CollegeComponent implements OnInit{
 
   collegeList :any[]=[];
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,private router:Router){}
 
@@ -38,6 +40,13 @@ export class CollegeComponent implements OnInit{
     },err =>{
       this.toastr.error(err)
     })
+  }
+
+  onSearch() {
+    this.collegeService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+      this.collegeList = res.data;
+      this.collectionSize = this.collegeList.length;
+    });
   }
 
   toggleActive(user: any): void {

@@ -18,6 +18,10 @@ export class ApplicantService {
     return this.http.get<any>(environment.apiUrl +'/Applicant/GetAllApplicant');
   }
 
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/Applicant/GetAllApplicant?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
   getApplicantById(applicantId:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Applicant/GetApplicantById?applicantId='+applicantId);
   }

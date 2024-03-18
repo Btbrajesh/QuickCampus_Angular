@@ -15,6 +15,10 @@ export class UserService {
     return this.http.get<any>(environment.apiUrl+'/User/UserList')
   }
 
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/User/UserList?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
   addUser(data:any):Observable<any>{
     return this.http.post<any>(environment.apiUrl+'/User/AddUser',data)
   }

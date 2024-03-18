@@ -15,6 +15,10 @@ export class CollegeService {
     return this.http.get<any>(environment.apiUrl +'/College/GetAllCollege');
   }
 
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/College/GetAllCollege?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
   getCollegeById(collegeId:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/College/GetCollegeDetailsById?collegeid='+collegeId);
   }

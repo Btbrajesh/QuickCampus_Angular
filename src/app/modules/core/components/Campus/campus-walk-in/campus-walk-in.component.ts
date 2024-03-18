@@ -17,8 +17,10 @@ export class CampusWalkInComponent implements OnInit{
 
   campusList:any[]=[];
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
 
@@ -41,6 +43,13 @@ export class CampusWalkInComponent implements OnInit{
       this.spinnerService.hide();
       this.toastr.error(err)
     })
+  }
+
+  onSearch() {
+    this.campusService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+      this.campusList = res.data;
+      this.collectionSize = this.campusList.length;
+    });
   }
 
   toggleActive(user: any): void {

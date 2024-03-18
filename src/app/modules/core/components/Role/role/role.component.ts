@@ -15,7 +15,7 @@ export class RoleComponent implements OnInit{
 
   roleList!:any
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
 
   constructor(private modalService: NgbModal,private spinnerService: NgxSpinnerService,public roleService:RoleService, public toastr:ToastrService){}

@@ -17,6 +17,10 @@ export class CampusService {
     return this.http.get<any>(environment.apiUrl +'/Campus/ManageCampus');
   }
 
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/Campus/ManageCampus?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
   getCampusById(campusId:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Campus/getCampusByCampusId?campusId='+campusId);
   }

@@ -16,8 +16,10 @@ export class UserComponent implements OnInit{
 
   userList:any
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
 
   constructor(private modalService: NgbModal,public spinnerService:NgxSpinnerService,public toastr:ToastrService,public userService:UserService,public router:Router){}
 
@@ -40,6 +42,13 @@ export class UserComponent implements OnInit{
       this.spinnerService.hide()
       this.toastr.error(err)
     })
+  }
+
+  onSearch() {
+    this.userService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+      this.userList = res.data;
+      this.collectionSize = this.userList.length;
+    });
   }
 
   viewDetails(itemId: number): void {
