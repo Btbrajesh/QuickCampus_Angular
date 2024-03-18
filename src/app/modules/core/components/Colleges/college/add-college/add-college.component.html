@@ -7,7 +7,7 @@
       <div class="card-header card-title">
         <h4 class="mb-0">Add New College</h4>
       </div>
-      <form [formGroup]="addCollegeForm" (ngSubmit)="submit()">
+      <form [formGroup]="addCollegeForm" (ngSubmit)="submit()" #myform="ngForm">
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
@@ -42,10 +42,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('ImagePath')?.invalid &&
-                  (addCollegeForm.get('ImagePath')?.dirty ||
-                    addCollegeForm.get('ImagePath')?.touched) &&
-                  addCollegeForm.get('ImagePath')?.hasError('required')
+                  (addCollegeForm.get('ImagePath')?.invalid &&
+                    (addCollegeForm.get('ImagePath')?.dirty ||
+                    addCollegeForm.get('ImagePath')?.touched)) ||
+                  (addCollegeForm.get('ImagePath')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Image is required</span>
@@ -64,10 +65,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('collegeName')?.invalid &&
-                  (addCollegeForm.get('collegeName')?.dirty ||
-                    addCollegeForm.get('collegeName')?.touched) &&
-                  addCollegeForm.get('collegeName')?.hasError('required')
+                 (addCollegeForm.get('CollegeName')?.invalid &&
+                    (addCollegeForm.get('CollegeName')?.dirty ||
+                    addCollegeForm.get('CollegeName')?.touched)) ||
+                  (addCollegeForm.get('CollegeName')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Name is required</span>
@@ -98,10 +100,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('collegeCode')?.invalid &&
-                  (addCollegeForm.get('collegeCode')?.dirty ||
-                    addCollegeForm.get('collegeCode')?.touched) &&
-                  addCollegeForm.get('collegeCode')?.hasError('required')
+                  (addCollegeForm.get('CollegeCode')?.invalid &&
+                    (addCollegeForm.get('CollegeCode')?.dirty ||
+                    addCollegeForm.get('CollegeCode')?.touched)) ||
+                  (addCollegeForm.get('CollegeCode')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">College Code is required</span>
@@ -120,10 +123,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('Address1')?.invalid &&
-                  (addCollegeForm.get('Address1')?.dirty ||
-                    addCollegeForm.get('Address1')?.touched) &&
-                  addCollegeForm.get('Address1')?.hasError('required')
+                  (addCollegeForm.get('Address1')?.invalid &&
+                    (addCollegeForm.get('Address1')?.dirty ||
+                    addCollegeForm.get('Address1')?.touched)) ||
+                  (addCollegeForm.get('Address1')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">College Address is required</span>
@@ -142,10 +146,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('Address2')?.invalid &&
-                  (addCollegeForm.get('Address2')?.dirty ||
-                    addCollegeForm.get('Address2')?.touched) &&
-                  addCollegeForm.get('Address2')?.hasError('required')
+                  (addCollegeForm.get('Address2')?.invalid &&
+                    (addCollegeForm.get('Address2')?.dirty ||
+                    addCollegeForm.get('Address2')?.touched)) ||
+                  (addCollegeForm.get('Address2')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">College Address is required</span>
@@ -172,10 +177,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('CountryId')?.invalid &&
-                  (addCollegeForm.get('CountryId')?.dirty ||
-                    addCollegeForm.get('CountryId')?.touched) &&
-                  addCollegeForm.get('CountryId')?.hasError('required')
+                  (addCollegeForm.get('CountryId')?.invalid &&
+                    (addCollegeForm.get('CountryId')?.dirty ||
+                    addCollegeForm.get('CountryId')?.touched)) ||
+                  (addCollegeForm.get('CountryId')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Country is required</span>
@@ -202,10 +208,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('StateId')?.invalid &&
-                  (addCollegeForm.get('StateId')?.dirty ||
-                    addCollegeForm.get('StateId')?.touched) &&
-                  addCollegeForm.get('StateId')?.hasError('required')
+                  (addCollegeForm.get('StateId')?.invalid &&
+                    (addCollegeForm.get('StateId')?.dirty ||
+                    addCollegeForm.get('StateId')?.touched)) ||
+                  (addCollegeForm.get('StateId')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">State is required</span>
@@ -231,10 +238,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('CityId')?.invalid &&
-                  (addCollegeForm.get('CityId')?.dirty ||
-                    addCollegeForm.get('CityId')?.touched) &&
-                  addCollegeForm.get('CityId')?.hasError('required')
+                  (addCollegeForm.get('CityId')?.invalid &&
+                    (addCollegeForm.get('CityId')?.dirty ||
+                    addCollegeForm.get('CityId')?.touched)) ||
+                  (addCollegeForm.get('CityId')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">City is required</span>
@@ -253,10 +261,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('ContectPerson')?.invalid &&
-                  (addCollegeForm.get('ContectPerson')?.dirty ||
-                    addCollegeForm.get('ContectPerson')?.touched) &&
-                  addCollegeForm.get('ContectPerson')?.hasError('required')
+                  (addCollegeForm.get('contectperson')?.invalid &&
+                    (addCollegeForm.get('contectperson')?.dirty ||
+                    addCollegeForm.get('contectperson')?.touched)) ||
+                  (addCollegeForm.get('contectperson')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Contact Person is required</span>
@@ -287,10 +296,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('ContectEmail')?.invalid &&
-                  (addCollegeForm.get('ContectEmail')?.dirty ||
-                    addCollegeForm.get('ContectEmail')?.touched) &&
-                  addCollegeForm.get('ContectEmail')?.hasError('required')
+                  (addCollegeForm.get('contectemail')?.invalid &&
+                    (addCollegeForm.get('contectemail')?.dirty ||
+                    addCollegeForm.get('contectemail')?.touched)) ||
+                  (addCollegeForm.get('contectemail')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Contact Email is required</span>
@@ -315,10 +325,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addCollegeForm.get('ContectPhone')?.invalid &&
-                  (addCollegeForm.get('ContectPhone')?.dirty ||
-                    addCollegeForm.get('ContectPhone')?.touched) &&
-                  addCollegeForm.get('ContectPhone')?.hasError('required')
+                  (addCollegeForm.get('ContectPhone')?.invalid &&
+                    (addCollegeForm.get('ContectPhone')?.dirty ||
+                    addCollegeForm.get('ContectPhone')?.touched)) ||
+                  (addCollegeForm.get('ContectPhone')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Contact Phone is required</span>

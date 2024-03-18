@@ -9,7 +9,7 @@
         <h4 class="mb-0">Add New Role</h4>
       </div>
       <div class="card-body">
-        <form [formGroup]="addRoleForm" (ngSubmit)="submit()">
+        <form [formGroup]="addRoleForm" (ngSubmit)="submit()" #myform="ngForm">
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -24,10 +24,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addRoleForm.get('roleName')?.invalid &&
-                  (addRoleForm.get('roleName')?.dirty ||
-                    addRoleForm.get('roleName')?.touched) &&
-                  addRoleForm.get('roleName')?.hasError('required')
+                  (addRoleForm.get('roleName')?.invalid &&
+                    (addRoleForm.get('roleName')?.dirty ||
+                    addRoleForm.get('roleName')?.touched)) ||
+                  (addRoleForm.get('roleName')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Role Name is required</span>
@@ -46,10 +47,11 @@
                 <div
                 class="text-danger"
                 *ngIf="
-                  addRoleForm.get('permission')?.invalid &&
-                  (addRoleForm.get('permission')?.dirty ||
-                    addRoleForm.get('permission')?.touched) &&
-                  addRoleForm.get('permission')?.hasError('required')
+                  (addRoleForm.get('permission')?.invalid &&
+                    (addRoleForm.get('permission')?.dirty ||
+                    addRoleForm.get('permission')?.touched)) ||
+                  (addRoleForm.get('permission')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Permission is required</span>

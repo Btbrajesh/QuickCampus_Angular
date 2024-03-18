@@ -55,6 +55,7 @@ export class EditCollegeComponent implements OnInit{
       console.log(res,'cikkeg')
       this.onCountrySelected(res.data.countryId) 
       this.onStateSelected(res.data.stateId)
+     
       this.editCollegeForm = new FormGroup({
         id: new FormControl(),
         ImagePath:new FormControl(''),
@@ -73,11 +74,10 @@ export class EditCollegeComponent implements OnInit{
     },err=>{
       this.toastr.error(err)
     })
-    
    }
 
   fetchCountry(){
-    this.countrystatecityService.getCountry().subscribe(data=>{
+    this.countrystatecityService.getCountry().subscribe((data)=>{
       this.listcountry = data
       this.countryInfoList = this.listcountry.data
     },err=>{
@@ -88,6 +88,7 @@ export class EditCollegeComponent implements OnInit{
   
   onCountrySelected(countryId: number){
     this.countrystatecityService.getStateOfSelectedCountry(countryId).subscribe(data=>{
+      console.log(data)
       this.listState = data
       this.stateInfoList = this.listState.data
     },err=>{

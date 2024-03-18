@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
 import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
@@ -11,6 +11,7 @@ import { CampusService } from '../../../../services/campus.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/modules/core/services/client.service';
+import { valHooks } from 'jquery';
 
 @Component({
   selector: 'app-add-campus',
@@ -44,16 +45,16 @@ export class AddCampusComponent implements OnInit{
 
   initForm(){
     this.addCampusForm= this.fb.group({
-      walkInDate:[''],
-      title:[''],
-      address1:[''],
-      address2:[''],
-      countryId:[],
-      stateId:[],
-      city:[''],
-      jobDescription:[''],
-      selectedCollegeId: [''],
-      colleges :this.fb.array([])
+      walkInDate:['',[Validators.required]],
+      title:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
+      address1:['',[Validators.required,Validators.maxLength(30)]],
+      address2:['',[Validators.required,Validators.maxLength(30)]],
+      countryId:['',[Validators.required]],
+      stateId:['',[Validators.required]],
+      city:['',[Validators.required]],
+      jobDescription:['',[Validators.required,,Validators.maxLength(200)]],
+      selectedCollegeId: ['',[Validators.required]],
+      colleges :this.fb.array([],[Validators.required])
     })
   }
 

@@ -2,14 +2,17 @@
   class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
 >
   <div class="app-main__inner">
-    
     <!-- main content -->
     <div class="main-card mb-3 card">
       <div class="card-header card-title">
         <h4 class="mb-0">Add New Question</h4>
       </div>
       <div class="card-body">
-        <form [formGroup]="addQuestionForm" (ngSubmit)="submit()">
+        <form
+          [formGroup]="addQuestionForm"
+          (ngSubmit)="submit()"
+          #myform="ngForm"
+        >
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -30,10 +33,13 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('questionTypeId')?.invalid &&
-                  (addQuestionForm.get('questionTypeId')?.dirty ||
-                    addQuestionForm.get('questionTypeId')?.touched) &&
-                  addQuestionForm.get('questionTypeId')?.hasError('required')
+                  (addQuestionForm.get('questionTypeId')?.invalid &&
+                    (addQuestionForm.get('questionTypeId')?.dirty ||
+                      addQuestionForm.get('questionTypeId')?.touched)) ||
+                  (addQuestionForm
+                    .get('questionTypeId')
+                    ?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Question type is required</span>
@@ -61,10 +67,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('sectionId')?.invalid &&
-                  (addQuestionForm.get('sectionId')?.dirty ||
-                    addQuestionForm.get('sectionId')?.touched) &&
-                  addQuestionForm.get('sectionId')?.hasError('required')
+                  (addQuestionForm.get('sectionId')?.invalid &&
+                    (addQuestionForm.get('sectionId')?.dirty ||
+                      addQuestionForm.get('sectionId')?.touched)) ||
+                  (addQuestionForm.get('sectionId')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Section is required</span>
@@ -79,17 +86,22 @@
                   formControlName="groupId"
                 >
                   <option selected>--Choose--</option>
-                  <option *ngFor="let group of groupList" [value]="group.groupId">{{group.groupName}}</option>
-                  
+                  <option
+                    *ngFor="let group of groupList"
+                    [value]="group.groupId"
+                  >
+                    {{ group.groupName }}
+                  </option>
                 </select>
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('groupId')?.invalid &&
-                  (addQuestionForm.get('groupId')?.dirty ||
-                    addQuestionForm.get('groupId')?.touched) &&
-                  addQuestionForm.get('groupId')?.hasError('required')
+                  (addQuestionForm.get('groupId')?.invalid &&
+                    (addQuestionForm.get('groupId')?.dirty ||
+                      addQuestionForm.get('groupId')?.touched)) ||
+                  (addQuestionForm.get('groupId')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Group is required</span>
@@ -108,10 +120,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('marks')?.invalid &&
-                  (addQuestionForm.get('marks')?.dirty ||
-                    addQuestionForm.get('marks')?.touched) &&
-                  addQuestionForm.get('marks')?.hasError('required')
+                  (addQuestionForm.get('marks')?.invalid &&
+                    (addQuestionForm.get('marks')?.dirty ||
+                      addQuestionForm.get('marks')?.touched)) ||
+                  (addQuestionForm.get('marks')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Marks is required</span>
@@ -132,10 +145,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addQuestionForm.get('Text')?.invalid &&
-                  (addQuestionForm.get('Text')?.dirty ||
-                    addQuestionForm.get('Text')?.touched) &&
-                  addQuestionForm.get('Text')?.hasError('required')
+                  (addQuestionForm.get('Text')?.invalid &&
+                    (addQuestionForm.get('Text')?.dirty ||
+                      addQuestionForm.get('Text')?.touched)) ||
+                  (addQuestionForm.get('Text')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Question is required</span>
@@ -165,10 +179,26 @@
                         placeholder="Image Path"
                         class="form-control mt-2 ml-2 col-md-4"
                       />
-                      <input type="checkbox" formControlName="isCorrect" class="m-2"/>
+                      <input
+                        type="checkbox"
+                        formControlName="isCorrect"
+                        class="m-2"
+                      />
                     </div>
                   </div>
                 </div>
+                <div
+                      class="text-danger"
+                      *ngIf="
+                        (addQuestionForm.get('QuestionssoptionVm')?.invalid &&
+                          (addQuestionForm.get('QuestionssoptionVm')?.dirty ||
+                            addQuestionForm.get('QuestionssoptionVm')?.touched)) ||
+                        (addQuestionForm.get('QuestionssoptionVm')?.hasError('required') &&
+                          myform.submitted)
+                      "
+                    >
+                      <span class="error">Question Option is required</span>
+                    </div>
               </div>
             </div>
 

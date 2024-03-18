@@ -35,7 +35,7 @@ export class AddQuestionComponent implements OnInit{
         this.createOption(),
         this.createOption(),
         this.createOption()
-      ]),
+      ],[Validators.required]),
     })
   }
 
@@ -58,7 +58,7 @@ export class AddQuestionComponent implements OnInit{
 
   createOption(): FormGroup {
     return this.fb.group({
-      optionText: ['',],
+      optionText: [''],
       isCorrect: [false],
       imagepath: ['']
     });

@@ -2,14 +2,13 @@
   class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
 >
   <div class="app-main__inner">
-    
     <!-- main content -->
     <div class="main-card mb-3 card">
       <div class="card-header card-title">
         <h4 class="mb-0">Add New User</h4>
       </div>
       <div class="card-body">
-        <form [formGroup]="addUserForm" (ngSubmit)="submit()">
+        <form [formGroup]="addUserForm" (ngSubmit)="submit()" #myform="ngForm">
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -24,10 +23,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('name')?.invalid &&
-                  (addUserForm.get('name')?.dirty ||
-                    addUserForm.get('name')?.touched) &&
-                  addUserForm.get('name')?.hasError('required')
+                  (addUserForm.get('name')?.invalid &&
+                    (addUserForm.get('name')?.dirty ||
+                      addUserForm.get('name')?.touched)) ||
+                  (addUserForm.get('name')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Name is required</span>
@@ -58,10 +58,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('email')?.invalid &&
-                  (addUserForm.get('email')?.dirty ||
-                    addUserForm.get('email')?.touched) &&
-                  addUserForm.get('email')?.hasError('required')
+                  (addUserForm.get('email')?.invalid &&
+                    (addUserForm.get('email')?.dirty ||
+                      addUserForm.get('email')?.touched)) ||
+                  (addUserForm.get('email')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Email is required</span>
@@ -86,10 +87,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('mobile')?.invalid &&
-                  (addUserForm.get('mobile')?.dirty ||
-                    addUserForm.get('mobile')?.touched) &&
-                  addUserForm.get('mobile')?.hasError('required')
+                  (addUserForm.get('mobile')?.invalid &&
+                    (addUserForm.get('mobile')?.dirty ||
+                      addUserForm.get('mobile')?.touched)) ||
+                  (addUserForm.get('mobile')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Mobile Number is required</span>
@@ -118,10 +120,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('role')?.invalid &&
-                  (addUserForm.get('role')?.dirty ||
-                    addUserForm.get('role')?.touched) &&
-                  addUserForm.get('role')?.hasError('required')
+                  (addUserForm.get('role')?.invalid &&
+                    (addUserForm.get('role')?.dirty ||
+                      addUserForm.get('role')?.touched)) ||
+                  (addUserForm.get('role')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Role is required</span>
@@ -144,10 +147,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('client')?.invalid &&
-                  (addUserForm.get('client')?.dirty ||
-                    addUserForm.get('client')?.touched) &&
-                  addUserForm.get('client')?.hasError('required')
+                   (addUserForm.get('client')?.invalid &&
+                    (addUserForm.get('client')?.dirty ||
+                      addUserForm.get('client')?.touched)) ||
+                  (addUserForm.get('client')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Client is required</span>
@@ -182,10 +186,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('password')?.invalid &&
-                  (addUserForm.get('password')?.dirty ||
-                    addUserForm.get('password')?.touched) &&
-                  addUserForm.get('password')?.hasError('required')
+                  (addUserForm.get('password')?.invalid &&
+                    (addUserForm.get('password')?.dirty ||
+                      addUserForm.get('password')?.touched)) ||
+                  (addUserForm.get('password')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Password is required</span>
@@ -232,10 +237,11 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  addUserForm.get('confirmPassword')?.invalid &&
-                  (addUserForm.get('confirmPassword')?.dirty ||
-                    addUserForm.get('confirmPassword')?.touched) &&
-                  addUserForm.get('confirmPassword')?.hasError('required')
+                  (addUserForm.get('confirmPassword')?.invalid &&
+                    (addUserForm.get('confirmPassword')?.dirty ||
+                      addUserForm.get('confirmPassword')?.touched)) ||
+                  (addUserForm.get('confirmPassword')?.hasError('required') &&
+                    myform.submitted)
                 "
               >
                 <span class="error">Confirm Password is required</span>
@@ -256,7 +262,13 @@
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">
                 <button type="submit" class="btn btn-primary mr-3">Save</button>
-                <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="cancel()"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@
       <div class="card-header card-title">
         <h4 class="mb-0">Add New Campus</h4>
       </div>
-      <form [formGroup]="addCampusForm" (ngSubmit)="submit()">
+      <form [formGroup]="addCampusForm" (ngSubmit)="submit()" #myform="ngForm">
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
@@ -20,6 +20,18 @@
                   formControlName="walkInDate"
                 />
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('walkInDate')?.invalid &&
+                    (addCampusForm.get('walkInDate')?.dirty ||
+                    addCampusForm.get('walkInDate')?.touched)) ||
+                  (addCampusForm.get('walkInDate')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Name is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -30,6 +42,24 @@
                   class="form-control"
                   formControlName="address1"
                 />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('address1')?.invalid &&
+                    (addCampusForm.get('address1')?.dirty ||
+                    addCampusForm.get('address1')?.touched)) ||
+                  (addCampusForm.get('address1')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Address is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addCampusForm.get('address1')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 200</span>
               </div>
             </div>
             <div class="col-md-4">
@@ -42,6 +72,24 @@
                   formControlName="address2"
                 />
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('address2')?.invalid &&
+                    (addCampusForm.get('address2')?.dirty ||
+                    addCampusForm.get('address2')?.touched)) ||
+                  (addCampusForm.get('address2')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Address is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addCampusForm.get('address2')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 200</span>
+              </div>
             </div>
             <div class="col-md-12">
               <div class="position-relative form-group">
@@ -52,6 +100,18 @@
                   rows="1"
                   formControlName="jobDescription"
                 ></textarea>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('jobDescription')?.invalid &&
+                    (addCampusForm.get('jobDescription')?.dirty ||
+                    addCampusForm.get('jobDescription')?.touched)) ||
+                  (addCampusForm.get('jobDescription')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Job Description is required</span>
               </div>
             </div>
 
@@ -73,6 +133,18 @@
                   </option>
                 </select>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('countryId')?.invalid &&
+                    (addCampusForm.get('countryId')?.dirty ||
+                    addCampusForm.get('countryId')?.touched)) ||
+                  (addCampusForm.get('countryId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Country is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -92,6 +164,18 @@
                   </option>
                 </select>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('stateId')?.invalid &&
+                    (addCampusForm.get('stateId')?.dirty ||
+                    addCampusForm.get('stateId')?.touched)) ||
+                  (addCampusForm.get('stateId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">State is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -110,6 +194,18 @@
                   </option>
                 </select>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('city')?.invalid &&
+                    (addCampusForm.get('city')?.dirty ||
+                    addCampusForm.get('city')?.touched)) ||
+                  (addCampusForm.get('city')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">City is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -120,6 +216,30 @@
                   class="form-control"
                   formControlName="title"
                 />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('title')?.invalid &&
+                    (addCampusForm.get('title')?.dirty ||
+                    addCampusForm.get('title')?.touched)) ||
+                  (addCampusForm.get('title')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Title is required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addCampusForm.get('title')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 20</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addCampusForm.get('title')?.hasError('minlength')"
+              >
+                <span class="error">Maximum length is 2</span>
               </div>
             </div>
             <div class="col-md-4">
@@ -138,6 +258,18 @@
                     {{ college.collegeName }}
                   </option>
                 </select>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('selectedCollegeId')?.invalid &&
+                    (addCampusForm.get('selectedCollegeId')?.dirty ||
+                    addCampusForm.get('selectedCollegeId')?.touched)) ||
+                  (addCampusForm.get('selectedCollegeId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">College Selection is required</span>
               </div>
             </div>
             <div class="col-md-2">
