@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h5 class="card-title mb-0">User</h5>
-          <a routerLink="/admin/add-user" class="btn btn-primary btn_blue"
+          <a routerLink="/admin/user/add" class="btn btn-primary btn_blue"
             >Add New User</a
           >
         </div>
@@ -69,7 +69,7 @@
                   >
                 </td>
                 <td class="action_button text-right">
-                  <a routerLink="/admin/edit-user/{{ user.id }}" class="edit"
+                  <a routerLink="/admin/user/edit/{{ user.id }}" class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>
                   <a class="delete" (click)="deleteItem(user.id)"

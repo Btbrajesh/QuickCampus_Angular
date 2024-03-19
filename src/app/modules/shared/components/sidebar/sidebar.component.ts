@@ -46,9 +46,7 @@ export class SidebarComponent implements OnInit {
    
   }
 
-  isSelected(routePath: string): boolean {
-    return this.router.url === routePath;
-}
+  
 
 
   sidebarList(items:any){

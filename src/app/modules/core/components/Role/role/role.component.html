@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h5 class="card-title mb-0">Role</h5>
-          <a routerLink="/admin/add-role" class="btn btn-primary btn_blue"
+          <a routerLink="/admin/role/add" class="btn btn-primary btn_blue"
             >Add New Role</a
           >
         </div>
@@ -42,7 +42,7 @@
                 <td>{{ role.id }}</td>
                 <td>{{ role.name }}</td>
                 <td class="action_button text-right">
-                  <a routerLink="/admin/edit-role/{{role.id}}" class="edit"
+                  <a routerLink="/admin/role/edit/{{role.id}}" class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>
                   <a

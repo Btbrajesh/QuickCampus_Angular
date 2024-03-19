@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h5 class="card-title mb-0">Clients</h5>
-          <a routerLink="/admin/add-client" class="btn btn-primary btn_blue"
+          <a routerLink="/admin/client/add" class="btn btn-primary btn_blue"
             >Add New Clients</a
           >
         </div>
@@ -74,7 +74,7 @@
                 <td>{{ client.createdDate | date }}</td>
                 <td class="action_button text-right">
                   <a
-                    routerLink="/admin/edit-client/{{client.id}}"
+                    routerLink="/admin/client/edit/{{client.id}}"
                     class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>

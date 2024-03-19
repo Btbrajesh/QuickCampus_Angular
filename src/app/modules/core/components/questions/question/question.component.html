@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="card-title mb-0">Manage Question</h5>
-                        <a routerLink="/admin/add-question" class="btn btn-primary btn_blue">Add New Question</a>
+                        <a routerLink="/admin/question/add" class="btn btn-primary btn_blue">Add New Question</a>
                     </div>
                     <div class="table-responsive">
                         <div
@@ -67,7 +67,7 @@
                                                 question.isActive ? 'Active' : 'Inactive' }}</a>
                                     </td >                                     
                                     <td class="action_button text-right">
-                                        <a routerLink="/admin/edit-question/{{question.questionId}}" class="edit"><i class="icofont-ui-edit"></i></a>
+                                        <a routerLink="/admin/question/edit/{{question.questionId}}" class="edit"><i class="icofont-ui-edit"></i></a>
                                         <a (click)="deleteItem(question.questionId)" class="delete"><i class="icofont-ui-delete"></i></a>
                                     </td>
                                 </tr>

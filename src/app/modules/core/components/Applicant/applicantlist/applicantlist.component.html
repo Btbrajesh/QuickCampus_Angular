@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h5 class="card-title mb-0">Applicant</h5>
-                <a routerLink="/admin/add-applicant" class="btn btn-primary btn_blue">Add New Applicant</a>
+                <a routerLink="/admin/applicant/add" class="btn btn-primary btn_blue">Add New Applicant</a>
             </div>
             <div class="table-responsive">
               <div
@@ -61,7 +61,7 @@
                                     applicant.isActive ? 'Active' : 'Inactive' }}</a>
                         </td>
                         <td class="action_button text-right">
-                            <a routerLink="/admin/edit-applicant/{{applicant.applicantID}}" class="edit"><i class="icofont-ui-edit"></i></a>
+                            <a routerLink="/admin/applicant/edit/{{applicant.applicantID}}" class="edit"><i class="icofont-ui-edit"></i></a>
                             <a class="delete" (click)="deleteItem(applicant.applicantID)"><i class="icofont-ui-delete"></i></a>
                             
                             <a (click)="viewDetails(applicant.applicantID)" class="inactive"><i class="icofont-eye"></i></a>
