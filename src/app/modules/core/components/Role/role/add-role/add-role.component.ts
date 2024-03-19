@@ -25,8 +25,7 @@ export class AddRoleComponent implements OnInit{
     this.getPermissionList()
     this.addRoleForm = this.fb.group({
       roleName:['',[Validators.required]],
-      client:['',[Validators.required]],
-      permission: this.fb.array([],[Validators.required])
+      permission: this.fb.array([],)
     })
 
   }

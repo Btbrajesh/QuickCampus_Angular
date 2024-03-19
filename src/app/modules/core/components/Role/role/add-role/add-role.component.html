@@ -44,18 +44,7 @@
                     <label class='ml-2' [for]="'checkbox-' + item.id">{{ item.permissionName }}</label>
                   </div>
                 </div>
-                <div
-                class="text-danger"
-                *ngIf="
-                  (addRoleForm.get('permission')?.invalid &&
-                    (addRoleForm.get('permission')?.dirty ||
-                    addRoleForm.get('permission')?.touched)) ||
-                  (addRoleForm.get('permission')?.hasError('required') &&
-                    myform.submitted)
-                "
-              >
-                <span class="error">Permission is required</span>
-              </div>
+              
               </div>
                
                 

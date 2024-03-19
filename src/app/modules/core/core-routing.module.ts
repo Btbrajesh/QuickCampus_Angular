@@ -30,27 +30,33 @@ const routes: Routes = [
       path: '',
       component: LayoutComponent,
       children: [
-        {path:'client',component:ClientComponent,canActivate:[AuthGuard]},
-        {path: 'applicant',component:ApplicantlistComponent,canActivate: [AuthGuard]},
-        {path: 'college',component:CollegeComponent,canActivate: [AuthGuard]},
-        {path: 'campus',component:CampusWalkInComponent,canActivate: [AuthGuard]},
-        {path: 'question',component:QuestionComponent,canActivate: [AuthGuard]},
-        {path: 'add-college',component:AddCollegeComponent,canActivate: [AuthGuard]},
-        {path: 'add-campus',component:AddCampusComponent,canActivate: [AuthGuard]},
+        {path: 'client',component:ClientComponent,canActivate:[AuthGuard]},
         {path: 'add-client',component:AddClientComponent,canActivate: [AuthGuard]},
         {path: 'edit-client/:id',component:EditClientComponent,canActivate: [AuthGuard]},
-        {path: 'role',component:RoleComponent,canActivate: [AuthGuard]},
-        {path: 'user',component:UserComponent,canActivate: [AuthGuard]},
-        {path: 'add-user',component:AddUserComponent,canActivate: [AuthGuard]},
-        {path: 'add-question',component:AddQuestionComponent,canActivate: [AuthGuard]},
-        {path: 'edit-user/:id',component:EditUserComponent,canActivate: [AuthGuard]},
-        {path: 'edit-college/:id',component:EditCollegeComponent,canActivate: [AuthGuard]},
-        {path: 'add-role',component:AddRoleComponent,canActivate: [AuthGuard]},
+
+        {path: 'applicant',component:ApplicantlistComponent,canActivate: [AuthGuard]},
         {path: 'add-applicant',component:AddApplicantComponent,canActivate: [AuthGuard]},
         {path: 'edit-applicant/:id',component:EditApplicantComponent,canActivate: [AuthGuard]},
-        {path: 'edit-role/:id',component:EditRoleComponent,canActivate: [AuthGuard]},
+
+        {path: 'college',component:CollegeComponent,canActivate: [AuthGuard]},
+        {path: 'add-college',component:AddCollegeComponent,canActivate: [AuthGuard]},
+        {path: 'edit-college/:id',component:EditCollegeComponent,canActivate: [AuthGuard]},
+
+        {path: 'campus',component:CampusWalkInComponent,canActivate: [AuthGuard]},
+        {path: 'add-campus',component:AddCampusComponent,canActivate: [AuthGuard]},
+        {path: 'edit-campus/:id',component:EditCampusComponent,canActivate:[AuthGuard]},
+
+        {path: 'question',component:QuestionComponent,canActivate: [AuthGuard]},
+        {path: 'add-question',component:AddQuestionComponent,canActivate: [AuthGuard]},
         {path: 'edit-question/:id',component:EditQuestionComponent,canActivate:[AuthGuard]},
-        {path: 'edit-campus/:id',component:EditCampusComponent,canActivate:[AuthGuard]}
+        
+        {path: 'role',component:RoleComponent,canActivate: [AuthGuard]},
+        {path: 'add-role',component:AddRoleComponent,canActivate: [AuthGuard]},
+        {path: 'edit-role/:id',component:EditRoleComponent,canActivate: [AuthGuard]},
+
+        {path: 'user',component:UserComponent,canActivate: [AuthGuard]},
+        {path: 'add-user',component:AddUserComponent,canActivate: [AuthGuard]},
+        {path: 'edit-user/:id',component:EditUserComponent,canActivate: [AuthGuard]},  
       ]
     },
   ];
