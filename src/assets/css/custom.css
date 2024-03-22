@@ -64,6 +64,7 @@ textarea.form-control{height: auto;}
 
 .table th, .table td {
     white-space: nowrap;
+    margin-top: 8px;
 }
 
 .eye-button {
@@ -124,6 +125,10 @@ textarea.form-control{height: auto;}
     padding: 5px 10px;
     min-width: 19px;
 }
+
+.required2 {
+    color: red;
+  }
 
 .modal-backdrop{
     z-index: 1040 !important;

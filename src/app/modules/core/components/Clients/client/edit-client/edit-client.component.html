@@ -7,6 +7,42 @@
       <div class="row">
         <div class="col-md-4">
           <div class="position-relative form-group">
+            <label for="exampleEmail11" class="">Name</label>
+            <input
+              placeholder="Enter name"
+              type="text"
+              class="form-control"
+              formControlName="name"
+            />
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              (editClientForm.get('name')?.invalid &&
+                (editClientForm.get('name')?.dirty ||
+                editClientForm.get('name')?.touched)) ||
+              (editClientForm.get('name')?.hasError('required') &&
+                myform.submitted)
+            "
+          >
+            <span class="error">Name is required</span>
+          </div>
+
+          <div
+            class="text-danger"
+            *ngIf="editClientForm.get('name')?.hasError('minlength')"
+          >
+            <span class="error">Minimum length is 2</span>
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="editClientForm.get('name')?.hasError('maxlength')"
+          >
+            <span class="error">Maximum length is 25</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="position-relative form-group">
             <label for="exampleEmail11" class="required">Email</label>
             <input
               placeholder="Email address"

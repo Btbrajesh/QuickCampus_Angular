@@ -16,7 +16,7 @@
               <div class="input-group size position-relative">
                 <input
                   type="text"
-                  placeholder="Search here ..."
+                  placeholder="Search here Name, College, Email, Phone"
                   class="form-control border-2"
                   name="search"
                   [(ngModel)]="searchTerm" (ngModelChange)="onSearch()" />
@@ -42,7 +42,6 @@
                         <th>Applicant Name</th>
                         <th>College Name</th>
                         <th>Email</th>
-                        <th>Highest Qualification</th>
                         <th>Phone Number</th>
                         <th>Isactive</th>
                         <th>Actions</th>
@@ -53,10 +52,9 @@
                         <td>{{ applicant.firstName }}</td>
                         <td>{{ applicant.collegeName }}</td>
                         <td>{{ applicant.emailAddress }}</td>
-                        <td>{{ applicant.higestQualification }}</td>
                         <td>{{ applicant.phoneNumber }}</td>
                         <td class="badge">
-                            <a (click)="toggleActive(applicant)"
+                            <a (click)="toggleActive(applicant.applicantID)"
                                 [ngClass]="{ 'active-link': applicant.isActive, 'inactive-link': !applicant.isActive }">{{
                                     applicant.isActive ? 'Active' : 'Inactive' }}</a>
                         </td>
@@ -74,7 +72,7 @@
                     [collectionSize]="collectionSize"
                     [(page)]="page"
                     [pageSize]="pageSize"
-                    (pageChange)="getApplicantList()"
+                    (pageChange)="getApplicantPage($event)"
                   >
                   </ngb-pagination>
                 

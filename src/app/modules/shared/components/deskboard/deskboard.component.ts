@@ -19,17 +19,17 @@ export class DeskboardComponent implements OnInit{
   lengthOfTotalCollege!:number
 
   ngOnInit(): void {
-    this.getApplicant()
+    // this.getApplicant()
     this.getQuestion()
     this.getWalkIn()
     this.getColleges()
   }
 
-  getApplicant(){
-    this.applicantService.getApplicantList().subscribe((res)=>{
-      this.lengthOfApplicant = res.data.length
-    })
-  }
+  // getApplicant(){
+  //   this.applicantService.getApplicantList().subscribe((res)=>{
+  //     this.lengthOfApplicant = res.data.length
+  //   })
+  // }
 
   getWalkIn(){
     this.campusService.getCampusList().subscribe((res)=>{

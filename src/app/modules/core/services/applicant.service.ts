@@ -14,8 +14,8 @@ export class ApplicantService {
 
   constructor(private http:HttpClient) { }
 
-  getApplicantList(): Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/Applicant/GetAllApplicant');
+  getApplicantList(pageStart:number,pageSize:number): Observable<any>{
+    return this.http.get<any>(environment.apiUrl +'/Applicant/GetAllApplicant?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
   searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
@@ -36,6 +36,10 @@ export class ApplicantService {
 
   addApplicant(data:any){
     return this.http.post<ResponseObj>(environment.apiUrl+'/Applicant/AddApplicant',data)
+  }
+
+  applicantActiveInactive(id:number){
+    return this.http.get<any>(environment.apiUrl + '/Applicant/ApplicantActiveInactive?applicantId='+id)
   }
 
   getStatusList(){

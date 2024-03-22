@@ -33,14 +33,14 @@ ngOnInit(): void {
 
 getApplicantList(){
   this.spinnerService.show();
-  this.applicantService.getApplicantList().subscribe(res =>{
+  this.applicantService.getApplicantList(this.pageStart,this.pageSize).subscribe(res =>{
     if(res.isSuccess){
-      this.collectionSize = res.data.length
-        this.applicantList = res.data.map((applicant:any,i:number)=>({id:i+1, ...applicant})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
+      this.collectionSize = res.totalRecordCount
+      this.applicantList = []
+        this.applicantList = res.data.map((applicant:any,i:number)=>({id:i+1, ...applicant}))
         this.spinnerService.hide()
+    }else{
+      this.toastr.error(res.message)
     }
   },err=>{
     this.spinnerService.hide();
@@ -48,10 +48,20 @@ getApplicantList(){
   })
 }
 
+getApplicantPage(event:any){
+  this.pageStart = event
+  this.getApplicantList()
+}
+
 onSearch() {
   this.applicantService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
-    this.applicantList = res.data;
-    this.collectionSize = this.applicantList.length;
+    if (res.isSuccess){
+      this.applicantList = res.data;
+      this.collectionSize = res.totalRecordCount;
+    }else{
+      this.applicantList = res.data;
+      this.collectionSize = res.totalRecordCount;
+    } 
   });
 }
 
@@ -76,8 +86,17 @@ viewDetails(itemId: number): void {
 }
 
 
-  toggleActive(user: any): void {
-    user.isActive = !user.isActive;
+  toggleActive(id: number): void {
+    this.spinnerService.show()
+    this.applicantService.applicantActiveInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getApplicantList()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
+    })
+    
     // Call your service method to update the user's active status
   }
   

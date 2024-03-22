@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" class="required">First Name</label>
+              <label for="exampleEmail11" class="required">First Name<span aria-hidden="true" class="required2"> *</span></label>
               <input
                 placeholder="First Name"
                 type="text"
@@ -45,10 +45,16 @@
             >
               <span class="error">Minimum required words are 2</span>
             </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('firstName')?.hasError('pattern')"
+            >
+              <span class="error">Only Alphabets are allowed</span>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" class="required">Last Name</label>
+              <label for="exampleEmail11" class="required">Last Name<span aria-hidden="true" class="required2"> *</span></label>
               <input
                 placeholder="Last Name"
                 type="text"
@@ -81,10 +87,16 @@
             >
               <span class="error">Minimum required words are 2</span>
             </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('lastName')?.hasError('pattern')"
+            >
+              <span class="error">Only Alphabets are allowed</span>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" class="required">Email</label>
+              <label for="exampleEmail11" class="required">Email<span aria-hidden="true" class="required2"> *</span></label>
               <input
                 placeholder="Email address"
                 type="text"
@@ -114,7 +126,7 @@
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" class="required">Phone Number</label>
+              <label for="exampleEmail11" class="required">Phone Number<span aria-hidden="true" class="required2"> *</span></label>
               <input
                 placeholder="Phone"
                 type="text"
@@ -154,66 +166,60 @@
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" class="required">College Name</label>
-              <input
-                placeholder="College Name"
-                type="text"
-                class="form-control"
-                name="collegeName"
-                formControlName="collegeName"
-              />
+              <label for="exampleEmail11" class="required">College Name<span aria-hidden="true" class="required2"> *</span></label>
+              <select
+                class="form-select form-control mr-4"
+                placeholder="Select Company"
+                formControlName="collegeId"
+              >
+                <option value="">Select College</option>
+                <option
+                  *ngFor="let college of collegeList"
+                  [value]="college.collegeId"
+                >
+                  {{ college.collegeName }}
+                </option>
+              </select>
             </div>
             <div
               class="text-danger"
               *ngIf="
-                (editApplicantForm.get('collegeName')?.invalid &&
-                  (editApplicantForm.get('collegeName')?.dirty ||
-                    editApplicantForm.get('collegeName')?.touched)) ||
-                (editApplicantForm.get('collegeName')?.hasError('required') &&
+                (editApplicantForm.get('collegeId')?.invalid &&
+                  (editApplicantForm.get('collegeId')?.dirty ||
+                    editApplicantForm.get('collegeId')?.touched)) ||
+                (editApplicantForm.get('collegeId')?.hasError('required') &&
                   myform.submitted)
               "
             >
               <span class="error">College Name is required</span>
             </div>
-            <div
-              class="text-danger"
-              *ngIf="
-                editApplicantForm.get('collegeName')?.hasError('maxlength')
-              "
-            >
-              <span class="error">Maximum allowed length is 30</span>
-            </div>
-            <div
-              class="text-danger"
-              *ngIf="
-                editApplicantForm.get('collegeName')?.hasError('minlength')
-              "
-            >
-              <span class="error">Minimum required length is 2</span>
-            </div>
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
               <label for="exampleEmail11" class="required"
-                >Highest Qualification</label
+                >Highest Qualification<span aria-hidden="true" class="required2"> *</span></label
               >
-              <input
-                placeholder="Highest Qualification"
-                type="text"
-                class="form-control"
-                name="higestQualification"
-                formControlName="higestQualification"
-              />
+              <select
+                class="form-select form-control mr-4"
+                placeholder="Select Company"
+                formControlName="highestQualification"
+              >
+                <option value="">Select Qualification</option>
+                <option
+                  *ngFor="let qual of qualificationList"
+                  [value]="qual.qualId"
+                >
+                  {{ qual.qualName }}
+                </option>
+              </select>
             </div>
             <div
               class="text-danger"
               *ngIf="
-                (editApplicantForm.get('higestQualification')?.invalid &&
-                  (editApplicantForm.get('higestQualification')?.dirty ||
-                    editApplicantForm.get('higestQualification')?.touched)) ||
-                (editApplicantForm
-                  .get('higestQualification')
-                  ?.hasError('required') &&
+                (editApplicantForm.get('highestQualification')?.invalid &&
+                  (editApplicantForm.get('highestQualification')?.dirty ||
+                  editApplicantForm.get('highestQualification')?.touched)) ||
+                (editApplicantForm.get('highestQualification')?.hasError('required') &&
                   myform.submitted)
               "
             >
@@ -223,23 +229,29 @@
           <div class="col-md-4">
             <div class="position-relative form-group">
               <label for="exampleEmail11" class="required"
-                >Highest Qualification Percentage</label
+                >Highest Qualification Percentage<span aria-hidden="true" class="required2"> *</span></label
               >
               <input
                 placeholder="Highest Qualification Percentage"
                 type="text"
                 class="form-control"
                 name="higestQualificationPercentage"
-                formControlName="higestQualificationPercentage"
+                formControlName="highestQualificationPercentage"
               />
             </div>
             <div
               class="text-danger"
+              *ngIf="editApplicantForm.get('highestQualificationPercentage')?.hasError('max')"
+            >
+              <span class="error">Maximum Percentage Can be 100</span>
+            </div>
+            <div
+              class="text-danger"
               *ngIf="
-                (editApplicantForm.get('higestQualificationPercentage')?.invalid &&
-                  (editApplicantForm.get('higestQualificationPercentage')?.dirty ||
-                    editApplicantForm.get('higestQualificationPercentage')?.touched)) ||
-                (editApplicantForm.get('higestQualificationPercentage')?.hasError('required') &&
+                (editApplicantForm.get('highestQualificationPercentage')?.invalid &&
+                  (editApplicantForm.get('highestQualificationPercentage')?.dirty ||
+                    editApplicantForm.get('highestQualificationPercentage')?.touched)) ||
+                (editApplicantForm.get('highestQualificationPercentage')?.hasError('required') &&
                   myform.submitted)
               "
             >
@@ -251,7 +263,7 @@
           <div class="col-md-4">
             <div class="position-relative form-group">
               <label for="exampleEmail11" class="required"
-                >Metric Percentage</label
+                >Metric Percentage<span aria-hidden="true" class="required2"> *</span></label
               >
               <input
                 placeholder="Metric Percentage"
@@ -260,6 +272,12 @@
                 name="matricPercentage"
                 formControlName="matricPercentage"
               />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('matricPercentage')?.hasError('max')"
+            >
+              <span class="error">Maximum Percentage Can be 100</span>
             </div>
             <div
               class="text-danger"
@@ -277,7 +295,7 @@
           <div class="col-md-4">
             <div class="position-relative form-group">
               <label for="exampleEmail11" class="required"
-                >Intermediate Percentage</label
+                >Intermediate Percentage<span aria-hidden="true" class="required2"> *</span></label
               >
               <input
                 placeholder="Intermediate Percentage"
@@ -286,6 +304,12 @@
                 name="intermediatePercentage"
                 formControlName="intermediatePercentage"
               />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('intermediatePercentage')?.hasError('max')"
+            >
+              <span class="error">Maximum Percentage Can be 100</span>
             </div>
             <div
               class="text-danger"
@@ -302,7 +326,7 @@
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" class="required">Skills</label>
+              <label for="exampleEmail11" class="required">Skills<span aria-hidden="true" class="required2"> *</span></label>
               <input
                 placeholder="Skills"
                 type="text"
@@ -327,7 +351,32 @@
 
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" className="">Status</label>
+              <label for="exampleEmail11" class="required">Comment<span aria-hidden="true" class="required2"> *</span></label>
+              <input
+                placeholder="Comment"
+                type="text"
+                class="form-control"
+                name="comment"
+                formControlName="comment"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="
+                (editApplicantForm.get('comment')?.invalid &&
+                  (editApplicantForm.get('comment')?.dirty ||
+                  editApplicantForm.get('comment')?.touched)) ||
+                (editApplicantForm.get('comment')?.hasError('required') &&
+                  myform.submitted)
+              "
+            >
+              <span class="error">Comment is required</span>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" className="">Status<span aria-hidden="true" class="required2"> *</span></label>
               <select
                 class="form-select form-control mr-4"
                 placeholder="Select Select"
@@ -356,9 +405,11 @@
             </div>
           </div>
 
+          
+
           <div class="col-md-4">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" className="">Company</label>
+              <label for="exampleEmail11" className="">Company<span aria-hidden="true" class="required2"> *</span></label>
               <select
                 class="form-select form-control mr-4"
                 placeholder="Select Company"

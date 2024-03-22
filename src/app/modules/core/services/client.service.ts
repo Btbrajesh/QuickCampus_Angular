@@ -30,7 +30,7 @@ export class ClientService {
   }
 
   getDetailById(id:number){
-    return this.http.get<any>(environment.apiUrl+'/Client/DetailsClient?Id='+id)
+    return this.http.get<any>(environment.apiUrl+'/Client/GetClientById?clientId='+id)
   }
 
   updateDetails(data:any){

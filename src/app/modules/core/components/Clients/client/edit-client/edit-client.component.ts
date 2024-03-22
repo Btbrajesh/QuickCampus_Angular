@@ -16,6 +16,7 @@ export class EditClientComponent implements OnInit{
   
   editClientForm= new FormGroup({
     id: new FormControl(),
+    name: new FormControl(''),
     address: new FormControl(''),
     email: new FormControl('' ),
     phone:new FormControl(''),
@@ -26,8 +27,10 @@ export class EditClientComponent implements OnInit{
 
   ngOnInit(): void {
     this.clientService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
+      console.log(res)
       this.editClientForm= new FormGroup({
         id: new FormControl(),
+        name:new FormControl(res.data['name'],Validators.compose([Validators.required,Validators.maxLength(25),Validators.minLength(2)])),
         address: new FormControl(res.data['address'], Validators.compose([Validators.required,Validators.maxLength(50)])),
         email: new FormControl(res.data['email'],Validators.compose([Validators.required,Validators.email])),
         phone:new FormControl(res.data['phone'],Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10)])),

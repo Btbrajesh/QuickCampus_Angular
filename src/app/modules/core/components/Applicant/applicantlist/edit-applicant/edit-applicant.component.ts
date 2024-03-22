@@ -5,6 +5,8 @@ import { ClientService } from '../../../../services/client.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApplicantService } from '../../../../services/applicant.service';
 import { Applicant } from 'src/app/modules/master/models/applicant';
+import { CollegeService } from 'src/app/modules/core/services/college.service';
+import { CommonService } from 'src/app/modules/core/services/common.service';
 
 @Component({
   selector: 'app-edit-applicant',
@@ -15,16 +17,18 @@ export class EditApplicantComponent implements OnInit{
 
   statusList :any;
   companyList :any;
+  collegeList:any;
+  qualificationList:any;
   editApplicantForm= new FormGroup({
     applicantID: new FormControl(),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    emailAddress: new FormControl('',Validators.compose([Validators.required,Validators.email]) ),
-    phoneNumber:new FormControl('',Validators.compose([Validators.required,Validators.minLength(10)])),
-    higestQualification:new FormControl(''),
-    higestQualificationPercentage:new FormControl(''),
+    emailAddress: new FormControl(''),
+    phoneNumber:new FormControl(''),
+    highestQualification:new FormControl(''),
+    highestQualificationPercentage:new FormControl(''),
     matricPercentage:new FormControl(''),
-    collegeName:new FormControl(''),
+    collegeId:new FormControl(''),
     intermediatePercentage:new FormControl(''),
     skills:new FormControl(''),
     statusId: new FormControl(),
@@ -32,24 +36,27 @@ export class EditApplicantComponent implements OnInit{
     assignedToCompany: new FormControl(),
   })
 
-  constructor(private router:ActivatedRoute,public route:Router, public applicantService:ApplicantService, public toastr:ToastrService){}
+  constructor(private router:ActivatedRoute,public route:Router, public applicantService:ApplicantService, public toastr:ToastrService,public collegeService:CollegeService,public commonService:CommonService){}
 
 
 ngOnInit(): void {
   this.getCompany()
   this.getStatus()
+  this.getCollege()
+  this.getQualification()
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
+    console.log(res)
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
-      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15)]),
-      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15)]),
+      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]),
+      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]),
       emailAddress: new FormControl(res.data['emailAddress'],[Validators.required,Validators.email]),
       phoneNumber:new FormControl(res.data['phoneNumber'],[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
-      collegeName:new FormControl(res.data['collegeName'],[Validators.required,Validators.minLength(2),Validators.maxLength(30)]),
-      higestQualification:new FormControl(res.data['higestQualification'],[Validators.required]),
-      higestQualificationPercentage:new FormControl(res.data['higestQualificationPercentage'],[Validators.required]),
-      matricPercentage:new FormControl(res.data['matricPercentage'],[Validators.required]),
-      intermediatePercentage:new FormControl(res.data['intermediatePercentage'],[Validators.required]),
+      collegeId:new FormControl(res.data['collegeId'],[Validators.required]),
+      highestQualification:new FormControl(res.data['highestQualification'],[Validators.required]),
+      highestQualificationPercentage:new FormControl(res.data['highestQualificationPercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
+      matricPercentage:new FormControl(res.data['matricPercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
+      intermediatePercentage:new FormControl(res.data['intermediatePercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
       skills:new FormControl(res.data['skills'],[Validators.required]),
       statusId: new FormControl(res.data['statusId'],[Validators.required]),
       comment: new FormControl(res.data['comment'],[Validators.required]),
@@ -96,6 +103,22 @@ getCompany(){
   this.applicantService.getCompanyList().subscribe((res)=>{
     if (res.isSuccess){
       this.companyList = res.data
+    }
+  })
+}
+
+getCollege(){
+  this.collegeService.getCollegeList().subscribe((res)=>{
+    if (res.isSuccess){
+      this.collegeList = res.data
+    }
+  })
+}
+
+getQualification(){
+  this.commonService.getQualification().subscribe((res)=>{
+    if (res.isSuccess){
+      this.qualificationList = res.data
     }
   })
 }

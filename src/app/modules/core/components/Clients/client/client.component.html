@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h5 class="card-title mb-0">Clients</h5>
           <a routerLink="/admin/client/add" class="btn btn-primary btn_blue"
-            >Add New Clients</a
+            >Add New Client</a
           >
         </div>
         
@@ -48,7 +48,6 @@
                 <th>Phone</th>
                 <th>Subscription Plan</th>
                 <th>Isactive</th>
-                <th>Created Date</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -71,7 +70,7 @@
                     >{{ client.isActive ? "Active" : "Inactive" }}</a
                   >
                 </td>
-                <td>{{ client.createdDate | date }}</td>
+          
                 <td class="action_button text-right">
                   <a
                     routerLink="/admin/client/edit/{{client.id}}"
