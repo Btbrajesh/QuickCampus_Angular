@@ -12,8 +12,16 @@ export class RoleService {
 
   constructor(public http:HttpClient) { }
 
-  getAllRole():Observable<any>{
+  getAllRoleList():Observable<any>{
     return this.http.get<Response>(environment.apiUrl+'/Role/RoleList')
+  }
+
+  getAllRole(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<Response>(environment.apiUrl+'/Role/RoleList?'+'pageStart='+pageStart+'&pageSize='+pageSize)
+  }
+
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/Role/RoleList?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
   getAllPermission():Observable<any>{
@@ -25,7 +33,7 @@ export class RoleService {
   }
 
   getRoleById(id:any){
-    return this.http.get<any>(environment.apiUrl + '/Role/GetRoleById?rId='+id)
+    return this.http.get<any>(environment.apiUrl + '/Role/GetRoleById?RoleId='+id)
   }
 
   updateRole(data:any){
@@ -33,6 +41,10 @@ export class RoleService {
   }
 
   deleteRole(id:any){
-    return this.http.delete<ResponseObj>(environment.apiUrl+'/Role/DeleteRole?id='+id)
+    return this.http.delete<ResponseObj>(environment.apiUrl+'/Role/DeleteRoleByRoleId?RoleId='+id)
+  }
+
+  toggleActiveInactive(id:any){
+    return this.http.get<any>(environment.apiUrl+'/Role/RoleActiveInactive?RoleId='+id)
   }
 }

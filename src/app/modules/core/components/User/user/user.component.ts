@@ -29,14 +29,17 @@ export class UserComponent implements OnInit{
 
   getAllUser(){
     this.spinnerService.show()
-    this.userService.getAllUser().subscribe((res)=>{
+    this.userService.getAllUser(this.pageStart,this.pageSize).subscribe((res)=>{
+      console.log(res)
       if (res.isSuccess){
-        this.collectionSize = res.data.length
-        this.userList = res.data.map((user:any,i:number)=>({id:i+1, ...user})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
         this.spinnerService.hide()
+        this.collectionSize = res.totalRecordCount
+        this.userList = []
+        this.userList = res.data.map((user:any,i:number)=>({id:i+1, ...user}))
+        this.spinnerService.hide()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
       }
     },err=>{
       this.spinnerService.hide()
@@ -44,10 +47,20 @@ export class UserComponent implements OnInit{
     })
   }
 
+  getUserPage(event:any){
+    this.pageStart = event
+    this.getAllUser()
+  }
+
   onSearch() {
     this.userService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
-      this.userList = res.data;
-      this.collectionSize = this.userList.length;
+      if (res.isSuccess){
+        this.userList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.userList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }
     });
   }
 
@@ -64,15 +77,23 @@ export class UserComponent implements OnInit{
         this.userService.deleteUser(itemId).subscribe((res)=>{
           this.toastr.success(res.message)
           this.getAllUser()
-        }
-        )
+        },err=>{
+          this.toastr.error(err)
+        })
       }
     })
   }
 
-  toggleActive(user: any): void {
-    user.isActive = !user.isActive;
-    // Call your service method to update the user's active status
+  toggleActive(id: number): void {
+    this.spinnerService.show()
+    this.userService.toggleActiveAndInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getAllUser()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
+    })
   }
   
 

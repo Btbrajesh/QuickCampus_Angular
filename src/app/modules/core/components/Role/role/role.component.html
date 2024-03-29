@@ -20,10 +20,10 @@
               <div class="input-group size position-relative">
                 <input
                   type="text"
-                  placeholder="Search here ..."
+                  placeholder="Search here Name"
                   class="form-control border-2"
                   name="search"
-                  value=""
+                  [(ngModel)]="searchTerm" (ngModelChange)="onSearch()"
                 />
               </div>
             </div>
@@ -34,25 +34,37 @@
               <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Isactive</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let role of roleList">
-                <td>{{ role.id }}</td>
-                <td>{{ role.name }}</td>
+                <td>{{ role.roleId }}</td>
+                <td>{{ role.roleName }}</td>
+                <td class="badge">
+                 
+                  <a
+                    (click)="toggleActive(role.roleId)"
+                    [ngClass]="{
+                      'active-link': role.isActive,
+                      'inactive-link': !role.isActive
+                    }"
+                    >{{ role.isActive ? "Active" : "Inactive" }}</a
+                  >
+                </td>
                 <td class="action_button text-right">
-                  <a routerLink="/admin/role/edit/{{role.id}}" class="edit"
+                  <a routerLink="/admin/role/edit/{{role.roleId}}" class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>
                   <a
-                    (click)="deleteItem(role.id)"
+                    (click)="deleteItem(role.roleId)"
                     class="delete"
                     data-toggle="modal"
                     ><i class="icofont-ui-delete"></i
                   ></a>
                   <a
-                  (click)="viewDetails(role.id)"
+                  (click)="viewDetails(role.roleId)"
                     class="inactive"
                     ><i class="icofont-eye"></i
                   ></a>
@@ -65,7 +77,7 @@
               [collectionSize]="collectionSize"
               [(page)]="page"
               [pageSize]="pageSize"
-              (pageChange)="getAllRole()"
+              (pageChange)="getRolePage($event)"
             >
             </ngb-pagination>
           

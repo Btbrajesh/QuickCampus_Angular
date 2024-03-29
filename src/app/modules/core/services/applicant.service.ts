@@ -14,6 +14,10 @@ export class ApplicantService {
 
   constructor(private http:HttpClient) { }
 
+  getAllApplicant():Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Applicant/GetAllApplicant')
+  }
+
   getApplicantList(pageStart:number,pageSize:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Applicant/GetAllApplicant?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { passwordMatchValidator } from '../../../confirm-password.validator';
 import { valHooks } from 'jquery';
+import { RoleService } from 'src/app/modules/master/services/role.service';
 
 @Component({
   selector: 'app-add-client',
@@ -14,14 +15,16 @@ import { valHooks } from 'jquery';
 })
 export class AddClientComponent implements OnInit{
 
-  constructor(public fb:FormBuilder, public clientService:ClientService,public router:Router,public toastr:ToastrService){}
+  constructor(public fb:FormBuilder, public clientService:ClientService,public router:Router,public toastr:ToastrService,public roleService:RoleService){}
 
   addClientForm!: FormGroup
   data!:Client
   hidePassword: boolean = true;
   hideConfirmPassword:boolean = true;
+  roleList:any[]=[]
   
   ngOnInit(): void {
+    this.getAllRole()
     this.addClientForm = this.fb.group({
       name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2)]],
       email:['',[Validators.required,Validators.email]],
@@ -29,7 +32,8 @@ export class AddClientComponent implements OnInit{
       address:['',[Validators.required,Validators.maxLength(50)]],
       subscriptionPlan:['',[Validators.required]],
       username:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
+      roleId:['',[Validators.required]],
+      password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(8),Validators.pattern('(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       confirmPassword:['',[Validators.required]]
     },{
       validator:passwordMatchValidator()
@@ -65,6 +69,13 @@ export class AddClientComponent implements OnInit{
 
   togglePasswordVisibility2(){
     this.hideConfirmPassword = !this.hideConfirmPassword;
+  }
+
+  getAllRole(){
+    this.roleService.getAllRole().subscribe((res)=>{
+      console.log(res)
+      this.roleList =res.data
+    })
   }
 
 }

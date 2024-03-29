@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  role:any
   userPermissions :any;
   clientPermissions :any;
   userRole!: AuthDataResponse[];
@@ -43,10 +44,8 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+   this.role = localStorage.getItem('role')
   }
-
-  
 
 
   sidebarList(items:any){

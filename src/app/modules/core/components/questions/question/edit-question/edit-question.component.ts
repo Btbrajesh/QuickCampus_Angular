@@ -46,8 +46,9 @@ export class EditQuestionComponent implements OnInit{
   loadQuestionData() {
     const questionId = this.route.snapshot.params['id'];
     this.questionService.getQuestionById(questionId).subscribe((questionData: any) => {
+      console.log(questionData)
       this.editQuestionForm.patchValue(questionData.data);
-      this.patchOptionsArray(questionData.data.options);
+      this.patchOptionsArray(questionData.data.questionssoptionVm);
     });
   }
 
@@ -80,7 +81,7 @@ export class EditQuestionComponent implements OnInit{
 
   getQuestion(){
     return this.questionService.getQuestionType().subscribe((res)=>{
-      this.questionList = res
+      this.questionList = res.data
     })
   }
 
@@ -97,11 +98,15 @@ export class EditQuestionComponent implements OnInit{
       });
   
       // Append QuestionssoptionVm data to FormData
+      const questionId = this.route.snapshot.params['id'];
+      formData.append('QuestionId', questionId);
+
       const options = formValue.QuestionssoptionVm;
       options.forEach((option: any, index: number) => {
         Object.keys(option).forEach(optionKey => {
           formData.append(`QuestionssoptionVm[${index}].${optionKey}`, option[optionKey]);
         });
+        formData.set(`QuestionssoptionVm[${index}].questionId`,questionId)
       });
   
       // Append file if selected
@@ -109,16 +114,15 @@ export class EditQuestionComponent implements OnInit{
         formData.append('file', this.selectedFile, this.selectedFileName);
       }
 
-      const questionId = this.route.snapshot.params['id'];
-      formData.append('questionId', questionId);
+      
   
-      this.questionService.addQuestion(formData).subscribe((res)=>{
-        if (res.result.isSuccess){
-          this.toastr.success(res.result.message)
+      this.questionService.updateQuestion(formData).subscribe((res)=>{
+        if (res.isSuccess){
+          this.toastr.success(res.message)
           this.editQuestionForm.reset()
           this.router.navigateByUrl('/admin/question')
         }else{
-          this.toastr.error(res.result.message)
+          this.toastr.error(res.message)
         }
       },err=>{
         this.toastr.error(err)

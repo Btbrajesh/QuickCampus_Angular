@@ -43,7 +43,7 @@
                     </li>
                     <li class="app-sidebar__heading">Menu</li>
                     <li>
-                        <a routerLink="/admin/client" routerLinkActive="mm-active">
+                        <a routerLink="/admin/client" routerLinkActive="mm-active" *ngIf="role == 'Admin'">
                             <i class="metismenu-icon icofont-cop-badge font-18"></i>Client
                         </a>
                     </li>

@@ -19,7 +19,7 @@ export class CampusWalkInComponent implements OnInit{
   page = 1;
 	pageSize = 10;
   collectionSize!:number
-  searchTerm: string = '';
+  search: string = '';
   pageStart=1
 
   constructor(private modalService: NgbModal,public toastr:ToastrService,public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
@@ -30,14 +30,17 @@ export class CampusWalkInComponent implements OnInit{
 
   getCampusList(){
     this.spinnerService.show();
-    this.campusService.getCampusList().subscribe(res =>{
+    this.campusService.getCampusList(this.pageStart,this.pageSize).subscribe(res =>{
+      console.log(res)
       if(res.isSuccess){
-        this.collectionSize = res.data.length
-        this.campusList = res.data.map((campus:any,i:number)=>({id:i+1, ...campus})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
         this.spinnerService.hide()
+        this.collectionSize = res.totalRecordCount
+        this.campusList = []
+        this.campusList = res.data.map((campus:any,i:number)=>({id:i+1, ...campus}))
+        this.spinnerService.hide()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
       }
     },err =>{
       this.spinnerService.hide();
@@ -45,16 +48,33 @@ export class CampusWalkInComponent implements OnInit{
     })
   }
 
+  getCampusPage(event:any){
+    this.pageStart = event
+    this.getCampusList()
+  }
+
   onSearch() {
-    this.campusService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
-      this.campusList = res.data;
-      this.collectionSize = this.campusList.length;
+    this.campusService.searchData(this.search,this.pageStart,this.pageSize).subscribe((res:any) => {
+      if (res.isSuccess){
+        this.campusList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.campusList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      } 
     });
   }
 
-  toggleActive(user: any): void {
-    user.isActive = !user.isActive;
-    // Call your service method to update the user's active status
+  toggleActive(id: number): void {
+    this.spinnerService.show()
+    this.campusService.toggleActiveInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getCampusList()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
+    })
   }
   
   deleteItem(itemId: number): void {

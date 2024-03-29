@@ -43,6 +43,18 @@
                   />
                 </div>
               </a>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (editCollegeForm.get('ImagePath')?.invalid &&
+                    (editCollegeForm.get('ImagePath')?.dirty ||
+                    editCollegeForm.get('ImagePath')?.touched)) ||
+                  (editCollegeForm.get('ImagePath')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Image is required</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -51,16 +63,16 @@
                   placeholder="College name"
                   type="text"
                   class="form-control"
-                  formControlName="collegeName"
+                  formControlName="CollegeName"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('collegeName')?.invalid &&
-                    (editCollegeForm.get('collegeName')?.dirty ||
-                      editCollegeForm.get('collegeName')?.touched)) ||
-                  (editCollegeForm.get('collegeName')?.hasError('required') &&
+                  (editCollegeForm.get('CollegeName')?.invalid &&
+                    (editCollegeForm.get('CollegeName')?.dirty ||
+                      editCollegeForm.get('CollegeName')?.touched)) ||
+                  (editCollegeForm.get('CollegeName')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -69,7 +81,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  editCollegeForm.get('collegeName')?.hasError('minlength')
+                  editCollegeForm.get('CollegeName')?.hasError('minlength')
                 "
               >
                 <span class="error">Minimum 3 letters required</span>
@@ -77,7 +89,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  editCollegeForm.get('collegeName')?.hasError('maxlength')
+                  editCollegeForm.get('CollegeName')?.hasError('maxlength')
                 "
               >
                 <span class="error">Maximum length is 50</span>
@@ -91,16 +103,16 @@
                   placeholder="College code"
                   type="text"
                   class="form-control"
-                  formControlName="collegeCode"
+                  formControlName="CollegeCode"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('collegeCode')?.invalid &&
-                    (editCollegeForm.get('collegeCode')?.dirty ||
-                      editCollegeForm.get('collegeCode')?.touched)) ||
-                  (editCollegeForm.get('collegeCode')?.hasError('required') &&
+                  (editCollegeForm.get('CollegeCode')?.invalid &&
+                    (editCollegeForm.get('CollegeCode')?.dirty ||
+                      editCollegeForm.get('CollegeCode')?.touched)) ||
+                  (editCollegeForm.get('CollegeCode')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -269,16 +281,16 @@
                   placeholder="Contact Person"
                   type="text"
                   class="form-control"
-                  formControlName="ContectPerson"
+                  formControlName="ContactPerson"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('ContectPerson')?.invalid &&
-                    (editCollegeForm.get('ContectPerson')?.dirty ||
-                      editCollegeForm.get('ContectPerson')?.touched)) ||
-                  (editCollegeForm.get('ContectPerson')?.hasError('required') &&
+                  (editCollegeForm.get('ContactPerson')?.invalid &&
+                    (editCollegeForm.get('ContactPerson')?.dirty ||
+                      editCollegeForm.get('ContactPerson')?.touched)) ||
+                  (editCollegeForm.get('ContactPerson')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -287,7 +299,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  editCollegeForm.get('ContectPerson')?.hasError('minlength')
+                  editCollegeForm.get('ContactPerson')?.hasError('minlength')
                 "
               >
                 <span class="error">Minimum 3 letters required</span>
@@ -302,16 +314,16 @@
                   placeholder="Contact Email"
                   type="text"
                   class="form-control"
-                  formControlName="ContectEmail"
+                  formControlName="ContactEmail"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('ContectEmail')?.invalid &&
-                    (editCollegeForm.get('ContectEmail')?.dirty ||
-                      editCollegeForm.get('ContectEmail')?.touched)) ||
-                  (editCollegeForm.get('ContectEmail')?.hasError('required') &&
+                  (editCollegeForm.get('ContactEmail')?.invalid &&
+                    (editCollegeForm.get('ContactEmail')?.dirty ||
+                      editCollegeForm.get('ContactEmail')?.touched)) ||
+                  (editCollegeForm.get('ContactEmail')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -319,7 +331,7 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="editCollegeForm.get('ContectEmail')?.hasError('email')"
+                *ngIf="editCollegeForm.get('ContactEmail')?.hasError('email')"
               >
                 <span class="error">Provide a correct email</span>
               </div>
@@ -331,16 +343,16 @@
                   placeholder="Created by"
                   type="text"
                   class="form-control"
-                  formControlName="ContectPhone"
+                  formControlName="ContactPhone"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('ContectPhone')?.invalid &&
-                    (editCollegeForm.get('ContectPhone')?.dirty ||
-                      editCollegeForm.get('ContectPhone')?.touched)) ||
-                  (editCollegeForm.get('ContectPhone')?.hasError('required') &&
+                  (editCollegeForm.get('ContactPhone')?.invalid &&
+                    (editCollegeForm.get('ContactPhone')?.dirty ||
+                      editCollegeForm.get('ContactPhone')?.touched)) ||
+                  (editCollegeForm.get('ContactPhone')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -349,7 +361,7 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  editCollegeForm.get('ContectPhone')?.hasError('maxlength')
+                  editCollegeForm.get('ContactPhone')?.hasError('maxlength')
                 "
               >
                 <span class="error">Maximum allowed length is 10</span>
@@ -357,13 +369,13 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  editCollegeForm.get('ContectPhone')?.hasError('minlength')
+                  editCollegeForm.get('ContactPhone')?.hasError('minlength')
                 "
               >
                 <span class="error">Minimum required length is 10</span>
               </div>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Client</label>
                 <select
@@ -390,7 +402,7 @@
               >
                 <span class="error">Client is required</span>
               </div>
-            </div>
+            </div> -->
 
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">

@@ -11,12 +11,12 @@ export class UserService {
 
   constructor(public http:HttpClient) { }
   
-  getAllUser():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+'/User/UserList')
+  getAllUser(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/User/GetAllUser?'+'pageStart='+pageStart+'&pageSize='+pageSize)
   }
 
   searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
-    return this.http.get<any>(environment.apiUrl +'/User/UserList?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+    return this.http.get<any>(environment.apiUrl +'/User/GetAllUser?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
   addUser(data:any):Observable<any>{
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   getCurrentData(id:any){
-    return this.http.get<any>(environment.apiUrl+'/User/GetUserDetailsById?Id='+id)
+    return this.http.get<any>(environment.apiUrl+'/User/GetUserById?UserId='+id)
   }
 
   updateUser(data:any){
@@ -36,12 +36,14 @@ export class UserService {
   // }
 
   deleteUser(id:any){
-    return this.http.delete<any>(environment.apiUrl+'/User/DeleteUser?id='+id)
+    return this.http.delete<any>(environment.apiUrl+'/User/DeleteUserById?UserId='+id)
   }
 
   getUserById(id:any){
-    return this.http.get<any>(environment.apiUrl+'/User/GetUserDetailsById?Id='+id)
+    return this.http.get<any>(environment.apiUrl+'/User/GetUserById?UserId='+id)
   }
 
-  
+  toggleActiveAndInactive(id:any){
+    return this.http.get<any>(environment.apiUrl+'/User/UserActiveInactive?UserId='+id)
+  }
 }

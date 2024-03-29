@@ -2,12 +2,12 @@ export interface College{
     ImagePath:string,
     CollegeName:string,
     CollegeCode:string,
-    CityId :string,
+    CityId :number,
     StateId :string,
     CountryId :string,
-    contectperson:string,
-    contectemail:string,
-    ContectPhone:string,
+    ContactPerson:string,
+    ContactEmail:string,
+    ContactPhone:string,
     Address1:string,
     Address2:string,
 }
@@ -20,16 +20,16 @@ export interface ResponseObj{
 }
 
 export interface UpdateCollege{
-    id:number,
+    CollegeId:number,
     ImagePath:string,
     CollegeName:string,
     CollegeCode:string,
     CityId :string,
     StateId :string,
     CountryId :string,
-    contectperson:string,
-    contectemail:string,
-    ContectPhone:string,
+    ContactPerson:string,
+    ContactEmail:string,
+    ContactPhone:string,
     Address1:string,
     Address2:string,
     

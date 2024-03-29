@@ -54,13 +54,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let user of userList">
-                <td>{{ user.id }}</td>
+                <td>{{ user.userId }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.mobile }}</td>
                 <td class="badge">
                   <a
-                    (click)="toggleActive(user)"
+                    (click)="toggleActive(user.userId)"
                     [ngClass]="{
                       'active-link': user.isActive,
                       'inactive-link': !user.isActive
@@ -69,13 +69,13 @@
                   >
                 </td>
                 <td class="action_button text-right">
-                  <a routerLink="/admin/user/edit/{{ user.id }}" class="edit"
+                  <a routerLink="/admin/user/edit/{{ user.userId }}" class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>
-                  <a class="delete" (click)="deleteItem(user.id)"
+                  <a class="delete" (click)="deleteItem(user.userId)"
                     ><i class="icofont-ui-delete"></i
                   ></a>
-                  <a class="inactive" (click)="viewDetails(user.id)"
+                  <a class="inactive" (click)="viewDetails(user.userId)"
                     ><i class="icofont-eye"></i
                   ></a>
                 </td>
@@ -87,7 +87,7 @@
               [collectionSize]="collectionSize"
               [(page)]="page"
               [pageSize]="pageSize"
-              (pageChange)="getAllUser()"
+              (pageChange)="getUserPage($event)"
             >
             </ngb-pagination>
           

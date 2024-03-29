@@ -21,7 +21,7 @@
                               placeholder="Search here ..."
                               class="form-control border-2"
                               name="search"
-                              [(ngModel)]="searchTerm" (ngModelChange)="onSearch()" 
+                              [(ngModel)]="search" (ngModelChange)="onSearch()" 
                             />
                           </div>
                         </div>
@@ -45,6 +45,7 @@
                                     <th>Campus Date</th>
                                     <th>Title</th>
                                     <th>Place</th>
+                                    <th>Job Description</th>
                                     <th>Isactive</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
@@ -53,9 +54,10 @@
                                 <tr *ngFor="let campus of campusList">
                                     <td>{{campus.walkInDate | date}}</td>
                                     <td>{{campus.title}}</td>
-                                    <td>{{campus.address1}}</td>
+                                    <td>{{campus.address1}} {{campus.address2}} </td>
+                                    <td>{{campus.jobDescription}}</td>
                                     <td class="badge">
-                                        <a (click)="toggleActive(campus)"
+                                        <a (click)="toggleActive(campus.walkInID)"
                                             [ngClass]="{ 'active-link': campus.isActive, 'inactive-link': !campus.isActive }">{{
                                                 campus.isActive ? 'Active' : 'Inactive' }}</a>
                                     </td>                                      <td class="action_button text-right">
@@ -71,7 +73,7 @@
                             [collectionSize]="collectionSize"
                             [(page)]="page"
                             [pageSize]="pageSize"
-                            (pageChange)="getCampusList()"
+                            (pageChange)="getCampusPage($event)"
                           >
                           </ngb-pagination>
                         

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { State, StateInfo } from 'src/app/modules/master/models/state';
-import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
+import { CountrystatecityService } from 'src/app/modules/core/services/countrystatecity.service';
 import { College } from 'src/app/modules/master/models/college';
 import { CollegeService } from '../../../../services/college.service';
 import { Router } from '@angular/router';
@@ -34,16 +34,16 @@ export class AddCollegeComponent implements OnInit{
     this.fetchCountry();
      this.addCollegeForm = this.fb.group({
       ImagePath:['',[Validators.required]],
-      CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3)]],
+      CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern('^[A-Za-z]+$')]],
       CollegeCode:['',[Validators.required]],
       Address1:['',[Validators.required]],
       Address2:['',[Validators.required]],
       CityId:['',[Validators.required]],
       StateId:['',[Validators.required]],
       CountryId:['',[Validators.required]],
-      contectperson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
-      contectemail:['',[Validators.required,Validators.email]],
-      ContectPhone:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      ContactPerson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
+      ContactEmail:['',[Validators.required,Validators.email]],
+      ContactPhone:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
 
      })
    }
@@ -52,6 +52,7 @@ export class AddCollegeComponent implements OnInit{
     if (this.addCollegeForm.valid){
       this.data = this.addCollegeForm.value
       this.data.ImagePath = this.selectedFileName
+      console.log(this.data,'add')
       this.collegeService.addCollege(this.data).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)

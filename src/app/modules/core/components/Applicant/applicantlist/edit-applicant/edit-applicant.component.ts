@@ -45,7 +45,6 @@ ngOnInit(): void {
   this.getCollege()
   this.getQualification()
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
-    console.log(res)
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
       firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]),
@@ -108,7 +107,7 @@ getCompany(){
 }
 
 getCollege(){
-  this.collegeService.getCollegeList().subscribe((res)=>{
+  this.collegeService.getAllCollegeList().subscribe((res)=>{
     if (res.isSuccess){
       this.collegeList = res.data
     }

@@ -76,16 +76,22 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('collegeName')?.hasError('minlength')"
+                *ngIf="addCollegeForm.get('CollegeName')?.hasError('minlength')"
               >
                 <span class="error">Minimum 3 letters required</span>
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('collegeName')?.hasError('maxlength')"
+                *ngIf="addCollegeForm.get('CollegeName')?.hasError('maxlength')"
               >
                 <span class="error">Maximum length is 50</span>
               </div>
+              <div
+              class="text-danger"
+              *ngIf="addCollegeForm.get('CollegeName')?.hasError('pattern')"
+            >
+              <span class="error">Only Alphabets are allowed</span>
+            </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -255,16 +261,16 @@
                   placeholder="Contact Person Email"
                   type="text"
                   class="form-control"
-                  formControlName="contectperson"
+                  formControlName="ContactPerson"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (addCollegeForm.get('contectperson')?.invalid &&
-                    (addCollegeForm.get('contectperson')?.dirty ||
-                    addCollegeForm.get('contectperson')?.touched)) ||
-                  (addCollegeForm.get('contectperson')?.hasError('required') &&
+                  (addCollegeForm.get('ContactPerson')?.invalid &&
+                    (addCollegeForm.get('ContactPerson')?.dirty ||
+                    addCollegeForm.get('ContactPerson')?.touched)) ||
+                  (addCollegeForm.get('ContactPerson')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -272,13 +278,13 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContectPerson')?.hasError('minlength')"
+                *ngIf="addCollegeForm.get('ContactPerson')?.hasError('minlength')"
               >
                 <span class="error">Minimum 3 letters required</span>
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContectPerson')?.hasError('maxlength')"
+                *ngIf="addCollegeForm.get('ContactPerson')?.hasError('maxlength')"
               >
                 <span class="error">Maximum length is 20</span>
               </div>
@@ -290,16 +296,16 @@
                   placeholder="Contact Email"
                   type="text"
                   class="form-control"
-                  formControlName="contectemail"
+                  formControlName="ContactEmail"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (addCollegeForm.get('contectemail')?.invalid &&
-                    (addCollegeForm.get('contectemail')?.dirty ||
-                    addCollegeForm.get('contectemail')?.touched)) ||
-                  (addCollegeForm.get('contectemail')?.hasError('required') &&
+                  (addCollegeForm.get('ContactEmail')?.invalid &&
+                    (addCollegeForm.get('ContactEmail')?.dirty ||
+                    addCollegeForm.get('ContactEmail')?.touched)) ||
+                  (addCollegeForm.get('ContactEmail')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -307,7 +313,7 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('contectemail')?.hasError('email')"
+                *ngIf="addCollegeForm.get('ContactEmail')?.hasError('email')"
               >
                 <span class="error">Provide a correct email</span>
               </div>
@@ -319,16 +325,16 @@
                   placeholder="Your Phone Number"
                   type="text"
                   class="form-control"
-                  formControlName="ContectPhone"
+                  formControlName="ContactPhone"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (addCollegeForm.get('ContectPhone')?.invalid &&
-                    (addCollegeForm.get('ContectPhone')?.dirty ||
-                    addCollegeForm.get('ContectPhone')?.touched)) ||
-                  (addCollegeForm.get('ContectPhone')?.hasError('required') &&
+                  (addCollegeForm.get('ContactPhone')?.invalid &&
+                    (addCollegeForm.get('ContactPhone')?.dirty ||
+                    addCollegeForm.get('ContactPhone')?.touched)) ||
+                  (addCollegeForm.get('ContactPhone')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -336,13 +342,13 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContectPhone')?.hasError('maxlength')"
+                *ngIf="addCollegeForm.get('ContactPhone')?.hasError('maxlength')"
               >
                 <span class="error">Maximum allowed length is 10</span>
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContectPhone')?.hasError('minlength')"
+                *ngIf="addCollegeForm.get('ContactPhone')?.hasError('minlength')"
               >
                 <span class="error">Minimum required length is 10</span>
               </div>

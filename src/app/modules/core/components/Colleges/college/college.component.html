@@ -20,14 +20,14 @@
               <div class="input-group size position-relative">
                 <input
                   type="text"
-                  placeholder="Search here ..."
+                  placeholder="Search here College Contact Email Phone"
                   class="form-control border-2"
                   name="search"
                   [(ngModel)]="searchTerm" (ngModelChange)="onSearch()" 
                 />
               </div>
             </div>
-            <div class="rounded-pill form_custom_inner d-flex">
+            <!-- <div class="rounded-pill form_custom_inner d-flex">
               <div
                 class="input-group size position-relative"
                 style="margin-right: 15px"
@@ -39,14 +39,12 @@
                 </select>
               </div>
             
-            </div>
+            </div> -->
           </div>
           <table class="mb-0 table table-striped">
             <thead>
               <tr>
                 <th>College</th>
-                <th>City</th>
-                <th>State</th>
                 <th>Contact Person</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -57,15 +55,13 @@
             <tbody>
               <tr *ngFor="let college of collegeList">
                 <td>{{ college.collegeName }}</td>
-                <td>{{ college.cityName }}</td>
-                <td>{{ college.stateName }}</td>
                 <td>{{ college.contectPerson }}</td>
                 <td>{{ college.contectEmail }}</td>
                 <td>{{ college.contectPhone }}</td>
                 <td class="badge">
                  
                   <a
-                    (click)="toggleActive(college)"
+                    (click)="toggleActive(college.collegeId)"
                     [ngClass]="{
                       'active-link': college.isActive,
                       'inactive-link': !college.isActive
@@ -96,11 +92,11 @@
               [collectionSize]="collectionSize"
               [(page)]="page"
               [pageSize]="pageSize"
-              (pageChange)="getAllCollegeList()"
+              (pageChange)="getCollegePage($event)"
             >
             </ngb-pagination>
           
-            <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getAllCollegeList()">
+            <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCollegeList()">
               <option [ngValue]="10">10 items per page</option>
               <option [ngValue]="20">20 items per page</option>
               <option [ngValue]="25">25 items per page</option>

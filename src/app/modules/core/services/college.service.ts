@@ -11,8 +11,12 @@ export class CollegeService {
 
   constructor(private http:HttpClient) { }
 
-  getCollegeList():Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/College/GetAllCollege');
+  getCollegeList(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl +'/College/GetAllCollege?'+'pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
+  getAllCollegeList():Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/College/GetAllCollege')
   }
 
   searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
@@ -20,7 +24,7 @@ export class CollegeService {
   }
 
   getCollegeById(collegeId:number): Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/College/GetCollegeDetailsById?collegeid='+collegeId);
+    return this.http.get<any>(environment.apiUrl +'/College/GetCollegeDetailsByCollegeId?collegeId='+collegeId);
   }
 
   addCollege(data:College):Observable<any>{
@@ -32,20 +36,36 @@ export class CollegeService {
     formData.append('Address2',data.Address2)
     formData.append('StateId',data.StateId)
     formData.append('CountryId',data.CountryId)
-    formData.append('CityId',data.CityId)
-    formData.append('contectperson',data.contectperson)
-    formData.append('ContectPhone',data.ContectPhone)
-    formData.append('contectemail',data.contectemail)
+    formData.append('CityId',data.CityId.toString())
+    formData.append('ContactPerson',data.ContactPerson)
+    formData.append('ContactPhone',data.ContactPhone)
+    formData.append('ContactEmail',data.ContactEmail)
    
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)
   }
 
   updateCollege(data:any): Observable<any>{
-    return this.http.post<any>(environment.apiUrl+'/College/EditCollege',data)
+    var formData = new FormData;
+    formData.append('CollegeId',data.CollegeId)
+    formData.append('ImagePath',data.ImagePath)
+    formData.append('CollegeCode',data.CollegeCode)
+    formData.append('CollegeName',data.CollegeName)
+    formData.append('Address1',data.Address1)
+    formData.append('Address2',data.Address2)
+    formData.append('StateId',data.StateId)
+    formData.append('CountryId',data.CountryId)
+    formData.append('CityId',data.CityId.toString())
+    formData.append('ContactPerson',data.ContactPerson)
+    formData.append('ContactPhone',data.ContactPhone)
+    formData.append('ContactEmail',data.ContactEmail)
+    return this.http.post<any>(environment.apiUrl+'/College/EditCollege',formData)
   }
 
   deleteByID(id:any): Observable<any>{
-    return this.http.delete<any>(environment.apiUrl+'/College/DeleteCollege?id='+id)
+    return this.http.delete<any>(environment.apiUrl+'/College/DeleteCollege?CollegeId='+id)
   }
- 
+
+  toggleActiveInactive(id:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl + '/College/CollegeActiveInactive?CollegeId='+id)
+  } 
 }

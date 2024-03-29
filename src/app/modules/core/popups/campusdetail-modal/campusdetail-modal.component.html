@@ -11,11 +11,8 @@
     </button>
   </div>
   <div class="modal-body user_details">
-    <ul class="list-group list-group-flush" *ngFor="let campus of data">
+    <ul class="list-group list-group-flush" *ngFor="let campus of campusDetail">
         <li class="list-group-item"><strong>Title:</strong> {{campus.title}}</li>
-        <li class="list-group-item"><strong>Walk In Date:</strong> {{campus.walkInDate | date}}</li>
-        <li class="list-group-item"><strong>Country:</strong> {{campus.countryName}}</li>
-        <li class="list-group-item"><strong>State:</strong> {{campus.stateName}}</li>
         <li class="list-group-item"><strong>Address:</strong> {{campus.address1}}</li>
         <li class="list-group-item"><strong>Job Description:</strong> {{campus.jobDescription}}</li>
     </ul>

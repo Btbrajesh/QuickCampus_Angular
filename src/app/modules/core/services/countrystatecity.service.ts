@@ -15,15 +15,15 @@ export class CountrystatecityService {
   constructor(private httpclient:HttpClient) { }
 
   getCountry(): Observable<Country>{
-    return this.httpclient.get<Country>(environment.apiUrl+'/Country/GetAllCountry')
+    return this.httpclient.get<Country>(environment.apiUrl+'/Common/GetCountries')
   }
 
   getStateOfSelectedCountry(countryID: number): Observable<State>{
-    return this.httpclient.get<State>(environment.apiUrl+'/State/GetAllState?countryID='+countryID )
+    return this.httpclient.get<State>(environment.apiUrl+'/Common/GetStatesByCountry?countryId='+countryID )
   }
 
   getCitiesOfSelectedState(stateId:number): Observable<any>{
-    return this.httpclient.get(environment.apiUrl+'/City/GetAllCity?stateId='+stateId)
+    return this.httpclient.get(environment.apiUrl+'/Common/GetAllCity?stateId='+stateId)
   }
 
   getCityById(cityId:number){

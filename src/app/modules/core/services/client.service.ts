@@ -12,8 +12,12 @@ export class ClientService {
 
   constructor(private http:HttpClient) { }
 
-  getClientList():Observable<any>{
+  getAllClientList(){
     return this.http.get<any>(environment.apiUrl+'/Client/GetAllClient')
+  }
+
+  getClientList(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Client/GetAllClient?'+'pageStart='+pageStart+'&pageSize='+pageSize)
   }
 
   searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]> {
@@ -38,6 +42,6 @@ export class ClientService {
   }
 
   activeInactive(id:any){
-    return this.http.get<any>(environment.apiUrl+'/Client/activeAndInactive?id='+id)
+    return this.http.get<any>(environment.apiUrl+'/Client/ClientActiveInactive?id='+id)
   }
 }

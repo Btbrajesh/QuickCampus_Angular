@@ -188,7 +188,7 @@
                   <option value="">Select City</option>
                   <option
                     *ngFor="let city of cityInfoList"
-                    [value]="city.cityName"
+                    [value]="city.cityId"
                   >
                     {{ city.cityName }}
                   </option>
@@ -309,7 +309,7 @@
                       <input type="time" formControlName="examStartTime" />
                     </td>
                     <td><input type="time" formControlName="examEndTime" /></td>
-                    <td><input type="date" formControlName="startDate" /></td>
+                    <td><input type="date" formControlName="startDateTime" /></td>
                     <td>
                       <button
                         type="button"

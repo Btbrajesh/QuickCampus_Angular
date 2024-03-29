@@ -30,13 +30,11 @@ export class ClientComponent implements OnInit{
 
   getClientList(){
     this.spinnerService.show()
-    this.clientService.getClientList().subscribe((res)=>{
+    this.clientService.getClientList(this.pageStart,this.pageSize).subscribe((res)=>{
       if (res.isSuccess){
-        this.collectionSize = res.data.length
-        this.clientList = res.data.map((client:any,i:number)=>({id:i+1, ...client})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
+        this.collectionSize = res.totalRecordCount
+        this.clientList = []
+        this.clientList = res.data.map((client:any,i:number)=>({id:i+1, ...client}))
         this.spinnerService.hide()
       }else{
         this.spinnerService.hide()
@@ -48,10 +46,21 @@ export class ClientComponent implements OnInit{
     })
   }
 
+  getClientPage(event:any){
+    this.pageStart = event
+    this.getClientList()
+  }
+
   onSearch() {
     this.clientService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
-      this.clientList = res.data;
-      this.collectionSize = this.clientList.length;
+      if (res.isSuccess){
+        this.clientList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.clientList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }
+      
     });
   }
 
@@ -70,7 +79,14 @@ export class ClientComponent implements OnInit{
   }
 
   toggleActive(id: any): void {
+    this.spinnerService.show()
     this.clientService.activeInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getClientList()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
     })
   }
 

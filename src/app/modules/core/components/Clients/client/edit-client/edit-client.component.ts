@@ -5,6 +5,7 @@ import { valHooks } from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { UpdateClient } from 'src/app/modules/master/models/client';
+import { RoleService } from 'src/app/modules/master/services/role.service';
 
 @Component({
   selector: 'app-edit-client',
@@ -13,7 +14,7 @@ import { UpdateClient } from 'src/app/modules/master/models/client';
 })
 export class EditClientComponent implements OnInit{
 
-  
+  roleList:any[]=[]
   editClientForm= new FormGroup({
     id: new FormControl(),
     name: new FormControl(''),
@@ -21,9 +22,10 @@ export class EditClientComponent implements OnInit{
     email: new FormControl('' ),
     phone:new FormControl(''),
     subscriptionPlan:new FormControl(''),
+    roleId:new FormControl('')
   })
 
-  constructor(private router:ActivatedRoute,public route:Router, public clientService:ClientService, public toastr:ToastrService){}
+  constructor(private router:ActivatedRoute,public route:Router, public clientService:ClientService, public toastr:ToastrService,public roleService:RoleService){}
 
   ngOnInit(): void {
     this.clientService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
@@ -35,10 +37,12 @@ export class EditClientComponent implements OnInit{
         email: new FormControl(res.data['email'],Validators.compose([Validators.required,Validators.email])),
         phone:new FormControl(res.data['phone'],Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10)])),
         subscriptionPlan:new FormControl(res.data['subscriptionPlan'],Validators.required),
+        roleId:new FormControl(res.data['roleId'],[Validators.required])
       })
     },err=>{
       this.toastr.error(err)
     })
+    this.getAllRole()
   }
 
   submit(){
@@ -63,6 +67,13 @@ export class EditClientComponent implements OnInit{
 
   cancel(){
     this.route.navigateByUrl('/admin/client')
+  }
+
+  getAllRole(){
+    this.roleService.getAllRole().subscribe((res)=>{
+      console.log(res)
+      this.roleList =res.data
+    })
   }
 
 }

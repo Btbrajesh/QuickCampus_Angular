@@ -35,11 +35,13 @@ getApplicantList(){
   this.spinnerService.show();
   this.applicantService.getApplicantList(this.pageStart,this.pageSize).subscribe(res =>{
     if(res.isSuccess){
+      this.spinnerService.hide()
       this.collectionSize = res.totalRecordCount
       this.applicantList = []
         this.applicantList = res.data.map((applicant:any,i:number)=>({id:i+1, ...applicant}))
         this.spinnerService.hide()
     }else{
+      this.spinnerService.hide()
       this.toastr.error(res.message)
     }
   },err=>{
@@ -96,8 +98,6 @@ viewDetails(itemId: number): void {
         this.toastr.error(res.message)
       }
     })
-    
-    // Call your service method to update the user's active status
   }
   
   editUser(user: any): void {

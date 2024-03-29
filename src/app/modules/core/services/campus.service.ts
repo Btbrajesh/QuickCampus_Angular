@@ -13,12 +13,16 @@ export class CampusService {
 
   constructor(private http:HttpClient) { }
 
-  getCampusList():Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/Campus/ManageCampus');
+  getAllCampus():Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Campus/GetAllCampus') 
   }
 
-  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
-    return this.http.get<any>(environment.apiUrl +'/Campus/ManageCampus?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
+  getCampusList(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl +'/Campus/GetAllCampus?'+'pageStart='+pageStart+'&pageSize='+pageSize);
+  }
+
+  searchData(search:string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/Campus/GetAllCampus?search='+search+'&pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
   getCampusById(campusId:number): Observable<any>{
@@ -35,5 +39,9 @@ export class CampusService {
 
   updateCampus(data:any){
     return this.http.post<any>(environment.apiUrl +'/Campus/UpdateCampus',data)
+  }
+
+  toggleActiveInactive(id:number){
+    return this.http.get<any>(environment.apiUrl+'/Campus/CampusActiveInActive?campusId='+id)
   }
 }

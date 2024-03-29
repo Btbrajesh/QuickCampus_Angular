@@ -16,7 +16,8 @@ export class EditUserComponent implements OnInit{
 
   clientList:any
   editForm = new FormGroup({
-    id:new FormControl(),
+    userId:new FormControl(),
+    name:new FormControl(''),
     email: new FormControl(''),
     mobile:new FormControl(''),
   })
@@ -24,10 +25,12 @@ export class EditUserComponent implements OnInit{
   constructor(public toastr:ToastrService,public route:Router, public clientService:ClientService,private router:ActivatedRoute, public userService:UserService){}
 
   ngOnInit(): void {
-    this.getClient()
+    // this.getClient()
     this.userService.getCurrentData(this.router.snapshot.params['id']).subscribe((res)=>{
+      console.log(res)
       this.editForm = new FormGroup({
-        id: new FormControl(),
+        userId: new FormControl(),
+        name:new FormControl(res.data['name'],[Validators.required]),
         email: new FormControl(res.data['email'],[Validators.required,Validators.email]),
         mobile:new FormControl(res.data['mobile'],[Validators.required,Validators.maxLength(10),Validators.minLength(10)])
       })
@@ -35,15 +38,15 @@ export class EditUserComponent implements OnInit{
     
   }
 
-  getClient(){
-    this.clientService.getClientList().subscribe((res)=>{
-      if(res.isSuccess){
-        this.clientList = res.data
-      }
-    },err=>{
-      this.toastr.error(err)
-    })
-  }
+  // getClient(){
+  //   this.clientService.getAllClientList().subscribe((res)=>{
+  //     if(res.isSuccess){
+  //       this.clientList = res.data
+  //     }
+  //   },err=>{
+  //     this.toastr.error(err)
+  //   })
+  // }
 
   cancel(){
     this.route.navigateByUrl('/admin/user')
@@ -52,7 +55,7 @@ export class EditUserComponent implements OnInit{
   submit(){
     if (this.editForm.valid){
       const formData = this.editForm.value as User;
-      formData.id = this.router.snapshot.params['id']
+      formData.userId = this.router.snapshot.params['id']
       this.userService.updateUser(formData).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)
@@ -64,7 +67,9 @@ export class EditUserComponent implements OnInit{
       },err=>{
         this.toastr.error(err)
       })
-    }this.toastr.error('Please fill the form correctly')
+    }else{
+      this.toastr.error('Please fill the form correctly')
+    }
     
   }
 

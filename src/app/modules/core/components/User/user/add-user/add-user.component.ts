@@ -25,15 +25,15 @@ export class AddUserComponent implements OnInit{
   constructor(public router:Router, public roleService:RoleService,private toastr: ToastrService,public clientService:ClientService,public fb:FormBuilder,public userService:UserService){}
 
   ngOnInit(): void {
-    this.getRole()
-    this.getClient()
+    // this.getRole()
+    // this.getClient()
     this.addUserForm = this.fb.group({
-      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2)]],
+      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern('^[A-Za-z]+$')]],
       email:['',[Validators.required,Validators.email]],
-      mobile:['',[Validators.required,Validators.maxLength(10)]],
-      role:['',[Validators.required]],
-      client:['',[Validators.required]],
-      password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(6)]],
+      mobile:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      // role:['',[Validators.required]],
+      // client:['',[Validators.required]],
+      password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(8),Validators.pattern('(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       confirmPassword:['',[Validators.required]]
     },{
       validator:passwordMatchValidator()
@@ -41,21 +41,21 @@ export class AddUserComponent implements OnInit{
 
   }
 
-  getRole(){
-    this.roleService.getAllRole().subscribe((res)=>{
-        this.roleList = res.data
-    })
-  }
+  // getRole(){
+  //   this.roleService.getAllRoleList().subscribe((res)=>{
+  //       this.roleList = res.data
+  //   })
+  // }
 
-  getClient(){
-    this.clientService.getClientList().subscribe((res)=>{
-      if(res.isSuccess){
-        this.clientList = res.data
-      }
-    },err=>{
-      this.toastr.error(err)
-    })
-  }
+  // getClient(){
+  //   this.clientService.getAllClientList().subscribe((res)=>{
+  //     if(res.isSuccess){
+  //       this.clientList = res.data
+  //     }
+  //   },err=>{
+  //     this.toastr.error(err)
+  //   })
+  // }
 
   submit(){
     if (this.addUserForm.valid){

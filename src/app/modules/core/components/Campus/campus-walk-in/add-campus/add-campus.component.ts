@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
+import { CountrystatecityService } from 'src/app/modules/core/services/countrystatecity.service';
 import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { State, StateInfo } from 'src/app/modules/master/models/state';
@@ -108,7 +108,7 @@ export class AddCampusComponent implements OnInit{
       collegeCode: [college.collegeCode],
       examStartTime: [''],
       examEndTime: [''],
-      startDate: ['']
+      startDateTime: ['']
     });
   }
 
@@ -119,7 +119,7 @@ export class AddCampusComponent implements OnInit{
   }
 
   getClientList(){
-    this.clientService.getClientList().subscribe((res)=>{
+    this.clientService.getAllClientList().subscribe((res)=>{
       if(res.isSuccess){
         this.clientList = res.data
       }
@@ -130,7 +130,7 @@ export class AddCampusComponent implements OnInit{
 
   getAllCollegeList(){
     this.spinnerService.show();
-    this.collegeService.getCollegeList().subscribe(res =>{
+    this.collegeService.getAllCollegeList().subscribe(res =>{
       if(res.isSuccess){
         this.spinnerService.hide();
         this.collegeList = res.data;

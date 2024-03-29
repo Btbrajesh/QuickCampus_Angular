@@ -33,6 +33,12 @@
               >
                 <span class="error">Role Name is required</span>
               </div>
+              <div
+              class="text-danger"
+              *ngIf="editRoleForm.get('roleName')?.hasError('pattern')"
+            >
+              <span class="error">Only Alphabets are allowed</span>
+            </div>
             </div>
            
 

@@ -49,11 +49,10 @@ export class LoginComponent implements OnInit  {
     this.loginData.userName = this.loginForm.value.email;
     this.loginData.password = this.loginForm.value.password;
     this.loginInFlight = this.authenticationService.login(this.loginData.userName,this.loginData.password).subscribe(resp =>{
-      console.log(resp,'login')
       if(resp.isSuccess){
         this.loginInFlight = null;
         this.toastr.success(resp.message);
-        this.router.navigateByUrl('admin/applicant');
+        this.router.navigateByUrl('/dashboard');
       }else{
         this.loginInFlight = null;
         this.toastr.error(resp.message);

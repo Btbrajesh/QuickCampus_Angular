@@ -24,17 +24,15 @@ export class CollegeComponent implements OnInit{
   constructor(private modalService: NgbModal,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,private router:Router){}
 
   ngOnInit(): void {
-    this.getAllCollegeList()
+    this.getCollegeList()
   }
 
-  getAllCollegeList(){
-    this.collegeService.getCollegeList().subscribe(res =>{
+  getCollegeList(){
+    this.collegeService.getCollegeList(this.pageStart,this.pageSize).subscribe(res =>{
       if(res.isSuccess){
-        this.collectionSize = res.data.length
-        this.collegeList = res.data.map((college:any,i:number)=>({id:i+1, ...college})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
+        this.collectionSize = res.totalRecordCount
+        this.collegeList=[]
+        this.collegeList = res.data.map((college:any,i:number)=>({id:i+1, ...college}))
         this.spinnerService.hide()
       }
     },err =>{
@@ -42,16 +40,35 @@ export class CollegeComponent implements OnInit{
     })
   }
 
+
   onSearch() {
     this.collegeService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
-      this.collegeList = res.data;
-      this.collectionSize = this.collegeList.length;
+      if (res.isSuccess){
+        this.collegeList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.collegeList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }
+      
     });
   }
 
-  toggleActive(user: any): void {
-    user.isActive = !user.isActive;
-    // Call your service method to update the user's active status
+  getCollegePage(event:any){
+    this.pageStart = event
+    this.getCollegeList()
+  }
+
+  toggleActive(id: number): void {
+    this.spinnerService.show()
+    this.collegeService.toggleActiveInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getCollegeList()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
+    })
   }
   
   deleteItem(itemId: number): void {
@@ -61,7 +78,7 @@ export class CollegeComponent implements OnInit{
       if (result === 'delete') {
         this.collegeService.deleteByID(itemId).subscribe((res)=>{
           this.toastr.success(res.message)
-          this.getAllCollegeList()
+          this.getCollegeList()
         },err=>{
           this.toastr.error(err)
         })

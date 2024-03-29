@@ -44,6 +44,12 @@
               >
                 <span class="error">Maximum length is 25</span>
               </div>
+              <div
+              class="text-danger"
+              *ngIf="addUserForm.get('name')?.hasError('pattern')"
+            >
+              <span class="error">Only Alphabets are allowed</span>
+            </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -102,8 +108,14 @@
               >
                 <span class="error">Maximum allowed length is 10</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('mobile')?.hasError('minlength')"
+              >
+                <span class="error">Minimum allowed length is 10</span>
+              </div>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Role</label>
                 <select
@@ -129,8 +141,8 @@
               >
                 <span class="error">Role is required</span>
               </div>
-            </div>
-            <div class="col-md-4">
+            </div> -->
+            <!-- <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Client</label>
                 <select
@@ -156,7 +168,7 @@
               >
                 <span class="error">Client is required</span>
               </div>
-            </div>
+            </div> -->
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Password</label>
@@ -205,7 +217,13 @@
                 class="text-danger"
                 *ngIf="addUserForm.get('password')?.hasError('minlength')"
               >
-                <span class="error">Minimum required length is 6</span>
+                <span class="error">Minimum required length is 8</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addUserForm.get('password')?.hasError('pattern')"
+              >
+                <span class="error">Include 1 special character and 1 large character</span>
               </div>
             </div>
             <div class="col-md-4">

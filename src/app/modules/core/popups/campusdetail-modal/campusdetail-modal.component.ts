@@ -13,7 +13,6 @@ export class CampusdetailModalComponent {
 
   @Input() itemId!: number;
   campusDetail: any[]=[]
-  data: any;
 
   constructor(public toastr:ToastrService,public activeModal: NgbActiveModal,public campusService:CampusService) { }
 
@@ -25,7 +24,14 @@ export class CampusdetailModalComponent {
 
   getDetailById(Id:number){
     this.campusService.getCampusById(Id).subscribe((res)=>{
-        this.data = res
+      console.log(res)
+      if (res.isSuccess){
+        const data = res.data
+        this.campusDetail.push(data)
+      }else{
+        this.toastr.error(res.message)
+      }
+    
       })
     }
   

@@ -25,9 +25,7 @@
                   formControlName="questionTypeId"
                 >
                   <option selected>--Choose--</option>
-                  <option value="1">Objective</option>
-                  <option value="2">Objective - Multiple Answer</option>
-                  <option value="3">Subjective</option>
+                  <option *ngFor="let type of questionTypeList" [value]="type.questionTypeId" >{{type.questionType1}}</option>
                 </select>
               </div>
               <div
@@ -137,7 +135,7 @@
                 >
                 <textarea
                   class="form-control"
-                  placeholder="Job Description"
+                  placeholder="What is your question"
                   rows="1"
                   formControlName="Text"
                 ></textarea>

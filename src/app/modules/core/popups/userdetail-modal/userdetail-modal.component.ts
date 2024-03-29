@@ -22,6 +22,7 @@ export class UserdetailModalComponent {
 
   getDetailById(Id:number){
     this.userService.getUserById(Id).subscribe((res)=>{
+      console.log(res,'re')
       if (res.isSuccess){
         const data = res.data
         this.userDetail.push(data)

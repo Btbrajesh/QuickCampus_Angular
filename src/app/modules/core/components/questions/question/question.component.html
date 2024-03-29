@@ -21,11 +21,11 @@
                               placeholder="Search here ..."
                               class="form-control border-2"
                               name="search"
-                              value=""
+                              [(ngModel)]="searchTerm" (ngModelChange)="onSearch()"
                             />
                           </div>
                         </div>
-                        <div class="rounded-pill form_custom_inner d-flex">
+                        <!-- <div class="rounded-pill form_custom_inner d-flex">
                           <div
                             class="input-group size position-relative"
                             style="margin-right: 15px"
@@ -36,17 +36,14 @@
                               <option>Inactive</option>
                             </select>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                         <table class="mb-0 table table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Question</th>
-                                    <th>Question Type</th>
                                     <th>Marks</th>
-                                    <th>Section</th>
-                                    <th>Group</th>
                                     <th>Isactive</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
@@ -54,15 +51,10 @@
                             <tbody>
                                 <tr *ngFor="let question of questionList">
                                     <td>{{question.questionId}}</td>
-                                    <td>
-                                        <div [innerHTML]="sanitizeHtml(question.text)"></div>
-                                    </td>
-                                    <td>{{question.questionTypeName}}</td>
+                                    <td>{{question.text}}</td>
                                     <td>{{question.marks}}</td>
-                                    <td>{{question.questionSection}}</td>
-                                    <td>{{question.questionGroup}}</td>
                                     <td class="badge">
-                                        <a (click)="toggleActive(question)"
+                                        <a (click)="toggleActive(question.questionId)"
                                             [ngClass]="{ 'active-link': question.isActive, 'inactive-link': !question.isActive }">{{
                                                 question.isActive ? 'Active' : 'Inactive' }}</a>
                                     </td >                                     
@@ -78,12 +70,12 @@
                             [collectionSize]="collectionSize"
                             [(page)]="page"
                             [pageSize]="pageSize"
-                            (pageChange)="getQuestionList()"
+                            (pageChange)="getQuestionPage($event)"
                           >
                           </ngb-pagination>
                         
                           <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getQuestionList()">
-                            <option [ngValue]="8">8 items per page</option>
+                            <option [ngValue]="10">10 items per page</option>
                             <option [ngValue]="20">20 items per page</option>
                             <option [ngValue]="25">25 items per page</option>
                           </select>

@@ -17,8 +17,10 @@ export class QuestionComponent {
 
   questionList:any[]=[];
   page = 1;
-	pageSize = 8;
+	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
 
   constructor(public toastr:ToastrService,private modalService: NgbModal,public questionService:QuestionService,private spinnerService: NgxSpinnerService,public router:Router){}
 
@@ -29,14 +31,16 @@ export class QuestionComponent {
 
   getQuestionList(){
     this.spinnerService.show();
-    this.questionService.getQuestionList().subscribe(res =>{
+    this.questionService.getQuestionList(this.pageStart,this.pageSize).subscribe(res =>{
+      console.log(res)
       if(res.isSuccess){
-        this.collectionSize = res.data.length
-        this.questionList = res.data.map((question:any,i:number)=>({id:i+1, ...question})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
+        this.collectionSize = res.totalRecordCount
+        this.questionList = []
+        this.questionList = res.data.map((question:any,i:number)=>({id:i+1, ...question}))
         this.spinnerService.hide()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
       }
     },err =>{
       this.spinnerService.hide();
@@ -44,9 +48,21 @@ export class QuestionComponent {
     })
   }
 
-  toggleActive(user: any): void {
-    user.isActive = !user.isActive;
-    // Call your service method to update the user's active status
+  getQuestionPage(event:any){
+    this.pageStart = event
+    this.getQuestionList()
+  }
+
+  toggleActive(id: any): void {
+    this.spinnerService.show()
+    this.questionService.questionActiveInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getQuestionList()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
+    })
   }
   
   editUser(user: any): void {
@@ -54,11 +70,6 @@ export class QuestionComponent {
     this.router.navigateByUrl(url);
   }
 
-  sanitizeHtml(html: string): string {
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = html;
-    return tempElement.textContent || tempElement.innerText || '';
-}
 
 deleteItem(itemId: number): void {
   const modalRef = this.modalService.open(DeleteModalComponent);
@@ -77,6 +88,18 @@ deleteItem(itemId: number): void {
       })
     }
   })
+}
+
+onSearch() {
+  this.questionService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+    if (res.isSuccess){
+      this.questionList = res.data;
+      this.collectionSize = res.totalRecordCount;
+    }else{
+      this.questionList = res.data;
+      this.collectionSize = res.totalRecordCount;
+    } 
+  });
 }
 
 }

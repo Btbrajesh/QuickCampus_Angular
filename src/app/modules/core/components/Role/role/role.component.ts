@@ -17,6 +17,8 @@ export class RoleComponent implements OnInit{
   page = 1;
 	pageSize = 10;
   collectionSize!:number
+  searchTerm: string = '';
+  pageStart=1
 
   constructor(private modalService: NgbModal,private spinnerService: NgxSpinnerService,public roleService:RoleService, public toastr:ToastrService){}
 
@@ -26,13 +28,11 @@ export class RoleComponent implements OnInit{
 
   getAllRole(){
     this.spinnerService.show()
-    this.roleService.getAllRole().subscribe((res)=>{
+    this.roleService.getAllRole(this.pageStart,this.pageSize).subscribe((res)=>{
       if (res.isSuccess){
-        this.collectionSize = res.data.length
-        this.roleList = res.data.map((role:any,i:number)=>({id:i+1, ...role})).slice(
-          (this.page - 1) * this.pageSize,
-			    (this.page - 1) * this.pageSize + this.pageSize,
-        )
+        this.collectionSize = res.totalRecordCount
+        this.roleList = []
+        this.roleList = res.data.map((role:any,i:number)=>({id:i+1, ...role}))
         this.spinnerService.hide()
       }else{
         this.spinnerService.hide()
@@ -42,6 +42,11 @@ export class RoleComponent implements OnInit{
       this.spinnerService.hide()
       this.toastr.error(err)
     })
+  }
+
+  getRolePage(event:any){
+    this.pageStart = event
+    this.getAllRole()
   }
 
   viewDetails(itemId: number): void {
@@ -62,6 +67,29 @@ export class RoleComponent implements OnInit{
       }
     })
   }
+
+  onSearch() {
+    this.roleService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
+      if (res.isSuccess){
+        this.roleList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.roleList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      } 
+    });
+  }
   
+  toggleActive(id:number){
+    this.spinnerService.show()
+    this.roleService.toggleActiveInactive(id).subscribe((res)=>{
+      if (res.isSuccess){
+        this.getAllRole()
+      }else{
+        this.spinnerService.hide()
+        this.toastr.error(res.message)
+      }
+    })
+  }
 
 }

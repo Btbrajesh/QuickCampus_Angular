@@ -21,7 +21,7 @@
             <div class="input-group size position-relative">
               <input
                 type="text"
-                placeholder="Search here ..."
+                placeholder="Search here Name,Email,Phone"
                 class="form-control border-2"
                 [(ngModel)]="searchTerm" (ngModelChange)="onSearch()"
               />
@@ -62,7 +62,7 @@
                 <td class="badge">
                   
                   <a 
-                    (click)="toggleActive(client)"
+                    (click)="toggleActive(client.id)"
                     [ngClass]="{
                       'active-link': client.isActive,
                       'inactive-link': !client.isActive
@@ -96,7 +96,7 @@
               [collectionSize]="collectionSize"
               [(page)]="page"
               [pageSize]="pageSize"
-              (pageChange)="getClientList()"
+              (pageChange)="getClientPage($event)"
             >
             </ngb-pagination>
           

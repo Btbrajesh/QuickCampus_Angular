@@ -89,7 +89,7 @@ export class AddApplicantComponent implements OnInit{
   }
 
   getCollege(){
-    this.collegeService.getCollegeList().subscribe((res)=>{
+    this.collegeService.getAllCollegeList().subscribe((res)=>{
       if (res.isSuccess){
         this.collegeList = res.data
       }
@@ -105,7 +105,7 @@ export class AddApplicantComponent implements OnInit{
   }
 
   getClient(){
-    this.clientService.getClientList().subscribe((res)=>{
+    this.clientService.getAllClientList().subscribe((res)=>{
       this.clientList = res.data
     })
   }

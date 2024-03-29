@@ -10,31 +10,48 @@ export class QuestionService {
 
   constructor(public http:HttpClient) { }
 
-  getQuestionList():Observable<any>{
-    return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage');
+  getAllQuestion(){
+    return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage')
+  }
+
+  getQuestionList(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
   addQuestion(data:any):Observable<any>{
-    return this.http.post<any>(environment.apiUrl + '/Question/addorupdatequestion',data)
+    return this.http.post<any>(environment.apiUrl + '/Question/AddQuestion',data)
+  }
+
+  updateQuestion(data:any):Observable<any>{
+    return this.http.post<any>(environment.apiUrl + '/Question/UpdateQuestion',data)
+  }
+
+  searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{
+    return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
   deleteQuestion(id:number):Observable<any>{
-    return this.http.delete<any>(environment.apiUrl+'/Question/deletequestion?questionId='+id)
+    return this.http.delete<any>(environment.apiUrl+'/Question/DeleteQuestionById?QuestionId='+id)
   }
 
   getSection():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+'/Section/GetAllSection')
+    return this.http.get<any>(environment.apiUrl+'/Question/GetAllSectionList')
   }
 
   getQuestionById(id:number):Observable<any>{
-    return this.http.get<any>(environment.apiUrl+'/Question/getquestionbyid?questionId='+id)
+    return this.http.get<any>(environment.apiUrl+'/Question/GetQuestionById?questionId='+id)
   }
 
   getGroup(){
-    return this.http.get<any>(environment.apiUrl+'/Group/GetAllGroup')
+    return this.http.get<any>(environment.apiUrl+'/Question/GetAllGroupsList')
   }
 
   getQuestionType(){
     return this.http.get<any>(environment.apiUrl+'/Question/GetAllQuestionTypes')
   }
+
+  questionActiveInactive(id:any){
+    return this.http.get<any>(environment.apiUrl+'/Question/QuestionActiveInactive?QuestionId='+id)
+  }
+
 }

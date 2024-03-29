@@ -11,7 +11,7 @@ import { UpdateCampus } from 'src/app/modules/master/models/campus';
 import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { StateInfo } from 'src/app/modules/master/models/state';
-import { CountrystatecityService } from 'src/app/modules/shared/services/countrystatecity.service';
+import { CountrystatecityService } from 'src/app/modules/core/services/countrystatecity.service';
 
 @Component({
   selector: 'app-edit-campus',
@@ -60,13 +60,13 @@ export class EditCampusComponent implements OnInit{
   }
 
   loadCampusData() {
-    const questionId = this.route.snapshot.params['id'];
-    this.campusService.getCampusById(questionId).subscribe((campusData: any) => {
-      this.onCountrySelected(campusData.countryID)
-      this.onStateSelected(campusData.stateID)
+    const campusId = this.route.snapshot.params['id'];
+    this.campusService.getCampusById(campusId).subscribe((campusData: any) => {
       console.log(campusData)
-      this.editCampusForm.patchValue(campusData);
-      this.patchOptionsArray(campusData.colleges);
+      this.onCountrySelected(campusData.data.countryID)
+      this.onStateSelected(campusData.data.stateID)
+      this.editCampusForm.patchValue(campusData.data);
+      this.patchOptionsArray(campusData.data.colleges);
     });
   }
 
@@ -103,12 +103,11 @@ export class EditCampusComponent implements OnInit{
 
   createCollegeFormGroup(college: any): FormGroup {
     return this.fb.group({
-      stateId:[college.stateId],
       collegeId:[college.collegeId],
       collegeName: [college.collegeName],
       collegeCode: [college.collegeCode],
-      examStartTime: [''],
-      examEndTime: [''],
+      examStartTime: [college.examStartTime],
+      examEndTime: [college.examEndTime],
       startDateTime: ['']
     });
   }
@@ -120,7 +119,7 @@ export class EditCampusComponent implements OnInit{
   }
 
   getClientList(){
-    this.clientService.getClientList().subscribe((res)=>{
+    this.clientService.getAllClientList().subscribe((res)=>{
       if(res.isSuccess){
         this.clientList = res.data
       }
@@ -131,7 +130,7 @@ export class EditCampusComponent implements OnInit{
 
   getAllCollegeList(){
     this.spinnerService.show();
-    this.collegeService.getCollegeList().subscribe(res =>{
+    this.collegeService.getAllCollegeList().subscribe(res =>{
       if(res.isSuccess){
         this.spinnerService.hide();
         this.collegeList = res.data;
