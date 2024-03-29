@@ -84,8 +84,8 @@ export class EditCampusComponent implements OnInit{
       const optionsFormArray = this.editCampusForm.get('colleges') as FormArray;
       options.forEach(option => {
         option['startDateTime'] = moment(option['startDateTime']).format("yyyy-MM-DD")
-        option['examStartTime'] = moment(option['examStartTime']).format("hh:mm")
-        option['examEndTime'] = moment(option['examEndTime']).format("hh:mm")
+        option['examStartTime'] = moment('01-01-1970 ' + option['examStartTime']).format("hh:mm")
+        option['examEndTime'] = moment('01-01-1970 ' + option['examEndTime']).format("hh:mm")
         optionsFormArray.push(this.fb.group(option));
       });
     }
