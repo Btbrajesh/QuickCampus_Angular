@@ -190,8 +190,17 @@ export class EditCampusComponent implements OnInit{
     this.data = this.editCampusForm.value
     this.data.walkInId = this.route.snapshot.params['id']
     this.campusService.updateCampus(this.data).subscribe((res)=>{
-      console.log(res)
+      if (res.isSuccess){
+        this.toastr.success(res.message)
+        this.router.navigateByUrl('/admin/campus')
+      }else{
+        this.toastr.error(res.message)
+      }
+    },err=>{
+      this.toastr.error(err)
     })
+  }else{
+    this.toastr.error("Please fill the form properly")
   }
  }
 
