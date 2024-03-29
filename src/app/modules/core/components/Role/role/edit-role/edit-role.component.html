@@ -44,6 +44,7 @@
             <div class="col-md-12" formArrayName="permission">
               <div
                 class="col-md-3"
+
                 *ngFor="let item of permissionList; let i = index"
               >
                 <div class="position-relative form-group">
@@ -52,6 +53,7 @@
                     [id]="'checkbox-' + item.id"
                     [value]="item.id"
                     (change)="onCheckboxChange($event, item.id)"
+                    [checked]="isPermissionChecked(item.id)"
                   />
                   <label class="ml-2" [for]="'checkbox-' + item.id">{{
                     item.permissionName

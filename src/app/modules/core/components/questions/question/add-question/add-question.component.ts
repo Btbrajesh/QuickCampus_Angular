@@ -31,7 +31,7 @@ export class AddQuestionComponent implements OnInit{
       sectionId:['',[Validators.required]],
       groupId:['',[Validators.required]],
       marks:['',[Validators.required]],
-      Text:['',[Validators.required]],
+      Text:['',[Validators.required,Validators.maxLength(1000)]],
       QuestionssoptionVm:this.fb.array([
         this.createOption(),
         this.createOption(),

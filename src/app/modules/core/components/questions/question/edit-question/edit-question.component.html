@@ -154,6 +154,12 @@
               >
                 <span class="error">Question is required</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="editQuestionForm.get('text')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 1000</span>
+              </div>
             </div>
 
             <div class="col-md-12">

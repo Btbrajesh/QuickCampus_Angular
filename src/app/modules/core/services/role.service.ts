@@ -24,7 +24,7 @@ export class RoleService {
     return this.http.get<any>(environment.apiUrl +'/Role/RoleList?search='+searchTerm+'&pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
-  getAllPermission():Observable<any>{
+  getAllPermission(){
     return this.http.get<any>(environment.apiUrl + '/Account/getallpermission')
   }
 

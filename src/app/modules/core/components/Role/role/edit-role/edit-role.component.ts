@@ -15,6 +15,7 @@ import { Role } from 'src/app/modules/master/models/role';
 export class EditRoleComponent implements OnInit{
 
   permissionList: any[]= []
+  permissionUser:any
   editRoleForm = new FormGroup({
     id:new FormControl(),
     roleName:new FormControl(''),
@@ -25,22 +26,31 @@ export class EditRoleComponent implements OnInit{
   constructor(public spinnerService:NgxSpinnerService,public fb:FormBuilder,private router:ActivatedRoute,public route:Router,public roleService:RoleService, public clientService:ClientService, public toastr:ToastrService){}
 
   ngOnInit(): void {
-    this.getPermissionList()
+   
+    this.initializeForm()
+    
+  }
+
+  initializeForm(){
     this.roleService.getRoleById(this.router.snapshot.params['id']).subscribe((res)=>{
+      console.log(res)
+      this.permissionUser = res.data
+      console.log(this.permissionUser.permission)
       this.editRoleForm = new FormGroup({
         id:new FormControl(),
         roleName:new FormControl(res.data['roleName'],[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
         client:new FormControl(''),
-        permission: new FormArray([],Validators.required)
+        permission: new FormArray([])
       })
+      this.getPermissionList()
     },err=>{
       this.toastr.error(err)
     })
   }
 
-  get permission() {
-    return this.editRoleForm.get('permission') as FormArray;
-  }
+  // get permission() {
+  //   return this.editRoleForm.get('permission') as FormArray;
+  // }
 
   onCheckboxChange(event:any, id: number) {
     const selectedIdsFormArray = this.editRoleForm.get('permission') as FormArray;
@@ -53,14 +63,28 @@ export class EditRoleComponent implements OnInit{
     }
   }
 
+  setPermissions(): void {
+    const permissionFormArray = this.editRoleForm.get('permission') as FormArray;
+    this.permissionList.forEach(pm => {
+      const checked = this.permissionUser.permission.some((p:any) => p.id === pm.id);
+      permissionFormArray.push(this.fb.control(checked));
+    });
+  }
+
+  isPermissionChecked(permissionId: number): boolean {
+    return this.permissionUser.permission.some((p:any) => p.id === permissionId);
+  }
+
   getPermissionList(){
     this.roleService.getAllPermission().subscribe((res)=>{
       if (res.isSuccess){
         this.permissionList = res.data
+        this.setPermissions()
       }
     },err=>{
       this.toastr.error(err)
     })
+    
   }
 
   submit(){

@@ -38,7 +38,7 @@ export class EditQuestionComponent implements OnInit{
       sectionId: ['',[Validators.required]],
       groupId: ['',[Validators.required]],
       marks: ['',[Validators.required]],
-      text: ['',[Validators.required]],
+      text: ['',[Validators.required,,Validators.maxLength(1000)]],
       QuestionssoptionVm: this.fb.array([])
     });
   }
