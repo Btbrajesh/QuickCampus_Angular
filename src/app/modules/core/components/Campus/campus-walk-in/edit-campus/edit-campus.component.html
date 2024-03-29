@@ -39,16 +39,16 @@
                          <div class="col-md-4">
                              <div class="position-relative form-group">
                                  <label for="exampleEmail11" class="">Country</label>
-                                 <select class="form-control" placeholder="Select Country" formControlName="countryId" (ngModelChange)="onCountrySelected($event)">
+                                 <select class="form-control" placeholder="Select Country" formControlName="countryID" (ngModelChange)="onCountrySelected($event)">
                                      <option value="">Select Country</option>
-                                     <option *ngFor="let country of countryInfoList" [value]="country.countryId"  [attr.selected]="country.countryId === 103 ? true : null" >{{country.countryName}}</option>
+                                     <option *ngFor="let country of countryInfoList" [value]="country.countryId" >{{country.countryName}}</option>
                                  </select>                                
                              </div>
                          </div>
                          <div class="col-md-4">
                              <div class="position-relative form-group">
                                  <label for="exampleEmail11" class="">State</label>
-                                 <select class="form-control" placeholder="Select State" formControlName="stateId" (ngModelChange)="onStateSelected($event)">
+                                 <select class="form-control" placeholder="Select State" formControlName="stateID" (ngModelChange)="onStateSelected($event)">
                                      <option value="">Select State</option>
                                      <option *ngFor="let state of stateInfoList" [value]="state.stateId">{{state.stateName}}</option>
                                  </select>                                
@@ -59,7 +59,7 @@
                                  <label for="exampleEmail11" class="">City</label>
                                  <select class="form-control" placeholder="Select City" formControlName="city">
                                      <option value="">Select City</option>
-                                     <option *ngFor="let city of cityInfoList" [value]="city.cityName">{{city.cityName}}</option>
+                                     <option *ngFor="let city of cityInfoList" [value]="city.cityId">{{city.cityName}}</option>
                                     </select>                                
                              </div>
                          </div> 

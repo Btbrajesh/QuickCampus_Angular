@@ -35,6 +35,7 @@ export class EditCampusComponent implements OnInit{
     selectedColleges: any[] = [];
     isDisabled: boolean = true;
     country:any;
+    // walkInFormattedDate:any;
 
   constructor(public route:ActivatedRoute,public clientService:ClientService,public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
@@ -52,8 +53,8 @@ export class EditCampusComponent implements OnInit{
       title:new FormControl(),
       address1:new FormControl(),
       address2:new FormControl(),
-      countryId:new FormControl(),
-      stateId:new FormControl(),
+      countryID:new FormControl(),
+      stateID:new FormControl(),
       city:new FormControl(),
       jobDescription:new FormControl(),
       selectedCollegeId: new FormControl(),
@@ -65,21 +66,15 @@ export class EditCampusComponent implements OnInit{
     const campusId = this.route.snapshot.params['id'];
     this.campusService.getCampusById(campusId).subscribe((campusData: any) => {
       console.log(campusData)
-      this.country = campusData.data.countryID
-      this.onCountrySelected(campusData.data.countryID)
-      let campusObj = {
-        walkInID: campusData.walkInID,
-        walkInDate:moment(campusData.walkInDate).format("DD MM YYYY"),
-        title:campusData.title,
-        address1:campusData.address1,
-        address2:campusData.address2,
-        countryId:campusData.countryID,
-        stateId:campusData.stateID,
-        city:campusData.city,
-        jobDescription:campusData.jobDescription,
-      }
-      console.log(campusObj,'obj')
+      campusData.data['walkInDate'] = moment(campusData.data['walkInDate']).format("yyyy-MM-DD")
+      
       this.editCampusForm.patchValue(campusData.data);
+
+
+      // this.walkInFormattedDate = moment(campusData.data['walkInDate']).format("yyyy-MM-DD");
+      // this.editCampusForm.get('walkInDate')?.setValue(this.walkInFormattedDate)
+      // console.log(this.walkInFormattedDate)
+      
       this.patchOptionsArray(campusData.data.colleges);
     });
   }
@@ -88,6 +83,9 @@ export class EditCampusComponent implements OnInit{
     if (options) {
       const optionsFormArray = this.editCampusForm.get('colleges') as FormArray;
       options.forEach(option => {
+        option['startDateTime'] = moment(option['startDateTime']).format("yyyy-MM-DD")
+        option['examStartTime'] = moment(option['examStartTime']).format("hh:mm")
+        option['examEndTime'] = moment(option['examEndTime']).format("hh:mm")
         optionsFormArray.push(this.fb.group(option));
       });
     }
