@@ -30,7 +30,6 @@ export class UserComponent implements OnInit{
   getAllUser(){
     this.spinnerService.show()
     this.userService.getAllUser(this.pageStart,this.pageSize).subscribe((res)=>{
-      console.log(res)
       if (res.isSuccess){
         this.spinnerService.hide()
         this.collectionSize = res.totalRecordCount

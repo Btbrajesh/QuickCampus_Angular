@@ -12,6 +12,7 @@ import { City, CityInfo } from 'src/app/modules/master/models/city';
 import { Country, CountryInfo } from 'src/app/modules/master/models/country';
 import { StateInfo } from 'src/app/modules/master/models/state';
 import { CountrystatecityService } from 'src/app/modules/core/services/countrystatecity.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-campus',
@@ -33,6 +34,7 @@ export class EditCampusComponent implements OnInit{
     cityInfoList!:CityInfo[]
     selectedColleges: any[] = [];
     isDisabled: boolean = true;
+    country:any;
 
   constructor(public route:ActivatedRoute,public clientService:ClientService,public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
@@ -63,8 +65,20 @@ export class EditCampusComponent implements OnInit{
     const campusId = this.route.snapshot.params['id'];
     this.campusService.getCampusById(campusId).subscribe((campusData: any) => {
       console.log(campusData)
+      this.country = campusData.data.countryID
       this.onCountrySelected(campusData.data.countryID)
-      this.onStateSelected(campusData.data.stateID)
+      let campusObj = {
+        walkInID: campusData.walkInID,
+        walkInDate:moment(campusData.walkInDate).format("DD MM YYYY"),
+        title:campusData.title,
+        address1:campusData.address1,
+        address2:campusData.address2,
+        countryId:campusData.countryID,
+        stateId:campusData.stateID,
+        city:campusData.city,
+        jobDescription:campusData.jobDescription,
+      }
+      console.log(campusObj,'obj')
       this.editCampusForm.patchValue(campusData.data);
       this.patchOptionsArray(campusData.data.colleges);
     });
@@ -93,8 +107,8 @@ export class EditCampusComponent implements OnInit{
   patchCollegeArray(college:any){
     const collegeFormArray = this.editCampusForm.get('colleges') as FormArray;
     collegeFormArray.push(this.createCollegeFormGroup(college));
-    
   }
+
   addCollegeFormGroup(college: any) {
     const collegeFormArray = this.editCampusForm.get('colleges') as FormArray;
     collegeFormArray.push(this.createCollegeFormGroup(college));
@@ -108,7 +122,7 @@ export class EditCampusComponent implements OnInit{
       collegeCode: [college.collegeCode],
       examStartTime: [college.examStartTime],
       examEndTime: [college.examEndTime],
-      startDateTime: ['']
+      startDateTime: [college.startDateTime]
     });
   }
 

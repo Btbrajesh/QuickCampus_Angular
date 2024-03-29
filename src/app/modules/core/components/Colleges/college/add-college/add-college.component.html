@@ -13,6 +13,7 @@
             <div class="col-md-12">
               <a class="text-decoration-none">
                 <div class="my_profile_box text-center">
+                  
                   <img
                     *ngIf="!imagePreviewUrl"
                     src="assets/images/upload-icon.png"
@@ -54,7 +55,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">College Name</label>
+                <label for="exampleEmail11" class="">College Name<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="College name"
                   type="text"
@@ -95,7 +96,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">College Code</label>
+                <label for="exampleEmail11" class="">College Code<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="College code"
                   type="text"
@@ -118,7 +119,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">College Address</label>
+                <label for="exampleEmail11" class="">College Address<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="College address"
                   type="text"
@@ -138,10 +139,16 @@
               >
                 <span class="error">College Address is required</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="addCollegeForm.get('Address1')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 100</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Address 2</label>
+                <label for="exampleEmail11" class="">Address 2<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="College address"
                   type="text"
@@ -161,10 +168,16 @@
               >
                 <span class="error">College Address is required</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="addCollegeForm.get('Address2')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 100</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Country</label>
+                <label for="exampleEmail11" class="">Country<span aria-hidden="true" class="required2"> *</span></label>
                 <select
                   class="form-control"
                   placeholder="Select Country"
@@ -195,7 +208,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">State</label>
+                <label for="exampleEmail11" class="">State<span aria-hidden="true" class="required2"> *</span></label>
                 <select
                   class="form-control"
                   placeholder="Select State"
@@ -226,7 +239,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">City</label>
+                <label for="exampleEmail11" class="">City<span aria-hidden="true" class="required2"> *</span></label>
                 <select
                   class="form-control"
                   placeholder="Select City"
@@ -256,7 +269,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Contact Person Email</label>
+                <label for="exampleEmail11" class="">Contact Person Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Contact Person Email"
                   type="text"
@@ -291,7 +304,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Contact Email</label>
+                <label for="exampleEmail11" class="">Contact Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Contact Email"
                   type="text"
@@ -320,7 +333,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Phone</label>
+                <label for="exampleEmail11" class="">Phone<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Your Phone Number"
                   type="text"
@@ -342,16 +355,11 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContactPhone')?.hasError('maxlength')"
+                *ngIf="addCollegeForm.get('ContactPhone')?.hasError('pattern')"
               >
-                <span class="error">Maximum allowed length is 10</span>
+                <span class="error">Only Numbers are allowed</span>
               </div>
-              <div
-                class="text-danger"
-                *ngIf="addCollegeForm.get('ContactPhone')?.hasError('minlength')"
-              >
-                <span class="error">Minimum required length is 10</span>
-              </div>
+              
             </div>
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">

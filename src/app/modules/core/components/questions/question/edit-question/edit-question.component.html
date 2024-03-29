@@ -17,7 +17,7 @@
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
-                  >Question Type <sup>*</sup></label
+                  >Question Type<span aria-hidden="true" class="required2"> *</span></label
                 >
                 <select
                   class="form-select form-control"
@@ -48,7 +48,7 @@
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
-                  >Section <sup>*</sup></label
+                  >Section<span aria-hidden="true" class="required2"> *</span></label
                 >
                 <select
                   class="form-select form-control"
@@ -79,7 +79,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Group <sup>*</sup></label>
+                <label for="exampleEmail11" class="">Group<span aria-hidden="true" class="required2"> *</span></label>
                 <select
                   class="form-select form-control"
                   aria-label="Default select example"
@@ -109,7 +109,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Marks</label>
+                <label for="exampleEmail11" class="">Marks<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Marks"
                   type="text"
@@ -133,7 +133,7 @@
             <div class="col-md-12">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
-                  >Question <sup>*</sup></label
+                  >Question<span aria-hidden="true" class="required2"> *</span></label
                 >
                 <textarea
                   class="form-control"
@@ -159,6 +159,7 @@
             <div class="col-md-12">
               <div class="position-relative form-group">
                 <div formArrayName="QuestionssoptionVm" *ngIf="optionArray">
+                  <label for="exampleEmail11" class="">Options<span aria-hidden="true" class="required2"> *</span></label>
                   <div
                     *ngFor="let option of optionArray.controls; let i = index"
                     [formGroupName]="i"

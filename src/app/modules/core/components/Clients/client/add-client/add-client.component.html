@@ -16,8 +16,9 @@
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Name</label>
+                <label for="exampleEmail11" class="">Name<span aria-hidden="true" class="required2"> *</span></label>
                 <input
+                  
                   placeholder="Enter name"
                   type="text"
                   class="form-control"
@@ -49,10 +50,16 @@
               >
                 <span class="error">Maximum length is 25</span>
               </div>
+              <div
+              class="text-danger"
+              *ngIf="addClientForm.get('name')?.hasError('pattern')"
+            >
+              <span class="error">Only alphabets allowed</span>
+            </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Email</label>
+                <label for="exampleEmail11" class="">Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Email address"
                   type="text"
@@ -78,10 +85,16 @@
               >
                 <span class="error">Provide a correct email</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="addClientForm.get('email')?.hasError('maxlength')"
+              >
+                <span class="error">Max length allowed is 50</span>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Phone</label>
+                <label for="exampleEmail11" class="">Phone<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Phone"
                   type="text"
@@ -103,20 +116,14 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addClientForm.get('phone')?.hasError('maxlength')"
+                *ngIf="addClientForm.get('phone')?.hasError('pattern')"
               >
-                <span class="error">Maximum allowed length is 10</span>
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="addClientForm.get('phone')?.hasError('minlength')"
-              >
-                <span class="error">Minimum allowed length is 10</span>
+                <span class="error">Only Numbers Allowed</span>
               </div>
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Address</label>
+                <label for="exampleEmail11" class="">Address<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Address"
                   type="text"
@@ -142,31 +149,46 @@
               >
                 <span class="error">Maximum allowed length is 50</span>
               </div>
+              
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Role</label>
+                <label for="exampleEmail11" class="">Role<span aria-hidden="true" class="required2"> *</span></label>
                 <select
                   class="form-select form-control mr-4"
                   placeholder="Select Role"
                   formControlName="roleId"
                 >
-                  <option value="">Select Role</option>
+                  <option value="" selected>Select Role</option>
                   <option *ngFor="let role of roleList" [value]="role.roleId">
                     {{role.roleName}}
                   </option>
                 </select>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addClientForm.get('roleId')?.invalid &&
+                    (addClientForm.get('roleId')?.dirty ||
+                      addClientForm.get('roleId')?.touched)) ||
+                  (addClientForm
+                    .get('roleId')
+                    ?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Role is required</span>
+              </div>
               </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Subscription Plan</label>
+                <label for="exampleEmail11" class="">Subscription Plan<span aria-hidden="true" class="required2"> *</span></label>
                 <select
                   class="form-select form-control"
                   aria-label="Default select example"
                   formControlName="subscriptionPlan"
                 >
-                  <option selected>--Choose Plan--</option>
+                  <option selected value="">--Choose Plan--</option>
                   <option value="100">100</option>
                   <option value="200">200</option>
                 </select>
@@ -188,7 +210,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">UserName</label>
+                <label for="exampleEmail11" class="">UserName<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Enter your email"
                   type="text"
@@ -217,7 +239,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Password</label>
+                <label for="exampleEmail11" class="">Password<span aria-hidden="true" class="required2"> *</span></label>
                 <div class="input-group">
                   <input
                     placeholder="Password"
@@ -228,6 +250,7 @@
                   />
                   <div class="input-group-append">
                     <button
+                      type="button"
                       class="eye-button"
                       tabindex="-1"
                       (click)="togglePasswordVisibility()"
@@ -274,7 +297,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Confirm Password</label>
+                <label for="exampleEmail11" class="">Confirm Password<span aria-hidden="true" class="required2"> *</span></label>
                 <div class="input-group">
                   <input
                     placeholder="Confirm Password"
@@ -285,6 +308,7 @@
                   />
                   <div class="input-group-append">
                     <button
+                      type="button"
                       class="eye-button"
                       tabindex="-1"
                       (click)="togglePasswordVisibility2()"

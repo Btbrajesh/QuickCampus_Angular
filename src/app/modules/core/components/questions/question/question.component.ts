@@ -32,7 +32,6 @@ export class QuestionComponent {
   getQuestionList(){
     this.spinnerService.show();
     this.questionService.getQuestionList(this.pageStart,this.pageSize).subscribe(res =>{
-      console.log(res)
       if(res.isSuccess){
         this.collectionSize = res.totalRecordCount
         this.questionList = []

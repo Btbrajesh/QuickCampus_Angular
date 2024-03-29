@@ -149,16 +149,11 @@
             </div>
             <div
               class="text-danger"
-              *ngIf="addApplicantForm.get('phoneNumber')?.hasError('maxlength')"
+              *ngIf="addApplicantForm.get('phoneNumber')?.hasError('pattern')"
             >
-              <span class="error">Maximum allowed length is 10</span>
+              <span class="error">Only Numbers are allowed</span>
             </div>
-            <div
-              class="text-danger"
-              *ngIf="addApplicantForm.get('phoneNumber')?.hasError('minlength')"
-            >
-              <span class="error">Minimum 10 number required</span>
-            </div>
+            
           </div>
           <div class="col-md-4">
             <div class="position-relative form-group">
@@ -369,6 +364,12 @@
             >
               <span class="error">Comment is required</span>
             </div>
+            <div
+              class="text-danger"
+              *ngIf="addApplicantForm.get('comment')?.hasError('pattern')"
+            >
+              <span class="error">Only alphabets are allowed</span>
+            </div>
           </div>
 
           <div class="col-md-4">
@@ -433,7 +434,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4" *ngIf="roleName == 'Admin'">
             <div class="position-relative form-group">
               <label for="exampleEmail11" class="required"
                 >Client <span aria-hidden="true" class="required2">*</span></label
@@ -452,18 +453,18 @@
                 </option>
               </select>
             </div>
-            <div
+            <!-- <div
               class="text-danger"
               *ngIf="
-                (addApplicantForm.get('highestQualification')?.invalid &&
-                  (addApplicantForm.get('highestQualification')?.dirty ||
-                    addApplicantForm.get('highestQualification')?.touched)) ||
-                (addApplicantForm.get('highestQualification')?.hasError('required') &&
+                (addApplicantForm.get('clientId')?.invalid &&
+                  (addApplicantForm.get('clientId')?.dirty ||
+                    addApplicantForm.get('clientId')?.touched)) ||
+                (addApplicantForm.get('clientId')?.hasError('required') &&
                   myform.submitted)
               "
             >
-              <span class="error">Highest Qualification is required</span>
-            </div>
+              <span class="error">Client is required</span>
+            </div> -->
           </div>
 
           <div class="col-md-12">

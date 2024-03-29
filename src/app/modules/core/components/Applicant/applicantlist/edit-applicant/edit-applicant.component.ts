@@ -47,10 +47,10 @@ ngOnInit(): void {
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
-      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]),
-      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]),
+      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
+      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
       emailAddress: new FormControl(res.data['emailAddress'],[Validators.required,Validators.email]),
-      phoneNumber:new FormControl(res.data['phoneNumber'],[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
+      phoneNumber:new FormControl(res.data['phoneNumber'],[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]),
       collegeId:new FormControl(res.data['collegeId'],[Validators.required]),
       highestQualification:new FormControl(res.data['highestQualification'],[Validators.required]),
       highestQualificationPercentage:new FormControl(res.data['highestQualificationPercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
@@ -58,7 +58,7 @@ ngOnInit(): void {
       intermediatePercentage:new FormControl(res.data['intermediatePercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
       skills:new FormControl(res.data['skills'],[Validators.required]),
       statusId: new FormControl(res.data['statusId'],[Validators.required]),
-      comment: new FormControl(res.data['comment'],[Validators.required]),
+      comment: new FormControl(res.data['comment'],[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
       assignedToCompany: new FormControl(res.data['assignedToCompany'],[Validators.required]),
     })
   },err=>{

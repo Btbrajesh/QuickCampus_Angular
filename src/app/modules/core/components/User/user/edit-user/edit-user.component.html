@@ -13,7 +13,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Name</label>
+                <label for="exampleEmail11" class="">Name<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Enter Name"
                   type="text"
@@ -33,11 +33,17 @@
           >
             <span class="error">Name is required</span>
           </div>
-          
+          <div
+              class="text-danger"
+              *ngIf="editForm.get('name')?.hasError('pattern')"
+            >
+              <span class="error">Only Alphabets are allowed</span>
+            </div>
+            
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Email</label>
+                <label for="exampleEmail11" class="">Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Email address"
                   type="text"
@@ -66,7 +72,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Phone</label>
+                <label for="exampleEmail11" class="">Phone<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Phone"
                   type="text"
@@ -88,16 +94,11 @@
           </div>
           <div
             class="text-danger"
-            *ngIf="editForm.get('mobile')?.hasError('maxlength')"
+            *ngIf="editForm.get('mobile')?.hasError('pattern')"
           >
-            <span class="error">Maximum allowed length is 10</span>
+            <span class="error">Only Numbers are allowed</span>
           </div>
-          <div
-            class="text-danger"
-            *ngIf="editForm.get('mobile')?.hasError('minlength')"
-          >
-            <span class="error">Minimum allowed length is 10</span>
-          </div>
+          
             </div>
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">

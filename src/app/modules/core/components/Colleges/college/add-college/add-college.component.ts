@@ -34,16 +34,16 @@ export class AddCollegeComponent implements OnInit{
     this.fetchCountry();
      this.addCollegeForm = this.fb.group({
       ImagePath:['',[Validators.required]],
-      CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern('^[A-Za-z]+$')]],
+      CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
       CollegeCode:['',[Validators.required]],
-      Address1:['',[Validators.required]],
-      Address2:['',[Validators.required]],
+      Address1:['',[Validators.required,Validators.maxLength(100)]],
+      Address2:['',[Validators.required,Validators.maxLength(100)]],
       CityId:['',[Validators.required]],
       StateId:['',[Validators.required]],
       CountryId:['',[Validators.required]],
-      ContactPerson:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
+      ContactPerson:['',[Validators.required,Validators.email]],
       ContactEmail:['',[Validators.required,Validators.email]],
-      ContactPhone:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      ContactPhone:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
 
      })
    }
@@ -52,7 +52,6 @@ export class AddCollegeComponent implements OnInit{
     if (this.addCollegeForm.valid){
       this.data = this.addCollegeForm.value
       this.data.ImagePath = this.selectedFileName
-      console.log(this.data,'add')
       this.collegeService.addCollege(this.data).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)

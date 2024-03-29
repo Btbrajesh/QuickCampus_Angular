@@ -21,31 +21,36 @@ export class AddApplicantComponent implements OnInit{
   collegeList:any;
   qualificationList:any;
   clientList:any;
+  roleName:any
 
   constructor(public clientService:ClientService,public toastr:ToastrService,public router:Router,private applicantService:ApplicantService,public fb:FormBuilder,public collegeService:CollegeService,public commonService:CommonService){}
 
   ngOnInit(): void {
     this.addApplicantForm = this.fb.group({
-      firstName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]],
-      lastName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern('^[A-Za-z]+$')]],
+      firstName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
+      lastName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
       emailAddress: ['',[Validators.required,Validators.email]],
-      phoneNumber:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      phoneNumber:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
       highestQualification:['',[Validators.required]],
       highestQualificationPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
       matricPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
       intermediatePercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
       skills:['',[Validators.required]],
       statusId:['',[Validators.required]],
-      comment:['',[Validators.required]],
+      comment:['',[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
       collegeId:['',[Validators.required]],
       assignedToCompany:['',[Validators.required]],
-      clientId:['',[Validators.required]]
+      clientId:['',[]]
     })
     this.getStatus()
     this.getCompany()
     this.getCollege()
     this.getQualification()
-    this.getClient()
+    this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
+    
   }
 
   submit(){

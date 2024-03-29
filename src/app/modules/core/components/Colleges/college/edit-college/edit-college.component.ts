@@ -55,16 +55,16 @@ export class EditCollegeComponent implements OnInit{
       this.onStateSelected(res.data.stateId)
       this.editCollegeForm = new FormGroup({
         ImagePath:new FormControl('',[Validators.required]),
-        CollegeName:new FormControl(res.data.collegeName,[Validators.required,Validators.maxLength(50),Validators.minLength(3)]),
+        CollegeName:new FormControl(res.data.collegeName,[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
         CollegeCode:new FormControl(res.data.collegeCode,[Validators.required]),
-        Address1:new FormControl(res.data.address1,[Validators.required,Validators.maxLength(40)]),
-        Address2:new FormControl(res.data.address2,[Validators.required,Validators.maxLength(40)]),
+        Address1:new FormControl(res.data.address1,[Validators.required,Validators.maxLength(100)]),
+        Address2:new FormControl(res.data.address2,[Validators.required,Validators.maxLength(100)]),
         CityId:new FormControl(res.data.cityId,[Validators.required]),
         StateId:new FormControl(res.data.stateId,[Validators.required]),
         CountryId:new FormControl(res.data.countryId,[Validators.required]),
         ContactPerson:new FormControl(res.data.contectPerson,[Validators.required,Validators.minLength(2)]),
         ContactEmail:new FormControl(res.data.contectEmail,[Validators.required,Validators.email]),
-        ContactPhone:new FormControl(res.data.contectPhone,[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
+        ContactPhone:new FormControl(res.data.contectPhone,[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]),
         // client:new FormControl('',[Validators.required]),
       })
     },err=>{
@@ -117,7 +117,6 @@ export class EditCollegeComponent implements OnInit{
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     this.selectedFileName = event.target.files[0];
-    console.log(this.selectedFileName)
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -133,9 +132,7 @@ export class EditCollegeComponent implements OnInit{
     if (this.editCollegeForm.valid){
       const data = this.editCollegeForm.value as UpdateCollege;
       data.ImagePath = this.selectedFileName
-      console.log(data.ImagePath,'image')
       data.CollegeId = this.router.snapshot.params['id']
-      console.log(data,'data')
       this.collegeService.updateCollege(data).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)

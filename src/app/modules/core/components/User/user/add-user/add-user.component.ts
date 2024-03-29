@@ -28,9 +28,9 @@ export class AddUserComponent implements OnInit{
     // this.getRole()
     // this.getClient()
     this.addUserForm = this.fb.group({
-      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern('^[A-Za-z]+$')]],
+      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
       email:['',[Validators.required,Validators.email]],
-      mobile:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      mobile:['',[Validators.required,,Validators.pattern("^[1-9][0-9]{9}$")]],
       // role:['',[Validators.required]],
       // client:['',[Validators.required]],
       password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(8),Validators.pattern('(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],

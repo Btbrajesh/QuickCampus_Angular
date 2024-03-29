@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Name</label>
+                <label for="exampleEmail11" class="">Name<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Enter name"
                   type="text"
@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Email</label>
+                <label for="exampleEmail11" class="">Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Email address"
                   type="text"
@@ -82,7 +82,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Phone</label>
+                <label for="exampleEmail11" class="">Phone<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Phone"
                   type="text"
@@ -104,16 +104,11 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addUserForm.get('mobile')?.hasError('maxlength')"
+                *ngIf="addUserForm.get('mobile')?.hasError('pattern')"
               >
-                <span class="error">Maximum allowed length is 10</span>
+                <span class="error">Only Numbers are allowed</span>
               </div>
-              <div
-                class="text-danger"
-                *ngIf="addUserForm.get('mobile')?.hasError('minlength')"
-              >
-                <span class="error">Minimum allowed length is 10</span>
-              </div>
+              
             </div>
             <!-- <div class="col-md-4">
               <div class="position-relative form-group">
@@ -171,7 +166,7 @@
             </div> -->
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Password</label>
+                <label for="exampleEmail11" class="">Password<span aria-hidden="true" class="required2"> *</span></label>
                 <div class="input-group">
                   <input
                     placeholder="Password"
@@ -182,6 +177,7 @@
                   />
                   <div class="input-group-append">
                     <button
+                    type="button"
                       class="eye-button"
                       tabindex="-1"
                       (click)="togglePasswordVisibility()"
@@ -228,7 +224,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Confirm Password</label>
+                <label for="exampleEmail11" class="">Confirm Password<span aria-hidden="true" class="required2"> *</span></label>
                 <div class="input-group">
                   <input
                     placeholder="Confirm Password"
@@ -239,6 +235,7 @@
                   />
                   <div class="input-group-append">
                     <button
+                    type="button"
                       class="eye-button"
                       tabindex="-1"
                       (click)="togglePasswordVisibility2()"

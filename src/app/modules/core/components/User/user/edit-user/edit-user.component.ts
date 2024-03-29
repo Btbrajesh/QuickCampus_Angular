@@ -27,12 +27,11 @@ export class EditUserComponent implements OnInit{
   ngOnInit(): void {
     // this.getClient()
     this.userService.getCurrentData(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res)
       this.editForm = new FormGroup({
         userId: new FormControl(),
-        name:new FormControl(res.data['name'],[Validators.required]),
+        name:new FormControl(res.data['name'],[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
         email: new FormControl(res.data['email'],[Validators.required,Validators.email]),
-        mobile:new FormControl(res.data['mobile'],[Validators.required,Validators.maxLength(10),Validators.minLength(10)])
+        mobile:new FormControl(res.data['mobile'],[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")])
       })
     })
     

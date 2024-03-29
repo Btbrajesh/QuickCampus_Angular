@@ -46,7 +46,6 @@ export class EditQuestionComponent implements OnInit{
   loadQuestionData() {
     const questionId = this.route.snapshot.params['id'];
     this.questionService.getQuestionById(questionId).subscribe((questionData: any) => {
-      console.log(questionData)
       this.editQuestionForm.patchValue(questionData.data);
       this.patchOptionsArray(questionData.data.questionssoptionVm);
     });

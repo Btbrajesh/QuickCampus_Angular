@@ -26,9 +26,9 @@ export class AddClientComponent implements OnInit{
   ngOnInit(): void {
     this.getAllRole()
     this.addClientForm = this.fb.group({
-      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2)]],
-      email:['',[Validators.required,Validators.email]],
-      phone:['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
+      email:['',[Validators.required,Validators.email,Validators.maxLength(50)]],
+      phone:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
       address:['',[Validators.required,Validators.maxLength(50)]],
       subscriptionPlan:['',[Validators.required]],
       username:['',[Validators.required,Validators.email]],
@@ -73,7 +73,6 @@ export class AddClientComponent implements OnInit{
 
   getAllRole(){
     this.roleService.getAllRole().subscribe((res)=>{
-      console.log(res)
       this.roleList =res.data
     })
   }

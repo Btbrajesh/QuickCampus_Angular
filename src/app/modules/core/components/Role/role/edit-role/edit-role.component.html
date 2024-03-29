@@ -2,7 +2,6 @@
   class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar"
 >
   <div class="app-main__inner">
-    
     <!-- main content -->
     <div class="main-card mb-3 card">
       <div class="card-header card-title">
@@ -26,7 +25,7 @@
                 *ngIf="
                   (editRoleForm.get('roleName')?.invalid &&
                     (editRoleForm.get('roleName')?.dirty ||
-                    editRoleForm.get('roleName')?.touched)) ||
+                      editRoleForm.get('roleName')?.touched)) ||
                   (editRoleForm.get('roleName')?.hasError('required') &&
                     myform.submitted)
                 "
@@ -34,44 +33,55 @@
                 <span class="error">Role Name is required</span>
               </div>
               <div
-              class="text-danger"
-              *ngIf="editRoleForm.get('roleName')?.hasError('pattern')"
-            >
-              <span class="error">Only Alphabets are allowed</span>
+                class="text-danger"
+                *ngIf="editRoleForm.get('roleName')?.hasError('pattern')"
+              >
+                <span class="error">Only Alphabets are allowed</span>
+              </div>
             </div>
-            </div>
-           
 
             <div class="col-md-12"><label>Permission</label></div>
-                <div class="col-md-12" formArrayName="permission">
-                      <div class="col-md-3" *ngFor="let item of permissionList; let i = index">
-                      <div class="position-relative form-group">
-                    <input type="checkbox" [id]="'checkbox-' + item.id" [value]="item.id" (change)="onCheckboxChange($event, item.id)">
-                    <label class='ml-2' [for]="'checkbox-' + item.id">{{ item.permissionName }}</label>
-                  </div>
+            <div class="col-md-12" formArrayName="permission">
+              <div
+                class="col-md-3"
+                *ngFor="let item of permissionList; let i = index"
+              >
+                <div class="position-relative form-group">
+                  <input
+                    type="checkbox"
+                    [id]="'checkbox-' + item.id"
+                    [value]="item.id"
+                    (change)="onCheckboxChange($event, item.id)"
+                  />
+                  <label class="ml-2" [for]="'checkbox-' + item.id">{{
+                    item.permissionName
+                  }}</label>
                 </div>
-                <div
+              </div>
+              <div
                 class="text-danger"
                 *ngIf="
                   (editRoleForm.get('permission')?.invalid &&
                     (editRoleForm.get('permission')?.dirty ||
-                    editRoleForm.get('permission')?.touched)) ||
+                      editRoleForm.get('permission')?.touched)) ||
                   (editRoleForm.get('permission')?.hasError('required') &&
                     myform.submitted)
                 "
               >
                 <span class="error">Permission is required</span>
               </div>
-              </div>
-               
-                
-              
-            
+            </div>
 
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">
                 <button type="submit" class="btn btn-primary mr-3">Save</button>
-                <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="cancel()"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
@@ -81,4 +91,3 @@
     <!-- main content -->
   </div>
 </div>
-

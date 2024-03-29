@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-4">
           <div class="position-relative form-group">
-            <label for="exampleEmail11" class="">Name</label>
+            <label for="exampleEmail11" class="">Name<span aria-hidden="true" class="required2"> *</span></label>
             <input
               placeholder="Enter name"
               type="text"
@@ -27,7 +27,12 @@
           >
             <span class="error">Name is required</span>
           </div>
-
+          <div
+              class="text-danger"
+              *ngIf="editClientForm.get('name')?.hasError('pattern')"
+            >
+              <span class="error">Only alphabets allowed</span>
+            </div>
           <div
             class="text-danger"
             *ngIf="editClientForm.get('name')?.hasError('minlength')"
@@ -43,7 +48,7 @@
         </div>
         <div class="col-md-4">
           <div class="position-relative form-group">
-            <label for="exampleEmail11" class="required">Email</label>
+            <label for="exampleEmail11" class="required">Email<span aria-hidden="true" class="required2"> *</span></label>
             <input
               placeholder="Email address"
               type="text"
@@ -73,7 +78,7 @@
         </div>
         <div class="col-md-4">
           <div class="position-relative form-group">
-            <label for="exampleEmail11" class="required">Phone</label>
+            <label for="exampleEmail11" class="required">Phone<span aria-hidden="true" class="required2"> *</span></label>
             <input
               placeholder="Phone"
               type="text"
@@ -96,21 +101,15 @@
             <span class="error">Phone is required</span>
           </div>
           <div
-            class="text-danger"
-            *ngIf="editClientForm.get('phone')?.hasError('maxlength')"
-          >
-            <span class="error">Maximum allowed length is 10</span>
-          </div>
-          <div
-            class="text-danger"
-            *ngIf="editClientForm.get('phone')?.hasError('minlength')"
-          >
-            <span class="error">Minimum allowed length is 10</span>
-          </div>
+                class="text-danger"
+                *ngIf="editClientForm.get('phone')?.hasError('pattern')"
+              >
+                <span class="error">Only Numbers Allowed</span>
+              </div>
         </div>
         <div class="col-md-4">
           <div class="position-relative form-group">
-            <label for="exampleEmail11" class="required">Address</label>
+            <label for="exampleEmail11" class="required">Address<span aria-hidden="true" class="required2"> *</span></label>
             <input
               placeholder="Address"
               type="text"
@@ -137,11 +136,12 @@
           >
             <span class="error">Maximum allowed length is 50</span>
           </div>
+          
         </div>
 
         <div class="col-md-4">
           <div class="position-relative form-group">
-            <label for="exampleEmail11" class="">Subscription Plan</label>
+            <label for="exampleEmail11" class="">Subscription Plan<span aria-hidden="true" class="required2"> *</span></label>
             <select
               class="form-select form-control"
               aria-label="Default select example"
@@ -168,18 +168,32 @@
         </div>
         <div class="col-md-4">
           <div class="position-relative form-group">
-            <label for="exampleEmail11" class="">Role</label>
+            <label for="exampleEmail11" class="">Role<span aria-hidden="true" class="required2"> *</span></label>
             <select
               class="form-select form-control mr-4"
               placeholder="Select Role"
               formControlName="roleId"
             >
-              <option value="">Select Role</option>
+              <option value="" selected>Select Role</option>
               <option *ngFor="let role of roleList" [value]="role.roleId">
                 {{role.roleName}}
               </option>
             </select>
           </div>
+          <div
+                class="text-danger"
+                *ngIf="
+                  (editClientForm.get('roleId')?.invalid &&
+                    (editClientForm.get('roleId')?.dirty ||
+                    editClientForm.get('roleId')?.touched)) ||
+                  (editClientForm
+                    .get('roleId')
+                    ?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Role is required</span>
+              </div>
           </div>
 
         <div class="col-md-12">
