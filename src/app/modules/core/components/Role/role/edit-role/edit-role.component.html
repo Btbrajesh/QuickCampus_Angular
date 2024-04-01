@@ -52,8 +52,8 @@
                     type="checkbox"
                     [id]="'checkbox-' + item.id"
                     [value]="item.id"
+                    [checked]="item.IsCheck"
                     (change)="onCheckboxChange($event, item.id)"
-                    [checked]="isPermissionChecked(item.id)"
                   />
                   <label class="ml-2" [for]="'checkbox-' + item.id">{{
                     item.permissionName

@@ -13,7 +13,8 @@ import { Role } from 'src/app/modules/master/models/role';
   styleUrls: ['./edit-role.component.css']
 })
 export class EditRoleComponent implements OnInit{
-
+obj : any[] = []
+selectedIdsFormArray:any
   permissionList: any[]= []
   permissionUser:any
   editRoleForm = new FormGroup({
@@ -53,27 +54,27 @@ export class EditRoleComponent implements OnInit{
   // }
 
   onCheckboxChange(event:any, id: number) {
-    const selectedIdsFormArray = this.editRoleForm.get('permission') as FormArray;
+    this.selectedIdsFormArray = this.editRoleForm.get('permission') as FormArray;
 
     if (event.target.checked) {
-      selectedIdsFormArray.push(this.fb.control(id));
+      this.selectedIdsFormArray.push(this.fb.control(id));
     } else {
-      const index = selectedIdsFormArray.controls.findIndex(x => x.value === id);
-      selectedIdsFormArray.removeAt(index);
+      const index = this.selectedIdsFormArray.controls.findIndex((x:any) => x.value === id);
+      this.selectedIdsFormArray.removeAt(index);
     }
   }
 
   setPermissions(): void {
-    const permissionFormArray = this.editRoleForm.get('permission') as FormArray;
+    debugger
+    //const permissionFormArray = this.editRoleForm.get('permission') as FormArray;
     this.permissionList.forEach(pm => {
       const checked = this.permissionUser.permission.some((p:any) => p.id === pm.id);
-      permissionFormArray.push(this.fb.control(checked));
+      pm.IsCheck = checked;
+      //permissionFormArray.push(this.fb.control(checked));
     });
+    console.log(this.permissionList);
   }
 
-  isPermissionChecked(permissionId: number): boolean {
-    return this.permissionUser.permission.some((p:any) => p.id === permissionId);
-  }
 
   getPermissionList(){
     this.roleService.getAllPermission().subscribe((res)=>{
@@ -87,26 +88,61 @@ export class EditRoleComponent implements OnInit{
     
   }
 
-  submit(){
-    if (this.editRoleForm.valid){
-      const formData = this.editRoleForm.value as Role
-      formData.id = this.router.snapshot.params['id']
-      this.roleService.updateRole(formData).subscribe((res)=>{
-        if (res.isSuccess){
-          this.toastr.success(res.message)
-          this.editRoleForm.reset()
-          this.route.navigateByUrl('/admin/role')
-        }else{
-          this.toastr.error(res.message)
+  submit() {
+    if (this.editRoleForm.valid) {
+      const selectedPermissions = this.editRoleForm.value.permission || []; // Newly selected permissions from the form
+      const previouslySelectedPermissions = this.permissionList.filter(pm => pm.IsCheck).map(pm => pm.id); // Previously selected permissions fetched from the API
+  
+      // Merge both arrays to include all selected permissions
+      const allSelectedPermissions = [...selectedPermissions, ...previouslySelectedPermissions];
+  
+      const formData = {
+        id: this.router.snapshot.params['id'],
+        roleName: this.editRoleForm.value.roleName,
+        client: this.editRoleForm.value.client,
+        permission: allSelectedPermissions // Set the permissions array in the formData object
+      };
+  
+      // Send formData to your backend API
+      this.roleService.updateRole(formData).subscribe(
+        (res) => {
+          if (res.isSuccess) {
+            this.toastr.success(res.message);
+            this.editRoleForm.reset();
+            this.route.navigateByUrl('/admin/role');
+          } else {
+            this.toastr.error(res.message);
+          }
+        },
+        (err) => {
+          this.toastr.error(err);
         }
-      },err=>{
-        this.toastr.error(err)
-      })
-    }else{
-      this.toastr.error("Please fill the form Properly")
+      );
+    } else {
+      this.toastr.error('Please fill the form properly');
     }
-    
   }
+
+  // submit(){
+  //   if (this.editRoleForm.valid){
+  //     const formData = this.editRoleForm.value
+  //     formData.id = this.router.snapshot.params['id']
+  //     this.roleService.updateRole(formData).subscribe((res)=>{
+  //       if (res.isSuccess){
+  //         this.toastr.success(res.message)
+  //         this.editRoleForm.reset()
+  //         this.route.navigateByUrl('/admin/role')
+  //       }else{
+  //         this.toastr.error(res.message)
+  //       }
+  //     },err=>{
+  //       this.toastr.error(err)
+  //     })
+  //   }else{
+  //     this.toastr.error("Please fill the form Properly")
+  //   }
+    
+  // }
 
   cancel(){
     this.route.navigateByUrl('/admin/role')
