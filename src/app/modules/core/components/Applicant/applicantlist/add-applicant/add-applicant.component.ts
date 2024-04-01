@@ -56,17 +56,33 @@ export class AddApplicantComponent implements OnInit{
   submit(){
     if (this.addApplicantForm.valid){
       const data = this.addApplicantForm.value as Applicant
-      this.applicantService.addApplicant(data).subscribe((res)=>{
-        if (res.isSuccess){
-          this.toastr.success(res.message)
-          this.addApplicantForm.reset()
-          this.router.navigateByUrl('/admin/applicant')
-        }else{
-          this.toastr.error(res.message)
-        }
-      },err=>{
-        this.toastr.error(err)
-      })
+      if (this.roleName == 'Admin'){
+        this.applicantService.addApplicant(data).subscribe((res)=>{
+          if (res.isSuccess){
+            this.toastr.success(res.message)
+            this.addApplicantForm.reset()
+            this.router.navigateByUrl('/admin/applicant')
+          }else{
+            this.toastr.error(res.message)
+          }
+        },err=>{
+          this.toastr.error(err)
+        })
+      }else{
+        data.clientId = localStorage.getItem('clientId')
+        this.applicantService.addApplicant(data).subscribe((res)=>{
+          if (res.isSuccess){
+            this.toastr.success(res.message)
+            this.addApplicantForm.reset()
+            this.router.navigateByUrl('/admin/applicant')
+          }else{
+            this.toastr.error(res.message)
+          }
+        },err=>{
+          this.toastr.error(err)
+        })
+      }
+      
     }else{
       this.toastr.error('Please fill all the details properly')
     }

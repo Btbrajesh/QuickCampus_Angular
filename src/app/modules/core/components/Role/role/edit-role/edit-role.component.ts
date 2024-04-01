@@ -62,10 +62,10 @@ selectedIdsFormArray:any
       const index = this.selectedIdsFormArray.controls.findIndex((x:any) => x.value === id);
       this.selectedIdsFormArray.removeAt(index);
     }
+    
   }
 
   setPermissions(): void {
-    debugger
     //const permissionFormArray = this.editRoleForm.get('permission') as FormArray;
     this.permissionList.forEach(pm => {
       const checked = this.permissionUser.permission.some((p:any) => p.id === pm.id);
@@ -91,10 +91,10 @@ selectedIdsFormArray:any
   submit() {
     if (this.editRoleForm.valid) {
       const selectedPermissions = this.editRoleForm.value.permission || []; // Newly selected permissions from the form
-      const previouslySelectedPermissions = this.permissionList.filter(pm => pm.IsCheck).map(pm => pm.id); // Previously selected permissions fetched from the API
+      // const previouslySelectedPermissions = this.permissionList.filter(pm => pm.IsCheck).map(pm => pm.id); // Previously selected permissions fetched from the API
   
       // Merge both arrays to include all selected permissions
-      const allSelectedPermissions = [...selectedPermissions, ...previouslySelectedPermissions];
+      const allSelectedPermissions = [...selectedPermissions];
   
       const formData = {
         id: this.router.snapshot.params['id'],
