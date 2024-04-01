@@ -27,9 +27,9 @@ export class AddApplicantComponent implements OnInit{
 
   ngOnInit(): void {
     this.addApplicantForm = this.fb.group({
-      firstName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
-      lastName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
-      emailAddress: ['',[Validators.required,Validators.email]],
+      firstName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]],
+      lastName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]],
+      emailAddress: ['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       phoneNumber:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
       highestQualification:['',[Validators.required]],
       highestQualificationPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
@@ -37,7 +37,7 @@ export class AddApplicantComponent implements OnInit{
       intermediatePercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
       skills:['',[Validators.required]],
       statusId:['',[Validators.required]],
-      comment:['',[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
+      comment:['',[Validators.maxLength(1000)]],
       collegeId:['',[Validators.required]],
       assignedToCompany:['',[Validators.required]],
       clientId:['',[]]
@@ -87,16 +87,19 @@ export class AddApplicantComponent implements OnInit{
 
   getCompany(){
     this.applicantService.getCompanyList().subscribe((res)=>{
+      console.log(res)
       if (res.isSuccess){
-        this.companyList = res.data
+        this.companyList = res.data.filter((company:any) => company.isActive === true)
       }
     })
   }
 
   getCollege(){
-    this.collegeService.getAllCollegeList().subscribe((res)=>{
+    const pageStart1=1
+    const pageSize1 = 1000
+    this.collegeService.getAllCollegeList(pageStart1,pageSize1).subscribe((res:any)=>{
       if (res.isSuccess){
-        this.collegeList = res.data
+        this.collegeList = res.data.filter((college:any) => college.isActive === true)
       }
     })
   }
@@ -111,7 +114,9 @@ export class AddApplicantComponent implements OnInit{
 
   getClient(){
     this.clientService.getAllClientList().subscribe((res)=>{
-      this.clientList = res.data
+      if (res.isSuccess){
+        this.clientList = res.data.filter((client:any) => client.isActive === true)
+      }
     })
   }
 

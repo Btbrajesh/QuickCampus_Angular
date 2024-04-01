@@ -32,10 +32,14 @@ export class AuthenticationService {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 if (user && user.data) {
                     const userData = user.data;
+                    const userName = user.data.userName
+                    const userRoleName = user.data.roleMasters.roleName
                     const role = user.data.roleMasters.userAppRoleName
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('authenticate', JSON.stringify(userData));
                     localStorage.setItem('role',role)
+                    localStorage.setItem('userName',userName)
+                    localStorage.setItem('userRoleName',userRoleName)
                     this.userSubject.next(userData);
                 }
                 return user;

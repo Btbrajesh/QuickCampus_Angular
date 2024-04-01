@@ -291,16 +291,11 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContactPerson')?.hasError('minlength')"
+                *ngIf="addCollegeForm.get('ContactPerson')?.hasError('pattern')"
               >
-                <span class="error">Minimum 3 letters required</span>
+                <span class="error">Please provide a proper email</span>
               </div>
-              <div
-                class="text-danger"
-                *ngIf="addCollegeForm.get('ContactPerson')?.hasError('maxlength')"
-              >
-                <span class="error">Maximum length is 20</span>
-              </div>
+              
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
@@ -326,7 +321,7 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addCollegeForm.get('ContactEmail')?.hasError('email')"
+                *ngIf="addCollegeForm.get('ContactEmail')?.hasError('pattern')"
               >
                 <span class="error">Provide a correct email</span>
               </div>

@@ -41,8 +41,8 @@ export class AddCollegeComponent implements OnInit{
       CityId:['',[Validators.required]],
       StateId:['',[Validators.required]],
       CountryId:['',[Validators.required]],
-      ContactPerson:['',[Validators.required,Validators.email]],
-      ContactEmail:['',[Validators.required,Validators.email]],
+      ContactPerson:['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+      ContactEmail:['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       ContactPhone:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
 
      })

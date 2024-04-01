@@ -130,22 +130,15 @@ export class EditCampusComponent implements OnInit{
     this.selectedColleges.splice(index, 1);
   }
 
-  getClientList(){
-    this.clientService.getAllClientList().subscribe((res)=>{
-      if(res.isSuccess){
-        this.clientList = res.data
-      }
-    },err=>{
-      this.toastr.error(err)
-    })
-  }
-
   getAllCollegeList(){
     this.spinnerService.show();
-    this.collegeService.getAllCollegeList().subscribe(res =>{
+    const pageStart1=1
+    const pageSize1 = 1000
+    this.collegeService.getAllCollegeList(pageStart1,pageSize1).subscribe(res =>{
+      console.log(res)
       if(res.isSuccess){
         this.spinnerService.hide();
-        this.collegeList = res.data;
+        this.collegeList = res.data.filter((college:any)=> college.isActive === true);
       }
     },err =>{
       this.spinnerService.hide();

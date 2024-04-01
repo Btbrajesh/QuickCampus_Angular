@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit  {
   error = '';
   loginInFlight: any;
   loginData: { userName: string, password: string } = { userName: '', password: '' };
+  
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,

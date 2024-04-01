@@ -51,7 +51,7 @@ export class ApplicantService {
   }
 
   getCompanyList(){
-    return this.http.get<Response>(environment.apiUrl+'/Company/GetAllCompany')
+    return this.http.get<any>(environment.apiUrl+'/Company/GetAllCompany')
   }
   
 }

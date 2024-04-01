@@ -119,7 +119,7 @@
             </div>
             <div
               class="text-danger"
-              *ngIf="addApplicantForm.get('emailAddress')?.hasError('email')"
+              *ngIf="addApplicantForm.get('emailAddress')?.hasError('pattern')"
             >
               <span class="error">Provide a correct email</span>
             </div>
@@ -354,21 +354,9 @@
             </div>
             <div
               class="text-danger"
-              *ngIf="
-                (addApplicantForm.get('comment')?.invalid &&
-                  (addApplicantForm.get('comment')?.dirty ||
-                    addApplicantForm.get('comment')?.touched)) ||
-                (addApplicantForm.get('comment')?.hasError('required') &&
-                  myform.submitted)
-              "
+              *ngIf="addApplicantForm.get('comment')?.hasError('maxlength')"
             >
-              <span class="error">Comment is required</span>
-            </div>
-            <div
-              class="text-danger"
-              *ngIf="addApplicantForm.get('comment')?.hasError('pattern')"
-            >
-              <span class="error">Only alphabets are allowed</span>
+              <span class="error">Max 1000 characters are allowed</span>
             </div>
           </div>
 

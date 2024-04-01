@@ -65,7 +65,7 @@
           </div>
           <div
             class="text-danger"
-            *ngIf="editForm.get('email')?.hasError('email')"
+            *ngIf="editForm.get('email')?.hasError('pattern')"
           >
             <span class="error">Provide a correct email</span>
           </div>

@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { passwordMatchValidator } from '../../../confirm-password.validator';
-import { valHooks } from 'jquery';
-import { RoleService } from 'src/app/modules/master/services/role.service';
+import { RoleService } from 'src/app/modules/core/services/role.service';
 
 @Component({
   selector: 'app-add-client',
@@ -27,7 +26,7 @@ export class AddClientComponent implements OnInit{
     this.getAllRole()
     this.addClientForm = this.fb.group({
       name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
-      email:['',[Validators.required,Validators.email,Validators.maxLength(50)]],
+      email:['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       phone:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
       address:['',[Validators.required,Validators.maxLength(50)]],
       subscriptionPlan:['',[Validators.required]],
@@ -72,8 +71,10 @@ export class AddClientComponent implements OnInit{
   }
 
   getAllRole(){
-    this.roleService.getAllRole().subscribe((res)=>{
-      this.roleList =res.data
+    const pageStart = 1
+    const pageSize = 1000
+    this.roleService.getAllRole(pageStart,pageSize).subscribe((res)=>{
+      this.roleList = res.data.filter((role:any) => role.isActive === true)
     })
   }
 

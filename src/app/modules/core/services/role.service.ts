@@ -12,10 +12,6 @@ export class RoleService {
 
   constructor(public http:HttpClient) { }
 
-  getAllRoleList():Observable<any>{
-    return this.http.get<Response>(environment.apiUrl+'/Role/RoleList')
-  }
-
   getAllRole(pageStart:number,pageSize:number):Observable<any>{
     return this.http.get<Response>(environment.apiUrl+'/Role/RoleList?'+'pageStart='+pageStart+'&pageSize='+pageSize)
   }

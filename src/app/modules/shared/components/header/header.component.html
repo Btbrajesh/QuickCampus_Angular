@@ -1,7 +1,7 @@
 <div class="app-header header-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
-        <div class="header__pane ml-auto">
+        <!-- <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
                     data-class="closed-sidebar">
@@ -10,7 +10,7 @@
                     </span>
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="app-header__mobile-menu">
         <div>
@@ -59,10 +59,9 @@
                                                                 src="assets/images/avatars/1.jpg" alt="">
                                                         </div>
                                                         <div class="widget-content-left">
-                                                            <div class="widget-heading">Brajesh Prajapati
+                                                            <div class="widget-heading">{{userName}}
                                                             </div>
-                                                            <div class="widget-subheading opacity-8">A short
-                                                                profile description
+                                                            <div class="widget-subheading opacity-8">{{userRoleName}}
                                                             </div>
                                                         </div>
                                                         <div class="widget-content-right mr-2">
@@ -107,10 +106,10 @@
                         </div>
                         <div class="widget-content-left  ml-3 header-user-info">
                             <div class="widget-heading">
-                                Brajesh Prajapati
+                                {{userName}}
                             </div>
                             <div class="widget-subheading">
-                                VP People Manager
+                                {{userRoleName}}
                             </div>
                         </div>
                     </div>

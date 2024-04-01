@@ -34,7 +34,7 @@ export class EditClientComponent implements OnInit{
         id: new FormControl(),
         name:new FormControl(res.data['name'],Validators.compose([Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)])),
         address: new FormControl(res.data['address'], Validators.compose([Validators.required,Validators.maxLength(50)])),
-        email: new FormControl(res.data['email'],Validators.compose([Validators.required,Validators.email])),
+        email: new FormControl(res.data['email'],Validators.compose([Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)])),
         phone:new FormControl(res.data['phone'],Validators.compose([Validators.required,Validators.pattern("^[1-9][0-9]{9}$")])),
         subscriptionPlan:new FormControl(res.data['subscriptionPlan'],Validators.required),
         roleId:new FormControl(res.data['roleId'],[Validators.required])

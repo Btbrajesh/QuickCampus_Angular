@@ -81,16 +81,11 @@
               </div>
               <div
                 class="text-danger"
-                *ngIf="addClientForm.get('email')?.hasError('email')"
+                *ngIf="addClientForm.get('email')?.hasError('pattern')"
               >
                 <span class="error">Provide a correct email</span>
               </div>
-              <div
-                class="text-danger"
-                *ngIf="addClientForm.get('email')?.hasError('maxlength')"
-              >
-                <span class="error">Max length allowed is 50</span>
-              </div>
+             
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">

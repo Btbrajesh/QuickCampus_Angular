@@ -15,8 +15,8 @@ export class CollegeService {
     return this.http.get<any>(environment.apiUrl +'/College/GetAllCollege?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
-  getAllCollegeList():Observable<any>{
-    return this.http.get<any>(environment.apiUrl+'/College/GetAllCollege')
+  getAllCollegeList(pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/College/GetAllCollege?'+'pageStart='+pageStart+'&pageSize='+pageSize)
   }
 
   searchData(searchTerm: string,pageStart:number,pageSize:number): Observable<any[]>{

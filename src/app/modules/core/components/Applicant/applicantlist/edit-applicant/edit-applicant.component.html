@@ -119,7 +119,7 @@
             </div>
             <div
               class="text-danger"
-              *ngIf="editApplicantForm.get('emailAddress')?.hasError('email')"
+              *ngIf="editApplicantForm.get('emailAddress')?.hasError('pattern')"
             >
               <span class="error">Provide a correct email</span>
             </div>
@@ -353,23 +353,12 @@
                 formControlName="comment"
               />
             </div>
+            
             <div
               class="text-danger"
-              *ngIf="
-                (editApplicantForm.get('comment')?.invalid &&
-                  (editApplicantForm.get('comment')?.dirty ||
-                  editApplicantForm.get('comment')?.touched)) ||
-                (editApplicantForm.get('comment')?.hasError('required') &&
-                  myform.submitted)
-              "
+              *ngIf="editApplicantForm.get('comment')?.hasError('maxlength')"
             >
-              <span class="error">Comment is required</span>
-            </div>
-            <div
-              class="text-danger"
-              *ngIf="editApplicantForm.get('comment')?.hasError('pattern')"
-            >
-              <span class="error">Only alphabets are allowed</span>
+              <span class="error">Max 1000 characters are allowed</span>
             </div>
           </div>
 

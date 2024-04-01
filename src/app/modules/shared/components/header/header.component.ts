@@ -8,8 +8,12 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authenticationService :AuthenticationService){
+  userRoleName!:string | null;
+  userName!: string | null;
 
+  constructor(private authenticationService :AuthenticationService){
+    this.userRoleName = localStorage.getItem('userRoleName')
+    this.userName = localStorage.getItem('userName')
   }
 
   ngOnInit(): void {

@@ -44,7 +44,9 @@ export class DeskboardComponent implements OnInit{
   }
 
   getColleges(){
-    this.collegeService.getAllCollegeList().subscribe((res)=>{
+    const pageStart1=1
+    const pageSize1 = 1000
+    this.collegeService.getAllCollegeList(pageStart1,pageSize1).subscribe((res)=>{
       this.lengthOfTotalCollege = res.totalRecordCount
     })
   }

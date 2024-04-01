@@ -62,8 +62,8 @@ export class EditCollegeComponent implements OnInit{
         CityId:new FormControl(res.data.cityId,[Validators.required]),
         StateId:new FormControl(res.data.stateId,[Validators.required]),
         CountryId:new FormControl(res.data.countryId,[Validators.required]),
-        ContactPerson:new FormControl(res.data.contectPerson,[Validators.required,Validators.minLength(2)]),
-        ContactEmail:new FormControl(res.data.contectEmail,[Validators.required,Validators.email]),
+        ContactPerson:new FormControl(res.data.contectPerson,[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+        ContactEmail:new FormControl(res.data.contectEmail,[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
         ContactPhone:new FormControl(res.data.contectPhone,[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]),
         // client:new FormControl('',[Validators.required]),
       })

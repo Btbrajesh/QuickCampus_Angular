@@ -30,7 +30,7 @@ export class EditUserComponent implements OnInit{
       this.editForm = new FormGroup({
         userId: new FormControl(),
         name:new FormControl(res.data['name'],[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
-        email: new FormControl(res.data['email'],[Validators.required,Validators.email]),
+        email: new FormControl(res.data['email'],[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
         mobile:new FormControl(res.data['mobile'],[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")])
       })
     })

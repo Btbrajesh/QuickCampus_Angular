@@ -47,9 +47,9 @@ ngOnInit(): void {
   this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
     this.editApplicantForm = new FormGroup({
       applicantID: new FormControl(),
-      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
-      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
-      emailAddress: new FormControl(res.data['emailAddress'],[Validators.required,Validators.email]),
+      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]),
+      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]),
+      emailAddress: new FormControl(res.data['emailAddress'],[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       phoneNumber:new FormControl(res.data['phoneNumber'],[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]),
       collegeId:new FormControl(res.data['collegeId'],[Validators.required]),
       highestQualification:new FormControl(res.data['highestQualification'],[Validators.required]),
@@ -58,7 +58,7 @@ ngOnInit(): void {
       intermediatePercentage:new FormControl(res.data['intermediatePercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
       skills:new FormControl(res.data['skills'],[Validators.required]),
       statusId: new FormControl(res.data['statusId'],[Validators.required]),
-      comment: new FormControl(res.data['comment'],[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
+      comment: new FormControl(res.data['comment'],[Validators.maxLength(1000)]),
       assignedToCompany: new FormControl(res.data['assignedToCompany'],[Validators.required]),
     })
   },err=>{
@@ -94,22 +94,23 @@ getStatus(){
     if (res.isSuccess){
       this.statusList = res.data
     }
-   
   })
 }
 
 getCompany(){
   this.applicantService.getCompanyList().subscribe((res)=>{
     if (res.isSuccess){
-      this.companyList = res.data
+      this.companyList = res.data.filter((company:any) => company.isActive === true)
     }
   })
 }
 
 getCollege(){
-  this.collegeService.getAllCollegeList().subscribe((res)=>{
+  const pageStart1=1
+    const pageSize1 = 1000
+  this.collegeService.getAllCollegeList(pageStart1,pageSize1).subscribe((res)=>{
     if (res.isSuccess){
-      this.collegeList = res.data
+      this.collegeList = res.data.filter((college:any) => college.isActive === true)
     }
   })
 }
