@@ -15,6 +15,10 @@
         <li class="list-group-item"><strong>Name:</strong> {{user.name}}</li>
         <li class="list-group-item"><strong>Email:</strong> {{user.email}}</li>
         <li class="list-group-item"><strong>Phone:</strong> {{user.mobile}}</li>
+        <li class="list-group-item">
+          <strong>Status:</strong>
+          <span class="badge badge-success" [ngClass]="{ 'active-link': user.isActive, 'inactive-link': !user.isActive }">{{ user.isActive ? "Active" : "Inactive" }}</span>
+        </li>
     </ul>
   </div>
 

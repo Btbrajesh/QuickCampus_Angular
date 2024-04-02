@@ -31,37 +31,58 @@ export class DeskboardComponent implements OnInit{
 
   getApplicant(){
     this.applicantService.getAllApplicant().subscribe((res)=>{
-      this.applicantCountStop = setInterval(()=>{
-        this.lengthOfApplicant++;
-        if (this.lengthOfApplicant == res.totalRecordCount)
-        {
-          clearInterval(this.applicantCountStop)
+      if (res.isSuccess){
+        if (res.totalRecordCount >0){
+          this.applicantCountStop = setInterval(()=>{
+            this.lengthOfApplicant++;
+            if (this.lengthOfApplicant == res.totalRecordCount)
+            {
+              clearInterval(this.applicantCountStop)
+            }
+          },12)
+        }else{
+          this.lengthOfApplicant = res.totalRecordCount
         }
-      },12)
+      }
+      
     })
   }
 
   getWalkIn(){
     this.campusService.getAllCampus().subscribe((res)=>{
-      this.walkInCountStop = setInterval(()=>{
-        this.lengthOfTotalWalk++;
-        if (this.lengthOfTotalWalk == res.totalRecordCount)
-        {
-          clearInterval(this.walkInCountStop)
+      if (res.isSuccess){
+        if (res.totalRecordCount > 0){
+          this.walkInCountStop = setInterval(()=>{
+            this.lengthOfTotalWalk++;
+            if (this.lengthOfTotalWalk == res.totalRecordCount)
+            {
+              clearInterval(this.walkInCountStop)
+            }
+          },12)
+        }else{
+          this.lengthOfTotalWalk = res.totalRecordCount
         }
-      },12)
+      }
+      
     })
   }
 
   getQuestion(){
     this.questionService.getAllQuestion().subscribe((res)=>{
-      this.questionCountStop = setInterval(()=>{
-        this.lengthOfQuestion++;
-        if (this.lengthOfQuestion == res.totalRecordCount)
-        {
-          clearInterval(this.questionCountStop)
+      if (res.isSuccess){
+        if (res.totalRecordCount >0){
+          this.questionCountStop = setInterval(()=>{
+            if (this.lengthOfQuestion == res.totalRecordCount)
+            {
+              clearInterval(this.questionCountStop)
+            }
+            this.lengthOfQuestion++;
+          },12)
+        }else{
+          this.lengthOfQuestion = res.totalRecordCount
         }
-      },12)
+      }
+      
     })
   }
 
@@ -69,13 +90,20 @@ export class DeskboardComponent implements OnInit{
     const pageStart1=1
     const pageSize1 = 1000
     this.collegeService.getAllCollegeList(pageStart1,pageSize1).subscribe((res)=>{
-      this.collegeCountStop = setInterval(()=>{
-        this.lengthOfTotalCollege++;
-        if (this.lengthOfTotalCollege == res.totalRecordCount)
-        {
-          clearInterval(this.collegeCountStop)
+      if (res.isSuccess){
+        if (res.totalRecordCount >0 ){
+          this.collegeCountStop = setInterval(()=>{
+            this.lengthOfTotalCollege++;
+            if (this.lengthOfTotalCollege == res.totalRecordCount)
+            {
+              clearInterval(this.collegeCountStop)
+            }
+          },12)
+        }else{
+          this.lengthOfTotalCollege = res.totalRecordCount
         }
-      },12)
+      }
+      
     })
   }
 

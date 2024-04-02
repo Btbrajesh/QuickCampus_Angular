@@ -12,6 +12,7 @@ export class RoledetailModalComponent implements OnInit{
 
   @Input() itemId!: number;
   roleDetail: any[]=[]
+  permissionName:any
 
   constructor(public toastr:ToastrService,public activeModal: NgbActiveModal,public roleService:RoleService) { }
 
@@ -21,12 +22,14 @@ export class RoledetailModalComponent implements OnInit{
 
   getDetailById(Id:number){
     this.roleService.getRoleById(Id).subscribe((res)=>{
+      console.log(res)
       if (res.isSuccess){
         const data = res.data
         this.roleDetail.push(data)
       }else{
         this.toastr.error(res.message)
       }
+      this.permissionName = res.data.permission.map((permission:any) => permission.permissionName + " ");
     })
   }
 

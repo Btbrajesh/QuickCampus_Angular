@@ -20,11 +20,13 @@ export class UserComponent implements OnInit{
   collectionSize!:number
   searchTerm: string = '';
   pageStart=1
+  userId:any
 
   constructor(private modalService: NgbModal,public spinnerService:NgxSpinnerService,public toastr:ToastrService,public userService:UserService,public router:Router){}
 
   ngOnInit(): void {
     this.getAllUser()
+    this.userId = localStorage.getItem('userId')
   }
 
   getAllUser(){

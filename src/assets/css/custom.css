@@ -16,8 +16,8 @@ textarea.form-control{height: auto;}
 .vertical-nav-menu li a.mm-active{color: #fff;background: #2686ff;font-weight: bold;}
 .vertical-nav-menu li a.mm-active i{opacity:1;}
 .action_button a{width: 25px;height: 25px;display: inline-block;text-align: center;cursor: pointer; background-color: #ccc;border-radius: 2px;line-height: 25px;color: #fff;}
-.action_button a.edit{background-color: #02b228;}
-.action_button a.delete{background-color: #f00;}
+.action_button a.edit{background-color: #02b228; margin-right:6px}
+.action_button a.delete{background-color: #f00; margin-right:6px}
 .action_button a.inactive{background-color: rgb(134, 134, 134);font-size: 18px;}
 .vertical-nav-menu li a{font-weight: 500;}
 .app-header__logo{padding-right:0px;}
@@ -124,6 +124,7 @@ textarea.form-control{height: auto;}
     text-transform: uppercase;
     padding: 5px 10px;
     min-width: 19px;
+    margin-left:7px;
 }
 
 .required2 {

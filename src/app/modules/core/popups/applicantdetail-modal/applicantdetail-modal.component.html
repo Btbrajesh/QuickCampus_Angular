@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Applicant Details</h5>
     <button
       type="button"
       class="close"
@@ -22,6 +22,10 @@
         <li class="list-group-item"><strong>Metric Percentage:</strong> {{applicant.matricPercentage}}</li>
         <li class="list-group-item"><strong>Skills:</strong> {{applicant.skills}}</li>
         <li class="list-group-item"><strong>Comment:</strong> {{applicant.comment}}</li>
+        <li class="list-group-item">
+          <strong>Status:</strong>
+          <span class="badge badge-success" [ngClass]="{ 'active-link': applicant.isActive, 'inactive-link': !applicant.isActive }">{{ applicant.isActive ? "Active" : "Inactive" }}</span>
+        </li>
     </ul>
   </div>
 

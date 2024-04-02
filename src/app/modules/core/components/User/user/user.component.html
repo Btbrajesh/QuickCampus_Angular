@@ -69,10 +69,10 @@
                   >
                 </td>
                 <td class="action_button text-right">
-                  <a routerLink="/admin/user/edit/{{ user.userId }}" class="edit"
+                  <a *ngIf="userId != user.userId" routerLink="/admin/user/edit/{{ user.userId }}" class="edit"
                     ><i class="icofont-ui-edit"></i
                   ></a>
-                  <a class="delete" (click)="deleteItem(user.userId)"
+                  <a *ngIf="userId != user.userId" class="delete" (click)="deleteItem(user.userId)"
                     ><i class="icofont-ui-delete"></i
                   ></a>
                   <a class="inactive" (click)="viewDetails(user.userId)"

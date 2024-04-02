@@ -53,6 +53,7 @@ export class EditCollegeComponent implements OnInit{
     this.collegeService.getCollegeById(this.router.snapshot.params['id']).subscribe((res)=>{
       this.onCountrySelected(res.data.countryId)
       this.onStateSelected(res.data.stateId)
+      this.imagePreviewUrl = res.data.logo
       this.editCollegeForm = new FormGroup({
         ImagePath:new FormControl('',[Validators.required]),
         CollegeName:new FormControl(res.data.collegeName,[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),

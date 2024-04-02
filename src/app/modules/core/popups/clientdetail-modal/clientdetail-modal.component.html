@@ -26,8 +26,8 @@
             <span> {{client.subscriptionPlan}} <strong>Year</strong></span>
           </li>
           <li class="list-group-item">
-            <strong>Isactive:</strong>
-            <span class="badge badge-success"> {{client.isActive}}</span>
+            <strong>Status:</strong>
+            <span class="badge badge-success" [ngClass]="{ 'active-link': client.isActive, 'inactive-link': !client.isActive }">{{ client.isActive ? "Active" : "Inactive" }}</span>
           </li>
         </ul>
       </div>

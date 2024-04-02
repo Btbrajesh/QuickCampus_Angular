@@ -31,17 +31,20 @@ export class AuthenticationService {
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 if (user && user.data) {
+                    console.log(user)
                     const userData = user.data;
                     const userName = user.data.userName
                     const userRoleName = user.data.roleMasters.roleName
                     const role = user.data.roleMasters.userAppRoleName
                     const clientId = user.data.cilentId
+                    const userId = user.data.userId
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('authenticate', JSON.stringify(userData));
                     localStorage.setItem('role',role)
                     localStorage.setItem('userName',userName)
                     localStorage.setItem('userRoleName',userRoleName)
                     localStorage.setItem('clientId',clientId)
+                    localStorage.setItem('userId',userId)
                     this.userSubject.next(userData);
                 }
                 return user;

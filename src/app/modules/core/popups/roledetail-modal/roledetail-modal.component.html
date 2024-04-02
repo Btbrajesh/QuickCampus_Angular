@@ -14,7 +14,11 @@
       <div class="modal-body user_details">
         <ul class="list-group list-group-flush" *ngFor="let role of roleDetail">
           <li class="list-group-item"><strong>Role Name:</strong> {{role.roleName}}</li>
-          
+          <li class="list-group-item"><strong>Permissions:</strong> {{permissionName}}</li>
+          <li class="list-group-item">
+            <strong>Status:</strong>
+            <span class="badge badge-success" [ngClass]="{ 'active-link': role.isActive, 'inactive-link': !role.isActive }">{{ role.isActive ? "Active" : "Inactive" }}</span>
+          </li>
         </ul>
       </div>
   

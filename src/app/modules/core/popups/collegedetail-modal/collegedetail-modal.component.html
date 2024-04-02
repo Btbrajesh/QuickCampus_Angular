@@ -19,6 +19,10 @@
         <li class="list-group-item"><strong>Address:</strong> {{college.address1}}</li>
         <li class="list-group-item"><strong>College Code:</strong> {{college.collegeCode}}</li>
         <li class="list-group-item"><strong>College ID:</strong> {{college.collegeId}}</li>
+        <li class="list-group-item">
+          <strong>Status:</strong>
+          <span class="badge badge-success" [ngClass]="{ 'active-link': college.isActive, 'inactive-link': !college.isActive }">{{ college.isActive ? "Active" : "Inactive" }}</span>
+        </li>
     </ul>
   </div>
 
