@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Login } from '../../modals/login';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
@@ -22,9 +20,7 @@ export class LoginComponent implements OnInit  {
   
 
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService,
     private toastr: ToastrService,
     private authenticationService :AuthenticationService) {
    
@@ -57,7 +53,7 @@ export class LoginComponent implements OnInit  {
     this.loginInFlight = this.authenticationService.login(this.loginData.userName,this.loginData.password).subscribe(resp =>{
       if(resp.isSuccess){
         this.loginInFlight = null;
-        this.toastr.success(resp.message);
+        this.toastr.success(resp.message,'',{timeOut:1500});
         this.router.navigateByUrl('/dashboard');
       }else{
         this.loginInFlight = null;

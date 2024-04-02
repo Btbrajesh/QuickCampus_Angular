@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   userName!: string | null;
 
   constructor(private authenticationService :AuthenticationService){
-    this.userRoleName = localStorage.getItem('userRoleName')
+    this.userRoleName = localStorage.getItem('role')
     this.userName = localStorage.getItem('userName')
   }
 
