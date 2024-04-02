@@ -47,12 +47,7 @@ selectedIdsFormArray:any
     })
   }
 
-  // get permission() {
-  //   return this.editRoleForm.get('permission') as FormArray;
-  // }
-
   onCheckboxChange(event:any , id: number) {
-    debugger
     this.selectedIdsFormArray = this.editRoleForm.get('permission') as FormArray;
 
     if (event.target.checked) {
@@ -64,11 +59,9 @@ selectedIdsFormArray:any
   }
 
   setPermissions(): void {
-    //const permissionFormArray = this.editRoleForm.get('permission') as FormArray;
     this.permissionList.forEach(pm => {
       const checked = this.permissionUser.permission.some((p:any) => p.id === pm.id);
       pm.IsCheck = checked;
-      debugger
       if(checked){
         this.selectedIdsFormArray = this.editRoleForm.get('permission') as FormArray;
         this.selectedIdsFormArray.push(this.fb.control(pm.id));
