@@ -65,16 +65,9 @@ export class EditCampusComponent implements OnInit{
   loadCampusData() {
     const campusId = this.route.snapshot.params['id'];
     this.campusService.getCampusById(campusId).subscribe((campusData: any) => {
-      console.log(campusData)
       campusData.data['walkInDate'] = moment(campusData.data['walkInDate']).format("yyyy-MM-DD")
       
       this.editCampusForm.patchValue(campusData.data);
-
-
-      // this.walkInFormattedDate = moment(campusData.data['walkInDate']).format("yyyy-MM-DD");
-      // this.editCampusForm.get('walkInDate')?.setValue(this.walkInFormattedDate)
-      // console.log(this.walkInFormattedDate)
-      
       this.patchOptionsArray(campusData.data.colleges);
     });
   }
@@ -135,7 +128,6 @@ export class EditCampusComponent implements OnInit{
     const pageStart1=1
     const pageSize1 = 1000
     this.collegeService.getAllCollegeList(pageStart1,pageSize1).subscribe(res =>{
-      console.log(res)
       if(res.isSuccess){
         this.spinnerService.hide();
         this.collegeList = res.data.filter((college:any)=> college.isActive === true);

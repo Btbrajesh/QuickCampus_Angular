@@ -31,7 +31,6 @@ export class CampusWalkInComponent implements OnInit{
   getCampusList(){
     this.spinnerService.show();
     this.campusService.getCampusList(this.pageStart,this.pageSize).subscribe(res =>{
-      console.log(res)
       if(res.isSuccess){
         this.spinnerService.hide()
         this.collectionSize = res.totalRecordCount

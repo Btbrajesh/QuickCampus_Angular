@@ -103,7 +103,6 @@ export class AddApplicantComponent implements OnInit{
 
   getCompany(){
     this.applicantService.getCompanyList().subscribe((res)=>{
-      console.log(res)
       if (res.isSuccess){
         this.companyList = res.data.filter((company:any) => company.isActive === true)
       }

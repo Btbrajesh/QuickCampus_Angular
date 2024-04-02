@@ -29,7 +29,6 @@ export class EditClientComponent implements OnInit{
 
   ngOnInit(): void {
     this.clientService.getDetailById(this.router.snapshot.params['id']).subscribe((res)=>{
-      console.log(res)
       this.editClientForm= new FormGroup({
         id: new FormControl(),
         name:new FormControl(res.data['name'],Validators.compose([Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)])),

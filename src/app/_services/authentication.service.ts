@@ -31,7 +31,6 @@ export class AuthenticationService {
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 if (user && user.data) {
-                    console.log(user,'user')
                     const userData = user.data;
                     const userName = user.data.userName
                     const userRoleName = user.data.roleMasters.roleName
