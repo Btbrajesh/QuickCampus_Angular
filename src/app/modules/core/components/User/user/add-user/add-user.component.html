@@ -183,7 +183,7 @@
                       (click)="togglePasswordVisibility()"
                     >
                       <img
-                        [src]="eyeIconSrc"
+                      [src]="hidePassword ? '../../../../../../assets/images/hide.png' : '../../../../../../assets/images/show.png'"
                         height="17px"
                         alt="Toggle password visibility"
                       />
@@ -241,7 +241,7 @@
                       (click)="togglePasswordVisibility2()"
                     >
                       <img
-                        [src]="eyeIconSrc2"
+                      [src]="hideConfirmPassword ? '../../../../../../assets/images/hide.png' : '../../../../../../assets/images/show.png'"
                         height="17px"
                         alt="Toggle password visibility"
                       />

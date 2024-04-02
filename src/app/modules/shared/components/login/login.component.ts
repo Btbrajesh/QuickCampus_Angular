@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit  {
   loginForm!: FormGroup;
   loading:boolean=false;
   submitted = false;
+  hidePassword: boolean = true;
   error = '';
   loginInFlight: any;
   loginData: { userName: string, password: string } = { userName: '', password: '' };
@@ -36,6 +37,10 @@ export class LoginComponent implements OnInit  {
       password: ['', Validators.required],
       check: [false],
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
   }
 
   submitForm(){

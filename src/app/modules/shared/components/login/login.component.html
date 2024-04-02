@@ -34,7 +34,20 @@
                                         <div class="col-md-12">
                                             <div class="position-relative form-group">
                                                 <input formControlName="password" id="examplePassword" placeholder="Password here..."
-                                                       type="password" class="form-control">
+                                                        type="{{ hidePassword ? 'password' : 'text' }}" type="password" class="form-control">
+                                                       
+                                                            <button
+                                                              type="button"
+                                                              class="eye-button"
+                                                              tabindex="-1"
+                                                              (click)="togglePasswordVisibility()"
+                                                            >
+                                                              <img
+                                                                [src]="hidePassword ? '../../../../../../assets/images/hide.png' : '../../../../../../assets/images/show.png' "
+                                                                height="17px"
+                                                                alt="Toggle password visibility"
+                                                              />
+                                                            </button>
                                                        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
                                                        class="error-message">
                                                        <span *ngIf="loginForm.controls['password'].errors?.['required']">
