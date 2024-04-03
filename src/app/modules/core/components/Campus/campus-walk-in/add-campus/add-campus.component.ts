@@ -51,7 +51,7 @@ export class AddCampusComponent implements OnInit{
       countryId:['',[Validators.required]],
       stateId:['',[Validators.required]],
       city:['',[Validators.required]],
-      jobDescription:['',[Validators.required,,Validators.maxLength(200)]],
+      jobDescription:['',[Validators.required,,Validators.maxLength(1000)]],
       selectedCollegeId: ['',[Validators.required]],
       colleges :this.fb.array([],[Validators.required])
     })

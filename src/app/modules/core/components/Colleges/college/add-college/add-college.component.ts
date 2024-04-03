@@ -35,7 +35,7 @@ export class AddCollegeComponent implements OnInit{
      this.addCollegeForm = this.fb.group({
       ImagePath:['',[Validators.required]],
       CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
-      CollegeCode:['',[Validators.required]],
+      CollegeCode:['',[Validators.required,Validators.maxLength(10)]],
       Address1:['',[Validators.required,Validators.maxLength(100)]],
       Address2:['',[Validators.required,Validators.maxLength(100)]],
       CityId:['',[Validators.required]],

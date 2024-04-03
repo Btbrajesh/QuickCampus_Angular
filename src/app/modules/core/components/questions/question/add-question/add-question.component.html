@@ -23,9 +23,10 @@
                   class="form-select form-control"
                   aria-label="Default select example"
                   formControlName="questionTypeId"
+                  (ngModelChange)="optionAdd($event)"
                 >
                   <option value="" selected>--Choose--</option>
-                  <option *ngFor="let type of questionTypeList" [value]="type.questionTypeId" >{{type.questionType1}}</option>
+                  <option *ngFor="let type of questionTypeList" [value]="type.questionTypeId">{{type.questionType1}}</option>
                 </select>
               </div>
               <div
@@ -164,13 +165,13 @@
               <div class="position-relative form-group">
                 <div formArrayName="QuestionssoptionVm">
                   <label for="exampleEmail11" class="">Options<span aria-hidden="true" class="required2"> *</span></label>
-
                   <div
                     *ngFor="
                       let option of questionsOptionsArray.controls;
                       let i = index
                     "
                   >
+                  
                     <!-- Option fields -->
                     <div class="d-flex" [formGroupName]="i">
                       <input
@@ -190,21 +191,12 @@
                         formControlName="isCorrect"
                         class="m-2"
                       />
+                      
+                      <button type="button" (click)="removeOption(i)">Remove</button>
                     </div>
+                    <button type="button" (click)="addOption()">Add</button>
                   </div>
                 </div>
-                <div
-                      class="text-danger"
-                      *ngIf="
-                        (addQuestionForm.get('QuestionssoptionVm')?.invalid &&
-                          (addQuestionForm.get('QuestionssoptionVm')?.dirty ||
-                            addQuestionForm.get('QuestionssoptionVm')?.touched)) ||
-                        (addQuestionForm.get('QuestionssoptionVm')?.hasError('required') &&
-                          myform.submitted)
-                      "
-                    >
-                      <span class="error">Question Option is required</span>
-                    </div>
               </div>
             </div>
 

@@ -57,7 +57,7 @@ export class EditCollegeComponent implements OnInit{
       this.editCollegeForm = new FormGroup({
         ImagePath:new FormControl('',[Validators.required]),
         CollegeName:new FormControl(res.data.collegeName,[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
-        CollegeCode:new FormControl(res.data.collegeCode,[Validators.required]),
+        CollegeCode:new FormControl(res.data.collegeCode,[Validators.required,Validators.maxLength(10)]),
         Address1:new FormControl(res.data.address1,[Validators.required,Validators.maxLength(100)]),
         Address2:new FormControl(res.data.address2,[Validators.required,Validators.maxLength(100)]),
         CityId:new FormControl(res.data.cityId,[Validators.required]),

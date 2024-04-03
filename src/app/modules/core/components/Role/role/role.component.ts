@@ -49,6 +49,11 @@ export class RoleComponent implements OnInit{
     this.getAllRole()
   }
 
+  getCollectionPage(){
+    this.pageStart = 1
+    this.getAllRole()
+  }
+
   viewDetails(itemId: number): void {
     const modalRef = this.modalService.open(RoledetailModalComponent, { size: 'lg' });
     modalRef.componentInstance.itemId = itemId;

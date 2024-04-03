@@ -320,21 +320,23 @@
           <div class="col-md-4">
             <div class="position-relative form-group">
               <label for="exampleEmail11" class="required">Skills<span aria-hidden="true" class="required2"> *</span></label>
-              <input
-                placeholder="Skills"
-                type="text"
-                class="form-control"
-                name="skills"
-                formControlName="skills"
-              />
+              <div formArrayName="skilltype">
+                <ng-container *ngFor="let skill of skilltype.controls; let i=index" [formGroupName]="i">
+                 
+                    <input class="form-control" type="text" formControlName="skillName">
+                    
+                    <button (click)="removeSkill(i)">Remove</button>
+                </ng-container>
+                <button type="button" (click)="addSkill()">Add</button>
+              </div>
             </div>
             <div
               class="text-danger"
               *ngIf="
-                (addApplicantForm.get('skills')?.invalid &&
-                  (addApplicantForm.get('skills')?.dirty ||
-                    addApplicantForm.get('skills')?.touched)) ||
-                (addApplicantForm.get('skills')?.hasError('required') &&
+                (addApplicantForm.get('skilltype')?.invalid &&
+                  (addApplicantForm.get('skilltype')?.dirty ||
+                    addApplicantForm.get('skilltype')?.touched)) ||
+                (addApplicantForm.get('skilltype')?.hasError('required') &&
                   myform.submitted)
               "
             >

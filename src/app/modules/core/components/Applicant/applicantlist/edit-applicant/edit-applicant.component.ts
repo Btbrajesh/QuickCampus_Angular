@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from '../../../../services/client.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, Form, FormArray } from '@angular/forms';
 import { ApplicantService } from '../../../../services/applicant.service';
 import { Applicant } from 'src/app/modules/master/models/applicant';
 import { CollegeService } from 'src/app/modules/core/services/college.service';
@@ -19,24 +19,9 @@ export class EditApplicantComponent implements OnInit{
   companyList :any;
   collegeList:any;
   qualificationList:any;
-  editApplicantForm= new FormGroup({
-    applicantID: new FormControl(),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    emailAddress: new FormControl(''),
-    phoneNumber:new FormControl(''),
-    highestQualification:new FormControl(''),
-    highestQualificationPercentage:new FormControl(''),
-    matricPercentage:new FormControl(''),
-    collegeId:new FormControl(''),
-    intermediatePercentage:new FormControl(''),
-    skills:new FormControl(''),
-    statusId: new FormControl(),
-    comment: new FormControl(),
-    assignedToCompany: new FormControl(),
-  })
+  editApplicantForm!: FormGroup
 
-  constructor(private router:ActivatedRoute,public route:Router, public applicantService:ApplicantService, public toastr:ToastrService,public collegeService:CollegeService,public commonService:CommonService){}
+  constructor(public fb:FormBuilder,private router:ActivatedRoute,public route:Router, public applicantService:ApplicantService, public toastr:ToastrService,public collegeService:CollegeService,public commonService:CommonService){}
 
 
 ngOnInit(): void {
@@ -44,29 +29,67 @@ ngOnInit(): void {
   this.getStatus()
   this.getCollege()
   this.getQualification()
-  this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=>{
-    this.editApplicantForm = new FormGroup({
-      applicantID: new FormControl(),
-      firstName: new FormControl(res.data['firstName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]),
-      lastName: new FormControl(res.data['lastName'],[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]),
-      emailAddress: new FormControl(res.data['emailAddress'],[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-      phoneNumber:new FormControl(res.data['phoneNumber'],[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]),
-      collegeId:new FormControl(res.data['collegeId'],[Validators.required]),
-      highestQualification:new FormControl(res.data['highestQualification'],[Validators.required]),
-      highestQualificationPercentage:new FormControl(res.data['highestQualificationPercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
-      matricPercentage:new FormControl(res.data['matricPercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
-      intermediatePercentage:new FormControl(res.data['intermediatePercentage'],[Validators.required,Validators.max(100),Validators.min(0)]),
-      skills:new FormControl(res.data['skills'],[Validators.required]),
-      statusId: new FormControl(res.data['statusId'],[Validators.required]),
-      comment: new FormControl(res.data['comment'],[Validators.maxLength(1000)]),
-      assignedToCompany: new FormControl(res.data['assignedToCompany'],[Validators.required]),
-    })
-  },err=>{
-    this.toastr.error(err)
+  this.initForm()
+  this.loadApplicationData()
+}
+
+initForm() {
+  this.editApplicantForm = this.fb.group({
+    applicantID: [''],
+    firstName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]],
+    lastName: ['',[Validators.required,Validators.minLength(2),Validators.maxLength(15),Validators.pattern(/^[A-Za-z]*$/)]],
+    emailAddress: ['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+    phoneNumber:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
+    collegeId:['',[Validators.required]],
+    highestQualification:['',[Validators.required]],
+    highestQualificationPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
+    matricPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
+    intermediatePercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
+    statusId: ['',[Validators.required]],
+    comment: ['',[Validators.maxLength(1000)]],
+    assignedToCompany: ['',[Validators.required]],
+    skilltype: this.fb.array([]),
   })
 }
 
+loadApplicationData() {
+  const questionId = this.router.snapshot.params['id'];
+  this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=> {
+    this.editApplicantForm.patchValue(res.data);
+    this.patchOptionsArray(res.data.skilltype);
+  });
+}
+
+patchOptionsArray(options: any[]) {
+  if (options && options.length) {
+    const optionsFormArray = this.editApplicantForm.get('skilltype') as FormArray;
+    options.forEach(option => {
+      optionsFormArray.push(this.fb.group(option));
+    });
+  }
+}
+
+get skilltype() : FormArray {
+  return this.editApplicantForm.get("skilltype") as FormArray
+}
+
+newSkill():FormGroup{
+  return this.fb.group({
+    skillId:[0],
+    skillName:[''],
+  })
+}
+
+addSkill() {
+  this.skilltype.push(this.newSkill());
+}
+
+removeSkill(i:number) {
+  this.skilltype.removeAt(i);
+}
+
 submit(){
+  console.log(this.editApplicantForm.value)
   if (this.editApplicantForm.valid){
     const formData = this.editApplicantForm.value as Applicant;
     formData.applicantID = this.router.snapshot.params['id']

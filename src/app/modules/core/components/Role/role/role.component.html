@@ -32,7 +32,6 @@
           <table class="mb-0 table table-striped">
             <thead>
               <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Isactive</th>
                 <th class="text-right">Actions</th>
@@ -40,7 +39,6 @@
             </thead>
             <tbody>
               <tr *ngFor="let role of roleList">
-                <td>{{ role.roleId }}</td>
                 <td>{{ role.roleName }}</td>
                 <td class="badge">
                  
@@ -81,7 +79,7 @@
             >
             </ngb-pagination>
           
-            <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getAllRole()">
+            <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCollectionPage()">
               <option [ngValue]="10">10 items per page</option>
               <option [ngValue]="20">20 items per page</option>
               <option [ngValue]="25">25 items per page</option>

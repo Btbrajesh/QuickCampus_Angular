@@ -53,6 +53,11 @@ export class UserComponent implements OnInit{
     this.getAllUser()
   }
 
+  getCollectionPage(){
+    this.pageStart = 1
+    this.getAllUser()
+  }
+
   onSearch() {
     this.userService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
       if (res.isSuccess){

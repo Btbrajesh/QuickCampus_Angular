@@ -32,12 +32,7 @@ export class AddQuestionComponent implements OnInit{
       groupId:['',[Validators.required]],
       marks:['',[Validators.required]],
       Text:['',[Validators.required,Validators.maxLength(1000)]],
-      QuestionssoptionVm:this.fb.array([
-        this.createOption(),
-        this.createOption(),
-        this.createOption(),
-        this.createOption()
-      ],[Validators.required]),
+      QuestionssoptionVm:this.fb.array([]),
     })
   }
 
@@ -66,14 +61,37 @@ export class AddQuestionComponent implements OnInit{
 
   createOption(): FormGroup {
     return this.fb.group({
-      optionText: [''],
+      optionText: ['',[Validators.required]],
       isCorrect: [false],
       imagepath: ['']
     });
   }
 
   // Remove an option group
+
+  optionAdd(event:any){
+    if (event == 1 || event == 2){
+      console.log('je')
+      this.addOption()
+    }else{
+      this.clearOptions();
+    }
+  }
   
+  addOption() {
+    const optionGroup = this.createOption(); // Create option group
+    this.questionsOptionsArray.push(optionGroup); // Add option group to form array
+  }
+  
+  removeOption(index: number) {
+    this.questionsOptionsArray.removeAt(index); // Remove option group from form array
+  }
+
+  clearOptions() {
+    while (this.questionsOptionsArray.length !== 0) {
+      this.questionsOptionsArray.removeAt(0);
+    }
+  }
 
   submit(){
     if(this.addQuestionForm.valid){

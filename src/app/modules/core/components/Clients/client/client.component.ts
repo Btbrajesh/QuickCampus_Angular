@@ -51,6 +51,11 @@ export class ClientComponent implements OnInit{
     this.getClientList()
   }
 
+  getCollectionPage(){
+    this.pageStart = 1
+    this.getClientList()
+  }
+
   onSearch() {
     this.clientService.searchData(this.searchTerm,this.pageStart,this.pageSize).subscribe((res:any) => {
       if (res.isSuccess){

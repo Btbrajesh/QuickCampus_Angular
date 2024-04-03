@@ -59,6 +59,11 @@ export class CollegeComponent implements OnInit{
     this.getCollegeList()
   }
 
+  getCollectionPage(){
+    this.pageStart = 1
+    this.getCollegeList()
+  }
+
   toggleActive(id: number): void {
     this.spinnerService.show()
     this.collegeService.toggleActiveInactive(id).subscribe((res)=>{

@@ -52,6 +52,11 @@ export class QuestionComponent {
     this.getQuestionList()
   }
 
+  getCollectionPage(){
+    this.pageStart = 1
+    this.getQuestionList()
+  }
+
   toggleActive(id: any): void {
     this.spinnerService.show()
     this.questionService.questionActiveInactive(id).subscribe((res)=>{

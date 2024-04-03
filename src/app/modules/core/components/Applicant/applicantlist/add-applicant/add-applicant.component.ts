@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApplicantService } from 'src/app/modules/core/services/applicant.service';
@@ -35,22 +35,41 @@ export class AddApplicantComponent implements OnInit{
       highestQualificationPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
       matricPercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
       intermediatePercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
-      skills:['',[Validators.required]],
       statusId:['',[Validators.required]],
       comment:['',[Validators.maxLength(1000)]],
       collegeId:['',[Validators.required]],
       assignedToCompany:['',[Validators.required]],
-      clientId:['',[]]
+      clientId:['',[]],
+      skilltype:this.fb.array([]),
     })
     this.getStatus()
     this.getCompany()
     this.getCollege()
     this.getQualification()
+    this.addSkill()
     this.roleName = localStorage.getItem('role')
     if (this.roleName == 'Admin'){
       this.getClient()
     }
-    
+  }
+
+  get skilltype() : FormArray {
+    return this.addApplicantForm.get("skilltype") as FormArray
+  }
+
+  newSkill():FormGroup{
+    return this.fb.group({
+      skillId:[0],
+      skillName:[''],
+    })
+  }
+
+  addSkill() {
+    this.skilltype.push(this.newSkill());
+  }
+
+  removeSkill(i:number) {
+    this.skilltype.removeAt(i);
   }
 
   submit(){

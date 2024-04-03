@@ -55,7 +55,7 @@
                                     <td>{{campus.walkInDate | date}}</td>
                                     <td>{{campus.title}}</td>
                                     <td>{{campus.address1}} {{campus.address2}} </td>
-                                    <td>{{campus.jobDescription}}</td>
+                                    <td>{{campus.jobDescription | slice:0:50}}</td>
                                     <td class="badge">
                                         <a (click)="toggleActive(campus.walkInID)"
                                             [ngClass]="{ 'active-link': campus.isActive, 'inactive-link': !campus.isActive }">{{
@@ -77,7 +77,7 @@
                           >
                           </ngb-pagination>
                         
-                          <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCampusList()">
+                          <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCollectionPage()">
                             <option [ngValue]="10">10 items per page</option>
                             <option [ngValue]="20">20 items per page</option>
                             <option [ngValue]="25">25 items per page</option>

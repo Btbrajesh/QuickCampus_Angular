@@ -34,6 +34,7 @@ ngOnInit(): void {
 getApplicantList(){
   this.spinnerService.show();
   this.applicantService.getApplicantList(this.pageStart,this.pageSize).subscribe(res =>{
+    console.log(res)
     if(res.isSuccess){
       this.spinnerService.hide()
       this.collectionSize = res.totalRecordCount
@@ -52,6 +53,11 @@ getApplicantList(){
 
 getApplicantPage(event:any){
   this.pageStart = event
+  this.getApplicantList()
+}
+
+getCollectionPage(){
+  this.pageStart = 1
   this.getApplicantList()
 }
 

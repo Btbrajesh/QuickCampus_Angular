@@ -113,6 +113,12 @@
               >
                 <span class="error">Job Description is required</span>
               </div>
+              <div
+                class="text-danger"
+                *ngIf="addCampusForm.get('jobDescription')?.hasError('maxlength')"
+              >
+                <span class="error">Maximum length is 1000</span>
+              </div>
             </div>
 
             <div class="col-md-4">

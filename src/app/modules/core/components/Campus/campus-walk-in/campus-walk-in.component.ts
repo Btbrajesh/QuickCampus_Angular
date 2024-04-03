@@ -52,6 +52,11 @@ export class CampusWalkInComponent implements OnInit{
     this.getCampusList()
   }
 
+  getCollectionPage(){
+    this.pageStart = 1
+    this.getCampusList()
+  }
+
   onSearch() {
     this.campusService.searchData(this.search,this.pageStart,this.pageSize).subscribe((res:any) => {
       if (res.isSuccess){
