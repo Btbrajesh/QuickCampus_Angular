@@ -7,6 +7,8 @@ import { CollegedetailModalComponent } from '../../../popups/collegedetail-modal
 import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { CampusdetailModalComponent } from '../../../popups/campusdetail-modal/campusdetail-modal.component';
+import { FormControl } from '@angular/forms';
+import { ClientService } from '../../../services/client.service';
 
 @Component({
   selector: 'app-campus-walk-in',
@@ -21,11 +23,17 @@ export class CampusWalkInComponent implements OnInit{
   collectionSize!:number
   search: string = '';
   pageStart=1
+  selectedOption = new FormControl('');
+  inputOption = new FormControl('');
+  clientList:any
+  filteredClientList:any
+  val: string = '';
 
-  constructor(private modalService: NgbModal,public toastr:ToastrService,public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
+  constructor(public clientService:ClientService,private modalService: NgbModal,public toastr:ToastrService,public campusService:CampusService,private spinnerService: NgxSpinnerService,public router:Router){}
 
   ngOnInit(): void {
     this.getCampusList()
+    this.getClient()
   }
 
   getCampusList(){
@@ -45,6 +53,52 @@ export class CampusWalkInComponent implements OnInit{
       this.spinnerService.hide();
       this.toastr.error(err)
     })
+  }
+
+  getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if(res.isSuccess){
+        this.clientList = res.data
+        this.filteredClientList = res.data
+      }
+    },err=>{
+      this.toastr.error(err)
+    })
+  }
+  
+  onSelected(event:any){
+    const clientId = event.value
+    this.campusService.getCampusListOnClientId(clientId,this.pageStart,this.pageSize).subscribe((res:any)=>{
+      if (res.isSuccess){
+        this.campusList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.campusList = res.data;
+        this.collectionSize = res.totalRecordCount;
+        this.toastr.error(res.message)
+      }
+    })
+  }
+  
+  filterOptions() {
+    if (this.clientList) { // Check if this.clientList is defined
+      this.filteredClientList = this.clientList.filter((client:any) => {
+        // Check if client.name and this.val are not null before calling toLowerCase()
+        if (client.name && this.val) {
+          return client.name.toLowerCase().includes(this.val.toLowerCase());
+        }
+        return false; // Return false if either client.name or this.val is null
+      });
+    } else {
+      this.filteredClientList = []; // Set filteredClientList to an empty array if this.clientList is undefined
+    }
+  }
+  
+  resetSelect() {
+    this.selectedOption.reset(); // Reset selected option
+    this.inputOption.reset();
+    this.getCampusList() 
+    this.getClient()
   }
 
   getCampusPage(event:any){

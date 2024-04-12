@@ -17,7 +17,9 @@
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
-                  >Question Type<span aria-hidden="true" class="required2"> *</span></label
+                  >Question Type<span aria-hidden="true" class="required2">
+                    *</span
+                  ></label
                 >
                 <select
                   class="form-select form-control"
@@ -28,7 +30,7 @@
                     *ngFor="let question of questionList"
                     [value]="question.questionTypeId"
                   >
-                    {{ question.questionType1 }}
+                    {{ question.questionType }}
                   </option>
                 </select>
               </div>
@@ -38,7 +40,9 @@
                   (editQuestionForm.get('questionTypeId')?.invalid &&
                     (editQuestionForm.get('questionTypeId')?.dirty ||
                       editQuestionForm.get('questionTypeId')?.touched)) ||
-                  (editQuestionForm.get('questionTypeId')?.hasError('required') &&
+                  (editQuestionForm
+                    .get('questionTypeId')
+                    ?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -48,7 +52,9 @@
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
-                  >Section<span aria-hidden="true" class="required2"> *</span></label
+                  >Section<span aria-hidden="true" class="required2">
+                    *</span
+                  ></label
                 >
                 <select
                   class="form-select form-control"
@@ -60,7 +66,7 @@
                     *ngFor="let section of sectionList"
                     [value]="section.sectionId"
                   >
-                    {{ section.section1 }}
+                    {{ section.section }}
                   </option>
                 </select>
               </div>
@@ -79,7 +85,11 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Group<span aria-hidden="true" class="required2"> *</span></label>
+                <label for="exampleEmail11" class=""
+                  >Group<span aria-hidden="true" class="required2">
+                    *</span
+                  ></label
+                >
                 <select
                   class="form-select form-control"
                   aria-label="Default select example"
@@ -109,7 +119,11 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Marks<span aria-hidden="true" class="required2"> *</span></label>
+                <label for="exampleEmail11" class=""
+                  >Marks<span aria-hidden="true" class="required2">
+                    *</span
+                  ></label
+                >
                 <input
                   placeholder="Marks"
                   type="text"
@@ -133,7 +147,9 @@
             <div class="col-md-12">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class=""
-                  >Question<span aria-hidden="true" class="required2"> *</span></label
+                  >Question<span aria-hidden="true" class="required2">
+                    *</span
+                  ></label
                 >
                 <textarea
                   class="form-control"
@@ -165,7 +181,11 @@
             <div class="col-md-12">
               <div class="position-relative form-group">
                 <div formArrayName="QuestionssoptionVm" *ngIf="optionArray">
-                  <label for="exampleEmail11" class="">Options<span aria-hidden="true" class="required2"> *</span></label>
+                  <label for="exampleEmail11" class=""
+                    >Options<span aria-hidden="true" class="required2">
+                      *</span
+                    ></label
+                  >
                   <div
                     *ngFor="let option of optionArray.controls; let i = index"
                     [formGroupName]="i"
@@ -190,9 +210,29 @@
                           formControlName="isCorrect"
                           class="m-2"
                         />
+                        <button
+                          mat-flat-button
+                          color="warn"
+                          type="button"
+                          class="button-rem"
+                          (click)="removeOption(i)"
+                        >
+                          Remove
+                        </button>
                       </div>
                     </div>
                   </div>
+                  <button
+                    type="button"
+                    class="button-add"
+                    mat-flat-button
+                    color="primary"
+                    *ngIf="optionArray.length != 0"
+                    (click)="addOption()"
+                  >
+                    Add
+                  </button>
+
                   <div
                     class="text-danger"
                     *ngIf="

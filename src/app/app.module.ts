@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ApplicantlistComponent } from './modules/core/components/Applicant/applicantlist/applicantlist.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { fakeBackendProvider } from './_helpers/fack-backend';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -19,7 +18,6 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbPaginationModule, NgbTypeaheadModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +25,7 @@ import { NgbPaginationModule, NgbTypeaheadModule, NgbModule } from '@ng-bootstra
     RoleListComponent,
   ],
   imports: [
+    
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

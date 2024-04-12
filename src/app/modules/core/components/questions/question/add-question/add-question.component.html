@@ -26,7 +26,7 @@
                   (ngModelChange)="optionAdd($event)"
                 >
                   <option value="" selected>--Choose--</option>
-                  <option *ngFor="let type of questionTypeList" [value]="type.questionTypeId">{{type.questionType1}}</option>
+                  <option *ngFor="let type of questionTypeList" [value]="type.questionTypeId">{{type.questionType}}</option>
                 </select>
               </div>
               <div
@@ -59,7 +59,7 @@
                     *ngFor="let section of sectionList"
                     [value]="section.sectionId"
                   >
-                    {{ section.section1 }}
+                    {{ section.section }}
                   </option>
                 </select>
               </div>
@@ -160,45 +160,25 @@
                 <span class="error">Maximum length is 1000</span>
               </div>
             </div>
-
             <div class="col-md-12">
               <div class="position-relative form-group">
                 <div formArrayName="QuestionssoptionVm">
                   <label for="exampleEmail11" class="">Options<span aria-hidden="true" class="required2"> *</span></label>
-                  <div
-                    *ngFor="
-                      let option of questionsOptionsArray.controls;
-                      let i = index
-                    "
-                  >
-                  
+                  <div *ngFor="let option of questionsOptionsArray.controls; let i = index">
                     <!-- Option fields -->
                     <div class="d-flex" [formGroupName]="i">
-                      <input
-                        type="text"
-                        formControlName="optionText"
-                        placeholder="Option Text"
-                        class="form-control mt-2 col-md-4"
-                      />
-                      <input
-                        type="file"
-                        formControlName="imagepath"
-                        placeholder="Image Path"
-                        class="form-control mt-2 ml-2 col-md-4"
-                      />
-                      <input
-                        type="checkbox"
-                        formControlName="isCorrect"
-                        class="m-2"
-                      />
-                      
-                      <button type="button" (click)="removeOption(i)">Remove</button>
+                      <input type="text" formControlName="optionText" placeholder="Option Text" class="form-control mt-2 col-md-4" />
+                      <input type="file" formControlName="imagepath" placeholder="Image Path" class="form-control mt-2 ml-2 col-md-4" />
+                      <input type="checkbox" formControlName="isCorrect" class="m-2" />
+                      <button mat-flat-button color="warn" type="button" class="button-rem" (click)="removeOption(i)">Remove</button>
                     </div>
-                    <button type="button" (click)="addOption()">Add</button>
                   </div>
+                  <!-- Display "Add" button only when form array is not empty -->
+                  <button type="button" class="button-add" mat-flat-button color="primary" *ngIf="questionsOptionsArray.length != 0" (click)="addOption()">Add</button>
                 </div>
               </div>
             </div>
+            
 
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">

@@ -131,7 +131,22 @@ export class EditQuestionComponent implements OnInit{
     }
   }
 
+  addOption() {
+    const optionGroup = this.createOption(); // Create option group
+    this.optionArray.push(optionGroup); // Add option group to form array
+  }
+  
+  removeOption(index: number) {
+    this.optionArray.removeAt(index); // Remove option group from form array
+  }
 
+  createOption(): FormGroup {
+    return this.fb.group({
+      optionText: ['',[Validators.required]],
+      isCorrect: [false],
+      imagepath: ['']
+    });
+  }
 
   cancel(){
     this.router.navigateByUrl('/admin/question')

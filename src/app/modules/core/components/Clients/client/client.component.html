@@ -21,7 +21,8 @@
             <div class="input-group size position-relative">
               <input
                 type="text"
-                placeholder="Search here Name,Email,Phone"
+                title="Search By Name, Email, Phone"
+                placeholder="Search By Name, Email, Phone"
                 class="form-control border-2"
                 [(ngModel)]="searchTerm" (ngModelChange)="onSearch()"
               />
@@ -101,9 +102,10 @@
             </ngb-pagination>
           
             <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCollectionPage()">
-              <option [ngValue]="10">10 items per page</option>
-              <option [ngValue]="20">20 items per page</option>
-              <option [ngValue]="25">25 items per page</option>
+                    <option [ngValue]="10">10 Records</option>
+                    <option [ngValue]="20">20 Records</option>
+                    <option [ngValue]="50">50 Records</option>
+                    <option [ngValue]="100">100 Records</option>
             </select>
           </div>
         </div>

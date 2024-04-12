@@ -22,7 +22,8 @@ export class EditClientComponent implements OnInit{
     email: new FormControl('' ),
     phone:new FormControl(''),
     subscriptionPlan:new FormControl(''),
-    roleId:new FormControl('')
+    companyName:new FormControl('')
+
   })
 
   constructor(private router:ActivatedRoute,public route:Router, public clientService:ClientService, public toastr:ToastrService,public roleService:RoleService){}
@@ -36,12 +37,11 @@ export class EditClientComponent implements OnInit{
         email: new FormControl(res.data['email'],Validators.compose([Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)])),
         phone:new FormControl(res.data['phone'],Validators.compose([Validators.required,Validators.pattern("^[1-9][0-9]{9}$")])),
         subscriptionPlan:new FormControl(res.data['subscriptionPlan'],Validators.required),
-        roleId:new FormControl(res.data['roleId'],[Validators.required])
+        companyName:new FormControl(res.data['companyName'],Validators.required)
       })
     },err=>{
       this.toastr.error(err)
     })
-    this.getAllRole()
   }
 
   submit(){
@@ -68,10 +68,6 @@ export class EditClientComponent implements OnInit{
     this.route.navigateByUrl('/admin/client')
   }
 
-  getAllRole(){
-    this.roleService.getAllRole().subscribe((res)=>{
-      this.roleList =res.data
-    })
-  }
+ 
 
 }

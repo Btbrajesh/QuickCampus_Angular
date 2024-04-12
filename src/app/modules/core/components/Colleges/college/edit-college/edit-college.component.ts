@@ -29,6 +29,7 @@ export class EditCollegeComponent implements OnInit{
     countryId!:number
     stateId!:number
     imagePreviewUrl: string | ArrayBuffer | null = null;
+    roleName:any
     editCollegeForm= new FormGroup({
       ImagePath:new FormControl(''),
       CollegeName:new FormControl(''),
@@ -38,10 +39,10 @@ export class EditCollegeComponent implements OnInit{
       CityId:new FormControl(),
       StateId:new FormControl(''),
       CountryId:new FormControl(''),
-      ContactPerson:new FormControl(''),
+      ContactPersonName:new FormControl(''),
       ContactEmail:new FormControl(''),
       ContactPhone:new FormControl(''),
-      // client:new FormControl(''),
+      ClientId:new FormControl(''),
     })
 
     constructor(public route:Router,public toastr:ToastrService,public clientService:ClientService,private router:ActivatedRoute,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
@@ -55,22 +56,27 @@ export class EditCollegeComponent implements OnInit{
       this.onStateSelected(res.data.stateId)
       this.imagePreviewUrl = res.data.logo
       this.editCollegeForm = new FormGroup({
-        ImagePath:new FormControl('',[Validators.required]),
+        ImagePath:new FormControl(''),
         CollegeName:new FormControl(res.data.collegeName,[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
         CollegeCode:new FormControl(res.data.collegeCode,[Validators.required,Validators.maxLength(10)]),
         Address1:new FormControl(res.data.address1,[Validators.required,Validators.maxLength(100)]),
-        Address2:new FormControl(res.data.address2,[Validators.required,Validators.maxLength(100)]),
+        Address2:new FormControl(res.data.address2,[Validators.maxLength(100)]),
         CityId:new FormControl(res.data.cityId,[Validators.required]),
         StateId:new FormControl(res.data.stateId,[Validators.required]),
         CountryId:new FormControl(res.data.countryId,[Validators.required]),
-        ContactPerson:new FormControl(res.data.contectPerson,[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+        ContactPersonName:new FormControl(res.data.contectPerson,[Validators.required,Validators.minLength(2),Validators.maxLength(20)]),
         ContactEmail:new FormControl(res.data.contectEmail,[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
         ContactPhone:new FormControl(res.data.contectPhone,[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]),
-        // client:new FormControl('',[Validators.required]),
+        ClientId:new FormControl('',[Validators.required]),
       })
     },err=>{
       this.toastr.error(err)
     })
+
+    this.roleName = localStorage.getItem('role')
+      if (this.roleName == 'Admin'){
+        this.getClient()
+      }
    }
 
   fetchCountry(){

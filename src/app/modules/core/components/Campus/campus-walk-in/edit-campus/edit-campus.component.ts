@@ -35,7 +35,7 @@ export class EditCampusComponent implements OnInit{
     selectedColleges: any[] = [];
     isDisabled: boolean = true;
     country:any;
-    // walkInFormattedDate:any;
+    roleName:any
 
   constructor(public route:ActivatedRoute,public clientService:ClientService,public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
@@ -44,6 +44,10 @@ export class EditCampusComponent implements OnInit{
     this.fetchCountry()
     this.getAllCollegeList()
     this.loadCampusData()
+    this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
   }
 
   initForm() {
@@ -58,6 +62,8 @@ export class EditCampusComponent implements OnInit{
       city:new FormControl(),
       jobDescription:new FormControl(),
       selectedCollegeId: new FormControl(),
+      clientId:new FormControl(),
+      passingYear:new FormControl(),
       colleges :this.fb.array([])
     });
   }
@@ -65,11 +71,20 @@ export class EditCampusComponent implements OnInit{
   loadCampusData() {
     const campusId = this.route.snapshot.params['id'];
     this.campusService.getCampusById(campusId).subscribe((campusData: any) => {
+      console.log(campusData)
       campusData.data['walkInDate'] = moment(campusData.data['walkInDate']).format("yyyy-MM-DD")
       
       this.editCampusForm.patchValue(campusData.data);
       this.patchOptionsArray(campusData.data.colleges);
     });
+  }
+
+  getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if (res.isSuccess){
+        this.clientList = res.data.filter((client:any) => client.isActive === true)
+      }
+    })
   }
 
   patchOptionsArray(options: any[]) {

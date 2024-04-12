@@ -10,6 +10,10 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   constructor(public http:HttpClient) { }
+
+  getUserListOnClientId(clientId:number,pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/User/GetAllUser?ClientId='+clientId+'&pageStart='+pageStart+'&pageSize='+pageSize)
+  }
   
   getAllUser(pageStart:number,pageSize:number):Observable<any>{
     return this.http.get<any>(environment.apiUrl+'/User/GetAllUser?'+'pageStart='+pageStart+'&pageSize='+pageSize)

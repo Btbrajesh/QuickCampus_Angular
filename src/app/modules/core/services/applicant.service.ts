@@ -18,6 +18,10 @@ export class ApplicantService {
     return this.http.get<any>(environment.apiUrl+'/Applicant/GetAllApplicant')
   }
 
+  getApplicantListOnClientId(clientId:number,pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Applicant/GetAllApplicant?ClientId='+clientId+'&pageStart='+pageStart+'&pageSize='+pageSize)
+  }
+
   getApplicantList(pageStart:number,pageSize:number): Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Applicant/GetAllApplicant?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }
@@ -52,6 +56,10 @@ export class ApplicantService {
 
   getCompanyList(){
     return this.http.get<any>(environment.apiUrl+'/Company/GetAllCompany')
+  }
+
+  getAllSkill(){
+    return this.http.get<any>(environment.apiUrl + '/Common/GetAllSkill' )
   }
   
 }

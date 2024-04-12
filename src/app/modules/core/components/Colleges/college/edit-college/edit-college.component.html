@@ -166,25 +166,13 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Address 2<span aria-hidden="true" class="required2"> *</span></label>
+                <label for="exampleEmail11" class="">Address 2</label>
                 <input
                   placeholder="College address"
                   type="text"
                   class="form-control"
                   formControlName="Address2"
                 />
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  (editCollegeForm.get('Address2')?.invalid &&
-                    (editCollegeForm.get('Address2')?.dirty ||
-                      editCollegeForm.get('Address2')?.touched)) ||
-                  (editCollegeForm.get('Address2')?.hasError('required') &&
-                    myform.submitted)
-                "
-              >
-                <span class="error">College Address is required</span>
               </div>
               <div
                 class="text-danger"
@@ -290,21 +278,21 @@
 
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Contact Person<span aria-hidden="true" class="required2"> *</span></label>
+                <label for="exampleEmail11" class="">Contact Person Name<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Contact Person"
                   type="text"
                   class="form-control"
-                  formControlName="ContactPerson"
+                  formControlName="ContactPersonName"
                 />
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('ContactPerson')?.invalid &&
-                    (editCollegeForm.get('ContactPerson')?.dirty ||
-                      editCollegeForm.get('ContactPerson')?.touched)) ||
-                  (editCollegeForm.get('ContactPerson')?.hasError('required') &&
+                  (editCollegeForm.get('ContactPersonName')?.invalid &&
+                    (editCollegeForm.get('ContactPersonName')?.dirty ||
+                      editCollegeForm.get('ContactPersonName')?.touched)) ||
+                  (editCollegeForm.get('ContactPersonName')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -313,17 +301,25 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  editCollegeForm.get('ContactPerson')?.hasError('pattern')
+                  editCollegeForm.get('ContactPersonName')?.hasError('minlength')
                 "
               >
-                <span class="error">Please provide a proper email</span>
+                <span class="error">Minimum 2 letters required</span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  editCollegeForm.get('ContactPerson')?.hasError('maxlength')
+                "
+              >
+                <span class="error">Maximum length is 20</span>
               </div>
               
             </div>
 
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Contact Email<span aria-hidden="true" class="required2"> *</span></label>
+                <label for="exampleEmail11" class="">Contact Person Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Contact Email"
                   type="text"
@@ -382,34 +378,39 @@
               </div>
               
             </div>
-            <!-- <div class="col-md-4">
+            <div class="col-md-4" *ngIf="roleName == 'Admin'">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Client</label>
+                <label for="exampleEmail11" class="required"
+                  >Client <span aria-hidden="true" class="required2">*</span></label
+                >
                 <select
                   class="form-select form-control mr-4"
-                  placeholder="Select Client"
-                  formControlName="client"
+                  placeholder="Select Company"
+                  formControlName="ClientId"
                 >
                   <option value="">Select Client</option>
-                  <option *ngFor="let client of clientList" [value]="client.id">
+                  <option
+                    *ngFor="let client of clientList"
+                    [value]="client.id"
+                  >
                     {{ client.name }}
                   </option>
                 </select>
-                
               </div>
               <div
                 class="text-danger"
                 *ngIf="
-                  (editCollegeForm.get('client')?.invalid &&
-                    (editCollegeForm.get('client')?.dirty ||
-                      editCollegeForm.get('client')?.touched)) ||
-                  (editCollegeForm.get('client')?.hasError('required') &&
+                  (editCollegeForm.get('ClientId')?.invalid &&
+                    (editCollegeForm.get('ClientId')?.dirty ||
+                    editCollegeForm.get('ClientId')?.touched)) ||
+                  (editCollegeForm.get('ClientId')?.hasError('required') &&
                     myform.submitted)
                 "
               >
                 <span class="error">Client is required</span>
               </div>
-            </div> -->
+            </div>
+              
 
             <div class="col-md-12">
               <div class="d-flex btn_form mt-3">

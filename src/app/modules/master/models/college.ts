@@ -5,11 +5,12 @@ export interface College{
     CityId :number,
     StateId :string,
     CountryId :string,
-    ContactPerson:string,
+    ContactPersonName:string,
     ContactEmail:string,
     ContactPhone:string,
     Address1:string,
     Address2:string,
+    ClientId:string
 }
 
 export interface ResponseObj{
@@ -21,16 +22,16 @@ export interface ResponseObj{
 
 export interface UpdateCollege{
     CollegeId:number,
-    ImagePath:string,
+    ImagePath:string | null | ArrayBuffer,
     CollegeName:string,
     CollegeCode:string,
     CityId :string,
     StateId :string,
     CountryId :string,
-    ContactPerson:string,
+    ContactPersonName:string,
     ContactEmail:string,
     ContactPhone:string,
     Address1:string,
     Address2:string,
-    
+    ClientId:string
 }

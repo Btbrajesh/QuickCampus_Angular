@@ -13,6 +13,9 @@ export class QuestionService {
   getAllQuestion(){
     return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage')
   }
+  getQuestionListOnClientId(clientId:number,pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Question/QuestionManage?ClientId='+clientId+'&pageStart='+pageStart+'&pageSize='+pageSize)
+  }
 
   getQuestionList(pageStart:number,pageSize:number):Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Question/QuestionManage?'+'pageStart='+pageStart+'&pageSize='+pageSize);

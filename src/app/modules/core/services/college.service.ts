@@ -15,6 +15,10 @@ export class CollegeService {
     return this.http.get<any>(environment.apiUrl +'/College/GetAllCollege?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }
 
+  getCollegeListOnClientId(clientId:number,pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/College/GetAllCollege?ClientId='+clientId+'&pageStart='+pageStart+'&pageSize='+pageSize)
+  }
+
   getAllCollegeList(pageStart:number,pageSize:number):Observable<any>{
     return this.http.get<any>(environment.apiUrl+'/College/GetAllCollege?'+'pageStart='+pageStart+'&pageSize='+pageSize)
   }
@@ -37,10 +41,10 @@ export class CollegeService {
     formData.append('StateId',data.StateId)
     formData.append('CountryId',data.CountryId)
     formData.append('CityId',data.CityId.toString())
-    formData.append('ContactPerson',data.ContactPerson)
+    formData.append('ContactPersonName',data.ContactPersonName)
     formData.append('ContactPhone',data.ContactPhone)
     formData.append('ContactEmail',data.ContactEmail)
-   
+    formData.append('ClientId',data.ClientId)
     return this.http.post<any>(environment.apiUrl+'/College/AddCollege',formData)
   }
 
@@ -55,9 +59,10 @@ export class CollegeService {
     formData.append('StateId',data.StateId)
     formData.append('CountryId',data.CountryId)
     formData.append('CityId',data.CityId.toString())
-    formData.append('ContactPerson',data.ContactPerson)
+    formData.append('ContactPersonName',data.ContactPersonName)
     formData.append('ContactPhone',data.ContactPhone)
     formData.append('ContactEmail',data.ContactEmail)
+    formData.append('ClientId',data.ClientId)
     return this.http.post<any>(environment.apiUrl+'/College/EditCollege',formData)
   }
 

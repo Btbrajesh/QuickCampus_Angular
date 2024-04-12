@@ -40,7 +40,38 @@
               <span class="error">Only Alphabets are allowed</span>
             </div>
             </div>
-         
+            <div class="col-md-4" *ngIf="roleName == 'Admin'">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="required"
+                  >Client <span aria-hidden="true" class="required2">*</span></label
+                >
+                <select
+                  class="form-select form-control mr-4"
+                  placeholder="Select Company"
+                  formControlName="clientId"
+                >
+                  <option value="">Select Client</option>
+                  <option
+                    *ngFor="let client of clientList"
+                    [value]="client.id"
+                  >
+                    {{ client.name }}
+                  </option>
+                </select>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addRoleForm.get('clientId')?.invalid &&
+                    (addRoleForm.get('clientId')?.dirty ||
+                    addRoleForm.get('clientId')?.touched)) ||
+                  (addRoleForm.get('clientId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Client is required</span>
+              </div>
+            </div>
 
             <div class="col-md-12"><label>Permission</label></div>
                 <div class="col-md-12" formArrayName="permission">

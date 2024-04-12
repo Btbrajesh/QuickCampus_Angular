@@ -110,43 +110,21 @@
               </div>
               
             </div>
-            <!-- <div class="col-md-4">
+            <div class="col-md-4" *ngIf="roleName == 'Admin'">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Role</label>
-                <select
-                  class="form-select form-control mr-4"
-                  placeholder="Select Role"
-                  formControlName="role"
+                <label for="exampleEmail11" class="required"
+                  >Client <span aria-hidden="true" class="required2">*</span></label
                 >
-                  <option value="">Select Role</option>
-                  <option *ngFor="let role of roleList" [value]="">
-                    {{ role.name }}
-                  </option>
-                </select>
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  (addUserForm.get('role')?.invalid &&
-                    (addUserForm.get('role')?.dirty ||
-                      addUserForm.get('role')?.touched)) ||
-                  (addUserForm.get('role')?.hasError('required') &&
-                    myform.submitted)
-                "
-              >
-                <span class="error">Role is required</span>
-              </div>
-            </div> -->
-            <!-- <div class="col-md-4">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Client</label>
                 <select
                   class="form-select form-control mr-4"
-                  placeholder="Select Client"
-                  formControlName="client"
+                  placeholder="Select Company"
+                  formControlName="clientId"
                 >
                   <option value="">Select Client</option>
-                  <option *ngFor="let client of clientList" [value]="client.id">
+                  <option
+                    *ngFor="let client of clientList"
+                    [value]="client.id"
+                  >
                     {{ client.name }}
                   </option>
                 </select>
@@ -154,16 +132,16 @@
               <div
                 class="text-danger"
                 *ngIf="
-                   (addUserForm.get('client')?.invalid &&
-                    (addUserForm.get('client')?.dirty ||
-                      addUserForm.get('client')?.touched)) ||
-                  (addUserForm.get('client')?.hasError('required') &&
+                  (addUserForm.get('clientId')?.invalid &&
+                    (addUserForm.get('clientId')?.dirty ||
+                    addUserForm.get('clientId')?.touched)) ||
+                  (addUserForm.get('clientId')?.hasError('required') &&
                     myform.submitted)
                 "
               >
                 <span class="error">Client is required</span>
               </div>
-            </div> -->
+            </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Password<span aria-hidden="true" class="required2"> *</span></label>

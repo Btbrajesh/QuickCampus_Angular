@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Address 2<span aria-hidden="true" class="required2"> *</span></label>
+                <label for="exampleEmail11" class="">Address 2</label>
                 <input
                   placeholder="Enter address"
                   type="text"
@@ -72,23 +72,62 @@
                   formControlName="address2"
                 />
               </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  (addCampusForm.get('address2')?.invalid &&
-                    (addCampusForm.get('address2')?.dirty ||
-                    addCampusForm.get('address2')?.touched)) ||
-                  (addCampusForm.get('address2')?.hasError('required') &&
-                    myform.submitted)
-                "
-              >
-                <span class="error">Address is required</span>
-              </div>
+             
               <div
                 class="text-danger"
                 *ngIf="addCampusForm.get('address2')?.hasError('maxlength')"
               >
                 <span class="error">Maximum length is 200</span>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="roleName == 'Admin'">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="required"
+                  >Client <span aria-hidden="true" class="required2">*</span></label
+                >
+                <select
+                  class="form-select form-control mr-4"
+                  placeholder="Select Company"
+                  formControlName="clientId"
+                >
+                  <option value="">Select Client</option>
+                  <option
+                    *ngFor="let client of clientList"
+                    [value]="client.id"
+                  >
+                    {{ client.name }}
+                  </option>
+                </select>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addCampusForm.get('clientId')?.invalid &&
+                    (addCampusForm.get('clientId')?.dirty ||
+                    addCampusForm.get('clientId')?.touched)) ||
+                  (addCampusForm.get('clientId')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Client is required</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
+                <label for="exampleEmail11" class="required">Passing Year<span aria-hidden="true" class="required2"> *</span></label>
+                <input
+                  placeholder="Passing Out Year"
+                  type="text"
+                  class="form-control"
+                  name="comment"
+                  formControlName="passingYear"
+                />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="addCampusForm.get('passingYear')?.hasError('maxlength')"
+              >
+                <span class="error">Max 4 characters are allowed</span>
               </div>
             </div>
             <div class="col-md-12">
@@ -127,7 +166,7 @@
                 <select
                   class="form-control"
                   placeholder="Select Country"
-                  formControlName="countryId"
+                  formControlName="countryID"
                   (ngModelChange)="onCountrySelected($event)"
                 >
                   <option value="">Select Country</option>
@@ -142,10 +181,10 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  (addCampusForm.get('countryId')?.invalid &&
-                    (addCampusForm.get('countryId')?.dirty ||
-                    addCampusForm.get('countryId')?.touched)) ||
-                  (addCampusForm.get('countryId')?.hasError('required') &&
+                  (addCampusForm.get('countryID')?.invalid &&
+                    (addCampusForm.get('countryID')?.dirty ||
+                    addCampusForm.get('countryID')?.touched)) ||
+                  (addCampusForm.get('countryID')?.hasError('required') &&
                     myform.submitted)
                 "
               >
@@ -158,7 +197,7 @@
                 <select
                   class="form-control"
                   placeholder="Select State"
-                  formControlName="stateId"
+                  formControlName="stateID"
                   (ngModelChange)="onStateSelected($event)"
                 >
                   <option value="">Select State</option>
@@ -173,10 +212,10 @@
               <div
                 class="text-danger"
                 *ngIf="
-                  (addCampusForm.get('stateId')?.invalid &&
-                    (addCampusForm.get('stateId')?.dirty ||
-                    addCampusForm.get('stateId')?.touched)) ||
-                  (addCampusForm.get('stateId')?.hasError('required') &&
+                  (addCampusForm.get('stateID')?.invalid &&
+                    (addCampusForm.get('stateID')?.dirty ||
+                    addCampusForm.get('stateID')?.touched)) ||
+                  (addCampusForm.get('stateID')?.hasError('required') &&
                     myform.submitted)
                 "
               >

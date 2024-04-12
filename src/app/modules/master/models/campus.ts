@@ -6,22 +6,23 @@ export interface Campus{
     title:string;
     campusDate: Date;
     city:number;
-    stateId:number;
-    countryId:number;
+    stateID:number;
+    countryID:number;
     isActive:number;
     jobDescription:string;
+    walkInID:number,
+    selectedCollegeId:number | undefined,
     colleges:Array<AddCollege>;
 }
 
 export interface AddCollege{
     campusId:number;
     collegeId:number;
-    stateId:number;
     collegeName:string;
     collegeCode:string;
     examStartTime:Time;
     examEndTime:Time;
-    startDate:Date;
+    startDateTime:Date;
     isIncludeInWalkIn:boolean
 }
 

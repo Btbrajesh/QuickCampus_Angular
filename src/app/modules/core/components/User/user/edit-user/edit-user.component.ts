@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/modules/core/services/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { User } from 'src/app/modules/master/models/user';
 import { ToastrService } from 'ngx-toastr';
-import { valHooks } from 'jquery';
+import { RoleService } from '../../../../services/role.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,6 +15,7 @@ import { valHooks } from 'jquery';
 export class EditUserComponent implements OnInit{
 
   clientList:any
+  roleList:any
   editForm = new FormGroup({
     userId:new FormControl(),
     name:new FormControl(''),
@@ -22,7 +23,7 @@ export class EditUserComponent implements OnInit{
     mobile:new FormControl(''),
   })
 
-  constructor(public toastr:ToastrService,public route:Router, public clientService:ClientService,private router:ActivatedRoute, public userService:UserService){}
+  constructor(public roleService:RoleService,public toastr:ToastrService,public route:Router, public clientService:ClientService,private router:ActivatedRoute, public userService:UserService){}
 
   ngOnInit(): void {
     // this.getClient()
@@ -34,7 +35,12 @@ export class EditUserComponent implements OnInit{
         mobile:new FormControl(res.data['mobile'],[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")])
       })
     })
-    
+  }
+
+  getRole(){
+    this.roleService.getAllRoleList().subscribe((res)=>{
+        this.roleList = res.data.filter((role:any) => role.isActive === true)
+    })
   }
 
   // getClient(){

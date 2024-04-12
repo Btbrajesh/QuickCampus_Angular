@@ -37,6 +37,24 @@
                             </select>
                           </div>
                         </div> -->
+                        <div class="rounded-pill form_custom_inner d-flex">
+                          <div
+                            class="input-group size position-relative"
+                          >
+                          <mat-form-field class="mat-box">
+                            <mat-label>Select Client</mat-label>
+                            <mat-select  [formControl]="selectedOption" (selectionChange)="onSelected($event)">
+                              <input [formControl]="inputOption" [(ngModel)]="val" (ngModelChange)="filterOptions()" placeholder="Search">
+                              <mat-option [value]="">Select</mat-option>
+                              <mat-option *ngFor="let client of filteredClientList" [value]="client.id">
+                                {{client.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <button class="mat-button" (click)="resetSelect()" style="background: none;text-decoration: none;border: none; color: red;"><img class="cross" src="../../../../../../assets/images/close.png" alt=""></button>
+                        
+                        </div>
                       </div>
                         <table class="mb-0 table table-striped">
                             <thead>
@@ -75,9 +93,10 @@
                           </ngb-pagination>
                         
                           <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="getCollectionPage()">
-                            <option [ngValue]="10">10 items per page</option>
-                            <option [ngValue]="20">20 items per page</option>
-                            <option [ngValue]="25">25 items per page</option>
+                            <option [ngValue]="10">10 Records</option>
+                            <option [ngValue]="20">20 Records</option>
+                            <option [ngValue]="50">50 Records</option>
+                            <option [ngValue]="100">100 Records</option>
                           </select>
                         </div>
                     </div>

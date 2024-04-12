@@ -16,7 +16,8 @@ export class AddRoleComponent implements OnInit{
 
   permissionList: any[]= []
   addRoleForm!:FormGroup
-
+  roleName:any
+  clientList:any;
 
   constructor(public toastr:ToastrService,public roleService:RoleService,public fb:FormBuilder,public clientService:ClientService,public router:Router,public spinnerService:NgxSpinnerService){}
 
@@ -25,9 +26,13 @@ export class AddRoleComponent implements OnInit{
     this.getPermissionList()
     this.addRoleForm = this.fb.group({
       roleName:['',[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
+      clientId:['',[Validators.required]],
       permission: this.fb.array([],)
     })
-
+    this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
   }
 
 
@@ -44,6 +49,14 @@ export class AddRoleComponent implements OnInit{
       const index = selectedIdsFormArray.controls.findIndex(x => x.value === id);
       selectedIdsFormArray.removeAt(index);
     }
+  }
+
+  getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if (res.isSuccess){
+        this.clientList = res.data.filter((client:any) => client.isActive === true)
+      }
+    })
   }
   
   getPermissionList(){

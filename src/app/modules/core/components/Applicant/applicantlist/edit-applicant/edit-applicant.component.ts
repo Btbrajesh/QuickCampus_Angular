@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from '../../../../services/client.service';
-import { FormGroup, FormControl, Validators, FormBuilder, Form, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { ApplicantService } from '../../../../services/applicant.service';
 import { Applicant } from 'src/app/modules/master/models/applicant';
 import { CollegeService } from 'src/app/modules/core/services/college.service';
@@ -20,8 +20,10 @@ export class EditApplicantComponent implements OnInit{
   collegeList:any;
   qualificationList:any;
   editApplicantForm!: FormGroup
+  clientList:any;
+  roleName:any
 
-  constructor(public fb:FormBuilder,private router:ActivatedRoute,public route:Router, public applicantService:ApplicantService, public toastr:ToastrService,public collegeService:CollegeService,public commonService:CommonService){}
+  constructor(public clientService:ClientService,public fb:FormBuilder,private router:ActivatedRoute,public route:Router, public applicantService:ApplicantService, public toastr:ToastrService,public collegeService:CollegeService,public commonService:CommonService){}
 
 
 ngOnInit(): void {
@@ -31,6 +33,10 @@ ngOnInit(): void {
   this.getQualification()
   this.initForm()
   this.loadApplicationData()
+  this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
 }
 
 initForm() {
@@ -47,14 +53,16 @@ initForm() {
     intermediatePercentage:['',[Validators.required,Validators.max(100),Validators.min(0)]],
     statusId: ['',[Validators.required]],
     comment: ['',[Validators.maxLength(1000)]],
-    assignedToCompany: ['',[Validators.required]],
+    passingYear:['',[Validators.maxLength(4)]],
+    clientId:[''],
     skilltype: this.fb.array([]),
   })
 }
 
 loadApplicationData() {
-  const questionId = this.router.snapshot.params['id'];
-  this.applicantService.getApplicantById(this.router.snapshot.params['id']).subscribe((res)=> {
+  const applicantId = this.router.snapshot.params['id'];
+  this.applicantService.getApplicantById(applicantId).subscribe((res)=> {
+    console.log(res)
     this.editApplicantForm.patchValue(res.data);
     this.patchOptionsArray(res.data.skilltype);
   });
@@ -77,6 +85,14 @@ newSkill():FormGroup{
   return this.fb.group({
     skillId:[0],
     skillName:[''],
+  })
+}
+
+getClient(){
+  this.clientService.getAllClientList().subscribe((res)=>{
+    if (res.isSuccess){
+      this.clientList = res.data.filter((client:any) => client.isActive === true)
+    }
   })
 }
 

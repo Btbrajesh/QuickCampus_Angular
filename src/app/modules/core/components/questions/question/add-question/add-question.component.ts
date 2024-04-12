@@ -71,7 +71,6 @@ export class AddQuestionComponent implements OnInit{
 
   optionAdd(event:any){
     if (event == 1 || event == 2){
-      console.log('je')
       this.addOption()
     }else{
       this.clearOptions();

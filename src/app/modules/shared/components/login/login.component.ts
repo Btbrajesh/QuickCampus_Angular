@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit  {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
-    private authenticationService :AuthenticationService) {
+    private authenticationService :AuthenticationService,
+    public spinnerService:NgxSpinnerService) {
    
   }
 
@@ -40,11 +42,13 @@ export class LoginComponent implements OnInit  {
   }
 
   submitForm(){
+    this.spinnerService.show()
     this.submitted = true;
     if (this.loginForm.invalid) {
               return;
     }
     if (this.loginInFlight) {
+      this.spinnerService.show()
       console.log('request is in flight...');
       return;
     }
@@ -52,14 +56,17 @@ export class LoginComponent implements OnInit  {
     this.loginData.password = this.loginForm.value.password;
     this.loginInFlight = this.authenticationService.login(this.loginData.userName,this.loginData.password).subscribe(resp =>{
       if(resp.isSuccess){
+        this.spinnerService.hide()
         this.loginInFlight = null;
         this.toastr.success(resp.message,'',{timeOut:1500});
         this.router.navigateByUrl('/dashboard');
       }else{
+        this.spinnerService.hide()
         this.loginInFlight = null;
         this.toastr.error(resp.message);
       }
     },err =>{
+      this.spinnerService.hide()
       this.toastr.error(err);
       this.loginInFlight = null;
     });

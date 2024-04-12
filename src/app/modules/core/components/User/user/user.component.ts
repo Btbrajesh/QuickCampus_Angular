@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
 import { UserdetailModalComponent } from '../../../popups/userdetail-modal/userdetail-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ClientService } from '../../../services/client.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -15,17 +17,23 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class UserComponent implements OnInit{
 
   userList:any
+  clientList:any
+  filteredClientList:any
   page = 1;
 	pageSize = 10;
   collectionSize!:number
   searchTerm: string = '';
   pageStart=1
   userId:any
+  val: string = '';
+  selectedOption = new FormControl('');
+  inputOption = new FormControl('');
 
-  constructor(private modalService: NgbModal,public spinnerService:NgxSpinnerService,public toastr:ToastrService,public userService:UserService,public router:Router){}
+  constructor(public clientService:ClientService ,private modalService: NgbModal,public spinnerService:NgxSpinnerService,public toastr:ToastrService,public userService:UserService,public router:Router){}
 
   ngOnInit(): void {
     this.getAllUser()
+    this.getClient()
     this.userId = localStorage.getItem('userId')
   }
 
@@ -56,6 +64,52 @@ export class UserComponent implements OnInit{
   getCollectionPage(){
     this.pageStart = 1
     this.getAllUser()
+  }
+
+   getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if(res.isSuccess){
+        this.clientList = res.data
+        this.filteredClientList = res.data
+      }
+    },err=>{
+      this.toastr.error(err)
+    })
+  }
+
+  onSelected(event:any){
+    const clientId = event.value
+    this.userService.getUserListOnClientId(clientId,this.pageStart,this.pageSize).subscribe((res:any)=>{
+      if (res.isSuccess){
+        this.userList = res.data;
+        this.collectionSize = res.totalRecordCount;
+      }else{
+        this.userList = res.data;
+        this.collectionSize = res.totalRecordCount;
+        this.toastr.error(res.message)
+      }
+    })
+  }
+
+  filterOptions() {
+    if (this.clientList) { // Check if this.clientList is defined
+      this.filteredClientList = this.clientList.filter((client:any) => {
+        // Check if client.name and this.val are not null before calling toLowerCase()
+        if (client.name && this.val) {
+          return client.name.toLowerCase().includes(this.val.toLowerCase());
+        }
+        return false; // Return false if either client.name or this.val is null
+      });
+    } else {
+      this.filteredClientList = []; // Set filteredClientList to an empty array if this.clientList is undefined
+    }
+  }
+
+  resetSelect() {
+    this.selectedOption.reset(); // Reset selected option
+    this.inputOption.reset();
+    this.getAllUser() 
+    this.getClient()
   }
 
   onSearch() {

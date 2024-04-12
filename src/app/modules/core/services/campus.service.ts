@@ -17,6 +17,10 @@ export class CampusService {
     return this.http.get<any>(environment.apiUrl+'/Campus/GetAllCampus') 
   }
 
+  getCampusListOnClientId(clientId:number,pageStart:number,pageSize:number):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/Campus/GetAllCampus?ClientId='+clientId+'&pageStart='+pageStart+'&pageSize='+pageSize)
+  }
+
   getCampusList(pageStart:number,pageSize:number):Observable<any>{
     return this.http.get<any>(environment.apiUrl +'/Campus/GetAllCampus?'+'pageStart='+pageStart+'&pageSize='+pageSize);
   }

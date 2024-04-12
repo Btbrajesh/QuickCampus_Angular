@@ -35,9 +35,17 @@ import { CampusdetailModalComponent } from './popups/campusdetail-modal/campusde
 import { EditCampusComponent } from './components/Campus/campus-walk-in/edit-campus/edit-campus.component';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from './services/search.pipe';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [ApplicantlistComponent, CollegeComponent, CampusWalkInComponent, QuestionComponent, AddCollegeComponent, AddCampusComponent, ClientComponent, AddClientComponent, EditClientComponent, RoleComponent, UserComponent, AddUserComponent, AddQuestionComponent, EditUserComponent, EditCollegeComponent, AddRoleComponent, EditApplicantComponent, EditRoleComponent, AddApplicantComponent, EditQuestionComponent,DeleteModalComponent, ClientdetailModalComponent, RoledetailModalComponent, UserdetailModalComponent, ApplicantdetailModalComponent, CollegedetailModalComponent, CampusdetailModalComponent, EditCampusComponent, SearchPipe],
-  imports: [FormsModule,NgbPaginationModule, NgbTypeaheadModule,CommonModule,CoreRoutingModule,DataTablesModule,NgxPaginationModule,NgxSpinnerModule,ReactiveFormsModule,FormsModule],
+  imports: [ MatSelectModule,
+    MatInputModule,
+    MatIconModule,MatButtonModule, MatDividerModule,FormsModule,NgbPaginationModule, NgbTypeaheadModule,CommonModule,CoreRoutingModule,DataTablesModule,NgxPaginationModule,NgxSpinnerModule,ReactiveFormsModule,FormsModule],
 })
 export class CoreModule {}

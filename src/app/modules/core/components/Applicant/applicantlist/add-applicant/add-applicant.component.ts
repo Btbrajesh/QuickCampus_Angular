@@ -21,6 +21,7 @@ export class AddApplicantComponent implements OnInit{
   collegeList:any;
   qualificationList:any;
   clientList:any;
+  skillList:any;
   roleName:any
 
   constructor(public clientService:ClientService,public toastr:ToastrService,public router:Router,private applicantService:ApplicantService,public fb:FormBuilder,public collegeService:CollegeService,public commonService:CommonService){}
@@ -38,19 +39,31 @@ export class AddApplicantComponent implements OnInit{
       statusId:['',[Validators.required]],
       comment:['',[Validators.maxLength(1000)]],
       collegeId:['',[Validators.required]],
-      assignedToCompany:['',[Validators.required]],
-      clientId:['',[]],
-      skilltype:this.fb.array([]),
+      clientId:['',[Validators.required]],
+      passingYear:['',[Validators.maxLength(4)]],
+      skilltype:this.fb.array([],Validators.required),
     })
     this.getStatus()
     this.getCompany()
     this.getCollege()
     this.getQualification()
     this.addSkill()
+    
     this.roleName = localStorage.getItem('role')
     if (this.roleName == 'Admin'){
       this.getClient()
     }
+  }
+
+  
+ 
+
+  getAllSkills(){
+    this.applicantService.getAllSkill().subscribe((res)=>{
+      if (res.isSuccess){
+        this.skillList = res.data
+      }
+    })
   }
 
   get skilltype() : FormArray {
@@ -60,7 +73,7 @@ export class AddApplicantComponent implements OnInit{
   newSkill():FormGroup{
     return this.fb.group({
       skillId:[0],
-      skillName:[''],
+      skillName:['',Validators.required],
     })
   }
 

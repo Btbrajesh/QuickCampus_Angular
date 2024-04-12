@@ -13,7 +13,9 @@ export class ClientService {
   constructor(private http:HttpClient) { }
 
   getAllClientList(){
-    return this.http.get<any>(environment.apiUrl+'/Client/GetAllClient')
+    const pageStart = 1
+    const pageSize = 10000
+    return this.http.get<any>(environment.apiUrl+'/Client/GetAllClient?'+'pageStart='+pageStart+'&pageSize='+pageSize)
   }
 
   getClientList(pageStart:number,pageSize:number):Observable<any>{

@@ -59,6 +59,29 @@
             </div>
             <div class="col-md-4">
               <div class="position-relative form-group">
+                <label for="exampleEmail11" class="">Company Name<span aria-hidden="true" class="required2"> *</span></label>
+                <input
+                  placeholder="Enter your company name"
+                  type="text"
+                  class="form-control"
+                  formControlName="companyName"
+                />
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  (addClientForm.get('companyName')?.invalid &&
+                    (addClientForm.get('companyName')?.dirty ||
+                      addClientForm.get('companyName')?.touched)) ||
+                  (addClientForm.get('companyName')?.hasError('required') &&
+                    myform.submitted)
+                "
+              >
+                <span class="error">Company Name is required</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Email<span aria-hidden="true" class="required2"> *</span></label>
                 <input
                   placeholder="Email address"
@@ -146,35 +169,7 @@
               </div>
               
             </div>
-            <div class="col-md-4">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">Role<span aria-hidden="true" class="required2"> *</span></label>
-                <select
-                  class="form-select form-control mr-4"
-                  placeholder="Select Role"
-                  formControlName="roleId"
-                >
-                  <option value="" selected>Select Role</option>
-                  <option *ngFor="let role of roleList" [value]="role.roleId">
-                    {{role.roleName}}
-                  </option>
-                </select>
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  (addClientForm.get('roleId')?.invalid &&
-                    (addClientForm.get('roleId')?.dirty ||
-                      addClientForm.get('roleId')?.touched)) ||
-                  (addClientForm
-                    .get('roleId')
-                    ?.hasError('required') &&
-                    myform.submitted)
-                "
-              >
-                <span class="error">Role is required</span>
-              </div>
-              </div>
+            
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Subscription Plan<span aria-hidden="true" class="required2"> *</span></label>
@@ -203,35 +198,7 @@
                 <span class="error">Subscription Plan is required</span>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="position-relative form-group">
-                <label for="exampleEmail11" class="">UserName<span aria-hidden="true" class="required2"> *</span></label>
-                <input
-                  placeholder="Enter your email"
-                  type="text"
-                  class="form-control"
-                  formControlName="username"
-                />
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="
-                  (addClientForm.get('username')?.invalid &&
-                    (addClientForm.get('username')?.dirty ||
-                      addClientForm.get('username')?.touched)) ||
-                  (addClientForm.get('username')?.hasError('required') &&
-                    myform.submitted)
-                "
-              >
-                <span class="error">Username is required</span>
-              </div>
-              <div
-                class="text-danger"
-                *ngIf="addClientForm.get('username')?.hasError('email')"
-              >
-                <span class="error">Please provide a proper email</span>
-              </div>
-            </div>
+           
             <div class="col-md-4">
               <div class="position-relative form-group">
                 <label for="exampleEmail11" class="">Password<span aria-hidden="true" class="required2"> *</span></label>

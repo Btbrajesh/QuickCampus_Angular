@@ -13,23 +13,27 @@ import { Role } from 'src/app/modules/master/models/role';
   styleUrls: ['./edit-role.component.css']
 })
 export class EditRoleComponent implements OnInit{
-obj : any[] = []
-selectedIdsFormArray:any 
+  obj : any[] = []
+  selectedIdsFormArray:any 
+  roleName:any
+  clientList:any;
   permissionList: any[]= []
   permissionUser:any
   editRoleForm = new FormGroup({
     id:new FormControl(),
     roleName:new FormControl(''),
-    client:new FormControl(''),
+    clientId:new FormControl(''),
     permission: new FormArray([],[Validators.required])
   })
 
   constructor(public spinnerService:NgxSpinnerService,public fb:FormBuilder,private router:ActivatedRoute,public route:Router,public roleService:RoleService, public clientService:ClientService, public toastr:ToastrService){}
 
   ngOnInit(): void {
-   
     this.initializeForm()
-    
+    this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
   }
 
   initializeForm(){
@@ -38,12 +42,20 @@ selectedIdsFormArray:any
       this.editRoleForm = new FormGroup({
         id:new FormControl(),
         roleName:new FormControl(res.data['roleName'],[Validators.required,Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]),
-        client:new FormControl(''),
+        clientId:new FormControl(res.data['clientId'],[Validators.required]),
         permission: new FormArray([])
       })
       this.getPermissionList()
     },err=>{
       this.toastr.error(err)
+    })
+  }
+
+  getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if (res.isSuccess){
+        this.clientList = res.data.filter((client:any) => client.isActive === true)
+      }
     })
   }
 

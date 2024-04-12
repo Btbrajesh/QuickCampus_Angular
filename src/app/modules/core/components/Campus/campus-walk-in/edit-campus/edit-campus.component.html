@@ -7,7 +7,7 @@
             <div class="card-header card-title">
                 <h4 class="mb-0">Edit Campus</h4>
             </div>
-            <form [formGroup]="editCampusForm" (ngSubmit)="submit()">
+            <form [formGroup]="editCampusForm" (ngSubmit)="submit()"  #myform="ngForm">
                 <div class="card-body">
                     <div class="row">
                          <div class="col-md-4">
@@ -28,6 +28,56 @@
                                 <input placeholder="Enter address" type="text" class="form-control" formControlName="address2">
                             </div>
                         </div>
+                        <div class="col-md-4" *ngIf="roleName == 'Admin'">
+                            <div class="position-relative form-group">
+                              <label for="exampleEmail11" class="required"
+                                >Client <span aria-hidden="true" class="required2">*</span></label
+                              >
+                              <select
+                                class="form-select form-control mr-4"
+                                placeholder="Select Company"
+                                formControlName="clientId"
+                              >
+                                <option value="">Select Client</option>
+                                <option
+                                  *ngFor="let client of clientList"
+                                  [value]="client.id"
+                                >
+                                  {{ client.name }}
+                                </option>
+                              </select>
+                            </div>
+                            <div
+                              class="text-danger"
+                              *ngIf="
+                                (editCampusForm.get('clientId')?.invalid &&
+                                  (editCampusForm.get('clientId')?.dirty ||
+                                  editCampusForm.get('clientId')?.touched)) ||
+                                (editCampusForm.get('clientId')?.hasError('required') &&
+                                  myform.submitted)
+                              "
+                            >
+                              <span class="error">Client is required</span>
+                            </div>
+                          </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                              <label for="exampleEmail11" class="required">Passing Year<span aria-hidden="true" class="required2"> *</span></label>
+                              <input
+                                placeholder="Passing Out Year"
+                                type="text"
+                                class="form-control"
+                                name="comment"
+                                formControlName="passingYear"
+                              />
+                            </div>
+                            <div
+                              class="text-danger"
+                              *ngIf="editCampusForm.get('passingYear')?.hasError('maxlength')"
+                            >
+                              <span class="error">Max 4 characters are allowed</span>
+                            </div>
+                          </div>
                         <div class="col-md-12">
                             <div class="position-relative form-group">
                                 <label for="exampleEmail11" class="">Job Description</label>

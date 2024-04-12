@@ -21,41 +21,36 @@ export class AddUserComponent implements OnInit{
   hideConfirmPassword:boolean = true;
   eyeIconSrc: string = '../../../../../../assets/images/hide.png';
   eyeIconSrc2: string = '../../../../../../assets/images/hide.png';
+  roleName:any
 
   constructor(public router:Router, public roleService:RoleService,private toastr: ToastrService,public clientService:ClientService,public fb:FormBuilder,public userService:UserService){}
 
   ngOnInit(): void {
-    // this.getRole()
-    // this.getClient()
     this.addUserForm = this.fb.group({
       name:['',[Validators.required,Validators.maxLength(25),Validators.minLength(2),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
       email:['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       mobile:['',[Validators.required,,Validators.pattern("^[1-9][0-9]{9}$")]],
-      // role:['',[Validators.required]],
-      // client:['',[Validators.required]],
+      clientId:['',[Validators.required]],
       password:['',[Validators.required,Validators.maxLength(15),Validators.minLength(8),Validators.pattern('(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
       confirmPassword:['',[Validators.required]]
     },{
       validator:passwordMatchValidator()
     })
-
+    this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
   }
 
-  // getRole(){
-  //   this.roleService.getAllRoleList().subscribe((res)=>{
-  //       this.roleList = res.data
-  //   })
-  // }
-
-  // getClient(){
-  //   this.clientService.getAllClientList().subscribe((res)=>{
-  //     if(res.isSuccess){
-  //       this.clientList = res.data
-  //     }
-  //   },err=>{
-  //     this.toastr.error(err)
-  //   })
-  // }
+  getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if(res.isSuccess){
+        this.clientList = res.data
+      }
+    },err=>{
+      this.toastr.error(err)
+    })
+  }
 
   submit(){
     if (this.addUserForm.valid){

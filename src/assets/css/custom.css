@@ -134,3 +134,18 @@ textarea.form-control{height: auto;}
 .modal-backdrop{
     z-index: 1040 !important;
 }
+
+.mat-box{
+    margin-right: 7px;
+    height: 67px;
+    margin-top: 19px;
+}
+
+.mat-button{
+    margin-top: 5px;
+}
+
+.cross{
+    height: 25px;
+    width: 25px;
+}

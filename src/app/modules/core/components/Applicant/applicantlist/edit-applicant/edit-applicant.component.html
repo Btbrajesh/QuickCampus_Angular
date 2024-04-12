@@ -304,6 +304,7 @@
             >
               <span class="error">Maximum Percentage Can be 100</span>
             </div>
+
             <div
               class="text-danger"
               *ngIf="
@@ -315,6 +316,24 @@
               "
             >
               <span class="error">Intermediate Percentage is required</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="position-relative form-group">
+              <label for="exampleEmail11" class="required">Passign Year<span aria-hidden="true" class="required2"> *</span></label>
+              <input
+                placeholder="Passing Out Year"
+                type="number"
+                class="form-control"
+                name="comment"
+                formControlName="passingYear"
+              />
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="editApplicantForm.get('passingYear')?.hasError('maxlength')"
+            >
+              <span class="error">Max 4 characters are allowed</span>
             </div>
           </div>
           <div class="col-md-4">
@@ -394,37 +413,36 @@
               <span class="error">Status is required</span>
             </div>
           </div>
-
-          
-
-          <div class="col-md-4">
+          <div class="col-md-4" *ngIf="roleName == 'Admin'">
             <div class="position-relative form-group">
-              <label for="exampleEmail11" className="">Company<span aria-hidden="true" class="required2"> *</span></label>
+              <label for="exampleEmail11" class="required"
+                >Client <span aria-hidden="true" class="required2">*</span></label
+              >
               <select
                 class="form-select form-control mr-4"
                 placeholder="Select Company"
-                formControlName="assignedToCompany"
+                formControlName="clientId"
               >
-                <option value="">Select Company</option>
+                <option value="">Select Client</option>
                 <option
-                  *ngFor="let company of companyList"
-                  [value]="company.companyId"
+                  *ngFor="let client of clientList"
+                  [value]="client.id"
                 >
-                  {{ company.companyName }}
+                  {{ client.name }}
                 </option>
               </select>
             </div>
             <div
               class="text-danger"
               *ngIf="
-                (editApplicantForm.get('assignedToCompany')?.invalid &&
-                  (editApplicantForm.get('assignedToCompany')?.dirty ||
-                    editApplicantForm.get('assignedToCompany')?.touched)) ||
-                (editApplicantForm.get('assignedToCompany')?.hasError('required') &&
+                (editApplicantForm.get('clientId')?.invalid &&
+                  (editApplicantForm.get('clientId')?.dirty ||
+                  editApplicantForm.get('clientId')?.touched)) ||
+                (editApplicantForm.get('clientId')?.hasError('required') &&
                   myform.submitted)
               "
             >
-              <span class="error">Company is required</span>
+              <span class="error">Client is required</span>
             </div>
           </div>
 

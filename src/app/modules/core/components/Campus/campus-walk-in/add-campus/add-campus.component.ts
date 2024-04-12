@@ -33,6 +33,7 @@ export class AddCampusComponent implements OnInit{
     selectedColleges: any[] = [];
     isTableVisible: boolean = false;
     isDisabled: boolean = true;
+    roleName:any
 
   constructor(public clientService:ClientService,public router:Router,public toastr:ToastrService,private spinnerService: NgxSpinnerService,private collegeService:CollegeService,public fb:FormBuilder,private countrystatecityService: CountrystatecityService,public campusService:CampusService){}
 
@@ -40,6 +41,10 @@ export class AddCampusComponent implements OnInit{
     this.fetchCountry()
     this.getAllCollegeList()
     this.initForm()
+    this.roleName = localStorage.getItem('role')
+    if (this.roleName == 'Admin'){
+      this.getClient()
+    }
   }
 
   initForm(){
@@ -47,13 +52,16 @@ export class AddCampusComponent implements OnInit{
       walkInDate:['',[Validators.required]],
       title:['',[Validators.required,Validators.minLength(2),Validators.maxLength(20)]],
       address1:['',[Validators.required,Validators.maxLength(30)]],
-      address2:['',[Validators.required,Validators.maxLength(30)]],
-      countryId:['',[Validators.required]],
-      stateId:['',[Validators.required]],
+      address2:['',[Validators.maxLength(30)]],
+      countryID:['',[Validators.required]],
+      stateID:['',[Validators.required]],
       city:['',[Validators.required]],
       jobDescription:['',[Validators.required,,Validators.maxLength(1000)]],
-      selectedCollegeId: ['',[Validators.required]],
-      colleges :this.fb.array([],[Validators.required])
+      selectedCollegeId: [''],
+      clientId:['',[Validators.required]],
+      passingYear:['',[Validators.maxLength(4)]],
+      walkInID:[0],
+      colleges :this.fb.array([],[Validators.required]),
     })
   }
 
@@ -68,6 +76,14 @@ export class AddCampusComponent implements OnInit{
     })
   }
 
+  getClient(){
+    this.clientService.getAllClientList().subscribe((res)=>{
+      if (res.isSuccess){
+        this.clientList = res.data.filter((client:any) => client.isActive === true)
+      }
+    })
+  }
+
   patchCollegeArray(college:any){
     const collegeFormArray = this.addCampusForm.get('colleges') as FormArray;
     collegeFormArray.push(this.createCollegeFormGroup(college));
@@ -76,9 +92,15 @@ export class AddCampusComponent implements OnInit{
 
   submit(){
     if (this.addCampusForm.valid){
+      
       this.data = this.addCampusForm.value
-      this.data.countryId = parseInt(this.addCampusForm.value.countryId, 10);
-      this.data.stateId = parseInt(this.addCampusForm.value.stateId, 10);
+      delete this.data.selectedCollegeId;
+      
+      this.data.countryID = parseInt(this.addCampusForm.value.countryID, 10);
+      this.data.stateID = parseInt(this.addCampusForm.value.stateID, 10);
+      this.data.city = parseInt(this.addCampusForm.value.city, 10);
+      
+      console.log(this.data)
       this.campusService.addCampus(this.data).subscribe((res)=>{
         if (res.isSuccess){
           this.toastr.success(res.message)
@@ -99,13 +121,13 @@ export class AddCampusComponent implements OnInit{
 
   createCollegeFormGroup(college: any): FormGroup {
     return this.fb.group({
-      stateId:[college.stateId],
       collegeId:[college.collegeId],
       collegeName: [college.collegeName],
       collegeCode: [college.collegeCode],
       examStartTime: [''],
       examEndTime: [''],
-      startDateTime: ['']
+      startDateTime: [''],
+      isIncludeInWalkIn:[true]
     });
   }
 

@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteModalComponent } from '../../../popups/delete-modal/delete-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicantdetailModalComponent } from '../../../popups/applicantdetail-modal/applicantdetail-modal.component';
+import { FormControl } from '@angular/forms';
+import { ClientService } from '../../../services/client.service';
 
 @Component({
   selector: 'app-applicantlist',
@@ -22,19 +24,24 @@ export class ApplicantlistComponent implements OnInit {
   collectionSize!:number
   searchTerm: string = '';
   pageStart=1
+  selectedOption = new FormControl('');
+  inputOption = new FormControl('');
+  clientList:any
+  filteredClientList:any
+  val: string = '';
  
-  constructor(private modalService: NgbModal,public toastr:ToastrService,private applicantService: ApplicantService,private router: Router,private spinnerService: NgxSpinnerService){
+  constructor(public clientService:ClientService,private modalService: NgbModal,public toastr:ToastrService,private applicantService: ApplicantService,private router: Router,private spinnerService: NgxSpinnerService){
    
   }
 
 ngOnInit(): void {
   this.getApplicantList();
+  this.getClient()
 }
 
 getApplicantList(){
   this.spinnerService.show();
   this.applicantService.getApplicantList(this.pageStart,this.pageSize).subscribe(res =>{
-    console.log(res)
     if(res.isSuccess){
       this.spinnerService.hide()
       this.collectionSize = res.totalRecordCount
@@ -59,6 +66,52 @@ getApplicantPage(event:any){
 getCollectionPage(){
   this.pageStart = 1
   this.getApplicantList()
+}
+
+getClient(){
+  this.clientService.getAllClientList().subscribe((res)=>{
+    if(res.isSuccess){
+      this.clientList = res.data
+      this.filteredClientList = res.data
+    }
+  },err=>{
+    this.toastr.error(err)
+  })
+}
+
+onSelected(event:any){
+  const clientId = event.value
+  this.applicantService.getApplicantListOnClientId(clientId,this.pageStart,this.pageSize).subscribe((res:any)=>{
+    if (res.isSuccess){
+      this.applicantList = res.data;
+      this.collectionSize = res.totalRecordCount;
+    }else{
+      this.applicantList = res.data;
+      this.collectionSize = res.totalRecordCount;
+      this.toastr.error(res.message)
+    }
+  })
+}
+
+filterOptions() {
+  if (this.clientList) { // Check if this.clientList is defined
+    this.filteredClientList = this.clientList.filter((client:any) => {
+      // Check if client.name and this.val are not null before calling toLowerCase()
+      if (client.name && this.val) {
+        return client.name.toLowerCase().includes(this.val.toLowerCase());
+      }
+      return false; // Return false if either client.name or this.val is null
+    });
+  } else {
+    this.filteredClientList = []; // Set filteredClientList to an empty array if this.clientList is undefined
+  }
+}
+
+resetSelect() {
+  this.selectedOption.reset(); // Reset selected option
+  this.inputOption.reset();
+  this.getApplicantList() 
+  this.getClient()
 }
 
 onSearch() {

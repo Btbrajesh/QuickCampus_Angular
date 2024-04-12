@@ -8,6 +8,7 @@ import { College } from 'src/app/modules/master/models/college';
 import { CollegeService } from '../../../../services/college.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ClientService } from 'src/app/modules/core/services/client.service';
 
 @Component({
   selector: 'app-add-college',
@@ -27,8 +28,10 @@ export class AddCollegeComponent implements OnInit{
     selectedFile: File | null = null;
     selectedFileName!: string;
     imagePreviewUrl: string | ArrayBuffer | null = null;
+    clientList:any;
+    roleName:any
 
-   constructor(public toastr:ToastrService,public router:Router,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
+   constructor(public clientService:ClientService,public toastr:ToastrService,public router:Router,public fb:FormBuilder,private countrystatecityService: CountrystatecityService, public collegeService:CollegeService){}
 
    ngOnInit(): void {
     this.fetchCountry();
@@ -37,15 +40,20 @@ export class AddCollegeComponent implements OnInit{
       CollegeName:['',[Validators.required,Validators.maxLength(50),Validators.minLength(3),Validators.pattern(/^[A-Za-z]+(?:\s[A-Za-z]*)*$/)]],
       CollegeCode:['',[Validators.required,Validators.maxLength(10)]],
       Address1:['',[Validators.required,Validators.maxLength(100)]],
-      Address2:['',[Validators.required,Validators.maxLength(100)]],
+      Address2:['',[Validators.maxLength(100)]],
       CityId:['',[Validators.required]],
       StateId:['',[Validators.required]],
       CountryId:['',[Validators.required]],
-      ContactPerson:['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+      ContactPersonName:['',[Validators.required]],
       ContactEmail:['',[Validators.required,Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       ContactPhone:['',[Validators.required,Validators.pattern("^[1-9][0-9]{9}$")]],
-
+      clientId:['',[Validators.required]]
      })
+
+     this.roleName = localStorage.getItem('role')
+      if (this.roleName == 'Admin'){
+        this.getClient()
+      }
    }
 
    submit(){
@@ -111,5 +119,13 @@ export class AddCollegeComponent implements OnInit{
   } else {
       this.imagePreviewUrl = null; // Reset image preview if no file is selected
   }
+}
+
+getClient(){
+  this.clientService.getAllClientList().subscribe((res)=>{
+    if (res.isSuccess){
+      this.clientList = res.data.filter((client:any) => client.isActive === true)
+    }
+  })
 }
 }
